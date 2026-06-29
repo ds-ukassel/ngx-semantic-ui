@@ -208,7 +208,7 @@ export class PopupPage {
 
     public position:PopupPlacement = "bottom right";
 
-    public manualPopupMarkup:string = `
+    public manualPopupMarkup = `
 <div class="ui segment" suiPopup popupText="Manual" popupTrigger="manual" #popup="suiPopup">
     <button class="ui button" (click)="popup.open()">Open!</button>
     <button class="ui button" (click)="openPopup(popup)">Conditionally Open!</button>
@@ -217,7 +217,7 @@ export class PopupPage {
 </div>
 `;
 
-    public manualPopupCode:string = `
+    public manualPopupCode = `
 import {IPopup} from "@angular-ex/semantic-ui";
 
 @Component({})
@@ -232,7 +232,7 @@ export class MyComponent {
 }
 `;
 
-    public globalConfigCode:string = `
+    public globalConfigCode = `
 import {SuiPopupConfig} from "@angular-ex/semantic-ui";
 
 @Component({})

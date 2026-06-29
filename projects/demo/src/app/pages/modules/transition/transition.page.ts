@@ -33,7 +33,7 @@ export class TransitionPage {
         }
     ];
 
-    public transitionControllerCode:string = `
+    public transitionControllerCode = `
 import {TransitionController} from "@angular-ex/semantic-ui";
 
 @Component({})
@@ -42,13 +42,13 @@ export class MyComponent {
 }
 `;
 
-    public transitionElementCode:string = `
+    public transitionElementCode = `
 <div class="ui segment">
     <img src="https://goo.gl/VUcnwx" class="ui image" [suiTransition]="transitionController">
 </div>
 `;
 
-    public transitionExampleCode:string = `
+    public transitionExampleCode = `
 import {TransitionController, Transition, TransitionDirection} from "@angular-ex/semantic-ui";
 
 @Component({})
@@ -64,7 +64,7 @@ export class MyComponent {
 
     public exampleStandardTemplate:string = exampleStandardTemplate;
 
-    public transitionControllerInterface:string = `
+    public transitionControllerInterface = `
 this.ctrl = new TransitionController(isInitiallyVisible:boolean = false, display:string = "block");
 // isInitiallyVisible sets whether the element being animated starts off visible.
 // display sets the 'display' style set on the animated element when it is visible.
@@ -91,7 +91,7 @@ this.ctrl.clearQueue();
 // Continues with the current transition, but empties the queue.
 `;
 
-    public advancedExampleCode:string = `
+    public advancedExampleCode = `
 import {SuiTransition, TransitionController, Transition} from "@angular-ex/semantic-ui";
 
 @Component({})
@@ -133,9 +133,9 @@ export class TransitionExampleStandard {
         "flash", "shake", "pulse", "tada", "bounce"
     ];
 
-    public transitionName:string = "scale";
+    public transitionName = "scale";
 
-    public animate(transitionName:string = "scale"):void {
+    public animate(transitionName = "scale"):void {
         this.transitionController.animate(
             new Transition(transitionName, 500, TransitionDirection.Either, () => console.log("Completed transition.")));
     }

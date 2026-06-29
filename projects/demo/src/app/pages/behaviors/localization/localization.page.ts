@@ -105,7 +105,7 @@ const supportedLanguages:ISupportedLanguage[] = [
     standalone: false
 })
 export class LocalizationPage {
-    public localizationCode:string = `
+    public localizationCode = `
 import {SuiLocalizationService} from "@angular-ex/semantic-ui";
 // We'll use Spanish for this example.
 import es from "@angular-ex/semantic-ui/locales/es";
@@ -124,7 +124,7 @@ export class AppComponent {
 }
 `;
 
-    public customizationCode:string = `
+    public customizationCode = `
 import {SuiLocalizationService} from "@angular-ex/semantic-ui";
 // This example uses French.
 import fr from "@angular-ex/semantic-ui/locales/fr";
@@ -152,7 +152,7 @@ export class AppComponent {
 }
 `;
 
-    public valuesInterface:string = `
+    public valuesInterface = `
 interface ILocaleValues {
     datepicker: {
         months:string[], // Full month names

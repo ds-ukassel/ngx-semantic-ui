@@ -117,7 +117,7 @@ export class SidebarExampleStandard {}
     standalone: false
 })
 export class SidebarExampleDirection {
-    public isVisible:boolean = false;
+    public isVisible = false;
 }
 
 export const SidebarPageComponents = [SidebarPage, SidebarExampleStandard, SidebarExampleDirection];

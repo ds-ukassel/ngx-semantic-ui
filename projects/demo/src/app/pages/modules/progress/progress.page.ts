@@ -108,10 +108,10 @@ export class ProgressPage {
     standalone: false
 })
 export class ProgressExampleStandard {
-    public value:number = 55;
-    public progress:boolean = true;
-    public maximum:number = 100;
-    public precision:number = 0;
+    public value = 55;
+    public progress = true;
+    public maximum = 100;
+    public precision = 0;
 }
 
 @Component({
@@ -121,10 +121,10 @@ export class ProgressExampleStandard {
     standalone: false
 })
 export class ProgressExampleVariations {
-    public value:number = 55;
+    public value = 55;
 
-    public changingValue:number = -20;
-    public randomValue:number = 0;
+    public changingValue = -20;
+    public randomValue = 0;
 
     constructor() {
         this.updateChangingValue();

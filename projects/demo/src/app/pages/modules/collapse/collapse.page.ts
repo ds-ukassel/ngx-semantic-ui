@@ -47,7 +47,7 @@ export class CollapsePage {
     ];
     public exampleStandardTemplate:string = exampleStandardTemplate;
 
-    public polyfillInclude:string =
+    public polyfillInclude =
 `<script src="https://rawgit.com/web-animations/web-animations-js/master/web-animations.min.js"></script>`;
 }
 
@@ -58,7 +58,7 @@ export class CollapsePage {
     standalone: false
 })
 export class CollapseExampleStandard {
-    public collapse:boolean = false;
+    public collapse = false;
 }
 
 export const CollapsePageComponents = [CollapsePage, CollapseExampleStandard];

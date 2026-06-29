@@ -88,7 +88,7 @@ export class DimmerPage {
     standalone: false
 })
 export class DimmerExampleStandard {
-    public isClickable:boolean = true;
+    public isClickable = true;
     public isDimmed!:boolean;
 }
 
@@ -99,7 +99,7 @@ export class DimmerExampleStandard {
     standalone: false
 })
 export class DimmerExampleVariations {
-    public isClickable:boolean = true;
+    public isClickable = true;
     public pageDimmed!:boolean;
     public segmentDimmed!:boolean;
 }

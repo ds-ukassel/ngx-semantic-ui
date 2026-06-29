@@ -78,7 +78,7 @@ export class SuiSidebar {
         this.service.height = this._element.nativeElement.offsetHeight;
     }
 
-    private setClass(className:string, isAdd:boolean = true):void {
+    private setClass(className:string, isAdd = true):void {
         if (isAdd) {
             this._renderer.addClass(this._element.nativeElement, className);
         } else {

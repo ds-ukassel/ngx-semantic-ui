@@ -8,5 +8,5 @@ import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
 })
 export class GithubButtonsComponent {
     @Input()
-    public mega:boolean = true;
+    public mega = true;
 }

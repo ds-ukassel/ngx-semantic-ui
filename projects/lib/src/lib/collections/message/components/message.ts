@@ -43,7 +43,7 @@ export class SuiMessage implements IMessage {
     @Input()
     public transitionDuration:number;
 
-    @Input("class")
+    @Input()
     public class:string;
 
     constructor() {

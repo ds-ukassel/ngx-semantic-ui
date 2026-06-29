@@ -10,7 +10,7 @@ export enum DatePrecision {
 }
 
 export const DateUtil = {
-    startOf(precision:DatePrecision, date:Date, resetAll:boolean = false):Date {
+    startOf(precision:DatePrecision, date:Date, resetAll = false):Date {
         switch (precision) {
             // @ts-ignore
             case DatePrecision.Decade:

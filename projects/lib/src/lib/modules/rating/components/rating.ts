@@ -47,11 +47,10 @@ export class SuiRating implements ICustomValueAccessorHost<number> {
     public isReadonly:boolean;
 
     public get icons():undefined[] {
-        // tslint:disable-next-line:prefer-literal
-        return new Array(this.maximum);
+               return new Array(this.maximum);
     }
 
-    public hoveredIndex:number = -1;
+    public hoveredIndex = -1;
 
     constructor() {
         this.value = 0;

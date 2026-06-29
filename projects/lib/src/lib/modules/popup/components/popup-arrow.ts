@@ -4,10 +4,10 @@ import { PositioningPlacement } from "../../../misc/util/internal";
 @Component({
     selector: "sui-popup-arrow",
     template: `
-@if (alignment == 'center') {
+@if (alignment === 'center') {
   <div class="dynamic arrow" [attr.direction]="direction"></div>
 }
-@if (alignment != 'center') {
+@if (alignment !== 'center') {
   <div class="static arrow" [attr.direction]="direction" [attr.alignment]="alignment"></div>
 }
 `,

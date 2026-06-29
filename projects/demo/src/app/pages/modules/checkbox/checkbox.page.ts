@@ -181,7 +181,7 @@ export class CheckboxPage {
     standalone: false
 })
 export class CheckboxExampleStandard {
-    public eCheck:boolean = true;
+    public eCheck = true;
     public eCheckReadonly!:boolean;
     public eCheckDisabled!:boolean;
 }

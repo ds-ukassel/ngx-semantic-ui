@@ -8,7 +8,7 @@ import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
     standalone: false
 })
 export class ExampleComponent {
-    public detail:boolean = false;
+    public detail = false;
 
     @Input()
     public code!:string;

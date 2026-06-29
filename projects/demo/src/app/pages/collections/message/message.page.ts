@@ -77,7 +77,7 @@ export class MessagePage {
     public exampleNoDismissTemplate:string = exampleNoDismissTemplate;
     public exampleIconTemplate:string = exampleIconTemplate;
 
-    public manualDismissMarkup:string = `
+    public manualDismissMarkup = `
 <sui-message #message>
     <div class="header">
         Dismiss Manually
@@ -88,7 +88,7 @@ export class MessagePage {
 <button (click)="dismiss(message)">Dismiss (advanced)</button>
 `;
 
-    public manualDismissCode:string = `
+    public manualDismissCode = `
 import {IMessage} from "@angular-ex/semantic-ui";
 
 @Component({})

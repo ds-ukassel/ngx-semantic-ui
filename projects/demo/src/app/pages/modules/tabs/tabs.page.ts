@@ -218,7 +218,7 @@ export class TabExampleDynamic {
     standalone: false
 })
 export class TabExampleStyled {
-    public pointing:boolean = true;
+    public pointing = true;
 }
 
 export const TabsPageComponents = [TabsPage, TabExampleStandard, TabExampleProperties, TabExampleDynamic, TabExampleStyled];

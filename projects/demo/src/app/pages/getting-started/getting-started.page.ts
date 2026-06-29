@@ -13,13 +13,13 @@ import { Component, ChangeDetectionStrategy } from "@angular/core";
     standalone: false
 })
 export class GettingStartedPage {
-    public installCode:string = `$ npm install @angular-ex/semantic-ui --save`;
+    public installCode = `$ npm install @angular-ex/semantic-ui --save`;
 
-    public includeCssCode:string =
+    public includeCssCode =
 `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">`;
 
-    public importCode:string = `import {SuiModule} from '@angular-ex/semantic-ui';`;
-    public moduleImportCode:string = `
+    public importCode = `import {SuiModule} from '@angular-ex/semantic-ui';`;
+    public moduleImportCode = `
 import {SuiModule} from '@angular-ex/semantic-ui';
 
 @NgModule({
@@ -29,7 +29,7 @@ import {SuiModule} from '@angular-ex/semantic-ui';
 })
 export class AppModule {}
 `;
-    public systemJSCode:string = `
+    public systemJSCode = `
 var config = {
     ...
     map: {
@@ -38,5 +38,5 @@ var config = {
     }
 }
 `;
-    public individualImportCode:string = `import {SuiCheckboxModule, SuiRatingModule} from '@angular-ex/semantic-ui';`;
+    public individualImportCode = `import {SuiCheckboxModule, SuiRatingModule} from '@angular-ex/semantic-ui';`;
 }

@@ -12,5 +12,5 @@ export class PageTitleComponent {
     @HostBinding("class.masthead")
     @HostBinding("class.vertical")
     @HostBinding("class.segment")
-    public classes:boolean = true;
+    public classes = true;
 }

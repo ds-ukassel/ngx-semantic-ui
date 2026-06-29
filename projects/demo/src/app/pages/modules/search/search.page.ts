@@ -182,8 +182,8 @@ export class SearchExampleStandard {
         "Underneath", "Violet", "Water", "Xylophone",
         "Yellow", "Zebra"];
 
-    public hasIcon:boolean = true;
-    public allowEmptyQuery:boolean = true;
+    public hasIcon = true;
+    public allowEmptyQuery = true;
 
     public get options():string[] {
         return SearchExampleStandard.standardOptions;

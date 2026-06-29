@@ -412,13 +412,13 @@ export class SelectPage {
     public exampleVariationsTemplate:string = exampleVariationsTemplate;
     public exampleInMenuSearchTemplate:string = exampleInMenuSearchTemplate;
     public exampleTemplateTemplate:string = exampleTemplateTemplate;
-    public formatterCode:string = `
+    public formatterCode = `
 public formatter(option:IOption, query?:string):string {
     return \`name: "\${option.name}"\`;
 }
 `;
     public exampleSearchLookupTemplate:string = exampleSearchLookupTemplate;
-    public searchLookupCode:string = `
+    public searchLookupCode = `
 type LookupFn<T, U> = (query:string, initial?:U) => Promise<T> | Promise<T[]>
 
 // Example option interface:
@@ -458,9 +458,9 @@ export class SelectExampleStandard {
     public selectedOption!:IOption;
     public selectedOptions!:IOption[];
 
-    public searchable:boolean = false;
-    public disabled:boolean = false;
-    public hideLabels:boolean = false;
+    public searchable = false;
+    public disabled = false;
+    public hideLabels = false;
 }
 
 @Component({
@@ -470,7 +470,7 @@ export class SelectExampleStandard {
     standalone: false
 })
 export class SelectExampleVariations {
-    public selectedRange:string = "today";
+    public selectedRange = "today";
     public filters:string[] = ["Important", "Announcement", "Discussion"];
 }
 

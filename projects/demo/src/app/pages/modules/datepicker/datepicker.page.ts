@@ -178,7 +178,7 @@ export class DatepickerPage {
     public exampleMinMaxTemplate:string = exampleMinMaxTemplate;
     public exampleMobileFallbackTemplate:string = exampleMobileFallbackTemplate;
 
-    public cssInclude:string =
+    public cssInclude =
 `<link rel="stylesheet" href="https://unpkg.com/semantic-ui-calendar/dist/calendar.min.css">`;
 }
 
@@ -189,7 +189,7 @@ export class DatepickerPage {
     standalone: false
 })
 export class DatepickerExampleStandard {
-    public firstDayOfWeek:number = 1;
+    public firstDayOfWeek = 1;
 
     public datepickerModes:string[] = ["datetime", "date", "time", "month", "year"];
     public mode:DatepickerMode = DatepickerMode.Datetime;

@@ -87,7 +87,7 @@ export class SuiCollapse {
         });
     }
 
-    private animate(startHeight:number, endHeight:number, removeOnComplete:boolean = false, callback:() => void = () => {}):void {
+    private animate(startHeight:number, endHeight:number, removeOnComplete = false, callback:() => void = () => {}):void {
         const heightFrames = [
             {
                 offset: 0,

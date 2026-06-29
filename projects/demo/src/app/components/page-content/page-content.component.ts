@@ -13,5 +13,5 @@ export class PageContentComponent {
     @HostBinding("class.ui")
     @HostBinding("class.main")
     @HostBinding("class.container")
-    public classes:boolean = true;
+    public classes = true;
 }

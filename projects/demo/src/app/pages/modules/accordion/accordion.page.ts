@@ -157,7 +157,7 @@ export class AccordionExampleStyled {}
     standalone: false
 })
 export class AccordionExampleManual {
-    public panelOpen:boolean = false;
+    public panelOpen = false;
 }
 
 export const AccordionPageComponents = [AccordionPage, AccordionExampleStandard, AccordionExampleStyled, AccordionExampleManual];

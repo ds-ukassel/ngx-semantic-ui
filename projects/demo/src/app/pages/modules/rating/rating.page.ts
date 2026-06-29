@@ -83,7 +83,7 @@ export class RatingPage {
     standalone: false
 })
 export class RatingExampleStandard {
-    public rating:number = 3;
+    public rating = 3;
     public readonly!:boolean;
 }
 

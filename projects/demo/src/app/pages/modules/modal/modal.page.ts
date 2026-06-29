@@ -20,7 +20,6 @@ const exampleTemplateModalTemplate = `
 `;
 
 // Don't use template concatenation here as the Angular compiler complains.
-// tslint:disable-next-line:prefer-template
 export const exampleTemplateTemplate = exampleTemplateModalTemplate + `
 <div class="ui fluid action input">
     <input type="text" placeholder="Modal content..." [(ngModel)]="dynamicContent">
@@ -146,7 +145,7 @@ export class ModalPage {
     ];
     public exampleTemplateTemplate:string = exampleTemplateModalTemplate;
 
-    public autoCode:string = `
+    public autoCode = `
 <sui-modal [isClosable]="true" (dismissed)="alert($event)" #modal>
     <div class="header">Example</div>
     <div class="content">
@@ -161,7 +160,7 @@ export class ModalPage {
 
     public templateTemplate:string = exampleTemplateModalTemplate;
 
-    public templateComponent:string = `
+    public templateComponent = `
 import {SuiModalService, TemplateModalConfig, ModalTemplate} from '@angular-ex/semantic-ui';
 
 export interface IContext {
@@ -177,7 +176,7 @@ export class MyComponent {
 }
 `;
 
-    public templateOpen:string = `
+    public templateOpen = `
 public open(dynamicContent:string = "Example") {
     const config = new TemplateModalConfig<IContext, string, string>(this.modalTemplate);
 
@@ -191,7 +190,7 @@ public open(dynamicContent:string = "Example") {
 }
 `;
 
-    public componentComponent:string = `
+    public componentComponent = `
 import {SuiModal, ComponentModalConfig, ModalSize} from "@angular-ex/semantic-ui"
 
 interface IConfirmModalContext {
@@ -208,7 +207,7 @@ export class ConfirmModalComponent {
 }
 `;
 
-    public componentHelper:string = `
+    public componentHelper = `
 export class ConfirmModal extends ComponentModalConfig<IConfirmModalContext, void, void> {
     constructor(title:string, question:string, size = ModalSize.Small) {
         super(ConfirmModalComponent, { title, question });
@@ -220,7 +219,7 @@ export class ConfirmModal extends ComponentModalConfig<IConfirmModalContext, voi
 }
 `;
 
-    public componentOpen:string = `
+    public componentOpen = `
 this.modalService
     .open(new ConfirmModal("Are you sure?", "Are you sure about accepting this?", this.modalSize))
     .onApprove(() => alert("User has accepted."))
@@ -239,11 +238,11 @@ export class ModalExampleTemplate {
     @ViewChild("modalTemplate")
     public modalTemplate!:ModalTemplate<{ data:string }, string, string>;
 
-    public dynamicContent:string = "Example of dynamic content.";
+    public dynamicContent = "Example of dynamic content.";
 
     constructor(public modalService:SuiModalService) {}
 
-    public open(dynamicContent:string = "Example"):void {
+    public open(dynamicContent = "Example"):void {
         const config = new TemplateModalConfig<{ data:string }, string, string>(this.modalTemplate);
 
         config.closeResult = "dismissed";

@@ -286,7 +286,7 @@ export abstract class SuiSelectBase<T, U> implements AfterViewInit, OnDestroy {
             this.dropdownService.setOpenState(true));
     }
 
-    protected resetQuery(delayed:boolean = true):void {
+    protected resetQuery(delayed = true):void {
         // The search delay is set to the transition duration to ensure results
         // aren't rendered as the select closes as that causes a sudden flash.
         if (delayed) {
