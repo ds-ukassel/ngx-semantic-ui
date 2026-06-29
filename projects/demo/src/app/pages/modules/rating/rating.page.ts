@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 
 const exampleStandardTemplate = `
@@ -31,6 +31,7 @@ const exampleStyledTemplate = `
 @Component({
     selector: "demo-page-rating",
     templateUrl: "./rating.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class RatingPage {
@@ -78,6 +79,7 @@ export class RatingPage {
 @Component({
     selector: "example-rating-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class RatingExampleStandard {
@@ -88,6 +90,7 @@ export class RatingExampleStandard {
 @Component({
     selector: "example-rating-styled",
     template: exampleStyledTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class RatingExampleStyled {}

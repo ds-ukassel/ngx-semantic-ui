@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 
 const exampleStandardTemplate = `
@@ -22,6 +22,7 @@ const exampleStandardTemplate = `
 @Component({
     selector: "demo-page-collapse",
     templateUrl: "./collapse.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CollapsePage {
@@ -53,6 +54,7 @@ export class CollapsePage {
 @Component({
     selector: "example-collapse-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CollapseExampleStandard {

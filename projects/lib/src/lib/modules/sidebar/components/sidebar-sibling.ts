@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, HostListener, ElementRef, Renderer2 } from "@angular/core";
+import { Component, Input, HostBinding, HostListener, ElementRef, Renderer2, ChangeDetectionStrategy } from "@angular/core";
 import { SidebarService, SidebarTransition } from "../services/sidebar.service";
 
 @Component({
@@ -9,6 +9,7 @@ import { SidebarService, SidebarTransition } from "../services/sidebar.service";
     display: block;
 }
 `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiSidebarSibling {

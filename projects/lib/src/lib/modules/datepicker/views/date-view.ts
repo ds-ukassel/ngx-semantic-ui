@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from "@angular/core";
+import { Component, Renderer2, ChangeDetectionStrategy } from "@angular/core";
 import { DateUtil, DatePrecision } from "../../../misc/util/internal";
 import { CalendarItem } from "../directives/calendar-item";
 import { CalendarView, CalendarViewType } from "./calendar-view";
@@ -51,6 +51,7 @@ export class CalendarRangeDateService extends CalendarRangeService {
   </tbody>
 </table>
 `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiCalendarDateView extends CalendarView {

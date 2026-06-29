@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { SuiTransition, Transition, TransitionDirection, TransitionController } from "@angular-ex/semantic-ui";
 import { ApiDefinition } from "../../../components/api/api.component";
 
@@ -15,6 +15,7 @@ const exampleStandardTemplate = `
 @Component({
     selector: "demo-page-transition",
     templateUrl: "./transition.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TransitionPage {
@@ -116,6 +117,7 @@ export class MyComponent extends SuiTransition {
 @Component({
     selector: "example-transition-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TransitionExampleStandard {

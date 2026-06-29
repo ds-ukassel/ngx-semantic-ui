@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 
 const exampleStandardTemplate = `
@@ -165,6 +165,7 @@ const exampleSearchLookupTemplate = `
 @Component({
     selector: "demo-page-select",
     templateUrl: "./select.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SelectPage {
@@ -449,6 +450,7 @@ const idOptions:IOption[] = namedOptions.map(({ name }, id) => ({ name, id }));
 @Component({
     selector: "example-select-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SelectExampleStandard {
@@ -464,6 +466,7 @@ export class SelectExampleStandard {
 @Component({
     selector: "example-select-variations",
     template: exampleVariationsTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SelectExampleVariations {
@@ -474,6 +477,7 @@ export class SelectExampleVariations {
 @Component({
     selector: "example-select-in-menu-search",
     template: exampleInMenuSearchTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SelectExampleInMenuSearch {
@@ -484,6 +488,7 @@ export class SelectExampleInMenuSearch {
 @Component({
     selector: "example-select-template",
     template: exampleTemplateTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SelectExampleTemplate {
@@ -498,6 +503,7 @@ export class SelectExampleTemplate {
 @Component({
     selector: "example-select-search-lookup",
     template: exampleSearchLookupTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SelectExampleLookupSearch {

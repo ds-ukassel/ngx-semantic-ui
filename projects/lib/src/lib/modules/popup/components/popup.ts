@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewContainerRef, ElementRef, EventEmitter, HostListener, HostBinding } from "@angular/core";
+import { Component, ViewChild, ViewContainerRef, ElementRef, EventEmitter, HostListener, HostBinding, ChangeDetectionStrategy } from "@angular/core";
 import { PositioningService, IDynamicClasses } from "../../../misc/util/internal";
 import { TransitionController, TransitionDirection, Transition } from "../../transition/internal";
 import { IPopup } from "../classes/popup-controller";
@@ -61,6 +61,7 @@ import { TemplatePopupConfig } from "../classes/popup-template-controller";
     margin-right: 0.75em;
 }
 `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiPopup implements IPopup {

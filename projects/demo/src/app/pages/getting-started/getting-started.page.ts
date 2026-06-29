@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 
 @Component({
     selector: "demo-page-getting-started",
@@ -9,6 +9,7 @@ import { Component } from "@angular/core";
     margin-bottom: 0.5em;
 }
 `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class GettingStartedPage {

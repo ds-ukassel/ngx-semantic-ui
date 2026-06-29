@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 
 const exampleStandardTemplate = `
@@ -79,6 +79,7 @@ const exampleRotationTemplate = `
 @Component({
     selector: "demo-page-pagination",
     templateUrl: "./pagination.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PaginationPage {
@@ -155,6 +156,7 @@ export class PaginationPage {
 @Component({
     selector: "example-pagination-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PaginationExampleStandard implements OnInit {
@@ -175,6 +177,7 @@ export class PaginationExampleStandard implements OnInit {
 @Component({
     selector: "example-pagination-maxsize",
     template: exampleMaxSizeTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PaginationExampleMaxSize implements OnInit {
@@ -195,6 +198,7 @@ export class PaginationExampleMaxSize implements OnInit {
 @Component({
     selector: "example-pagination-rotation",
     template: exampleRotationTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PaginationExampleRotation implements OnInit {

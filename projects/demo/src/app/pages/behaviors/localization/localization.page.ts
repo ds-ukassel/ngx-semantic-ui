@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, ChangeDetectionStrategy } from "@angular/core";
 import { SuiLocalizationService } from "@angular-ex/semantic-ui";
 import locales from "@angular-ex/semantic-ui/locales";
 
@@ -101,6 +101,7 @@ const supportedLanguages:ISupportedLanguage[] = [
 @Component({
     selector: "demo-page-localization",
     templateUrl: "./localization.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class LocalizationPage {
@@ -198,6 +199,7 @@ interface ILocaleValues {
 @Component({
     selector: "example-localization",
     template: exampleTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class LocalizationExample implements OnDestroy {

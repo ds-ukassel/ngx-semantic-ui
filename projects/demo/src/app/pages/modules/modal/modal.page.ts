@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 import {
     SuiModalService, ModalTemplate, TemplateModalConfig, ComponentModalConfig,
@@ -54,6 +54,7 @@ const exampleComponentTemplate = `
 @Component({
     selector: "demo-page-modal",
     templateUrl: "./modal.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ModalPage {
@@ -231,6 +232,7 @@ this.modalService
 @Component({
     selector: "example-modal-template",
     template: exampleTemplateTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ModalExampleTemplate {
@@ -266,6 +268,7 @@ interface IConfirmModalContext {
 @Component({
     selector: "example-modal-confirm",
     template: exampleComponentModalTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ConfirmModalComponent {
@@ -285,6 +288,7 @@ export class ConfirmModal extends ComponentModalConfig<IConfirmModalContext, voi
 @Component({
     selector: "example-modal-component",
     template: exampleComponentTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ModalExampleComponent {

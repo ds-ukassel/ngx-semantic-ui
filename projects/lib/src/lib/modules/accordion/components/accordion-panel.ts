@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from "@angular/core";
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy } from "@angular/core";
 import { SuiAccordionService } from "../services/accordion.service";
 import { TransitionController, Transition } from "../../transition/internal";
 
@@ -28,6 +28,7 @@ import { TransitionController, Transition } from "../../transition/internal";
     border-top: none;
 }
 `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiAccordionPanel {

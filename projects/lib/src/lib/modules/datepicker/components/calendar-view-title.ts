@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from "@angular/core";
+import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from "@angular/core";
 import { CalendarRangeService } from "../services/calendar-range.service";
 
 @Component({
@@ -21,6 +21,7 @@ import { CalendarRangeService } from "../services/calendar-range.service";
     margin-right: 2rem;
 }
 `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiCalendarViewTitle {

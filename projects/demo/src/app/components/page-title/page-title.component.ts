@@ -1,9 +1,10 @@
-import { Component, HostBinding } from "@angular/core";
+import { Component, HostBinding, ChangeDetectionStrategy } from "@angular/core";
 
 @Component({
     selector: "demo-page-title",
     templateUrl: "./page-title.component.html",
     styleUrls: ["./page-title.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PageTitleComponent {

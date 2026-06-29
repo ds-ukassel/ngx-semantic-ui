@@ -1,6 +1,7 @@
 import {
-    Component, ViewChild, HostBinding, Input, AfterViewInit, HostListener,
-    EventEmitter, Output, Directive, ElementRef, TemplateRef, Renderer2
+  Component, ViewChild, HostBinding, Input, AfterViewInit, HostListener,
+  EventEmitter, Output, Directive, ElementRef, TemplateRef, Renderer2,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { Util, ITemplateRefContext, IFocusEvent } from "../../../misc/util/internal";
 import { DropdownService, SuiDropdownMenu } from "../../dropdown/internal";
@@ -57,6 +58,7 @@ export interface IResultContext<T> extends ITemplateRefContext<T> {
     margin-bottom: .5em;
 }
 `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiSearch<T> implements AfterViewInit {

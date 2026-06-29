@@ -1,4 +1,4 @@
-import { Component, HostBinding, Renderer2, ElementRef, ChangeDetectorRef } from "@angular/core";
+import { Component, HostBinding, Renderer2, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } from "@angular/core";
 import { SuiDimmer } from "../../dimmer/internal";
 
 @Component({
@@ -11,6 +11,7 @@ import { SuiDimmer } from "../../dimmer/internal";
             display: flex !important; 
         }
     `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiModalDimmer extends SuiDimmer {

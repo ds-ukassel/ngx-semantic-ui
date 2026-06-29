@@ -1,10 +1,11 @@
-import { Component, HostBinding } from "@angular/core";
+import { Component, HostBinding, ChangeDetectionStrategy } from "@angular/core";
 import { SuiPopupConfig } from "@angular-ex/semantic-ui";
 
 @Component({
     selector: "demo-root",
     templateUrl: "./app.component.html",
     styleUrls: ["./app.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppComponent {

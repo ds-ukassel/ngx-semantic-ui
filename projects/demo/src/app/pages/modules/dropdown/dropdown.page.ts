@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 
 const exampleFileMenuTemplate = `
@@ -139,6 +139,7 @@ const exampleMenuTemplate = `
 @Component({
     selector: "demo-page-dropdown",
     templateUrl: "./dropdown.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DropdownPage {
@@ -208,6 +209,7 @@ export class DropdownPage {
 @Component({
     selector: "example-dropdown-file-menu",
     template: exampleFileMenuTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DropdownExampleFileMenu {}
@@ -215,6 +217,7 @@ export class DropdownExampleFileMenu {}
 @Component({
     selector: "example-dropdown-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DropdownExampleStandard {
@@ -225,6 +228,7 @@ export class DropdownExampleStandard {
 @Component({
     selector: "example-dropdown-styled",
     template: exampleStyledTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DropdownExampleStyled {}
@@ -232,6 +236,7 @@ export class DropdownExampleStyled {}
 @Component({
     selector: "example-dropdown-menu",
     template: exampleMenuTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DropdownExampleMenu {}

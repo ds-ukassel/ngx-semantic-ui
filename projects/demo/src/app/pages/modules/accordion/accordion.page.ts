@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 
 const exampleStandardTemplate = `
@@ -76,6 +76,7 @@ const exampleManualTemplate = `
 @Component({
     selector: "demo-page-accordion",
     templateUrl: "./accordion.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AccordionPage {
@@ -136,6 +137,7 @@ export class AccordionPage {
 @Component({
     selector: "example-accordion-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AccordionExampleStandard {}
@@ -143,6 +145,7 @@ export class AccordionExampleStandard {}
 @Component({
     selector: "example-accordion-styled",
     template: exampleStyledTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AccordionExampleStyled {}
@@ -150,6 +153,7 @@ export class AccordionExampleStyled {}
 @Component({
     selector: "example-accordion-manual",
     template: exampleManualTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AccordionExampleManual {

@@ -1,6 +1,7 @@
 import {
-    Component, Input, HostBinding, HostListener, EventEmitter, ViewContainerRef,
-    ViewChild, Renderer2, ElementRef, Output, ChangeDetectorRef, TemplateRef
+  Component, Input, HostBinding, HostListener, EventEmitter, ViewContainerRef,
+  ViewChild, Renderer2, ElementRef, Output, ChangeDetectorRef, TemplateRef,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { SuiTransition, TransitionController, Transition, TransitionDirection } from "../../transition/internal";
 import { HandledEvent, SuiComponentFactory } from "../../../misc/util/internal";
@@ -18,6 +19,7 @@ const templateRef = TemplateRef;
 }
 <i class="delete icon" (click)="deselectOption($event)"></i>
 `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiMultiSelectLabel<T> extends SuiTransition {

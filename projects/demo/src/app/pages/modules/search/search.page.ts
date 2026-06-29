@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 import { SuiModalService } from "@angular-ex/semantic-ui";
 import { AlertModal } from "../../../modals/alert.modal";
@@ -41,6 +41,7 @@ const exampleTemplateTemplate = `
 @Component({
     selector: "demo-page-search",
     templateUrl: "./search.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SearchPage {
@@ -168,6 +169,7 @@ interface IOption {
 @Component({
     selector: "example-search-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SearchExampleStandard {
@@ -197,6 +199,7 @@ export class SearchExampleStandard {
 @Component({
     selector: "example-search-remote",
     template: exampleRemoteTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SearchExampleRemote extends SearchExampleStandard {
@@ -216,6 +219,7 @@ export class SearchExampleRemote extends SearchExampleStandard {
 @Component({
     selector: "example-search-template",
     template: exampleTemplateTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SearchExampleTemplate {

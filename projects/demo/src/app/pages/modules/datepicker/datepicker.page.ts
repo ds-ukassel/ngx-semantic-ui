@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 import { DatepickerMode } from "@angular-ex/semantic-ui";
 
@@ -81,6 +81,7 @@ const exampleMobileFallbackTemplate = `
 @Component({
     selector: "demo-page-datepicker",
     templateUrl: "./datepicker.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DatepickerPage {
@@ -184,6 +185,7 @@ export class DatepickerPage {
 @Component({
     selector: "example-datepicker-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DatepickerExampleStandard {
@@ -197,6 +199,7 @@ export class DatepickerExampleStandard {
 @Component({
     selector: "example-datepicker-button",
     template: exampleButtonTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DatepickerExampleButton {}
@@ -204,6 +207,7 @@ export class DatepickerExampleButton {}
 @Component({
     selector: "example-datepicker-min-max",
     template: exampleMinMaxTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DatepickerExampleMinMax {
@@ -221,6 +225,7 @@ export class DatepickerExampleMinMax {
 @Component({
     selector: "example-datepicker-mobile-fallback",
     template: exampleMobileFallbackTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DatepickerExampleMobileFallback {

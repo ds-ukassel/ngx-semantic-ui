@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, HostBinding, ContentChild } from "@angular/core";
+import { Component, AfterContentInit, HostBinding, ContentChild, ChangeDetectionStrategy } from "@angular/core";
 import { SidebarService } from "../services/sidebar.service";
 import { SuiSidebar } from "./sidebar";
 import { SuiSidebarSibling } from "./sidebar-sibling";
@@ -11,6 +11,7 @@ import { SuiSidebarSibling } from "./sidebar-sibling";
     display: block;
 }
 `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiSidebarContainer implements AfterContentInit {

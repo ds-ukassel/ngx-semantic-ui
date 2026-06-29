@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 import { SuiPopupConfig, PopupPlacement } from "@angular-ex/semantic-ui";
 
@@ -80,6 +80,7 @@ const exampleSizeTemplate = `
 @Component({
     selector: "demo-page-popup",
     templateUrl: "./popup.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PopupPage {
@@ -248,6 +249,7 @@ export class MyComponent {
     selector: "example-popup-standard",
     template: exampleStandardTemplate,
     providers: [SuiPopupConfig],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PopupExampleStandard {}
@@ -256,6 +258,7 @@ export class PopupExampleStandard {}
     selector: "example-popup-template",
     template: exampleTemplateTemplate,
     providers: [SuiPopupConfig],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PopupExampleTemplate {}
@@ -264,6 +267,7 @@ export class PopupExampleTemplate {}
     selector: "example-popup-placement",
     template: examplePlacementTemplate,
     providers: [SuiPopupConfig],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PopupExamplePlacement {
@@ -275,6 +279,7 @@ export class PopupExamplePlacement {
     selector: "example-popup-size",
     template: exampleSizeTemplate,
     providers: [SuiPopupConfig],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PopupExampleSize {}
@@ -283,6 +288,7 @@ export class PopupExampleSize {}
     selector: "example-popup-width",
     template: exampleWidthTemplate,
     providers: [SuiPopupConfig],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PopupExampleWidth {}

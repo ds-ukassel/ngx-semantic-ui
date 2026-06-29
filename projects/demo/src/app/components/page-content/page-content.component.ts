@@ -1,4 +1,4 @@
-import { Component, HostBinding } from "@angular/core";
+import { Component, HostBinding, ChangeDetectionStrategy } from "@angular/core";
 
 @Component({
     selector: "demo-page-content",
@@ -6,6 +6,7 @@ import { Component, HostBinding } from "@angular/core";
 <ng-content></ng-content>
 `,
     styleUrls: ["./page-content.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PageContentComponent {

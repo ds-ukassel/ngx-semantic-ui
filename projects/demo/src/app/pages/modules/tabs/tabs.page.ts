@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 import { SuiModalService } from "@angular-ex/semantic-ui";
 import { AlertModal } from "../../../modals/alert.modal";
@@ -85,6 +85,7 @@ const exampleStyledTemplate = `
 @Component({
     selector: "demo-page-tabs",
     templateUrl: "./tabs.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TabsPage {
@@ -156,6 +157,7 @@ export class TabsPage {
 @Component({
     selector: "example-tab-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TabExampleStandard {}
@@ -163,6 +165,7 @@ export class TabExampleStandard {}
 @Component({
     selector: "example-tab-properties",
     template: examplePropertiesTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TabExampleProperties {
@@ -184,6 +187,7 @@ export class TabExampleProperties {
 @Component({
     selector: "example-tab-dynamic",
     template: exampleDynamicTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TabExampleDynamic {
@@ -210,6 +214,7 @@ export class TabExampleDynamic {
 @Component({
     selector: "example-tab-styled",
     template: exampleStyledTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TabExampleStyled {

@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, ContentChildren, QueryList, AfterContentInit } from "@angular/core";
+import { Component, Input, HostBinding, ContentChildren, QueryList, AfterContentInit, ChangeDetectionStrategy } from "@angular/core";
 import { SuiAccordionPanel } from "./accordion-panel";
 import { SuiAccordionService } from "../services/accordion.service";
 
@@ -18,6 +18,7 @@ import { SuiAccordionService } from "../services/accordion.service";
     border-top: none
 }
 `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiAccordion implements AfterContentInit {

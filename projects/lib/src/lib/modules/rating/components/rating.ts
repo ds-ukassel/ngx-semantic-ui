@@ -1,4 +1,4 @@
-import { Component, Directive, Input, Output, EventEmitter, HostBinding, HostListener } from "@angular/core";
+import { Component, Directive, Input, Output, EventEmitter, HostBinding, HostListener, ChangeDetectionStrategy } from "@angular/core";
 import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor } from "../../../misc/util/internal";
 
 @Component({
@@ -18,6 +18,7 @@ import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccess
     cursor: auto
 }
 `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiRating implements ICustomValueAccessorHost<number> {

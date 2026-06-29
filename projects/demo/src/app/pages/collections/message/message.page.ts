@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 
 const exampleStandardTemplate = `
@@ -37,6 +37,7 @@ const exampleIconTemplate = `
 @Component({
     selector: "demo-page-message",
     templateUrl: "./message.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MessagePage {
@@ -102,6 +103,7 @@ export class MyComponent {
 @Component({
     selector: "example-message-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MessageExampleStandard {}
@@ -109,6 +111,7 @@ export class MessageExampleStandard {}
 @Component({
     selector: "example-message-no-dismiss",
     template: exampleNoDismissTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MessageExampleNoDismiss {}
@@ -116,6 +119,7 @@ export class MessageExampleNoDismiss {}
 @Component({
     selector: "example-message-icon",
     template: exampleIconTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MessageExampleIcon {}

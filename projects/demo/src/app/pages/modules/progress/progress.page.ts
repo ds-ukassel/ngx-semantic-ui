@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 
 const exampleStandardTemplate = `
@@ -54,6 +54,7 @@ const exampleVariationsTemplate = `
 @Component({
     selector: "demo-page-progress",
     templateUrl: "./progress.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ProgressPage {
@@ -103,6 +104,7 @@ export class ProgressPage {
 @Component({
     selector: "example-progress-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ProgressExampleStandard {
@@ -115,6 +117,7 @@ export class ProgressExampleStandard {
 @Component({
     selector: "example-progress-variations",
     template: exampleVariationsTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ProgressExampleVariations {

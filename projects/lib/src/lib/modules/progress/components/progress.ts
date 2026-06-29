@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding } from "@angular/core";
+import { Component, Input, HostBinding, ChangeDetectionStrategy } from "@angular/core";
 
 @Component({
     selector: "sui-progress",
@@ -18,6 +18,7 @@ import { Component, Input, HostBinding } from "@angular/core";
     z-index: 1;
 }
 `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiProgress {

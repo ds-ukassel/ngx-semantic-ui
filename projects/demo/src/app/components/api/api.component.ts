@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
 
 export interface IApiProperty {
     name:string;
@@ -26,6 +26,7 @@ export type ApiDefinition = IApi[];
     selector: "demo-api",
     templateUrl: "./api.component.html",
     styleUrls: ["./api.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ApiComponent {

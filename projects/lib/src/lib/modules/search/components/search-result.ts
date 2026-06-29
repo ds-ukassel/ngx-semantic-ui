@@ -1,6 +1,7 @@
 import {
-    Component, ViewChild, ViewContainerRef, Renderer2, ElementRef, HostBinding,
-    Input, TemplateRef
+  Component, ViewChild, ViewContainerRef, Renderer2, ElementRef, HostBinding,
+  Input, TemplateRef,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { ITemplateRefContext, SuiComponentFactory } from "../../../misc/util/internal";
 import type { IResultContext } from "./search";
@@ -16,6 +17,7 @@ const templateRef = TemplateRef;
   <span [innerHTML]="formatter(value, query)"></span>
 }
 `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiSearchResult<T> {

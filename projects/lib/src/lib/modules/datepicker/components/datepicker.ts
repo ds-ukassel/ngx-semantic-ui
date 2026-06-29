@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener } from "@angular/core";
+import { Component, HostBinding, HostListener, ChangeDetectionStrategy } from "@angular/core";
 import { CalendarService } from "./../services/calendar.service";
 import { DatetimeConfig } from "../classes/calendar-config";
 import { SuiLocalizationService } from "../../../behaviors/localization/internal";
@@ -39,6 +39,7 @@ export const DatepickerMode = {
     user-select: none;
 }
 `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiDatepicker {

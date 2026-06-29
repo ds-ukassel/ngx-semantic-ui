@@ -1,4 +1,4 @@
-import { Component, HostBinding, Output, EventEmitter, HostListener, isDevMode } from "@angular/core";
+import { Component, HostBinding, Output, EventEmitter, HostListener, isDevMode, ChangeDetectionStrategy } from "@angular/core";
 // Polyfill for IE
 import "element-closest";
 
@@ -10,6 +10,7 @@ interface IAugmentedElement extends Element {
     selector: "demo-sidebar",
     templateUrl: "./sidebar.component.html",
     styleUrls: ["./sidebar.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SidebarComponent {

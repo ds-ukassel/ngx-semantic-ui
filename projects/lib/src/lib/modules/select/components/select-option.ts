@@ -1,6 +1,7 @@
 import {
-    Component, Input, HostBinding, HostListener, EventEmitter, ViewContainerRef,
-    ViewChild, Renderer2, ElementRef, Output, ChangeDetectorRef
+  Component, Input, HostBinding, HostListener, EventEmitter, ViewContainerRef,
+  ViewChild, Renderer2, ElementRef, Output, ChangeDetectorRef,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { SuiDropdownMenuItem } from "../../dropdown/internal";
 import { HandledEvent } from "../../../misc/util/internal";
@@ -11,6 +12,7 @@ import { HandledEvent } from "../../../misc/util/internal";
 <span #templateSibling></span>
 <span [innerHTML]="renderedText"></span>
 `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiSelectOption<T> extends SuiDropdownMenuItem {

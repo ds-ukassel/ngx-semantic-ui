@@ -1,4 +1,4 @@
-import { Component, OnInit, DebugElement, ViewChild } from "@angular/core";
+import { Component, OnInit, DebugElement, ViewChild, ChangeDetectionStrategy } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
 
@@ -17,6 +17,7 @@ import { SuiPaginationModule } from "../pagination.module";
     [(page)]="currentPage"
     ></sui-pagination>
 `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TestHostComponent {

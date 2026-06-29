@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 
 const exampleStandardTemplate = `
@@ -34,6 +34,7 @@ const exampleVariationsTemplate = `
 @Component({
     selector: "demo-page-dimmer",
     templateUrl: "./dimmer.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DimmerPage {
@@ -83,6 +84,7 @@ export class DimmerPage {
 @Component({
     selector: "example-dimmer-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DimmerExampleStandard {
@@ -93,6 +95,7 @@ export class DimmerExampleStandard {
 @Component({
     selector: "example-dimmer-variations",
     template: exampleVariationsTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DimmerExampleVariations {

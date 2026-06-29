@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding } from "@angular/core";
+import { Component, Input, HostBinding, ChangeDetectionStrategy } from "@angular/core";
 import { PositioningPlacement } from "../../../misc/util/internal";
 
 @Component({
@@ -71,6 +71,7 @@ import { PositioningPlacement } from "../../../misc/util/internal";
     bottom: 1em;
 }
 `],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiPopupArrow {

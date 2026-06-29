@@ -1,6 +1,7 @@
 import {
-    Component, Directive, Input, Output, HostListener, HostBinding,
-    EventEmitter, ViewChild, ElementRef
+  Component, Directive, Input, Output, HostListener, HostBinding,
+  EventEmitter, ViewChild, ElementRef,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor } from "../../../misc/util/internal";
 
@@ -19,6 +20,7 @@ import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccess
     <ng-content></ng-content>
 </label>
 `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiCheckbox implements ICustomValueAccessorHost<boolean> {

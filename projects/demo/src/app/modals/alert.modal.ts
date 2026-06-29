@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { SuiModal, ComponentModalConfig, ModalSize } from "@angular-ex/semantic-ui";
 
 interface IAlertModalContext {
@@ -19,6 +19,7 @@ interface IAlertModalContext {
   <button class="ui green button" (click)="modal.approve(undefined)" autofocus>OK</button>
 </div>
 `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AlertModalComponent {

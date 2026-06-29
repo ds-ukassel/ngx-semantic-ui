@@ -1,9 +1,10 @@
-import { Component, HostBinding, Input, Output, Renderer2, ElementRef, EventEmitter } from "@angular/core";
+import { Component, HostBinding, Input, Output, Renderer2, ElementRef, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import { SidebarService, SidebarTransition, SidebarDirection } from "../services/sidebar.service";
 
 @Component({
     selector: "sui-sidebar",
     template: `<ng-content></ng-content>`,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiSidebar {

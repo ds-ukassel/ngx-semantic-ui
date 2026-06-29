@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 
 const exampleStandardTemplate = `
@@ -78,6 +78,7 @@ const exampleStyledTemplate = `
 @Component({
     selector: "demo-page-checkbox",
     templateUrl: "./checkbox.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CheckboxPage {
@@ -176,6 +177,7 @@ export class CheckboxPage {
 @Component({
     selector: "example-checkbox-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CheckboxExampleStandard {
@@ -187,6 +189,7 @@ export class CheckboxExampleStandard {
 @Component({
     selector: "example-checkbox-radio-button",
     template: exampleRadioButtonTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CheckboxExampleRadioButton {
@@ -196,6 +199,7 @@ export class CheckboxExampleRadioButton {
 @Component({
     selector: "example-checkbox-styled",
     template: exampleStyledTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CheckboxExampleStyled {

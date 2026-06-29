@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ApiDefinition } from "../../../components/api/api.component";
 
 const exampleStandardTemplate = `
@@ -46,6 +46,7 @@ const exampleDirectionTemplate = `
 @Component({
     selector: "demo-page-sidebar",
     templateUrl: "./sidebar.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SidebarPage {
@@ -104,6 +105,7 @@ export class SidebarPage {
 @Component({
     selector: "example-sidebar-standard",
     template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SidebarExampleStandard {}
@@ -111,6 +113,7 @@ export class SidebarExampleStandard {}
 @Component({
     selector: "example-sidebar-direction",
     template: exampleDirectionTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SidebarExampleDirection {

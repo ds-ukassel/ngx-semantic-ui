@@ -1,6 +1,7 @@
 import {
-    Component, Input, OnInit, ViewChild, ElementRef, Renderer2,
-    EventEmitter, Output, HostListener, ViewContainerRef, AfterViewInit
+  Component, Input, OnInit, ViewChild, ElementRef, Renderer2,
+  EventEmitter, Output, HostListener, ViewContainerRef, AfterViewInit,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { Util, IDynamicClasses, KeyCode, SuiComponentFactory } from "../../../misc/util/internal";
 import { TransitionController, Transition, TransitionDirection } from "../../transition/internal";
@@ -41,6 +42,7 @@ import { ModalConfig, ModalSize } from "../classes/modal-config";
 </sui-modal-dimmer>
 `,
     styles: [``],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiModal<T, U> implements OnInit, AfterViewInit {

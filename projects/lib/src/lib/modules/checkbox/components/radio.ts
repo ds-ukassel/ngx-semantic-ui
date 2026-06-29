@@ -1,6 +1,7 @@
 import {
-    Component, Directive, Input, Output, HostListener, HostBinding,
-    EventEmitter, ViewChild, ElementRef, ContentChildren, AfterContentInit, QueryList
+  Component, Directive, Input, Output, HostListener, HostBinding,
+  EventEmitter, ViewChild, ElementRef, ContentChildren, AfterContentInit, QueryList,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import {
     ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor,
@@ -22,6 +23,7 @@ import {
     <ng-content></ng-content>
 </label>
 `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiRadio<T> implements ICustomValueAccessorHost<T> {

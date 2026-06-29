@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef, ViewChild, Output, EventEmitter, ElementRef, Directive, Input } from "@angular/core";
+import { Component, ViewContainerRef, ViewChild, Output, EventEmitter, ElementRef, Directive, Input, ChangeDetectionStrategy } from "@angular/core";
 import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor } from "../../../misc/util/internal";
 import { SuiLocalizationService } from "../../../behaviors/localization/internal";
 import { SuiSelectBase } from "../classes/select-base";
@@ -40,6 +40,7 @@ import { SuiSelectOption } from "./select-option";
   }
 </div>
 `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SuiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValueAccessorHost<U> {
