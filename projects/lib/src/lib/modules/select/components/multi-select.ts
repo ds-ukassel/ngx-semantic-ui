@@ -10,45 +10,54 @@ import { SuiSelectOption } from "./select-option";
 <!-- Dropdown icon -->
 <i class="{{ icon }} icon" (click)="onCaretClick($event)"></i>
 
-<ng-container *ngIf="hasLabels">
-<!-- Multi-select labels -->
-    <sui-multi-select-label *ngFor="let selected of selectedOptions;"
-                            [value]="selected"
-                            [query]="query"
-                            [formatter]="configuredFormatter"
-                            [template]="optionTemplate"
-                            (deselected)="deselectOption($event)"></sui-multi-select-label>
-</ng-container>
+@if (hasLabels) {
+  <!-- Multi-select labels -->
+  @for (selected of selectedOptions; track selected) {
+    <sui-multi-select-label
+      [value]="selected"
+      [query]="query"
+      [formatter]="configuredFormatter"
+      [template]="optionTemplate"
+    (deselected)="deselectOption($event)"></sui-multi-select-label>
+  }
+}
 
 <!-- Query input -->
 <input suiSelectSearch
-       type="text"
-       [hidden]="!isSearchable || isSearchExternal">
+  type="text"
+  [hidden]="!isSearchable || isSearchExternal">
 
 <!-- Helper text -->
 <div class="text"
-     [class.default]="hasLabels"
-     [class.filtered]="!!query && !isSearchExternal">
-    
-    <!-- Placeholder text -->
-    <ng-container *ngIf="hasLabels; else selectedBlock">{{ placeholder }}</ng-container>
-    
-    <!-- Summary shown when labels are hidden -->
-    <ng-template #selectedBlock> {{ selectedMessage }}</ng-template>
+  [class.default]="hasLabels"
+  [class.filtered]="!!query && !isSearchExternal">
+
+  <!-- Placeholder text -->
+  @if (hasLabels) {
+    {{ placeholder }}
+  } @else {
+    {{ selectedMessage }}
+  }
+
+  <!-- Summary shown when labels are hidden -->
 </div>
 
 <!-- Select dropdown menu -->
 <div class="menu"
-     suiDropdownMenu
-     [menuTransition]="transition"
-     [menuTransitionDuration]="transitionDuration"
-     [menuAutoSelectFirst]="true">
+  suiDropdownMenu
+  [menuTransition]="transition"
+  [menuTransitionDuration]="transitionDuration"
+  [menuAutoSelectFirst]="true">
 
-    <ng-content></ng-content>
-    <ng-container *ngIf="availableOptions.length == 0 ">
-        <div *ngIf="!maxSelectedReached" class="message">{{ localeValues.noResultsMessage }}</div>
-        <div *ngIf="maxSelectedReached" class="message">{{ maxSelectedMessage }}</div>
-    </ng-container>
+  <ng-content></ng-content>
+  @if (availableOptions.length == 0 ) {
+    @if (!maxSelectedReached) {
+      <div class="message">{{ localeValues.noResultsMessage }}</div>
+    }
+    @if (maxSelectedReached) {
+      <div class="message">{{ maxSelectedMessage }}</div>
+    }
+  }
 </div>
 `,
     styles: [`

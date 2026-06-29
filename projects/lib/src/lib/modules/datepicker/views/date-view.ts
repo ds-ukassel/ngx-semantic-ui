@@ -23,27 +23,32 @@ export class CalendarRangeDateService extends CalendarRangeService {
     selector: "sui-calendar-date-view",
     template: `
 <table class="ui celled center aligned unstackable table seven column day">
-<thead>
+  <thead>
     <tr>
-        <th colspan="7">
-            <sui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
-                {{ date }}
-            </sui-calendar-view-title>
-        </th>
+      <th colspan="7">
+        <sui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
+          {{ date }}
+        </sui-calendar-view-title>
+      </th>
     </tr>
     <tr>
-        <th *ngFor="let day of days">{{ day }}</th>
+      @for (day of days; track day) {
+        <th>{{ day }}</th>
+      }
     </tr>
-</thead>
-<tbody>
-    <tr *ngFor="let group of ranges.current.groupedItems">
-        <td class="link"
-            *ngFor="let item of group"
+  </thead>
+  <tbody>
+    @for (group of ranges.current.groupedItems; track group) {
+      <tr>
+        @for (item of group; track item) {
+          <td class="link"
             [calendarItem]="item"
             (click)="setDate(item)">{{ item.humanReadable }}
-        </td>
-    </tr>
-</tbody>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
 </table>
 `,
     standalone: false

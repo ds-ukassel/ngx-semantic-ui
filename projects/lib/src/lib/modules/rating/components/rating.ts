@@ -4,13 +4,14 @@ import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccess
 @Component({
     selector: "sui-rating",
     template: `
-<i class="icon"
-   *ngFor="let icon of icons; let i = index"
-   (mouseover)="onMouseover(i)"
-   (click)="onClick(i)"
-   [class.selected]="hoveredIndex >= i && !isReadonly"
-   [class.active]="value > i">
-</i>
+@for (icon of icons; track icon; let i = $index) {
+  <i class="icon"
+    (mouseover)="onMouseover(i)"
+    (click)="onClick(i)"
+    [class.selected]="hoveredIndex >= i && !isReadonly"
+    [class.active]="value > i">
+  </i>
+}
 `,
     styles: [`
 :host.read-only .icon {

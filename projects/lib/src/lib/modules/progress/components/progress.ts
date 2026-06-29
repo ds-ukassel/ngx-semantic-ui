@@ -4,10 +4,12 @@ import { Component, Input, HostBinding } from "@angular/core";
     selector: "sui-progress",
     template: `
 <div class="bar" [style.width.%]="percentage">
-    <div class="progress" *ngIf="showProgress">{{ percentage }}%</div>
+  @if (showProgress) {
+    <div class="progress">{{ percentage }}%</div>
+  }
 </div>
 <div class="label">
-    <ng-content></ng-content>
+  <ng-content></ng-content>
 </div>
 `,
     styles: [`

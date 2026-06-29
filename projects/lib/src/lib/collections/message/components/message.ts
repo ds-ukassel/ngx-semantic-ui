@@ -8,10 +8,14 @@ export interface IMessage {
 @Component({
     selector: "sui-message",
     template: `
-<div class="ui message {{ class }}" *ngIf="!isDismissed" [suiTransition]="transitionController">
-    <i class="close icon" *ngIf="isDismissable" (click)="dismiss()"></i>
+@if (!isDismissed) {
+  <div class="ui message {{ class }}" [suiTransition]="transitionController">
+    @if (isDismissable) {
+      <i class="close icon" (click)="dismiss()"></i>
+    }
     <ng-content></ng-content>
-</div>
+  </div>
+}
 `,
     styles: [`
 /* Fix for CSS Bug */

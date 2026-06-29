@@ -12,7 +12,9 @@ const templateRef = TemplateRef;
     selector: "sui-search-result",
     template: `
 <span #templateSibling></span>
-<span *ngIf="!template" [innerHTML]="formatter(value, query)"></span>
+@if (!template) {
+  <span [innerHTML]="formatter(value, query)"></span>
+}
 `,
     standalone: false
 })

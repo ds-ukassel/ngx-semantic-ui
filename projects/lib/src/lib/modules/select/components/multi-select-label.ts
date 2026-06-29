@@ -13,7 +13,9 @@ const templateRef = TemplateRef;
     selector: "sui-multi-select-label",
     template: `
 <span #templateSibling></span>
-<span *ngIf="!template" [innerHTML]="formatter(value)"></span>
+@if (!template) {
+  <span [innerHTML]="formatter(value)"></span>
+}
 <i class="delete icon" (click)="deselectOption($event)"></i>
 `,
     standalone: false
