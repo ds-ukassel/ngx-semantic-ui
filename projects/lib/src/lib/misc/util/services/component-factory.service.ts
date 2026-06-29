@@ -1,6 +1,6 @@
 import {
   ApplicationRef,
-  ComponentRef, inject,
+  ComponentRef, createComponent, EnvironmentInjector, inject,
   Injectable,
   Injector,
   Provider,
@@ -16,8 +16,8 @@ export interface IImplicitContext<T> {
 @Injectable()
 export class SuiComponentFactory {
   private readonly _applicationRef = inject(ApplicationRef);
-  private readonly _componentFactoryResolver = inject(ViewContainerRef);
   private _injector = inject(Injector);
+  private _envInjector = inject(EnvironmentInjector);
 
   public createComponent<T>(type: Type<T>, providers: Provider[] = []): ComponentRef<T> {
     // Resolve and create an injector with the specified providers.
@@ -27,8 +27,9 @@ export class SuiComponentFactory {
     });
 
     // Create a component using the previously resolved factory & injector.
-    return this._componentFactoryResolver.createComponent(type as Type<T>, {
-      injector,
+    return createComponent(type as Type<T>, {
+      environmentInjector: this._envInjector,
+      elementInjector: injector,
     });
   }
 
