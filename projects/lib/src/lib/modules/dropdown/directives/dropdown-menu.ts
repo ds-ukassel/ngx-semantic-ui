@@ -10,7 +10,8 @@ import "element-closest";
 
 @Directive({
     // We must attach to every '.item' as Angular doesn't support > selectors.
-    selector: ".item"
+    selector: ".item",
+    standalone: false
 })
 export class SuiDropdownMenuItem {
     public get isDisabled():boolean {
@@ -57,7 +58,8 @@ export class SuiDropdownMenuItem {
 }
 
 @Directive({
-    selector: "[suiDropdownMenu]"
+    selector: "[suiDropdownMenu]",
+    standalone: false
 })
 export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, OnDestroy {
     private _service!:DropdownService;

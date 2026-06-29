@@ -8,7 +8,8 @@ import { SidebarService, SidebarTransition } from "../services/sidebar.service";
 :host {
     display: block;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiSidebarSibling {
     private _service!:SidebarService;

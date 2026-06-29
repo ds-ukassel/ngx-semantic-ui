@@ -45,7 +45,8 @@ export class CalendarRangeDateService extends CalendarRangeService {
     </tr>
 </tbody>
 </table>
-`
+`,
+    standalone: false
 })
 export class SuiCalendarDateView extends CalendarView {
     public get days():string[] {

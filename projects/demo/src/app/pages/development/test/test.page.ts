@@ -3,7 +3,8 @@ import { FormControl, Validators } from "@angular/forms";
 
 @Component({
     selector: "demo-page-test",
-    templateUrl: "./test.page.html"
+    templateUrl: "./test.page.html",
+    standalone: false
 })
 export class TestPage {
     constructor() {}

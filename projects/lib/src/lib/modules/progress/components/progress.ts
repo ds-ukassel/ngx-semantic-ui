@@ -15,7 +15,8 @@ import { Component, Input, HostBinding } from "@angular/core";
     transition-duration: 300ms !important;
     z-index: 1;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiProgress {
     @HostBinding("class.ui")

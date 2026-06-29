@@ -55,7 +55,8 @@ import { SuiSelectOption } from "./select-option";
 :host input.search {
     width: 12em !important;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValueAccessorHost<U[]> {
     public selectedOptions:T[];
@@ -244,7 +245,8 @@ export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustom
         "(selectedOptionsChange)": "onChange($event)",
         "(touched)": "onTouched()"
     },
-    providers: [customValueAccessorFactory(SuiMultiSelectValueAccessor)]
+    providers: [customValueAccessorFactory(SuiMultiSelectValueAccessor)],
+    standalone: false
 })
 export class SuiMultiSelectValueAccessor<T, U> extends CustomValueAccessor<U[], SuiMultiSelect<T, U>> {
     constructor(host:SuiMultiSelect<T, U>) {

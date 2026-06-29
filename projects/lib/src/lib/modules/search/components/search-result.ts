@@ -13,7 +13,8 @@ const templateRef = TemplateRef;
     template: `
 <span #templateSibling></span>
 <span *ngIf="!template" [innerHTML]="formatter(value, query)"></span>
-`
+`,
+    standalone: false
 })
 export class SuiSearchResult<T> {
     // Sets the Semantic UI classes on the host element.

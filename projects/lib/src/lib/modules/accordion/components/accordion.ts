@@ -17,7 +17,8 @@ import { SuiAccordionService } from "../services/accordion.service";
 :host.styled sui-accordion-panel:first-child .title {
     border-top: none
 }
-`]
+`],
+    standalone: false
 })
 export class SuiAccordion implements AfterContentInit {
     @HostBinding("class.ui")

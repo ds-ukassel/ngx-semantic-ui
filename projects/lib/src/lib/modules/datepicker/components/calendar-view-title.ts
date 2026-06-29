@@ -20,7 +20,8 @@ import { CalendarRangeService } from "../services/calendar-range.service";
     margin-left: 2rem;
     margin-right: 2rem;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiCalendarViewTitle {
 

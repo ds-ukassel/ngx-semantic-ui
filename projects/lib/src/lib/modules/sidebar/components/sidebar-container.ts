@@ -10,7 +10,8 @@ import { SuiSidebarSibling } from "./sidebar-sibling";
 :host {
     display: block;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiSidebarContainer implements AfterContentInit {
     public service!:SidebarService;

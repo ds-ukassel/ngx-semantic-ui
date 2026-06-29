@@ -4,7 +4,8 @@ import { SuiPopupConfig } from "@angular-ex/semantic-ui";
 @Component({
     selector: "demo-root",
     templateUrl: "./app.component.html",
-    styleUrls: ["./app.component.scss"]
+    styleUrls: ["./app.component.scss"],
+    standalone: false
 })
 export class AppComponent {
     constructor(popupConfig:SuiPopupConfig) {

@@ -10,7 +10,8 @@ const templateRef = TemplateRef;
 
 @Directive({
     selector: "[suiPopup]",
-    exportAs: "suiPopup"
+    exportAs: "suiPopup",
+    standalone: false
 })
 export class SuiPopupDirective<T> extends SuiPopupTemplateController<T> {
     @Input()

@@ -15,7 +15,8 @@ const templateRef = TemplateRef;
 <span #templateSibling></span>
 <span *ngIf="!template" [innerHTML]="formatter(value)"></span>
 <i class="delete icon" (click)="deselectOption($event)"></i>
-`
+`,
+    standalone: false
 })
 export class SuiMultiSelectLabel<T> extends SuiTransition {
     // Sets the Semantic UI classes on the host element.

@@ -12,7 +12,8 @@ import * as isUAWebView from "is-ua-webview";
 const isWebView = isUAWebView["default"] || isUAWebView;
 
 @Directive({
-    selector: "input[suiDatepicker]"
+    selector: "input[suiDatepicker]",
+    standalone: false
 })
 export class SuiDatepickerInputDirective {
     private _useNativeOnMobile!:boolean;

@@ -35,7 +35,8 @@ import { Component, Input, Output, OnChanges, EventEmitter, HostBinding } from "
 :host .item {
     transition: none;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiPagination implements OnChanges {
 

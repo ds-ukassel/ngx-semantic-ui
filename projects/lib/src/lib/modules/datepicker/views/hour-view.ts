@@ -37,7 +37,8 @@ export class CalendarRangeHourService extends CalendarRangeService {
     </tr>
 </tbody>
 </table>
-`
+`,
+    standalone: false
 })
 export class SuiCalendarHourView extends CalendarView {
 

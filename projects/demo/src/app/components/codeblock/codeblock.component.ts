@@ -7,7 +7,8 @@ declare const Prism: any;
     template: `
 <pre [ngClass]="languageClass" [innerHTML]="html"></pre>
 `,
-    styleUrls: ["./codeblock.component.scss"]
+    styleUrls: ["./codeblock.component.scss"],
+    standalone: false
 })
 export class CodeblockComponent implements AfterViewInit {
     @Input()

@@ -35,7 +35,8 @@ export class CalendarRangeMonthService extends CalendarRangeService {
     </tr>
 </tbody>
 </table>
-`
+`,
+    standalone: false
 })
 export class SuiCalendarMonthView extends CalendarView {
     public get year():string {

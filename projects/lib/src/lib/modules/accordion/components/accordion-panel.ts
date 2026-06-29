@@ -27,7 +27,8 @@ import { TransitionController, Transition } from "../../transition/internal";
 :host:first-child .title {
     border-top: none;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiAccordionPanel {
     private _service!:SuiAccordionService;

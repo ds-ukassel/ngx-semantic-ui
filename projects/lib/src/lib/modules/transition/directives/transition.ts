@@ -3,7 +3,8 @@ import { TransitionController } from "../classes/transition-controller";
 
 @Directive({
     selector: "[suiTransition]",
-    exportAs: "transition"
+    exportAs: "transition",
+    standalone: false
 })
 export class SuiTransition {
     // Each transition must have a controller associated that dispatches the transitions.

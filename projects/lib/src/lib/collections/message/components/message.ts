@@ -18,7 +18,8 @@ export interface IMessage {
 .ui.icon.visible.message {
     display: flex !important;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiMessage implements IMessage {
     @Input()

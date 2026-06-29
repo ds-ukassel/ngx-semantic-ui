@@ -3,7 +3,8 @@ import { SidebarService, SidebarTransition, SidebarDirection } from "../services
 
 @Component({
     selector: "sui-sidebar",
-    template: `<ng-content></ng-content>`
+    template: `<ng-content></ng-content>`,
+    standalone: false
 })
 export class SuiSidebar {
     public service:SidebarService;

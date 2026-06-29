@@ -40,7 +40,8 @@ const exampleTemplateTemplate = `
 
 @Component({
     selector: "demo-page-search",
-    templateUrl: "./search.page.html"
+    templateUrl: "./search.page.html",
+    standalone: false
 })
 export class SearchPage {
     public api:ApiDefinition = [
@@ -166,7 +167,8 @@ interface IOption {
 
 @Component({
     selector: "example-search-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    standalone: false
 })
 export class SearchExampleStandard {
     public static standardOptions:string[] = [
@@ -194,7 +196,8 @@ export class SearchExampleStandard {
 
 @Component({
     selector: "example-search-remote",
-    template: exampleRemoteTemplate
+    template: exampleRemoteTemplate,
+    standalone: false
 })
 export class SearchExampleRemote extends SearchExampleStandard {
     public last!:IOption | IOption[];
@@ -212,7 +215,8 @@ export class SearchExampleRemote extends SearchExampleStandard {
 
 @Component({
     selector: "example-search-template",
-    template: exampleTemplateTemplate
+    template: exampleTemplateTemplate,
+    standalone: false
 })
 export class SearchExampleTemplate {
     public options:IOption[];

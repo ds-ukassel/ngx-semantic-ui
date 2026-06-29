@@ -10,7 +10,8 @@ import { HandledEvent } from "../../../misc/util/internal";
     template: `
 <span #templateSibling></span>
 <span [innerHTML]="renderedText"></span>
-`
+`,
+    standalone: false
 })
 export class SuiSelectOption<T> extends SuiDropdownMenuItem {
     // Sets the Semantic UI classes on the host element.

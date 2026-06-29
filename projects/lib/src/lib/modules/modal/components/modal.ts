@@ -38,7 +38,8 @@ import { ModalConfig, ModalSize } from "../classes/modal-config";
     </div>
 </sui-modal-dimmer>
 `,
-    styles: [``]
+    styles: [``],
+    standalone: false
 })
 export class SuiModal<T, U> implements OnInit, AfterViewInit {
     @Input()

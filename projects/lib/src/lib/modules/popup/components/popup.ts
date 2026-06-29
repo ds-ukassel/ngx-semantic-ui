@@ -56,7 +56,8 @@ import { TemplatePopupConfig } from "../classes/popup-template-controller";
     margin-left: 0.75em;
     margin-right: 0.75em;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiPopup implements IPopup {
     // Config settings for this popup.

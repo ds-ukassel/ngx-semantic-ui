@@ -1,7 +1,8 @@
 import { Directive, Input, EventEmitter, Renderer2, ElementRef, HostListener, HostBinding } from "@angular/core";
 
 @Directive({
-    selector: "input[suiSelectSearch]"
+    selector: "input[suiSelectSearch]",
+    standalone: false
 })
 export class SuiSelectSearch {
     @HostBinding("class.search")

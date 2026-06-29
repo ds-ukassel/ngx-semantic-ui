@@ -46,7 +46,8 @@ export class CalendarRangeMinuteService extends CalendarRangeService {
     </tr>
 </tbody>
 </table>
-`
+`,
+    standalone: false
 })
 export class SuiCalendarMinuteView extends CalendarView {
     public get date():string {

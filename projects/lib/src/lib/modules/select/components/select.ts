@@ -33,7 +33,8 @@ import { SuiSelectOption } from "./select-option";
         {{ localeValues.noResultsMessage }}
     </div>
 </div>
-`
+`,
+    standalone: false
 })
 export class SuiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValueAccessorHost<U> {
     public selectedOption?:T;
@@ -153,7 +154,8 @@ export class SuiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValue
         "(selectedOptionChange)": "onChange($event)",
         "(touched)": "onTouched()"
     },
-    providers: [customValueAccessorFactory(SuiSelectValueAccessor)]
+    providers: [customValueAccessorFactory(SuiSelectValueAccessor)],
+    standalone: false
 })
 export class SuiSelectValueAccessor<T, U> extends CustomValueAccessor<U, SuiSelect<T, U>> {
     constructor(host:SuiSelect<T, U>) {

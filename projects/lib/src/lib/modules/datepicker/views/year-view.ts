@@ -34,7 +34,8 @@ export class CalendarRangeYearService extends CalendarRangeService {
     </tr>
 </tbody>
 </table>
-`
+`,
+    standalone: false
 })
 export class SuiCalendarYearView extends CalendarView {
     public get decadeStart():number {

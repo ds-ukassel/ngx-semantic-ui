@@ -14,7 +14,8 @@ import { CalendarConfig, YearConfig, MonthConfig, DatetimeConfig, TimeConfig, Da
 
 @Directive({
     selector: "[suiDatepicker]",
-    providers: [customValidatorFactory(SuiDatepickerDirective)]
+    providers: [customValidatorFactory(SuiDatepickerDirective)],
+    standalone: false
 })
 export class SuiDatepickerDirective
        extends SuiPopupComponentController<SuiDatepicker>
@@ -199,7 +200,8 @@ export class SuiDatepickerDirective
 @Directive({
     selector: "[suiDatepicker]",
     host: { "(pickerSelectedDateChange)": "onChange($event)" },
-    providers: [customValueAccessorFactory(SuiDatepickerDirectiveValueAccessor)]
+    providers: [customValueAccessorFactory(SuiDatepickerDirectiveValueAccessor)],
+    standalone: false
 })
 export class SuiDatepickerDirectiveValueAccessor extends CustomValueAccessor<Date, SuiDatepickerDirective> {
     constructor(public host:SuiDatepickerDirective) { super(host); }
@@ -208,7 +210,8 @@ export class SuiDatepickerDirectiveValueAccessor extends CustomValueAccessor<Dat
 @Directive({
     selector: "[suiDatepicker]",
     host: { "(pickerValidatorChange)": "onValidatorChange()" },
-    providers: [customValidatorFactory(SuiDatepickerDirectiveValidator)]
+    providers: [customValidatorFactory(SuiDatepickerDirectiveValidator)],
+    standalone: false
 })
 export class SuiDatepickerDirectiveValidator extends CustomValidator<SuiDatepickerDirective> {
     constructor(public host:SuiDatepickerDirective) { super(host); }

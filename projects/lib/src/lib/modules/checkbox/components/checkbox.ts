@@ -18,7 +18,8 @@ import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccess
 <label>
     <ng-content></ng-content>
 </label>
-`
+`,
+    standalone: false
 })
 export class SuiCheckbox implements ICustomValueAccessorHost<boolean> {
     @HostBinding("class.ui")
@@ -104,7 +105,8 @@ export class SuiCheckbox implements ICustomValueAccessorHost<boolean> {
         "(checkChange)": "onChange($event)",
         "(touched)": "onTouched()"
     },
-    providers: [customValueAccessorFactory(SuiCheckboxValueAccessor)]
+    providers: [customValueAccessorFactory(SuiCheckboxValueAccessor)],
+    standalone: false
 })
 export class SuiCheckboxValueAccessor extends CustomValueAccessor<boolean, SuiCheckbox> {
     constructor(host:SuiCheckbox) {

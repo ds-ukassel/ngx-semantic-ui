@@ -1,7 +1,8 @@
 import { HostBinding, Input, Directive, EventEmitter, HostListener, Output, ElementRef } from "@angular/core";
 
 @Directive({
-    selector: "[suiTabHeader]"
+    selector: "[suiTabHeader]",
+    standalone: false
 })
 export class SuiTabHeader {
     @HostBinding("class.item")

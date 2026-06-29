@@ -7,7 +7,8 @@ import { DropdownService, DropdownAutoCloseType } from "../services/dropdown.ser
 import { SuiDropdownMenu } from "./dropdown-menu";
 
 @Directive({
-    selector: "[suiDropdown]"
+    selector: "[suiDropdown]",
+    standalone: false
 })
 export class SuiDropdown implements AfterContentInit {
     public service:DropdownService;

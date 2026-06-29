@@ -16,7 +16,8 @@ import { SuiPaginationModule } from "../pagination.module";
     [maxSize]="maxSize"
     [(page)]="currentPage"
     ></sui-pagination>
-`
+`,
+    standalone: false
 })
 export class TestHostComponent {
     public collectionSize:number;

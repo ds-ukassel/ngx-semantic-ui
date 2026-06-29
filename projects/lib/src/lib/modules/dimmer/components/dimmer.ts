@@ -16,7 +16,8 @@ import { TransitionController, SuiTransition, TransitionDirection, Transition } 
     transition: none;
     display: flex !important;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiDimmer extends SuiTransition {
     @HostBinding("class.ui")

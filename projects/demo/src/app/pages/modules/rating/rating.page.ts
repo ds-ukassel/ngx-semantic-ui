@@ -30,7 +30,8 @@ const exampleStyledTemplate = `
 
 @Component({
     selector: "demo-page-rating",
-    templateUrl: "./rating.page.html"
+    templateUrl: "./rating.page.html",
+    standalone: false
 })
 export class RatingPage {
     public api:ApiDefinition = [
@@ -76,7 +77,8 @@ export class RatingPage {
 
 @Component({
     selector: "example-rating-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    standalone: false
 })
 export class RatingExampleStandard {
     public rating:number = 3;
@@ -85,7 +87,8 @@ export class RatingExampleStandard {
 
 @Component({
     selector: "example-rating-styled",
-    template: exampleStyledTemplate
+    template: exampleStyledTemplate,
+    standalone: false
 })
 export class RatingExampleStyled {}
 

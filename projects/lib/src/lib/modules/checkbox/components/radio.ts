@@ -21,7 +21,8 @@ import {
 <label>
     <ng-content></ng-content>
 </label>
-`
+`,
+    standalone: false
 })
 export class SuiRadio<T> implements ICustomValueAccessorHost<T> {
     @HostBinding("class.ui")
@@ -115,7 +116,8 @@ export class SuiRadio<T> implements ICustomValueAccessorHost<T> {
         "(currentValueChange)": "onChange($event)",
         "(touched)": "onTouched()"
     },
-    providers: [customValueAccessorFactory(SuiRadioValueAccessor)]
+    providers: [customValueAccessorFactory(SuiRadioValueAccessor)],
+    standalone: false
 })
 export class SuiRadioValueAccessor<T> extends CustomValueAccessor<T, SuiRadio<T>> {
     constructor(host:SuiRadio<T>) {

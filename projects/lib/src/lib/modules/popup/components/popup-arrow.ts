@@ -66,7 +66,8 @@ import { PositioningPlacement } from "../../../misc/util/internal";
     top: auto;
     bottom: 1em;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiPopupArrow {
     @Input()

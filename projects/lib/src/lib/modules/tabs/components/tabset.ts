@@ -5,7 +5,8 @@ import { Tab } from "../classes/tab";
 
 @Component({
     selector: "sui-tabset",
-    template: `<ng-content></ng-content>`
+    template: `<ng-content></ng-content>`,
+    standalone: false
 })
 export class SuiTabset implements AfterContentInit {
     @ContentChildren(SuiTabHeader, { descendants: true })

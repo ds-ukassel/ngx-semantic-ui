@@ -16,7 +16,8 @@ import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccess
 :host.read-only .icon {
     cursor: auto
 }
-`]
+`],
+    standalone: false
 })
 export class SuiRating implements ICustomValueAccessorHost<number> {
     @HostBinding("class.ui")
@@ -84,7 +85,8 @@ export class SuiRating implements ICustomValueAccessorHost<number> {
 @Directive({
     selector: "sui-rating",
     host: { "(valueChange)": "onChange($event)" },
-    providers: [customValueAccessorFactory(SuiRatingValueAccessor)]
+    providers: [customValueAccessorFactory(SuiRatingValueAccessor)],
+    standalone: false
 })
 export class SuiRatingValueAccessor extends CustomValueAccessor<number, SuiRating> {
     constructor(host:SuiRating) {

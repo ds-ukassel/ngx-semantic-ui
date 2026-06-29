@@ -50,7 +50,8 @@ export interface IResultContext<T> extends ITemplateRefContext<T> {
 .results {
     margin-bottom: .5em;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiSearch<T> implements AfterViewInit {
     public dropdownService:DropdownService;

@@ -3,7 +3,8 @@ import { Component, Input } from "@angular/core";
 @Component({
     selector: "demo-example",
     templateUrl: "./example.component.html",
-    styleUrls: ["./example.component.scss"]
+    styleUrls: ["./example.component.scss"],
+    standalone: false
 })
 export class ExampleComponent {
     public detail:boolean = false;

@@ -28,7 +28,8 @@ export const DatepickerMode = {
 :host {
     user-select: none;
 }
-`]
+`],
+    standalone: false
 })
 export class SuiDatepicker {
     @HostBinding("class.ui")

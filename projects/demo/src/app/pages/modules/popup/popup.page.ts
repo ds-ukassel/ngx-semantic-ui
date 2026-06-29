@@ -79,7 +79,8 @@ const exampleSizeTemplate = `
 
 @Component({
     selector: "demo-page-popup",
-    templateUrl: "./popup.page.html"
+    templateUrl: "./popup.page.html",
+    standalone: false
 })
 export class PopupPage {
     public api:ApiDefinition = [
@@ -246,21 +247,24 @@ export class MyComponent {
 @Component({
     selector: "example-popup-standard",
     template: exampleStandardTemplate,
-    providers: [SuiPopupConfig]
+    providers: [SuiPopupConfig],
+    standalone: false
 })
 export class PopupExampleStandard {}
 
 @Component({
     selector: "example-popup-template",
     template: exampleTemplateTemplate,
-    providers: [SuiPopupConfig]
+    providers: [SuiPopupConfig],
+    standalone: false
 })
 export class PopupExampleTemplate {}
 
 @Component({
     selector: "example-popup-placement",
     template: examplePlacementTemplate,
-    providers: [SuiPopupConfig]
+    providers: [SuiPopupConfig],
+    standalone: false
 })
 export class PopupExamplePlacement {
     @Input()
@@ -270,14 +274,16 @@ export class PopupExamplePlacement {
 @Component({
     selector: "example-popup-size",
     template: exampleSizeTemplate,
-    providers: [SuiPopupConfig]
+    providers: [SuiPopupConfig],
+    standalone: false
 })
 export class PopupExampleSize {}
 
 @Component({
     selector: "example-popup-width",
     template: exampleWidthTemplate,
-    providers: [SuiPopupConfig]
+    providers: [SuiPopupConfig],
+    standalone: false
 })
 export class PopupExampleWidth {}
 

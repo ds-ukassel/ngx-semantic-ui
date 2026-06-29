@@ -10,7 +10,8 @@ import { SuiDimmer } from "../../dimmer/internal";
             overflow-y: auto;
             display: flex !important; 
         }
-    `]
+    `],
+    standalone: false
 })
 export class SuiModalDimmer extends SuiDimmer {
 
