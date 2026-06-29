@@ -8,18 +8,18 @@ export interface ICustomValueAccessorHost<T> {
 export class CustomValueAccessor<U, T extends ICustomValueAccessorHost<U>> implements ControlValueAccessor {
     constructor(private _host:T) {}
 
-    public onChange = () => {};
-    public onTouched = () => {};
+    public onChange = (value?: any) => {};
+    public onTouched = (value?: any) => {};
 
     public writeValue(value:U):void {
         this._host.writeValue(value);
     }
 
-    public registerOnChange(fn:() => void):void {
+    public registerOnChange(fn:(value?: U) => void):void {
         this.onChange = fn;
     }
 
-    public registerOnTouched(fn:() => void):void {
+    public registerOnTouched(fn:(value?: U) => void):void {
         this.onTouched = fn;
     }
 }

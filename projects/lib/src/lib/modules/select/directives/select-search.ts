@@ -26,7 +26,11 @@ export class SuiSelectSearch {
         this.autoComplete = "off";
     }
 
-    @HostListener("input", ["$event.target.value"])
+    @HostListener("input", ["$event"])
+    protected _updateQuery($event: InputEvent) {
+      this.updateQuery($event.target && 'value' in $event.target && typeof $event.target.value === 'string' ? $event.target.value : '');
+    }
+
     public updateQuery(query:string):void {
         this.onQueryUpdated.emit(query);
     }

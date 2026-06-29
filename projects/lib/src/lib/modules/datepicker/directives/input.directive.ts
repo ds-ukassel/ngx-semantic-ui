@@ -7,7 +7,6 @@ import { SuiDatepickerDirective, SuiDatepickerDirectiveValueAccessor } from "./d
 import { InternalDateParser, DateParser } from "../classes/date-parser";
 import * as bowser from "bowser";
 
-import "../helpers/is-webview";
 import * as isUAWebView from "is-ua-webview";
 const isWebView = isUAWebView["default"] || isUAWebView;
 
@@ -122,7 +121,11 @@ export class SuiDatepickerInputDirective {
         this._lastUpdateTyped = false;
     }
 
-    @HostListener("input", ["$event.target.value"])
+    @HostListener("input", ["$event"])
+    protected _typeValue($event: InputEvent) {
+      this.typeValue($event.target && 'value' in $event.target && typeof $event.target.value === 'string' ? $event.target.value : undefined);
+    }
+
     public typeValue(value:string | undefined):void {
         this._lastUpdateTyped = true;
         this._currentInputValue = value;

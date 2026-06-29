@@ -24,6 +24,10 @@ export class HandledEvent extends MouseEvent {
     public eventHandled?:boolean;
 }
 
+export class HandledKeyboardEvent extends KeyboardEvent {
+    public eventHandled?:boolean;
+}
+
 export type IDynamicClasses = Record<string, true>;
 
 export const Util = {
