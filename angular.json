@@ -33,15 +33,6 @@
               "zone.js/testing"
             ]
           }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/lib/**/*.ts",
-              "projects/lib/**/*.html"
-            ]
-          }
         }
       }
     },
@@ -136,15 +127,6 @@
             "tsConfig": "projects/demo/tsconfig.spec.json",
             "buildTarget": ":build:testing",
             "runner": "vitest"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/demo/**/*.ts",
-              "projects/demo/**/*.html"
-            ]
           }
         }
       }
