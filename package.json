@@ -33,15 +33,15 @@
     "@angular/platform-browser": "^22.0.4",
     "@angular/platform-browser-dynamic": "^22.0.4",
     "@angular/router": "^22.0.4",
-    "bowser": "^2.11.0",
-    "date-fns": "^2.30.0",
+    "bowser": "^2.14.1",
+    "date-fns": "^4.4.0",
     "element-closest": "^3.0.2",
     "extend": "^3.0.2",
     "is-ua-webview": "^1.1.2",
     "popper.js": "^1.16.1",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.15.1"
+    "rxjs": "~7.8.2",
+    "tslib": "^2.8.1",
+    "zone.js": "~0.16.2"
   },
   "devDependencies": {
     "@angular-eslint/builder": "20.7.0",
