@@ -1,5 +1,4 @@
-import { Component, HostBinding, ChangeDetectionStrategy } from "@angular/core";
-import { SidebarComponent } from "../sidebar/sidebar.component";
+import {ChangeDetectionStrategy, Component, HostBinding} from '@angular/core';
 
 @Component({
     selector: "demo-page-content",
@@ -8,7 +7,7 @@ import { SidebarComponent } from "../sidebar/sidebar.component";
 `,
     styleUrls: ["./page-content.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SidebarComponent]
+  imports: [],
 })
 export class PageContentComponent {
     @HostBinding("class.ui")
