@@ -1,11 +1,19 @@
-import { Component, Input, ChangeDetectionStrategy, forwardRef } from "@angular/core";
-import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
-import { SuiPopupConfig, PopupPlacement, SuiSelectModule, SuiPopupModule, SuiRatingModule } from "@angular-ex/semantic-ui";
-import { PageTitleComponent } from "../../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../../components/page-content/page-content.component";
-import { ExampleComponent } from "../../../components/example/example.component";
-import { FormsModule } from "@angular/forms";
-import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
+import {
+  PopupPlacement,
+  SuiPopupConfig,
+  SuiPopupModule,
+  SuiRatingModule,
+  SuiSelect,
+  SuiSelectModule,
+  SuiSelectOption,
+} from '@angular-ex/semantic-ui';
+import {ChangeDetectionStrategy, Component, forwardRef, Input} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <button class="ui green icon button" suiPopup popupHeader="Example" popupText="This is an example popup">
@@ -59,11 +67,11 @@ const exampleWidthTemplate = `
 </div>
 </ng-template>
 
-<i class="circular heart icon link" suiPopup popupWidth="wide" 
-popupText="Hello. This is a wide pop-up which allows for lots of content with additional space. 
+<i class="circular heart icon link" suiPopup popupWidth="wide"
+popupText="Hello. This is a wide pop-up which allows for lots of content with additional space.
 You can fit a lot of words here and the paragraphs will be pretty wide."></i>
-<i class="circular heart icon link" suiPopup popupWidth="very wide" 
-popupText="Hello. This is a very wide pop-up which allows for lots of content with additional space. 
+<i class="circular heart icon link" suiPopup popupWidth="very wide"
+popupText="Hello. This is a very wide pop-up which allows for lots of content with additional space.
 You can fit a lot of words here and the paragraphs will be pretty wide."></i>
 <br/>
 <br/>
@@ -86,7 +94,7 @@ const exampleSizeTemplate = `
     selector: "demo-page-popup",
     templateUrl: "./popup.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => PopupExampleStandard), forwardRef(() => PopupExampleTemplate), forwardRef(() => PopupExamplePlacement), SuiSelectModule, FormsModule, forwardRef(() => PopupExampleSize), forwardRef(() => PopupExampleWidth), CodeblockComponent, ApiComponent]
+  imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => PopupExampleStandard), forwardRef(() => PopupExampleTemplate), forwardRef(() => PopupExamplePlacement), SuiSelectModule, FormsModule, forwardRef(() => PopupExampleSize), forwardRef(() => PopupExampleWidth), CodeblockComponent, ApiComponent, SuiSelectOption, SuiSelect],
 })
 export class PopupPage {
     public api:ApiDefinition = [

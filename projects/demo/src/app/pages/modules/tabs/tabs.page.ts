@@ -1,4 +1,4 @@
-import {SuiCheckboxModule, SuiDropdownModule, SuiModalService, SuiTabsModule} from '@angular-ex/semantic-ui';
+import {SuiCheckboxModule, SuiDropdownModule, SuiModalService, SuiTabsModule, SuiModalModule} from '@angular-ex/semantic-ui';
 import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
@@ -50,9 +50,13 @@ const exampleDynamicTemplate = `
 <sui-tabset>
     <div class="ui top attached tabular menu">
         <a class="item" suiTabHeader="static">Static</a>
-        <a class="item" *ngFor="let tab of tabs; let i = index" [suiTabHeader]="i" [(isActive)]="active[i]">{{ tab.header }}</a>
+        @for (tab of tabs; track $index) {
+            <a class="item" [suiTabHeader]="$index" [(isActive)]="active[$index]">{{ tab.header }}</a>
+        }
     </div>
-    <div class="ui bottom attached segment" *ngFor="let tab of tabs; let i = index" [suiTabContent]="i">{{ tab.content }}</div>
+    @for (tab of tabs; track $index) {
+        <div class="ui bottom attached segment" [suiTabContent]="$index">{{ tab.content }}</div>
+    }
     <div class="ui bottom attached segment" suiTabContent="static">
         <p>Static tabs alongside dynamic tabs are supported.</p>
         <p>Note that the order that <code>[suiTabContent]</code> elements are defined doesn't affect the headers.</p>
@@ -170,7 +174,7 @@ export class TabExampleStandard {}
     selector: "example-tab-properties",
     template: examplePropertiesTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiTabsModule, SuiDropdownModule, SuiCheckboxModule, FormsModule]
+    imports: [SuiModalModule, SuiTabsModule, SuiDropdownModule, SuiCheckboxModule, FormsModule]
 })
 export class TabExampleProperties {
     public firstActive:boolean;

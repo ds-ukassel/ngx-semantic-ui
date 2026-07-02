@@ -54,7 +54,9 @@ const exampleComponentTemplate = `
 <div class="field">
     <label>Modal Size:</label>
     <sui-select class="selection" [(ngModel)]="size" [options]="availableSizes" #sizes>
-        <sui-select-option *ngFor="let s of sizes.availableOptions" [value]="s"></sui-select-option>
+        @for (s of sizes.availableOptions; track s) {
+            <sui-select-option [value]="s" />
+        }
     </sui-select>
 </div>
 <button class="ui primary button" (click)="open()">Confirm?</button>
