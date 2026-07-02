@@ -12,9 +12,7 @@ import { SuiModalDimmer } from "./components/dimmer";
         CommonModule,
         SuiDimmerModule,
         SuiTransitionModule,
-        SuiUtilityModule
-    ],
-    declarations: [
+        SuiUtilityModule,
         SuiModal,
         SuiModalDimmer
     ],

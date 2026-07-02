@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import { TransitionController, Transition, TransitionDirection } from "../../../modules/transition/internal";
+import { SuiTransition } from "../../../modules/transition/directives/transition";
 
 export interface IMessage {
     dismiss():void;
@@ -24,7 +25,7 @@ export interface IMessage {
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiTransition]
 })
 export class SuiMessage implements IMessage {
     @Input()

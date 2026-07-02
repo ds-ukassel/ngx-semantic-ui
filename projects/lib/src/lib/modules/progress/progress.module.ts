@@ -4,9 +4,7 @@ import { SuiProgress } from "./components/progress";
 
 @NgModule({
     imports: [
-        CommonModule
-    ],
-    declarations: [
+        CommonModule,
         SuiProgress
     ],
     exports: [

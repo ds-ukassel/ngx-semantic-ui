@@ -7,9 +7,7 @@ import { SuiDropdownMenu, SuiDropdownMenuItem } from "./directives/dropdown-menu
 @NgModule({
     imports: [
         CommonModule,
-        SuiTransitionModule
-    ],
-    declarations: [
+        SuiTransitionModule,
         SuiDropdown,
         SuiDropdownMenu,
         SuiDropdownMenuItem

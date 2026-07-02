@@ -10,15 +10,15 @@ import { SuiPaginationModule } from "../pagination.module";
  */
 @Component({
     template: `
-<sui-pagination 
-    [collectionSize]="collectionSize" 
+<sui-pagination
+    [collectionSize]="collectionSize"
     [pageSize]="pageSize"
     [maxSize]="maxSize"
     [(page)]="currentPage"
     ></sui-pagination>
 `,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiPaginationModule]
 })
 export class TestHostComponent {
     public collectionSize:number;
@@ -44,8 +44,7 @@ describe("Pagination", () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [SuiPaginationModule],
-            declarations: [TestHostComponent] // declare the test component
+          imports: [SuiPaginationModule, TestHostComponent]
         });
 
         fixture = TestBed.createComponent(TestHostComponent);

@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, Input, ChangeDetectorRef, ChangeDetectionStrategy } from "@angular/core";
+import { NgClass } from "@angular/common";
 
 declare const Prism: any;
 
@@ -9,7 +10,7 @@ declare const Prism: any;
 `,
     styleUrls: ["./codeblock.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgClass]
 })
 export class CodeblockComponent implements AfterViewInit {
     @Input()

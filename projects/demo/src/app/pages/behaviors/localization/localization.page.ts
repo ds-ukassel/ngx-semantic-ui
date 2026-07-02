@@ -1,6 +1,12 @@
-import { Component, OnDestroy, ChangeDetectionStrategy } from "@angular/core";
-import { SuiLocalizationService } from "@angular-ex/semantic-ui";
+import { Component, OnDestroy, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { SuiLocalizationService, SuiDropdownModule, SuiSelectModule, SuiDatepickerModule } from "@angular-ex/semantic-ui";
 import locales from "@angular-ex/semantic-ui/locales";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { FormsModule } from "@angular/forms";
+import { NgFor } from "@angular/common";
 
 const exampleTemplate = `
 <div class="ui segments">
@@ -102,7 +108,7 @@ const supportedLanguages:ISupportedLanguage[] = [
     selector: "demo-page-localization",
     templateUrl: "./localization.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, CodeblockComponent, ExampleComponent, forwardRef(() => LocalizationExample), SuiDropdownModule]
 })
 export class LocalizationPage {
     public localizationCode = `
@@ -200,7 +206,7 @@ interface ILocaleValues {
     selector: "example-localization",
     template: exampleTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSelectModule, FormsModule, NgFor, SuiDatepickerModule]
 })
 export class LocalizationExample implements OnDestroy {
     public languages:ISupportedLanguage[];

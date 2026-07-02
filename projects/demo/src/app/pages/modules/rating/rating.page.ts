@@ -1,5 +1,10 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { SuiRatingModule, SuiCheckboxModule } from "@angular-ex/semantic-ui";
+import { FormsModule } from "@angular/forms";
 
 const exampleStandardTemplate = `
 <div class="ui form">
@@ -32,7 +37,7 @@ const exampleStyledTemplate = `
     selector: "demo-page-rating",
     templateUrl: "./rating.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => RatingExampleStandard), forwardRef(() => RatingExampleStyled), ApiComponent]
 })
 export class RatingPage {
     public api:ApiDefinition = [
@@ -80,7 +85,7 @@ export class RatingPage {
     selector: "example-rating-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiRatingModule, FormsModule, SuiCheckboxModule]
 })
 export class RatingExampleStandard {
     public rating = 3;
@@ -91,7 +96,7 @@ export class RatingExampleStandard {
     selector: "example-rating-styled",
     template: exampleStyledTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiRatingModule, FormsModule]
 })
 export class RatingExampleStyled {}
 

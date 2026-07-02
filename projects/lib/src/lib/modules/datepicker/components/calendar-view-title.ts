@@ -21,8 +21,7 @@ import { CalendarRangeService } from "../services/calendar-range.service";
     margin-right: 2rem;
 }
 `],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class SuiCalendarViewTitle {
 

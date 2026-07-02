@@ -1,7 +1,12 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
-import { SuiModalService } from "@angular-ex/semantic-ui";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { SuiModalService, SuiTabsModule, SuiDropdownModule, SuiCheckboxModule } from "@angular-ex/semantic-ui";
 import { AlertModal } from "../../../modals/alert.modal";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { FormsModule } from "@angular/forms";
+import { NgFor } from "@angular/common";
 
 const exampleStandardTemplate = `
 <sui-tabset>
@@ -86,7 +91,7 @@ const exampleStyledTemplate = `
     selector: "demo-page-tabs",
     templateUrl: "./tabs.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => TabExampleStandard), forwardRef(() => TabExampleProperties), forwardRef(() => TabExampleDynamic), forwardRef(() => TabExampleStyled), ApiComponent]
 })
 export class TabsPage {
     public api:ApiDefinition = [
@@ -158,7 +163,7 @@ export class TabsPage {
     selector: "example-tab-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiTabsModule, SuiDropdownModule]
 })
 export class TabExampleStandard {}
 
@@ -166,7 +171,7 @@ export class TabExampleStandard {}
     selector: "example-tab-properties",
     template: examplePropertiesTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiTabsModule, SuiDropdownModule, SuiCheckboxModule, FormsModule]
 })
 export class TabExampleProperties {
     public firstActive:boolean;
@@ -188,7 +193,7 @@ export class TabExampleProperties {
     selector: "example-tab-dynamic",
     template: exampleDynamicTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiTabsModule, SuiDropdownModule, NgFor]
 })
 export class TabExampleDynamic {
     public active:boolean[] = [];
@@ -215,7 +220,7 @@ export class TabExampleDynamic {
     selector: "example-tab-styled",
     template: exampleStyledTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiTabsModule, SuiDropdownModule]
 })
 export class TabExampleStyled {
     public pointing = true;

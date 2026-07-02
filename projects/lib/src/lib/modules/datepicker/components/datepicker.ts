@@ -2,6 +2,12 @@ import { Component, HostBinding, HostListener, ChangeDetectionStrategy } from "@
 import { CalendarService } from "./../services/calendar.service";
 import { DatetimeConfig } from "../classes/calendar-config";
 import { SuiLocalizationService } from "../../../behaviors/localization/internal";
+import { SuiCalendarYearView } from "../views/year-view";
+import { SuiCalendarMonthView } from "../views/month-view";
+import { SuiCalendarDateView } from "../views/date-view";
+import { SuiCalendarHourView } from "../views/hour-view";
+import { SuiCalendarMinuteView } from "../views/minute-view";
+import { SuiCalendarViewTitle } from "./calendar-view-title";
 
 export type DatepickerMode = "year" | "month" | "date" | "datetime" | "time";
 
@@ -40,7 +46,7 @@ export const DatepickerMode = {
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiCalendarYearView, SuiCalendarMonthView, SuiCalendarDateView, SuiCalendarHourView, SuiCalendarMinuteView, SuiCalendarViewTitle]
 })
 export class SuiDatepicker {
     @HostBinding("class.ui")

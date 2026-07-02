@@ -1,5 +1,10 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { SuiProgressModule, SuiCheckboxModule } from "@angular-ex/semantic-ui";
+import { FormsModule } from "@angular/forms";
 
 const exampleStandardTemplate = `
 <div class="ui segment">
@@ -55,7 +60,7 @@ const exampleVariationsTemplate = `
     selector: "demo-page-progress",
     templateUrl: "./progress.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => ProgressExampleStandard), forwardRef(() => ProgressExampleVariations), ApiComponent]
 })
 export class ProgressPage {
     public api:ApiDefinition = [
@@ -105,7 +110,7 @@ export class ProgressPage {
     selector: "example-progress-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiProgressModule, FormsModule, SuiCheckboxModule]
 })
 export class ProgressExampleStandard {
     public value = 55;
@@ -118,7 +123,7 @@ export class ProgressExampleStandard {
     selector: "example-progress-variations",
     template: exampleVariationsTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiProgressModule]
 })
 export class ProgressExampleVariations {
     public value = 55;

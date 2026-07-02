@@ -8,6 +8,10 @@ import { DropdownService, SuiDropdownMenu } from "../../dropdown/internal";
 import { ISearchLocaleValues, RecursivePartial, SuiLocalizationService } from "../../../behaviors/localization/internal";
 import { SearchService } from "../services/search.service";
 import { LookupFn, FilterFn } from "../helpers/lookup-fn";
+import { FormsModule } from "@angular/forms";
+import { SuiDropdownMenu as SuiDropdownMenu_1, SuiDropdownMenuItem } from "../../dropdown/directives/dropdown-menu";
+import { SuiSearchResult } from "./search-result";
+import { SuiSearchModule } from "../search.module";
 
 export interface IResultContext<T> extends ITemplateRefContext<T> {
     query:string;
@@ -59,7 +63,7 @@ export interface IResultContext<T> extends ITemplateRefContext<T> {
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [FormsModule, SuiDropdownMenu_1, SuiSearchResult, SuiDropdownMenuItem, SuiSearchModule]
 })
 export class SuiSearch<T> implements AfterViewInit {
     public dropdownService:DropdownService;

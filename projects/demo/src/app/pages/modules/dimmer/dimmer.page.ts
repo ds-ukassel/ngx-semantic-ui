@@ -1,5 +1,10 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { SuiDimmerModule, SuiCheckboxModule } from "@angular-ex/semantic-ui";
+import { FormsModule } from "@angular/forms";
 
 const exampleStandardTemplate = `
 <div class="ui segment">
@@ -35,7 +40,7 @@ const exampleVariationsTemplate = `
     selector: "demo-page-dimmer",
     templateUrl: "./dimmer.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => DimmerExampleStandard), forwardRef(() => DimmerExampleVariations), ApiComponent]
 })
 export class DimmerPage {
     public api:ApiDefinition = [
@@ -85,7 +90,7 @@ export class DimmerPage {
     selector: "example-dimmer-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiDimmerModule, SuiCheckboxModule, FormsModule]
 })
 export class DimmerExampleStandard {
     public isClickable = true;
@@ -96,7 +101,7 @@ export class DimmerExampleStandard {
     selector: "example-dimmer-variations",
     template: exampleVariationsTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiDimmerModule]
 })
 export class DimmerExampleVariations {
     public isClickable = true;

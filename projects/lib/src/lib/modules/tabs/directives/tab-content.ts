@@ -1,9 +1,6 @@
 import { HostBinding, Directive, Input } from "@angular/core";
 
-@Directive({
-    selector: "[suiTabContent]",
-    standalone: false
-})
+@Directive({ selector: "[suiTabContent]" })
 export class SuiTabContent {
     @HostBinding("class.tab")
     public readonly hasClasses:boolean;

@@ -1,7 +1,13 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
-import { SuiModalService } from "@angular-ex/semantic-ui";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { SuiModalService, SuiMessageModule, SuiSearchModule, SuiCheckboxModule } from "@angular-ex/semantic-ui";
 import { AlertModal } from "../../../modals/alert.modal";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { RouterLink } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { JsonPipe } from "@angular/common";
 
 const exampleStandardTemplate = `
 <sui-search placeholder="Example Search..."
@@ -42,7 +48,7 @@ const exampleTemplateTemplate = `
     selector: "demo-page-search",
     templateUrl: "./search.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => SearchExampleStandard), forwardRef(() => SearchExampleRemote), forwardRef(() => SearchExampleTemplate), SuiMessageModule, RouterLink, ApiComponent]
 })
 export class SearchPage {
     public api:ApiDefinition = [
@@ -170,7 +176,7 @@ interface IOption {
     selector: "example-search-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSearchModule, SuiCheckboxModule, FormsModule]
 })
 export class SearchExampleStandard {
     public static standardOptions:string[] = [
@@ -200,7 +206,7 @@ export class SearchExampleStandard {
     selector: "example-search-remote",
     template: exampleRemoteTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSearchModule, JsonPipe]
 })
 export class SearchExampleRemote extends SearchExampleStandard {
     public last!:IOption | IOption[];
@@ -220,7 +226,7 @@ export class SearchExampleRemote extends SearchExampleStandard {
     selector: "example-search-template",
     template: exampleTemplateTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSearchModule]
 })
 export class SearchExampleTemplate {
     public options:IOption[];

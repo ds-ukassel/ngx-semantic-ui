@@ -1,10 +1,12 @@
-import { Component, ViewChild, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
-import {
-    SuiModalService, ModalTemplate, TemplateModalConfig, ComponentModalConfig,
-    ModalSize, SuiModal
-} from "@angular-ex/semantic-ui";
+import { Component, ViewChild, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { SuiModalService, ModalTemplate, TemplateModalConfig, ComponentModalConfig, ModalSize, SuiModal, SuiTabsModule, SuiDropdownModule, SuiSelectModule } from "@angular-ex/semantic-ui";
 import { AlertModal } from "../../../modals/alert.modal";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
+import { FormsModule } from "@angular/forms";
+import { NgFor } from "@angular/common";
 
 const exampleTemplateModalTemplate = `
 <ng-template let-context let-modal="modal" #modalTemplate>
@@ -54,7 +56,7 @@ const exampleComponentTemplate = `
     selector: "demo-page-modal",
     templateUrl: "./modal.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, SuiTabsModule, SuiDropdownModule, CodeblockComponent, forwardRef(() => ModalExampleTemplate), forwardRef(() => ModalExampleComponent), ApiComponent]
 })
 export class ModalPage {
     public api:ApiDefinition = [
@@ -232,7 +234,7 @@ this.modalService
     selector: "example-modal-template",
     template: exampleTemplateTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [FormsModule]
 })
 export class ModalExampleTemplate {
     @ViewChild("modalTemplate")
@@ -267,8 +269,7 @@ interface IConfirmModalContext {
 @Component({
     selector: "example-modal-confirm",
     template: exampleComponentModalTemplate,
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ConfirmModalComponent {
     constructor(public modal:SuiModal<IConfirmModalContext, void, void>) {}
@@ -288,7 +289,7 @@ export class ConfirmModal extends ComponentModalConfig<IConfirmModalContext, voi
     selector: "example-modal-component",
     template: exampleComponentTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSelectModule, FormsModule, NgFor]
 })
 export class ModalExampleComponent {
 

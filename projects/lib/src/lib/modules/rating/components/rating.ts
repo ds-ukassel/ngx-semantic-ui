@@ -1,5 +1,6 @@
 import { Component, Directive, Input, Output, EventEmitter, HostBinding, HostListener, ChangeDetectionStrategy } from "@angular/core";
 import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor } from "../../../misc/util/internal";
+import { SuiRatingModule } from "../rating.module";
 
 @Component({
     selector: "sui-rating",
@@ -19,7 +20,7 @@ import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccess
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiRatingModule]
 })
 export class SuiRating implements ICustomValueAccessorHost<number> {
     @HostBinding("class.ui")
@@ -86,8 +87,7 @@ export class SuiRating implements ICustomValueAccessorHost<number> {
 @Directive({
     selector: "sui-rating",
     host: { "(valueChange)": "onChange($event)" },
-    providers: [customValueAccessorFactory(SuiRatingValueAccessor)],
-    standalone: false
+    providers: [customValueAccessorFactory(SuiRatingValueAccessor)]
 })
 export class SuiRatingValueAccessor extends CustomValueAccessor<number, SuiRating> {
     constructor(host:SuiRating) {

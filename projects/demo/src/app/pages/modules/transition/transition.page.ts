@@ -1,6 +1,12 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { SuiTransition, Transition, TransitionDirection, TransitionController } from "@angular-ex/semantic-ui";
-import { ApiDefinition } from "../../../components/api/api.component";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { SuiTransition, Transition, TransitionDirection, TransitionController, SuiTransitionModule, SuiSelectModule } from "@angular-ex/semantic-ui";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { FormsModule } from "@angular/forms";
+import { NgFor } from "@angular/common";
 
 const exampleStandardTemplate = `
 <div class="ui segment">
@@ -16,7 +22,7 @@ const exampleStandardTemplate = `
     selector: "demo-page-transition",
     templateUrl: "./transition.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, CodeblockComponent, ExampleComponent, forwardRef(() => TransitionExampleStandard), ApiComponent]
 })
 export class TransitionPage {
     public api:ApiDefinition = [
@@ -118,7 +124,7 @@ export class MyComponent extends SuiTransition {
     selector: "example-transition-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiTransitionModule, SuiSelectModule, FormsModule, NgFor]
 })
 export class TransitionExampleStandard {
     public transitionController:TransitionController = new TransitionController();

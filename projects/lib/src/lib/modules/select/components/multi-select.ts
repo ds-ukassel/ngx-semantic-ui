@@ -3,6 +3,10 @@ import { ICustomValueAccessorHost, KeyCode, customValueAccessorFactory, CustomVa
 import { SuiLocalizationService } from "../../../behaviors/localization/internal";
 import { SuiSelectBase } from "../classes/select-base";
 import { SuiSelectOption } from "./select-option";
+import { SuiMultiSelectLabel } from "./multi-select-label";
+import { SuiSelectSearch } from "../directives/select-search";
+import { SuiDropdownMenu } from "../../dropdown/directives/dropdown-menu";
+import { SuiSelect } from "./select";
 
 @Component({
     selector: "sui-multi-select",
@@ -66,7 +70,7 @@ import { SuiSelectOption } from "./select-option";
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiMultiSelectLabel, SuiSelectSearch, SuiDropdownMenu, SuiSelect]
 })
 export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValueAccessorHost<U[]> {
     public selectedOptions:T[];
@@ -255,8 +259,7 @@ export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustom
         "(selectedOptionsChange)": "onChange($event)",
         "(touched)": "onTouched()"
     },
-    providers: [customValueAccessorFactory(SuiMultiSelectValueAccessor)],
-    standalone: false
+    providers: [customValueAccessorFactory(SuiMultiSelectValueAccessor)]
 })
 export class SuiMultiSelectValueAccessor<T, U> extends CustomValueAccessor<U[], SuiMultiSelect<T, U>> {
     constructor(host:SuiMultiSelect<T, U>) {

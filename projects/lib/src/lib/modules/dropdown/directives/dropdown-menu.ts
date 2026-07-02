@@ -8,11 +8,9 @@ import { DropdownService, DropdownAutoCloseType } from "../services/dropdown.ser
 // Polyfill for IE
 import "element-closest";
 
-@Directive({
+@Directive({ 
     // We must attach to every '.item' as Angular doesn't support > selectors.
-    selector: ".item",
-    standalone: false
-})
+    selector: ".item" })
 export class SuiDropdownMenuItem {
     public get isDisabled():boolean {
         // We must use nativeElement as Angular doesn't have a way of reading class information.
@@ -57,10 +55,7 @@ export class SuiDropdownMenuItem {
     }
 }
 
-@Directive({
-    selector: "[suiDropdownMenu]",
-    standalone: false
-})
+@Directive({ selector: "[suiDropdownMenu]" })
 export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, OnDestroy {
     private _service!:DropdownService;
     private _transitionController:TransitionController;

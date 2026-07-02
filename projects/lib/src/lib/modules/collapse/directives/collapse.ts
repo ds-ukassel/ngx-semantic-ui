@@ -1,9 +1,6 @@
 import { Directive, ElementRef, Input, HostBinding, Renderer2 } from "@angular/core";
 
-@Directive({
-    selector: "[suiCollapse]",
-    standalone: false
-})
+@Directive({ selector: "[suiCollapse]" })
 export class SuiCollapse {
     // Set when the collapse is open, and not animating.
     @HostBinding("class.expanded")

@@ -1,8 +1,9 @@
 import { Component, Renderer2, ChangeDetectionStrategy } from "@angular/core";
 import { Util, DateUtil, DatePrecision } from "../../../misc/util/internal";
 import { CalendarView, CalendarViewType } from "./calendar-view";
-import { CalendarItem } from "../directives/calendar-item";
+import { CalendarItem, SuiCalendarItem } from "../directives/calendar-item";
 import { CalendarRangeService } from "../services/calendar-range.service";
+import { SuiCalendarViewTitle } from "../components/calendar-view-title";
 
 export class CalendarRangeYearService extends CalendarRangeService {
     public configureItem(item:CalendarItem, baseDate:Date):void {
@@ -39,7 +40,7 @@ export class CalendarRangeYearService extends CalendarRangeService {
 </table>
 `,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiCalendarViewTitle, SuiCalendarItem]
 })
 export class SuiCalendarYearView extends CalendarView {
     public get decadeStart():number {

@@ -6,10 +6,7 @@ import {HandledEvent, KeyCode, IFocusEvent, HandledKeyboardEvent} from '../../..
 import { DropdownService, DropdownAutoCloseType } from "../services/dropdown.service";
 import { SuiDropdownMenu } from "./dropdown-menu";
 
-@Directive({
-    selector: "[suiDropdown]",
-    standalone: false
-})
+@Directive({ selector: "[suiDropdown]" })
 export class SuiDropdown implements AfterContentInit {
     public service:DropdownService;
 

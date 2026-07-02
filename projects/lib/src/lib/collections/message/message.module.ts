@@ -6,9 +6,7 @@ import { SuiMessage } from "./components/message";
 @NgModule({
     imports: [
         CommonModule,
-        SuiTransitionModule
-    ],
-    declarations: [
+        SuiTransitionModule,
         SuiMessage
     ],
     exports: [

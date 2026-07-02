@@ -20,8 +20,7 @@ interface IConfirmModalContext {
   <button class="ui green button" (click)="modal.approve(undefined)">OK</button>
 </div>
 `,
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ConfirmModalComponent {
     constructor(public modal:SuiModal<IConfirmModalContext, void, void>) {}

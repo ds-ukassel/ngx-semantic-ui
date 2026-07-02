@@ -5,6 +5,7 @@ import {
 } from "@angular/core";
 import { ITemplateRefContext, SuiComponentFactory } from "../../../misc/util/internal";
 import type { IResultContext } from "./search";
+import { SuiSearch } from "./search";
 
 // See https://github.com/Microsoft/TypeScript/issues/13449.
 const templateRef = TemplateRef;
@@ -18,7 +19,7 @@ const templateRef = TemplateRef;
 }
 `,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSearch]
 })
 export class SuiSearchResult<T> {
     // Sets the Semantic UI classes on the host element.

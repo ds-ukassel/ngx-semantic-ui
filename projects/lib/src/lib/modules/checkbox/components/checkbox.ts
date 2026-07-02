@@ -4,6 +4,8 @@ import {
   ChangeDetectionStrategy
 } from "@angular/core";
 import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor } from "../../../misc/util/internal";
+import { FormsModule } from "@angular/forms";
+import { SuiCheckboxModule } from "../checkbox.module";
 
 @Component({
     selector: "sui-checkbox",
@@ -21,7 +23,7 @@ import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccess
 </label>
 `,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [FormsModule, SuiCheckboxModule]
 })
 export class SuiCheckbox implements ICustomValueAccessorHost<boolean> {
     @HostBinding("class.ui")
@@ -107,8 +109,7 @@ export class SuiCheckbox implements ICustomValueAccessorHost<boolean> {
         "(checkChange)": "onChange($event)",
         "(touched)": "onTouched()"
     },
-    providers: [customValueAccessorFactory(SuiCheckboxValueAccessor)],
-    standalone: false
+    providers: [customValueAccessorFactory(SuiCheckboxValueAccessor)]
 })
 export class SuiCheckboxValueAccessor extends CustomValueAccessor<boolean, SuiCheckbox> {
     constructor(host:SuiCheckbox) {

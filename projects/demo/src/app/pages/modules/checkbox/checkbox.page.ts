@@ -1,5 +1,11 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { SuiCheckboxModule } from "@angular-ex/semantic-ui";
+import { FormsModule } from "@angular/forms";
+import { JsonPipe } from "@angular/common";
 
 const exampleStandardTemplate = `
 <div class="ui form">
@@ -79,7 +85,7 @@ const exampleStyledTemplate = `
     selector: "demo-page-checkbox",
     templateUrl: "./checkbox.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => CheckboxExampleStandard), forwardRef(() => CheckboxExampleRadioButton), forwardRef(() => CheckboxExampleStyled), ApiComponent]
 })
 export class CheckboxPage {
     public api:ApiDefinition = [
@@ -178,7 +184,7 @@ export class CheckboxPage {
     selector: "example-checkbox-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiCheckboxModule, FormsModule]
 })
 export class CheckboxExampleStandard {
     public eCheck = true;
@@ -190,7 +196,7 @@ export class CheckboxExampleStandard {
     selector: "example-checkbox-radio-button",
     template: exampleRadioButtonTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiCheckboxModule, FormsModule, JsonPipe]
 })
 export class CheckboxExampleRadioButton {
     public eRadio:any = "world";
@@ -200,7 +206,7 @@ export class CheckboxExampleRadioButton {
     selector: "example-checkbox-styled",
     template: exampleStyledTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiCheckboxModule, FormsModule]
 })
 export class CheckboxExampleStyled {
     public eStyledRadio:any;

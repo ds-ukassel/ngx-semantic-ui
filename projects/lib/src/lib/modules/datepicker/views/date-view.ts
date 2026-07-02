@@ -1,9 +1,10 @@
 import { Component, Renderer2, ChangeDetectionStrategy } from "@angular/core";
 import { DateUtil, DatePrecision } from "../../../misc/util/internal";
-import { CalendarItem } from "../directives/calendar-item";
+import { CalendarItem, SuiCalendarItem } from "../directives/calendar-item";
 import { CalendarView, CalendarViewType } from "./calendar-view";
 import { CalendarRangeService } from "../services/calendar-range.service";
 import { DateParser } from "../classes/date-parser";
+import { SuiCalendarViewTitle } from "../components/calendar-view-title";
 
 export class CalendarRangeDateService extends CalendarRangeService {
     public override calcStart(start:Date):Date {
@@ -52,7 +53,7 @@ export class CalendarRangeDateService extends CalendarRangeService {
 </table>
 `,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiCalendarViewTitle, SuiCalendarItem]
 })
 export class SuiCalendarDateView extends CalendarView {
     public get days():string[] {

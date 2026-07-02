@@ -16,9 +16,7 @@ import { SuiMultiSelectLabel } from "./components/multi-select-label";
         FormsModule,
         SuiDropdownModule,
         SuiUtilityModule,
-        SuiLocalizationModule
-    ],
-    declarations: [
+        SuiLocalizationModule,
         SuiSelect,
         SuiSelectOption,
         SuiSelectSearch,

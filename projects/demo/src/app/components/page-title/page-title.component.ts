@@ -1,11 +1,13 @@
 import { Component, HostBinding, ChangeDetectionStrategy } from "@angular/core";
+import { GithubButtonsComponent } from "../github-buttons/github-buttons.component";
+import { SidebarComponent } from "../sidebar/sidebar.component";
 
 @Component({
     selector: "demo-page-title",
     templateUrl: "./page-title.component.html",
     styleUrls: ["./page-title.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [GithubButtonsComponent, SidebarComponent]
 })
 export class PageTitleComponent {
     @HostBinding("class.ui")

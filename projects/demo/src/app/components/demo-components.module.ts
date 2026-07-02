@@ -16,11 +16,8 @@ import { GithubButtonsComponent } from "./github-buttons/github-buttons.componen
     imports: [
         CommonModule,
         RouterModule,
-
         SuiCollapseModule,
-        SuiPopupModule
-    ],
-    declarations: [
+        SuiPopupModule,
         SidebarComponent,
         ApiComponent,
         CodeblockComponent,

@@ -11,9 +11,7 @@ import { SuiPopupConfig } from "./services/popup.service";
     imports: [
         CommonModule,
         SuiTransitionModule,
-        SuiUtilityModule
-    ],
-    declarations: [
+        SuiUtilityModule,
         SuiPopupDirective,
         SuiPopupArrow,
         SuiPopup

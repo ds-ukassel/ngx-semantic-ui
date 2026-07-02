@@ -1,6 +1,11 @@
-import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
-import { SuiPopupConfig, PopupPlacement } from "@angular-ex/semantic-ui";
+import { Component, Input, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { SuiPopupConfig, PopupPlacement, SuiSelectModule, SuiPopupModule, SuiRatingModule } from "@angular-ex/semantic-ui";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { FormsModule } from "@angular/forms";
+import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
 
 const exampleStandardTemplate = `
 <button class="ui green icon button" suiPopup popupHeader="Example" popupText="This is an example popup">
@@ -81,7 +86,7 @@ const exampleSizeTemplate = `
     selector: "demo-page-popup",
     templateUrl: "./popup.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => PopupExampleStandard), forwardRef(() => PopupExampleTemplate), forwardRef(() => PopupExamplePlacement), SuiSelectModule, FormsModule, forwardRef(() => PopupExampleSize), forwardRef(() => PopupExampleWidth), CodeblockComponent, ApiComponent]
 })
 export class PopupPage {
     public api:ApiDefinition = [
@@ -250,7 +255,7 @@ export class MyComponent {
     template: exampleStandardTemplate,
     providers: [SuiPopupConfig],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiPopupModule]
 })
 export class PopupExampleStandard {}
 
@@ -259,7 +264,7 @@ export class PopupExampleStandard {}
     template: exampleTemplateTemplate,
     providers: [SuiPopupConfig],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiRatingModule, SuiPopupModule]
 })
 export class PopupExampleTemplate {}
 
@@ -268,7 +273,7 @@ export class PopupExampleTemplate {}
     template: examplePlacementTemplate,
     providers: [SuiPopupConfig],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiPopupModule]
 })
 export class PopupExamplePlacement {
     @Input()
@@ -280,7 +285,7 @@ export class PopupExamplePlacement {
     template: exampleSizeTemplate,
     providers: [SuiPopupConfig],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiPopupModule]
 })
 export class PopupExampleSize {}
 
@@ -289,7 +294,7 @@ export class PopupExampleSize {}
     template: exampleWidthTemplate,
     providers: [SuiPopupConfig],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiPopupModule]
 })
 export class PopupExampleWidth {}
 

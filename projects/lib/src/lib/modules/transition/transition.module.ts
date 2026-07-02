@@ -3,10 +3,7 @@ import { CommonModule } from "@angular/common";
 import { SuiTransition } from "./directives/transition";
 
 @NgModule({
-    imports: [CommonModule],
-    declarations: [
-        SuiTransition
-    ],
+    imports: [CommonModule, SuiTransition],
     exports: [
         SuiTransition
     ],

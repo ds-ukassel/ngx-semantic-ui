@@ -7,6 +7,8 @@ import {
     ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor,
     Util
 } from "../../../misc/util/internal";
+import { FormsModule } from "@angular/forms";
+import { SuiCheckbox } from "./checkbox";
 
 @Component({
     selector: "sui-radio-button",
@@ -24,7 +26,7 @@ import {
 </label>
 `,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [FormsModule, SuiCheckbox]
 })
 export class SuiRadio<T> implements ICustomValueAccessorHost<T> {
     @HostBinding("class.ui")
@@ -118,8 +120,7 @@ export class SuiRadio<T> implements ICustomValueAccessorHost<T> {
         "(currentValueChange)": "onChange($event)",
         "(touched)": "onTouched()"
     },
-    providers: [customValueAccessorFactory(SuiRadioValueAccessor)],
-    standalone: false
+    providers: [customValueAccessorFactory(SuiRadioValueAccessor)]
 })
 export class SuiRadioValueAccessor<T> extends CustomValueAccessor<T, SuiRadio<T>> {
     constructor(host:SuiRadio<T>) {

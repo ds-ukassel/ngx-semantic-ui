@@ -1,4 +1,8 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { PageTitleComponent } from "../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../components/page-content/page-content.component";
+import { CodeblockComponent } from "../../components/codeblock/codeblock.component";
+import { SuiDropdownModule } from "@angular-ex/semantic-ui";
 
 @Component({
     selector: "demo-page-getting-started",
@@ -10,7 +14,7 @@ import { Component, ChangeDetectionStrategy } from "@angular/core";
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, CodeblockComponent, SuiDropdownModule]
 })
 export class GettingStartedPage {
     public installCode = `$ npm install @angular-ex/semantic-ui --save`;

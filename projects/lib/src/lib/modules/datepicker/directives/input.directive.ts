@@ -10,10 +10,7 @@ import * as bowser from "bowser";
 import * as isUAWebView from "is-ua-webview";
 const isWebView = isUAWebView["default"] || isUAWebView;
 
-@Directive({
-    selector: "input[suiDatepicker]",
-    standalone: false
-})
+@Directive({ selector: "input[suiDatepicker]" })
 export class SuiDatepickerInputDirective {
     private _useNativeOnMobile!:boolean;
 

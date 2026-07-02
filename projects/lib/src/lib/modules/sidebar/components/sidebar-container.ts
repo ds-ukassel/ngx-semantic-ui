@@ -12,7 +12,7 @@ import { SuiSidebarSibling } from "./sidebar-sibling";
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSidebar]
 })
 export class SuiSidebarContainer implements AfterContentInit {
     public service!:SidebarService;

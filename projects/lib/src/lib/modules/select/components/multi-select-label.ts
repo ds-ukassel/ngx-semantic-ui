@@ -6,6 +6,7 @@ import {
 import { SuiTransition, TransitionController, Transition, TransitionDirection } from "../../transition/internal";
 import { HandledEvent, SuiComponentFactory } from "../../../misc/util/internal";
 import { IOptionContext } from "../classes/select-base";
+import { SuiSelect } from "./select";
 
 // See https://github.com/Microsoft/TypeScript/issues/13449.
 const templateRef = TemplateRef;
@@ -20,7 +21,7 @@ const templateRef = TemplateRef;
 <i class="delete icon" (click)="deselectOption($event)"></i>
 `,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSelect]
 })
 export class SuiMultiSelectLabel<T> extends SuiTransition {
     // Sets the Semantic UI classes on the host element.

@@ -41,15 +41,11 @@ import { TestPage } from "./development/test/test.page";
         ReactiveFormsModule,
         RouterModule,
         SuiModule,
-        DemoComponentsModule
-    ],
-    declarations: [
+        DemoComponentsModule,
         GettingStartedPage,
-
         // Collections
         MessagePageComponents,
         PaginationPageComponents,
-
         // Modules
         AccordionPageComponents,
         CheckboxPageComponents,
@@ -66,10 +62,8 @@ import { TestPage } from "./development/test/test.page";
         SidebarPageComponents,
         TabsPageComponents,
         TransitionPageComponents,
-
         // Behaviors
         LocalizationPageComponents,
-
         // Development
         TestPage
     ],

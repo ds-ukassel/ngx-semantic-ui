@@ -1,5 +1,10 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { SuiMessageModule, SuiCollapseModule } from "@angular-ex/semantic-ui";
+import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
 
 const exampleStandardTemplate = `
 <div class="ui segments">
@@ -23,7 +28,7 @@ const exampleStandardTemplate = `
     selector: "demo-page-collapse",
     templateUrl: "./collapse.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => CollapseExampleStandard), SuiMessageModule, CodeblockComponent, ApiComponent]
 })
 export class CollapsePage {
     public api:ApiDefinition = [
@@ -55,7 +60,7 @@ export class CollapsePage {
     selector: "example-collapse-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiCollapseModule]
 })
 export class CollapseExampleStandard {
     public collapse = false;

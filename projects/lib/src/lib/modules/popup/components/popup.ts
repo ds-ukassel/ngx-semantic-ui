@@ -3,6 +3,9 @@ import { PositioningService, IDynamicClasses } from "../../../misc/util/internal
 import { TransitionController, TransitionDirection, Transition } from "../../transition/internal";
 import { IPopup } from "../classes/popup-controller";
 import { TemplatePopupConfig } from "../classes/popup-template-controller";
+import { NgClass } from "@angular/common";
+import { SuiTransition } from "../../transition/directives/transition";
+import { SuiPopupArrow } from "./popup-arrow";
 
 @Component({
     selector: "sui-popup",
@@ -62,7 +65,7 @@ import { TemplatePopupConfig } from "../classes/popup-template-controller";
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgClass, SuiTransition, SuiPopupArrow]
 })
 export class SuiPopup implements IPopup {
     // Config settings for this popup.

@@ -1,5 +1,10 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
+import { SuiMessageModule } from "@angular-ex/semantic-ui";
 
 const exampleStandardTemplate = `
 <sui-message class="success">
@@ -38,7 +43,7 @@ const exampleIconTemplate = `
     selector: "demo-page-message",
     templateUrl: "./message.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => MessageExampleStandard), forwardRef(() => MessageExampleNoDismiss), forwardRef(() => MessageExampleIcon), CodeblockComponent, ApiComponent]
 })
 export class MessagePage {
     public api:ApiDefinition = [
@@ -104,7 +109,7 @@ export class MyComponent {
     selector: "example-message-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiMessageModule]
 })
 export class MessageExampleStandard {}
 
@@ -112,7 +117,7 @@ export class MessageExampleStandard {}
     selector: "example-message-no-dismiss",
     template: exampleNoDismissTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiMessageModule]
 })
 export class MessageExampleNoDismiss {}
 
@@ -120,7 +125,7 @@ export class MessageExampleNoDismiss {}
     selector: "example-message-icon",
     template: exampleIconTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiMessageModule]
 })
 export class MessageExampleIcon {}
 

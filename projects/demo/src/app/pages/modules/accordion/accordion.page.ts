@@ -1,5 +1,10 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { SuiMessageModule, SuiAccordionModule } from "@angular-ex/semantic-ui";
+import { RouterLink } from "@angular/router";
+import { ExampleComponent } from "../../../components/example/example.component";
 
 const exampleStandardTemplate = `
 <sui-accordion [closeOthers]="false">
@@ -77,7 +82,7 @@ const exampleManualTemplate = `
     selector: "demo-page-accordion",
     templateUrl: "./accordion.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, SuiMessageModule, RouterLink, ExampleComponent, forwardRef(() => AccordionExampleStandard), forwardRef(() => AccordionExampleStyled), forwardRef(() => AccordionExampleManual), ApiComponent]
 })
 export class AccordionPage {
     public api:ApiDefinition = [
@@ -138,7 +143,7 @@ export class AccordionPage {
     selector: "example-accordion-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiAccordionModule]
 })
 export class AccordionExampleStandard {}
 
@@ -146,7 +151,7 @@ export class AccordionExampleStandard {}
     selector: "example-accordion-styled",
     template: exampleStyledTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiAccordionModule]
 })
 export class AccordionExampleStyled {}
 
@@ -154,7 +159,7 @@ export class AccordionExampleStyled {}
     selector: "example-accordion-manual",
     template: exampleManualTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiAccordionModule]
 })
 export class AccordionExampleManual {
     public panelOpen = false;

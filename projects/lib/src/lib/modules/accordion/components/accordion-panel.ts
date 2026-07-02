@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy } from "@angular/core";
 import { SuiAccordionService } from "../services/accordion.service";
 import { TransitionController, Transition } from "../../transition/internal";
+import { SuiCollapse } from "../../collapse/directives/collapse";
+import { SuiTransition } from "../../transition/directives/transition";
 
 @Component({
     selector: "sui-accordion-panel",
@@ -29,7 +31,7 @@ import { TransitionController, Transition } from "../../transition/internal";
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiCollapse, SuiTransition]
 })
 export class SuiAccordionPanel {
     private _service!:SuiAccordionService;

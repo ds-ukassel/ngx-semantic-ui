@@ -1,5 +1,9 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { SuiDropdownModule, SuiSidebarModule } from "@angular-ex/semantic-ui";
 
 const exampleStandardTemplate = `
 <div class="ui top attached demo menu">
@@ -47,7 +51,7 @@ const exampleDirectionTemplate = `
     selector: "demo-page-sidebar",
     templateUrl: "./sidebar.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => SidebarExampleStandard), forwardRef(() => SidebarExampleDirection), ApiComponent]
 })
 export class SidebarPage {
     public api:ApiDefinition = [
@@ -106,7 +110,7 @@ export class SidebarPage {
     selector: "example-sidebar-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiDropdownModule, SuiSidebarModule]
 })
 export class SidebarExampleStandard {}
 
@@ -114,7 +118,7 @@ export class SidebarExampleStandard {}
     selector: "example-sidebar-direction",
     template: exampleDirectionTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiDropdownModule, SuiSidebarModule]
 })
 export class SidebarExampleDirection {
     public isVisible = false;

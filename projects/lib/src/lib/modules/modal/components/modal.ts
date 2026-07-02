@@ -7,6 +7,10 @@ import { Util, IDynamicClasses, KeyCode, SuiComponentFactory } from "../../../mi
 import { TransitionController, Transition, TransitionDirection } from "../../transition/internal";
 import { ModalControls, ModalResult } from "../classes/modal-controls";
 import { ModalConfig, ModalSize } from "../classes/modal-config";
+import { SuiModalDimmer } from "./dimmer";
+import { NgClass } from "@angular/common";
+import { SuiTransition } from "../../transition/directives/transition";
+import { SuiModalModule } from "../modal.module";
 
 @Component({
     selector: "sui-modal",
@@ -43,7 +47,7 @@ import { ModalConfig, ModalSize } from "../classes/modal-config";
 `,
     styles: [``],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiModalDimmer, NgClass, SuiTransition, SuiModalModule]
 })
 export class SuiModal<T, U> implements OnInit, AfterViewInit {
     @Input()

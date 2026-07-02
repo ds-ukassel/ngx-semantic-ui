@@ -1,5 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import { Component, OnInit, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { SuiPaginationModule, SuiCheckboxModule } from "@angular-ex/semantic-ui";
+import { FormsModule } from "@angular/forms";
 
 const exampleStandardTemplate = `
 <div class="ui segments">
@@ -80,7 +85,7 @@ const exampleRotationTemplate = `
     selector: "demo-page-pagination",
     templateUrl: "./pagination.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => PaginationExampleStandard), forwardRef(() => PaginationExampleMaxSize), forwardRef(() => PaginationExampleRotation), ApiComponent]
 })
 export class PaginationPage {
     public api:ApiDefinition = [
@@ -157,7 +162,7 @@ export class PaginationPage {
     selector: "example-pagination-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiPaginationModule, SuiCheckboxModule, FormsModule]
 })
 export class PaginationExampleStandard implements OnInit {
 
@@ -178,7 +183,7 @@ export class PaginationExampleStandard implements OnInit {
     selector: "example-pagination-maxsize",
     template: exampleMaxSizeTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiPaginationModule, SuiCheckboxModule, FormsModule]
 })
 export class PaginationExampleMaxSize implements OnInit {
 
@@ -199,7 +204,7 @@ export class PaginationExampleMaxSize implements OnInit {
     selector: "example-pagination-rotation",
     template: exampleRotationTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiPaginationModule, SuiCheckboxModule, FormsModule]
 })
 export class PaginationExampleRotation implements OnInit {
 

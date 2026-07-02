@@ -1,5 +1,11 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { SuiMessageModule, SuiDropdownModule, SuiCheckboxModule } from "@angular-ex/semantic-ui";
+import { RouterLink } from "@angular/router";
+import { FormsModule } from "@angular/forms";
 
 const exampleFileMenuTemplate = `
 <div class="ui dropdown" suiDropdown>
@@ -140,7 +146,7 @@ const exampleMenuTemplate = `
     selector: "demo-page-dropdown",
     templateUrl: "./dropdown.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => DropdownExampleFileMenu), forwardRef(() => DropdownExampleStandard), forwardRef(() => DropdownExampleStyled), forwardRef(() => DropdownExampleMenu), SuiMessageModule, RouterLink, ApiComponent]
 })
 export class DropdownPage {
     public api:ApiDefinition = [
@@ -210,7 +216,7 @@ export class DropdownPage {
     selector: "example-dropdown-file-menu",
     template: exampleFileMenuTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiDropdownModule]
 })
 export class DropdownExampleFileMenu {}
 
@@ -218,7 +224,7 @@ export class DropdownExampleFileMenu {}
     selector: "example-dropdown-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiDropdownModule, SuiCheckboxModule, FormsModule]
 })
 export class DropdownExampleStandard {
     public isOpen!:boolean;
@@ -229,7 +235,7 @@ export class DropdownExampleStandard {
     selector: "example-dropdown-styled",
     template: exampleStyledTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiDropdownModule]
 })
 export class DropdownExampleStyled {}
 
@@ -237,7 +243,7 @@ export class DropdownExampleStyled {}
     selector: "example-dropdown-menu",
     template: exampleMenuTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiDropdownModule]
 })
 export class DropdownExampleMenu {}
 

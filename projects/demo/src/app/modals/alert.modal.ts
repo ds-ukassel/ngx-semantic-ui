@@ -19,8 +19,7 @@ interface IAlertModalContext {
   <button class="ui green button" (click)="modal.approve(undefined)">OK</button>
 </div>
 `,
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class AlertModalComponent {
     constructor(public modal:SuiModal<IAlertModalContext, void, void>) {}

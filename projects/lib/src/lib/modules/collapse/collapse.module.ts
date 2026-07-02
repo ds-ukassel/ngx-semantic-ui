@@ -4,9 +4,7 @@ import { SuiCollapse } from "./directives/collapse";
 
 @NgModule({
     imports: [
-        CommonModule
-    ],
-    declarations: [
+        CommonModule,
         SuiCollapse
     ],
     exports: [

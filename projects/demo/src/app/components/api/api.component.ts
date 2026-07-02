@@ -1,4 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
+import { SuiPopupModule } from "@angular-ex/semantic-ui";
 
 export interface IApiProperty {
     name:string;
@@ -27,7 +28,7 @@ export type ApiDefinition = IApi[];
     templateUrl: "./api.component.html",
     styleUrls: ["./api.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiPopupModule]
 })
 export class ApiComponent {
     @Input()

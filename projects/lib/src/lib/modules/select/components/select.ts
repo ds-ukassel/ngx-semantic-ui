@@ -3,6 +3,8 @@ import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccess
 import { SuiLocalizationService } from "../../../behaviors/localization/internal";
 import { SuiSelectBase } from "../classes/select-base";
 import { SuiSelectOption } from "./select-option";
+import { SuiSelectSearch } from "../directives/select-search";
+import { SuiDropdownMenu } from "../../dropdown/directives/dropdown-menu";
 
 @Component({
     selector: "sui-select",
@@ -41,7 +43,7 @@ import { SuiSelectOption } from "./select-option";
 </div>
 `,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSelectSearch, SuiDropdownMenu]
 })
 export class SuiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValueAccessorHost<U> {
     public selectedOption?:T;
@@ -161,8 +163,7 @@ export class SuiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValue
         "(selectedOptionChange)": "onChange($event)",
         "(touched)": "onTouched()"
     },
-    providers: [customValueAccessorFactory(SuiSelectValueAccessor)],
-    standalone: false
+    providers: [customValueAccessorFactory(SuiSelectValueAccessor)]
 })
 export class SuiSelectValueAccessor<T, U> extends CustomValueAccessor<U, SuiSelect<T, U>> {
     constructor(host:SuiSelect<T, U>) {

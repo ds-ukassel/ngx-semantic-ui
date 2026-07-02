@@ -1,4 +1,5 @@
 import { Component, Input, Output, OnChanges, EventEmitter, HostBinding, ChangeDetectionStrategy } from "@angular/core";
+import { SuiPaginationModule } from "../pagination.module";
 
 @Component({
     selector: "sui-pagination",
@@ -55,7 +56,7 @@ import { Component, Input, Output, OnChanges, EventEmitter, HostBinding, ChangeD
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiPaginationModule]
 })
 export class SuiPagination implements OnChanges {
 

@@ -1,6 +1,8 @@
 import { Component, HostBinding, Output, EventEmitter, HostListener, isDevMode, ChangeDetectionStrategy } from "@angular/core";
 // Polyfill for IE
 import "element-closest";
+import { RouterLink, RouterLinkActive } from "@angular/router";
+import { DemoComponentsModule } from "../demo-components.module";
 
 interface IAugmentedElement extends Element {
     closest(selector:string):IAugmentedElement;
@@ -11,7 +13,7 @@ interface IAugmentedElement extends Element {
     templateUrl: "./sidebar.component.html",
     styleUrls: ["./sidebar.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [RouterLink, RouterLinkActive, DemoComponentsModule]
 })
 export class SidebarComponent {
     @Output()

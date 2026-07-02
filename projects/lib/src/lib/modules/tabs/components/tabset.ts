@@ -6,8 +6,7 @@ import { Tab } from "../classes/tab";
 @Component({
     selector: "sui-tabset",
     template: `<ng-content></ng-content>`,
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class SuiTabset implements AfterContentInit {
     @ContentChildren(SuiTabHeader, { descendants: true })

@@ -3,10 +3,7 @@ import { SuiRadio } from "../components/radio";
 import { Subscription } from "rxjs";
 import { Util } from "../../../misc/util/internal";
 
-@Directive({
-    selector: "form:not([ngForm]):not([[ngForm]]),ngForm,[ngForm]",
-    standalone: false
-})
+@Directive({ selector: "form:not([ngForm]):not([[ngForm]]),ngForm,[ngForm]" })
 export class SuiRadioManager<T> implements AfterContentInit {
 
     public isNested:boolean;

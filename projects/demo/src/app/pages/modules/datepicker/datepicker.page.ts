@@ -1,6 +1,13 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
-import { DatepickerMode } from "@angular-ex/semantic-ui";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { DatepickerMode, SuiMessageModule, SuiDatepickerModule, SuiSelectModule } from "@angular-ex/semantic-ui";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { RouterLink } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { NgFor } from "@angular/common";
 
 const exampleStandardTemplate = `
 <div class="ui form">
@@ -82,7 +89,7 @@ const exampleMobileFallbackTemplate = `
     selector: "demo-page-datepicker",
     templateUrl: "./datepicker.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, SuiMessageModule, CodeblockComponent, ExampleComponent, forwardRef(() => DatepickerExampleStandard), forwardRef(() => DatepickerExampleButton), forwardRef(() => DatepickerExampleMinMax), forwardRef(() => DatepickerExampleMobileFallback), RouterLink, ApiComponent]
 })
 export class DatepickerPage {
     public api:ApiDefinition = [
@@ -186,7 +193,7 @@ export class DatepickerPage {
     selector: "example-datepicker-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiDatepickerModule, FormsModule, SuiSelectModule, NgFor]
 })
 export class DatepickerExampleStandard {
     public firstDayOfWeek = 1;
@@ -200,7 +207,7 @@ export class DatepickerExampleStandard {
     selector: "example-datepicker-button",
     template: exampleButtonTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiDatepickerModule]
 })
 export class DatepickerExampleButton {}
 
@@ -208,7 +215,7 @@ export class DatepickerExampleButton {}
     selector: "example-datepicker-min-max",
     template: exampleMinMaxTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiDatepickerModule, FormsModule]
 })
 export class DatepickerExampleMinMax {
     public min:Date;
@@ -226,7 +233,7 @@ export class DatepickerExampleMinMax {
     selector: "example-datepicker-mobile-fallback",
     template: exampleMobileFallbackTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiDatepickerModule, FormsModule]
 })
 export class DatepickerExampleMobileFallback {
     public date?:Date = new Date();

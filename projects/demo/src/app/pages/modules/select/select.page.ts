@@ -1,5 +1,13 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
+import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
+import { PageTitleComponent } from "../../../components/page-title/page-title.component";
+import { PageContentComponent } from "../../../components/page-content/page-content.component";
+import { ExampleComponent } from "../../../components/example/example.component";
+import { SuiMessageModule, SuiSelectModule, SuiCheckboxModule } from "@angular-ex/semantic-ui";
+import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
+import { RouterLink } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { NgFor, JsonPipe } from "@angular/common";
 
 const exampleStandardTemplate = `
 <div class="ui segments">
@@ -166,7 +174,7 @@ const exampleSearchLookupTemplate = `
     selector: "demo-page-select",
     templateUrl: "./select.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => SelectExampleStandard), SuiMessageModule, forwardRef(() => SelectExampleVariations), forwardRef(() => SelectExampleInMenuSearch), forwardRef(() => SelectExampleTemplate), CodeblockComponent, forwardRef(() => SelectExampleLookupSearch), RouterLink, ApiComponent]
 })
 export class SelectPage {
     public api:ApiDefinition = [
@@ -451,7 +459,7 @@ const idOptions:IOption[] = namedOptions.map(({ name }, id) => ({ name, id }));
     selector: "example-select-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSelectModule, FormsModule, NgFor, SuiCheckboxModule, JsonPipe]
 })
 export class SelectExampleStandard {
     public options:IOption[] = namedOptions;
@@ -467,7 +475,7 @@ export class SelectExampleStandard {
     selector: "example-select-variations",
     template: exampleVariationsTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSelectModule, FormsModule, NgFor]
 })
 export class SelectExampleVariations {
     public selectedRange = "today";
@@ -478,7 +486,7 @@ export class SelectExampleVariations {
     selector: "example-select-in-menu-search",
     template: exampleInMenuSearchTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSelectModule, FormsModule, NgFor]
 })
 export class SelectExampleInMenuSearch {
     public options:IOption[] = namedOptions;
@@ -489,7 +497,7 @@ export class SelectExampleInMenuSearch {
     selector: "example-select-template",
     template: exampleTemplateTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSelectModule, FormsModule, NgFor, JsonPipe]
 })
 export class SelectExampleTemplate {
     public options:IOption[] = namedOptions;
@@ -504,7 +512,7 @@ export class SelectExampleTemplate {
     selector: "example-select-search-lookup",
     template: exampleSearchLookupTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSelectModule, FormsModule, NgFor, JsonPipe]
 })
 export class SelectExampleLookupSearch {
     private _options:IOption[] = idOptions;

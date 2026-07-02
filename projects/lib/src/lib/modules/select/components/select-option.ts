@@ -5,6 +5,7 @@ import {
 } from "@angular/core";
 import { SuiDropdownMenuItem } from "../../dropdown/internal";
 import { HandledEvent } from "../../../misc/util/internal";
+import { SuiSelect } from "./select";
 
 @Component({
     selector: "sui-select-option",
@@ -13,7 +14,7 @@ import { HandledEvent } from "../../../misc/util/internal";
 <span [innerHTML]="renderedText"></span>
 `,
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [SuiSelect]
 })
 export class SuiSelectOption<T> extends SuiDropdownMenuItem {
     // Sets the Semantic UI classes on the host element.

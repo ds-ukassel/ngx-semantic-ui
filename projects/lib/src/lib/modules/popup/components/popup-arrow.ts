@@ -71,8 +71,7 @@ import { PositioningPlacement } from "../../../misc/util/internal";
     bottom: 1em;
 }
 `],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class SuiPopupArrow {
     @Input()
