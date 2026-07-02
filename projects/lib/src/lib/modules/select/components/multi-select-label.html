@@ -1,0 +1,5 @@
+<span #templateSibling></span>
+@if (!template) {
+  <span [innerHTML]="formatter(value)"></span>
+}
+<i class="delete icon" (click)="deselectOption($event)"></i>

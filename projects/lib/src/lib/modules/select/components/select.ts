@@ -17,43 +17,10 @@ import {SuiSelectSearch} from '../directives/select-search';
 import {SuiSelectOption} from './select-option';
 
 @Component({
-    selector: "sui-select",
-    template: `
-<!-- Query input -->
-<input suiSelectSearch
-  type="text"
-  [hidden]="!isSearchable || isSearchExternal">
-
-<!-- Placeholder text -->
-@if (selectedOption == undefined) {
-  <div class="default text" [class.filtered]="query">{{ placeholder }}</div>
-}
-<!-- Selected item -->
-<div class="text" [class.filtered]="query || selectedOption == undefined">
-  <span #optionTemplateSibling></span>
-  @if (!optionTemplate && selectedOption != undefined) {
-    <span [innerHTML]="configuredFormatter(selectedOption)"></span>
-  }
-</div>
-<!-- Dropdown icon -->
-<i class="{{ icon }} icon" (click)="onCaretClick($event)"></i>
-<!-- Select dropdown menu -->
-<div class="menu"
-  suiDropdownMenu
-  [menuTransition]="transition"
-  [menuTransitionDuration]="transitionDuration"
-  [menuAutoSelectFirst]="isSearchable">
-
-  <ng-content></ng-content>
-  @if (isSearchable && availableOptions.length === 0) {
-    <div class="message">
-      {{ localeValues.noResultsMessage }}
-    </div>
-  }
-</div>
-`,
-    changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiSelectSearch, SuiDropdownMenu]
+  selector: "sui-select",
+  templateUrl: './select.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [SuiSelectSearch, SuiDropdownMenu],
 })
 export class SuiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValueAccessorHost<U> {
     public selectedOption?:T;
