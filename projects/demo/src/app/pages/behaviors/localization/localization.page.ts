@@ -18,9 +18,9 @@ const exampleTemplate = `
                     valueField="code"
                     [isSearchable]="true"
                     #lang>
-
-            <sui-select-option *ngFor="let l of lang.availableOptions"
-                               [value]="l"></sui-select-option>
+            @for (l of lang.availableOptions; track l) {
+                <sui-select-option [value]="l" />
+            }
         </sui-select>
     </div>
     <div class="ui segment">
