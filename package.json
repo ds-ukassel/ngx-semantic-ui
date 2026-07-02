@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "lib:lint": "ng lint lib",
-    "lib:build:locales": "tsc --project projects/lib/src/lib/behaviors/localization/tsconfig.locales.json && node ./scripts/locales",
+    "lib:build:locales": "tsc --project projects/lib/src/lib/behaviors/localization/tsconfig.locales.json",
     "lib:build": "ng build lib && pnpm run lib:build:locales",
     "lib:build:w": "ng build lib --watch",
     "lib:build:prod": "ng build lib --configuration production && pnpm run lib:build:locales",
