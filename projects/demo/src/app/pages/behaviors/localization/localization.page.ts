@@ -1,12 +1,11 @@
-import { Component, OnDestroy, ChangeDetectionStrategy, forwardRef } from "@angular/core";
-import { SuiLocalizationService, SuiDropdownModule, SuiSelectModule, SuiDatepickerModule } from "@angular-ex/semantic-ui";
-import locales from "@angular-ex/semantic-ui/locales";
-import { PageTitleComponent } from "../../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../../components/page-content/page-content.component";
-import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
-import { ExampleComponent } from "../../../components/example/example.component";
-import { FormsModule } from "@angular/forms";
-import { NgFor } from "@angular/common";
+import {SuiDatepickerModule, SuiDropdownModule, SuiLocalizationService, SuiSelectModule} from '@angular-ex/semantic-ui';
+import locales from '@angular-ex/semantic-ui/locales';
+import {ChangeDetectionStrategy, Component, forwardRef, OnDestroy} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleTemplate = `
 <div class="ui segments">
@@ -206,7 +205,7 @@ interface ILocaleValues {
     selector: "example-localization",
     template: exampleTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiSelectModule, FormsModule, NgFor, SuiDatepickerModule]
+    imports: [SuiSelectModule, FormsModule, SuiDatepickerModule]
 })
 export class LocalizationExample implements OnDestroy {
     public languages:ISupportedLanguage[];

@@ -1,12 +1,11 @@
-import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
-import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
-import { SuiModalService, SuiTabsModule, SuiDropdownModule, SuiCheckboxModule } from "@angular-ex/semantic-ui";
-import { AlertModal } from "../../../modals/alert.modal";
-import { PageTitleComponent } from "../../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../../components/page-content/page-content.component";
-import { ExampleComponent } from "../../../components/example/example.component";
-import { FormsModule } from "@angular/forms";
-import { NgFor } from "@angular/common";
+import {SuiCheckboxModule, SuiDropdownModule, SuiModalService, SuiTabsModule} from '@angular-ex/semantic-ui';
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
+import {AlertModal} from '../../../modals/alert.modal';
 
 const exampleStandardTemplate = `
 <sui-tabset>
@@ -193,7 +192,7 @@ export class TabExampleProperties {
     selector: "example-tab-dynamic",
     template: exampleDynamicTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiTabsModule, SuiDropdownModule, NgFor]
+    imports: [SuiTabsModule, SuiDropdownModule]
 })
 export class TabExampleDynamic {
     public active:boolean[] = [];

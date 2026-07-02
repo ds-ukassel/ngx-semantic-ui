@@ -1,13 +1,12 @@
-import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
-import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
-import { DatepickerMode, SuiMessageModule, SuiDatepickerModule, SuiSelectModule } from "@angular-ex/semantic-ui";
-import { PageTitleComponent } from "../../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../../components/page-content/page-content.component";
-import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
-import { ExampleComponent } from "../../../components/example/example.component";
-import { RouterLink } from "@angular/router";
-import { FormsModule } from "@angular/forms";
-import { NgFor } from "@angular/common";
+import {DatepickerMode, SuiDatepickerModule, SuiMessageModule, SuiSelectModule} from '@angular-ex/semantic-ui';
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {RouterLink} from '@angular/router';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui form">
@@ -193,7 +192,7 @@ export class DatepickerPage {
     selector: "example-datepicker-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiDatepickerModule, FormsModule, SuiSelectModule, NgFor]
+    imports: [SuiDatepickerModule, FormsModule, SuiSelectModule]
 })
 export class DatepickerExampleStandard {
     public firstDayOfWeek = 1;

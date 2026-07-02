@@ -1,12 +1,21 @@
-import { Component, ViewChild, ChangeDetectionStrategy, forwardRef } from "@angular/core";
-import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
-import { SuiModalService, ModalTemplate, TemplateModalConfig, ComponentModalConfig, ModalSize, SuiModal, SuiTabsModule, SuiDropdownModule, SuiSelectModule } from "@angular-ex/semantic-ui";
-import { AlertModal } from "../../../modals/alert.modal";
-import { PageTitleComponent } from "../../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../../components/page-content/page-content.component";
-import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
-import { FormsModule } from "@angular/forms";
-import { NgFor } from "@angular/common";
+import {
+  ComponentModalConfig,
+  ModalSize,
+  ModalTemplate,
+  SuiDropdownModule,
+  SuiModal,
+  SuiModalService,
+  SuiSelectModule,
+  SuiTabsModule,
+  TemplateModalConfig,
+} from '@angular-ex/semantic-ui';
+import {ChangeDetectionStrategy, Component, forwardRef, ViewChild} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
+import {AlertModal} from '../../../modals/alert.modal';
 
 const exampleTemplateModalTemplate = `
 <ng-template let-context let-modal="modal" #modalTemplate>
@@ -289,7 +298,7 @@ export class ConfirmModal extends ComponentModalConfig<IConfirmModalContext, voi
     selector: "example-modal-component",
     template: exampleComponentTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiSelectModule, FormsModule, NgFor]
+    imports: [SuiSelectModule, FormsModule]
 })
 export class ModalExampleComponent {
 

@@ -1,10 +1,20 @@
-import { Component, ViewContainerRef, ViewChild, Output, EventEmitter, ElementRef, Directive, Input, ChangeDetectionStrategy } from "@angular/core";
-import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor } from "../../../misc/util/internal";
-import { SuiLocalizationService } from "../../../behaviors/localization/internal";
-import { SuiSelectBase } from "../classes/select-base";
-import { SuiSelectOption } from "./select-option";
-import { SuiSelectSearch } from "../directives/select-search";
-import { SuiDropdownMenu } from "../../dropdown/directives/dropdown-menu";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import {SuiLocalizationService} from '../../../behaviors/localization/internal';
+import {CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost} from '../../../misc/util/internal';
+import {SuiDropdownMenu} from '../../dropdown/directives/dropdown-menu';
+import {SuiSelectBase} from '../classes/select-base';
+import {SuiSelectSearch} from '../directives/select-search';
+import {SuiSelectOption} from './select-option';
 
 @Component({
     selector: "sui-select",

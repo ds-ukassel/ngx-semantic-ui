@@ -1,12 +1,17 @@
-import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
-import { SuiTransition, Transition, TransitionDirection, TransitionController, SuiTransitionModule, SuiSelectModule } from "@angular-ex/semantic-ui";
-import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
-import { PageTitleComponent } from "../../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../../components/page-content/page-content.component";
-import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
-import { ExampleComponent } from "../../../components/example/example.component";
-import { FormsModule } from "@angular/forms";
-import { NgFor } from "@angular/common";
+import {
+  SuiSelectModule,
+  SuiTransitionModule,
+  Transition,
+  TransitionController,
+  TransitionDirection,
+} from '@angular-ex/semantic-ui';
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui segment">
@@ -60,7 +65,7 @@ import {TransitionController, Transition, TransitionDirection} from "@angular-ex
 @Component({})
 export class MyComponent {
     public transitionController = new TransitionController();
-    
+
     public animate(transitionName:string = "scale") {
         this.transitionController.animate(
             new Transition(transitionName, 500, TransitionDirection.In, () => console.log("Completed transition.")));
@@ -124,7 +129,7 @@ export class MyComponent extends SuiTransition {
     selector: "example-transition-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiTransitionModule, SuiSelectModule, FormsModule, NgFor]
+    imports: [SuiTransitionModule, SuiSelectModule, FormsModule]
 })
 export class TransitionExampleStandard {
     public transitionController:TransitionController = new TransitionController();

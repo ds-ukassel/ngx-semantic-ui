@@ -1,12 +1,25 @@
-import { Component, HostBinding, ElementRef, EventEmitter, Output, Input, Directive, ChangeDetectionStrategy } from "@angular/core";
-import { ICustomValueAccessorHost, KeyCode, customValueAccessorFactory, CustomValueAccessor } from "../../../misc/util/internal";
-import { SuiLocalizationService } from "../../../behaviors/localization/internal";
-import { SuiSelectBase } from "../classes/select-base";
-import { SuiSelectOption } from "./select-option";
-import { SuiMultiSelectLabel } from "./multi-select-label";
-import { SuiSelectSearch } from "../directives/select-search";
-import { SuiDropdownMenu } from "../../dropdown/directives/dropdown-menu";
-import { SuiSelect } from "./select";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+} from '@angular/core';
+import {SuiLocalizationService} from '../../../behaviors/localization/internal';
+import {
+  CustomValueAccessor,
+  customValueAccessorFactory,
+  ICustomValueAccessorHost,
+  KeyCode,
+} from '../../../misc/util/internal';
+import {SuiDropdownMenu} from '../../dropdown/directives/dropdown-menu';
+import {SuiSelectBase} from '../classes/select-base';
+import {SuiSelectSearch} from '../directives/select-search';
+import {SuiMultiSelectLabel} from './multi-select-label';
+import {SuiSelectOption} from './select-option';
 
 @Component({
     selector: "sui-multi-select",
@@ -70,7 +83,7 @@ import { SuiSelect } from "./select";
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiMultiSelectLabel, SuiSelectSearch, SuiDropdownMenu, SuiSelect]
+  imports: [SuiMultiSelectLabel, SuiSelectSearch, SuiDropdownMenu],
 })
 export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValueAccessorHost<U[]> {
     public selectedOptions:T[];

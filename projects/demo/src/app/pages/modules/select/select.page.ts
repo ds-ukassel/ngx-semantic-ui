@@ -1,13 +1,13 @@
-import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
-import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
-import { PageTitleComponent } from "../../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../../components/page-content/page-content.component";
-import { ExampleComponent } from "../../../components/example/example.component";
-import { SuiMessageModule, SuiSelectModule, SuiCheckboxModule } from "@angular-ex/semantic-ui";
-import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
-import { RouterLink } from "@angular/router";
-import { FormsModule } from "@angular/forms";
-import { NgFor, JsonPipe } from "@angular/common";
+import {SuiCheckboxModule, SuiMessageModule, SuiSelectModule} from '@angular-ex/semantic-ui';
+import {JsonPipe} from '@angular/common';
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {RouterLink} from '@angular/router';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui segments">
@@ -46,7 +46,7 @@ const exampleStandardTemplate = `
         <sui-checkbox [(ngModel)]="searchable">Searchable?</sui-checkbox>
         <br>
         <sui-checkbox [(ngModel)]="disabled">Disabled?</sui-checkbox>
-        
+
     </div>
     <div class="ui segment">
         <p>Singly selected: {{ selectedOption | json }}</p>
@@ -459,7 +459,7 @@ const idOptions:IOption[] = namedOptions.map(({ name }, id) => ({ name, id }));
     selector: "example-select-standard",
     template: exampleStandardTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiSelectModule, FormsModule, NgFor, SuiCheckboxModule, JsonPipe]
+    imports: [SuiSelectModule, FormsModule, SuiCheckboxModule, JsonPipe]
 })
 export class SelectExampleStandard {
     public options:IOption[] = namedOptions;
@@ -475,7 +475,7 @@ export class SelectExampleStandard {
     selector: "example-select-variations",
     template: exampleVariationsTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiSelectModule, FormsModule, NgFor]
+    imports: [SuiSelectModule, FormsModule]
 })
 export class SelectExampleVariations {
     public selectedRange = "today";
@@ -486,7 +486,7 @@ export class SelectExampleVariations {
     selector: "example-select-in-menu-search",
     template: exampleInMenuSearchTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiSelectModule, FormsModule, NgFor]
+    imports: [SuiSelectModule, FormsModule]
 })
 export class SelectExampleInMenuSearch {
     public options:IOption[] = namedOptions;
@@ -497,7 +497,7 @@ export class SelectExampleInMenuSearch {
     selector: "example-select-template",
     template: exampleTemplateTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiSelectModule, FormsModule, NgFor, JsonPipe]
+    imports: [SuiSelectModule, FormsModule, JsonPipe]
 })
 export class SelectExampleTemplate {
     public options:IOption[] = namedOptions;
@@ -512,7 +512,7 @@ export class SelectExampleTemplate {
     selector: "example-select-search-lookup",
     template: exampleSearchLookupTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiSelectModule, FormsModule, NgFor, JsonPipe]
+    imports: [SuiSelectModule, FormsModule, JsonPipe]
 })
 export class SelectExampleLookupSearch {
     private _options:IOption[] = idOptions;
