@@ -1,6 +1,5 @@
-import { Component, HostBinding, Renderer2, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } from "@angular/core";
-import { SuiDimmer } from "../../dimmer/internal";
-import { SuiModal } from "./modal";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Renderer2} from '@angular/core';
+import {SuiDimmer} from '../../dimmer/internal';
 
 @Component({
     selector: "sui-modal-dimmer",
@@ -9,11 +8,10 @@ import { SuiModal } from "./modal";
         :host.ui.dimmer:not(.hidden) {
             transition: none;
             overflow-y: auto;
-            display: flex !important; 
+            display: flex !important;
         }
     `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiModal]
 })
 export class SuiModalDimmer extends SuiDimmer {
 

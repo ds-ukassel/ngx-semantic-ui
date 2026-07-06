@@ -1,16 +1,24 @@
+import {NgClass} from '@angular/common';
 import {
-  Component, Input, OnInit, ViewChild, ElementRef, Renderer2,
-  EventEmitter, Output, HostListener, ViewContainerRef, AfterViewInit,
-  ChangeDetectionStrategy
-} from "@angular/core";
-import { Util, IDynamicClasses, KeyCode, SuiComponentFactory } from "../../../misc/util/internal";
-import { TransitionController, Transition, TransitionDirection } from "../../transition/internal";
-import { ModalControls, ModalResult } from "../classes/modal-controls";
-import { ModalConfig, ModalSize } from "../classes/modal-config";
-import { SuiModalDimmer } from "./dimmer";
-import { NgClass } from "@angular/common";
-import { SuiTransition } from "../../transition/directives/transition";
-import { SuiModalModule } from "../modal.module";
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import {IDynamicClasses, KeyCode, SuiComponentFactory, Util} from '../../../misc/util/internal';
+import {SuiTransition} from '../../transition/directives/transition';
+import {Transition, TransitionController, TransitionDirection} from '../../transition/internal';
+import {ModalConfig, ModalSize} from '../classes/modal-config';
+import {ModalControls, ModalResult} from '../classes/modal-controls';
+import {SuiModalDimmer} from './dimmer';
 
 @Component({
     selector: "sui-modal",
@@ -45,9 +53,8 @@ import { SuiModalModule } from "../modal.module";
   </div>
 </sui-modal-dimmer>
 `,
-    styles: [``],
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiModalDimmer, NgClass, SuiTransition, SuiModalModule]
+    imports: [SuiModalDimmer, NgClass, SuiTransition],
 })
 export class SuiModal<T, U> implements OnInit, AfterViewInit {
     @Input()

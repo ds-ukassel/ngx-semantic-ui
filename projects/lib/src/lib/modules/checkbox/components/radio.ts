@@ -1,14 +1,17 @@
 import {
-  Component, Directive, Input, Output, HostListener, HostBinding,
-  EventEmitter, ViewChild, ElementRef, ContentChildren, AfterContentInit, QueryList,
-  ChangeDetectionStrategy
-} from "@angular/core";
-import {
-    ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor,
-    Util
-} from "../../../misc/util/internal";
-import { FormsModule } from "@angular/forms";
-import { SuiCheckbox } from "./checkbox";
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost} from '../../../misc/util/internal';
 
 @Component({
     selector: "sui-radio-button",
@@ -26,7 +29,7 @@ import { SuiCheckbox } from "./checkbox";
 </label>
 `,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [FormsModule, SuiCheckbox]
+  imports: [FormsModule],
 })
 export class SuiRadio<T> implements ICustomValueAccessorHost<T> {
     @HostBinding("class.ui")

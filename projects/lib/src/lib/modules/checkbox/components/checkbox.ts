@@ -1,11 +1,17 @@
 import {
-  Component, Directive, Input, Output, HostListener, HostBinding,
-  EventEmitter, ViewChild, ElementRef,
-  ChangeDetectionStrategy
-} from "@angular/core";
-import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor } from "../../../misc/util/internal";
-import { FormsModule } from "@angular/forms";
-import { SuiCheckboxModule } from "../checkbox.module";
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost} from '../../../misc/util/internal';
 
 @Component({
     selector: "sui-checkbox",
@@ -23,7 +29,7 @@ import { SuiCheckboxModule } from "../checkbox.module";
 </label>
 `,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [FormsModule, SuiCheckboxModule]
+    imports: [FormsModule],
 })
 export class SuiCheckbox implements ICustomValueAccessorHost<boolean> {
     @HostBinding("class.ui")

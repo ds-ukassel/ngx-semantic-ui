@@ -1,5 +1,4 @@
-import { Component, Input, HostBinding, ChangeDetectionStrategy } from "@angular/core";
-import { SuiProgressModule } from "../progress.module";
+import {ChangeDetectionStrategy, Component, HostBinding, Input} from '@angular/core';
 
 @Component({
     selector: "sui-progress",
@@ -20,7 +19,6 @@ import { SuiProgressModule } from "../progress.module";
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiProgressModule]
 })
 export class SuiProgress {
     @HostBinding("class.ui")

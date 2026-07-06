@@ -1,12 +1,19 @@
-import { Component, HostBinding, Input, Output, Renderer2, ElementRef, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
-import { SidebarService, SidebarTransition, SidebarDirection } from "../services/sidebar.service";
-import { SuiSidebarModule } from "../sidebar.module";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+  Renderer2,
+} from '@angular/core';
+import {SidebarDirection, SidebarService, SidebarTransition} from '../services/sidebar.service';
 
 @Component({
     selector: "sui-sidebar",
     template: `<ng-content></ng-content>`,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [SuiSidebarModule]
 })
 export class SuiSidebar {
     public service:SidebarService;
