@@ -41,8 +41,10 @@ See the [Documentation](https://angular-ex.github.io/ngx-semantic-ui) for more i
 
 ## Dependencies
 
-* [Angular](https://angular.io) (^16.0.0)
-* [Semantic UI CSS](http://semantic-ui.com/) (^2.3.1) (jQuery is **not** required)
+* [Angular](https://angular.io) (^22.0.0)
+* [Semantic UI CSS](http://semantic-ui.com/) (^2.4.0) (jQuery is **not** required)
+
+For older version support see https://github.com/angular-ex/ngx-semantic-ui.
 
 ## Component Support
 
