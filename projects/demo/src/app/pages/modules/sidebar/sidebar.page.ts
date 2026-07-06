@@ -1,9 +1,9 @@
-import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
-import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
-import { PageTitleComponent } from "../../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../../components/page-content/page-content.component";
-import { ExampleComponent } from "../../../components/example/example.component";
-import { SuiDropdownModule, SuiSidebarModule } from "@angular-ex/semantic-ui";
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {SuiDropdownModule, SuiSidebarModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui top attached demo menu">

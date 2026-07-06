@@ -1,6 +1,6 @@
-import {SuiPopupConfig, SuiSidebarModule, SuiSidebar, SuiSidebarContainer, SuiSidebarSibling} from '@angular-ex/semantic-ui';
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
+import {SuiPopupConfig, SuiSidebar, SuiSidebarContainer, SuiSidebarModule, SuiSidebarSibling} from 'lib';
 import {GithubButtonsComponent} from './components/github-buttons/github-buttons.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 

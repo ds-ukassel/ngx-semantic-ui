@@ -1,11 +1,11 @@
-import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
-import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
-import { PageTitleComponent } from "../../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../../components/page-content/page-content.component";
-import { ExampleComponent } from "../../../components/example/example.component";
-import { SuiCheckboxModule } from "@angular-ex/semantic-ui";
-import { FormsModule } from "@angular/forms";
-import { JsonPipe } from "@angular/common";
+import {JsonPipe} from '@angular/common';
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {SuiCheckboxModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui form">

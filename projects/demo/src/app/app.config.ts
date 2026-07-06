@@ -1,5 +1,5 @@
 import {provideRouter} from '@angular/router';
-import {SuiPopupConfig} from '@angular-ex/semantic-ui';
+import {SuiPopupConfig} from 'lib';
 import {appRoutes} from './app.routing';
 
 export const appConfig = {

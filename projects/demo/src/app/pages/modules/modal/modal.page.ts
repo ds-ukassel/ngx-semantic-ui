@@ -1,17 +1,17 @@
+import {ChangeDetectionStrategy, Component, forwardRef, ViewChild} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {
   ComponentModalConfig,
   ModalSize,
   ModalTemplate,
   SuiDropdownModule,
   SuiModal,
+  SuiModalModule,
   SuiModalService,
   SuiSelectModule,
   SuiTabsModule,
   TemplateModalConfig,
-  SuiModalModule,
-} from '@angular-ex/semantic-ui';
-import {ChangeDetectionStrategy, Component, forwardRef, ViewChild} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+} from 'lib';
 import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
 import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
 import {PageContentComponent} from '../../../components/page-content/page-content.component';

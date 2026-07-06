@@ -1,10 +1,10 @@
-import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
-import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
-import { PageTitleComponent } from "../../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../../components/page-content/page-content.component";
-import { SuiMessageModule, SuiAccordionModule } from "@angular-ex/semantic-ui";
-import { RouterLink } from "@angular/router";
-import { ExampleComponent } from "../../../components/example/example.component";
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {SuiAccordionModule, SuiMessage, SuiMessageModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <sui-accordion [closeOthers]="false">
@@ -82,7 +82,7 @@ const exampleManualTemplate = `
     selector: "demo-page-accordion",
     templateUrl: "./accordion.page.html",
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [PageTitleComponent, PageContentComponent, SuiMessageModule, RouterLink, ExampleComponent, forwardRef(() => AccordionExampleStandard), forwardRef(() => AccordionExampleStyled), forwardRef(() => AccordionExampleManual), ApiComponent]
+  imports: [PageTitleComponent, PageContentComponent, SuiMessageModule, RouterLink, ExampleComponent, forwardRef(() => AccordionExampleStandard), forwardRef(() => AccordionExampleStyled), forwardRef(() => AccordionExampleManual), ApiComponent, SuiMessage],
 })
 export class AccordionPage {
     public api:ApiDefinition = [

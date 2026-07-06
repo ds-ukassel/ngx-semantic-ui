@@ -1,6 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
-import { SuiPopupModule, SuiCollapseModule } from "@angular-ex/semantic-ui";
-import { CodeblockComponent } from "../codeblock/codeblock.component";
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {SuiCollapseModule, SuiPopupModule} from 'lib';
+import {CodeblockComponent} from '../codeblock/codeblock.component';
 
 @Component({
     selector: "demo-example",

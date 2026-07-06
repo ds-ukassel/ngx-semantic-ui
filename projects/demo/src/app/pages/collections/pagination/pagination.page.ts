@@ -1,10 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, forwardRef } from "@angular/core";
-import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
-import { PageTitleComponent } from "../../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../../components/page-content/page-content.component";
-import { ExampleComponent } from "../../../components/example/example.component";
-import { SuiPaginationModule, SuiCheckboxModule } from "@angular-ex/semantic-ui";
-import { FormsModule } from "@angular/forms";
+import {ChangeDetectionStrategy, Component, forwardRef, OnInit} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {SuiCheckboxModule, SuiPaginationModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui segments">
@@ -20,7 +20,7 @@ const exampleStandardTemplate = `
         <p>Current page: {{ selectedPage }}</p>
         <div class="ui small form">
             <div class="field">
-                <sui-checkbox [(ngModel)]="navigation">Navigation Links?</sui-checkbox>    
+                <sui-checkbox [(ngModel)]="navigation">Navigation Links?</sui-checkbox>
             </div>
             <div class="field">
                 <sui-checkbox [(ngModel)]="boundary">Boundary Links?</sui-checkbox>
@@ -44,7 +44,7 @@ const exampleMaxSizeTemplate = `
         <p>Current page: {{ selectedPage }}</p>
         <div class="ui small form">
             <div class="field">
-                <sui-checkbox [(ngModel)]="ellipses">Ellipses?</sui-checkbox>    
+                <sui-checkbox [(ngModel)]="ellipses">Ellipses?</sui-checkbox>
             </div>
             <div class="field">
                 <label>Max Size</label>
@@ -70,7 +70,7 @@ const exampleRotationTemplate = `
         <p>Current page: {{ selectedPage }}</p>
         <div class="ui small form">
             <div class="field">
-                <sui-checkbox [(ngModel)]="ellipses">Ellipses?</sui-checkbox>    
+                <sui-checkbox [(ngModel)]="ellipses">Ellipses?</sui-checkbox>
             </div>
             <div class="field">
                 <label>Max Size</label>

@@ -1,12 +1,6 @@
-import {
-  SuiSelectModule,
-  SuiTransitionModule,
-  Transition,
-  TransitionController,
-  TransitionDirection,
-} from '@angular-ex/semantic-ui';
 import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {SuiSelectModule, SuiTransitionModule, Transition, TransitionController, TransitionDirection} from 'lib';
 import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
 import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
 import {ExampleComponent} from '../../../components/example/example.component';

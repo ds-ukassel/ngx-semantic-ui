@@ -1,8 +1,8 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { PageTitleComponent } from "../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../components/page-content/page-content.component";
-import { CodeblockComponent } from "../../components/codeblock/codeblock.component";
-import { SuiDropdownModule } from "@angular-ex/semantic-ui";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {SuiDropdownModule} from 'lib';
+import {CodeblockComponent} from '../../components/codeblock/codeblock.component';
+import {PageContentComponent} from '../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../components/page-title/page-title.component';
 
 @Component({
     selector: "demo-page-getting-started",
@@ -28,7 +28,7 @@ import {SuiModule} from '@angular-ex/semantic-ui';
 
 @NgModule({
     declarations: [AppComponent, ...],
-    imports: [SuiModule, ...],  
+    imports: [SuiModule, ...],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

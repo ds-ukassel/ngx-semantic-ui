@@ -1,6 +1,6 @@
-import {SuiCheckboxModule, SuiDropdownModule, SuiModalService, SuiTabsModule, SuiModalModule} from '@angular-ex/semantic-ui';
 import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {SuiCheckboxModule, SuiDropdownModule, SuiModalModule, SuiModalService, SuiTabsModule} from 'lib';
 import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
 import {ExampleComponent} from '../../../components/example/example.component';
 import {PageContentComponent} from '../../../components/page-content/page-content.component';

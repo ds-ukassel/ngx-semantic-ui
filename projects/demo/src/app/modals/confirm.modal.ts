@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { SuiModal, ComponentModalConfig, ModalSize } from "@angular-ex/semantic-ui";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ComponentModalConfig, ModalSize, SuiModal} from 'lib';
 
 interface IConfirmModalContext {
     question:string;

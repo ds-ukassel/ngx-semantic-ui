@@ -1,7 +1,7 @@
-import {SuiDatepickerModule, SuiDropdownModule, SuiLocalizationService, SuiSelectModule} from '@angular-ex/semantic-ui';
 import locales from '@angular-ex/semantic-ui/locales';
 import {ChangeDetectionStrategy, Component, forwardRef, OnDestroy} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {SuiDatepickerModule, SuiDropdownModule, SuiLocalizationService, SuiSelectModule} from 'lib';
 import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
 import {ExampleComponent} from '../../../components/example/example.component';
 import {PageContentComponent} from '../../../components/page-content/page-content.component';

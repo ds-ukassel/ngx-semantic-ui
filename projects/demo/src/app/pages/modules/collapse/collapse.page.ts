@@ -1,10 +1,10 @@
-import { Component, ChangeDetectionStrategy, forwardRef } from "@angular/core";
-import { ApiDefinition, ApiComponent } from "../../../components/api/api.component";
-import { PageTitleComponent } from "../../../components/page-title/page-title.component";
-import { PageContentComponent } from "../../../components/page-content/page-content.component";
-import { ExampleComponent } from "../../../components/example/example.component";
-import { SuiMessageModule, SuiCollapseModule } from "@angular-ex/semantic-ui";
-import { CodeblockComponent } from "../../../components/codeblock/codeblock.component";
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {SuiCollapseModule, SuiMessageModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui segments">

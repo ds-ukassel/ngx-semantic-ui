@@ -1,8 +1,8 @@
-import {SuiCheckboxModule, SuiMessageModule, SuiSelectModule} from '@angular-ex/semantic-ui';
 import {JsonPipe} from '@angular/common';
 import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
+import {SuiCheckboxModule, SuiMessageModule, SuiSelectModule} from 'lib';
 import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
 import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
 import {ExampleComponent} from '../../../components/example/example.component';
