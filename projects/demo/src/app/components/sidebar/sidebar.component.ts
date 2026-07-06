@@ -1,6 +1,4 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, HostListener, isDevMode, Output} from '@angular/core';
-// Polyfill for IE
-import 'element-closest';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 
 interface IAugmentedElement extends Element {
