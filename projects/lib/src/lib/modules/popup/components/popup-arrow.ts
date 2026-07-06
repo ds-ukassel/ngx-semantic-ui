@@ -1,77 +1,11 @@
-import { Component, Input, HostBinding, ChangeDetectionStrategy } from "@angular/core";
-import { PositioningPlacement } from "../../../misc/util/internal";
+import {ChangeDetectionStrategy, Component, HostBinding, Input} from '@angular/core';
+import {PositioningPlacement} from '../../../misc/util/internal';
 
 @Component({
-    selector: "sui-popup-arrow",
-    template: `
-@if (alignment === 'center') {
-  <div class="dynamic arrow" [attr.direction]="direction"></div>
-}
-@if (alignment !== 'center') {
-  <div class="static arrow" [attr.direction]="direction" [attr.alignment]="alignment"></div>
-}
-`,
-    styles: [`
-.arrow {
-    position: absolute;
-    width: 0.71428571em;
-    height: 0.71428571em;
-    background: #ffffff;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    z-index: 2;
-}
-
-:host.inverted .arrow {
-    background: #1b1c1d;
-}
-
-.arrow[direction="top"] {
-    bottom: -0.30714286em;
-    box-shadow: 1px 1px 0 0 #bababc;
-}
-
-.arrow[direction="left"] {
-    right: -0.30714286em;
-    box-shadow: 1px -1px 1px 0 #bababc;
-}
-
-.arrow[direction="bottom"] {
-    top: -0.30714286em;
-    box-shadow: -1px -1px 0 0 #bababc;
-}
-
-.arrow[direction="right"] {
-    left: -0.30714286em;
-    box-shadow: -1px 1px 1px 0 #bababc;
-}
-
-.static.arrow[direction="bottom"][alignment="left"],
-.static.arrow[direction="top"][alignment="left"] {
-    left: 1em;
-    right: auto;
-}
-
-.static.arrow[direction="left"][alignment="top"],
-.static.arrow[direction="right"][alignment="top"] {
-    top: 1em;
-    bottom: auto;
-}
-
-.static.arrow[direction="bottom"][alignment="right"],
-.static.arrow[direction="top"][alignment="right"] {
-    left: auto;
-    right: 1em;
-}
-
-.static.arrow[direction="left"][alignment="bottom"],
-.static.arrow[direction="right"][alignment="bottom"] {
-    top: auto;
-    bottom: 1em;
-}
-`],
-    changeDetection: ChangeDetectionStrategy.Eager
+  selector: "sui-popup-arrow",
+  templateUrl: './popup-arrow.html',
+  styleUrls: ['./popup-arrow.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SuiPopupArrow {
     @Input()

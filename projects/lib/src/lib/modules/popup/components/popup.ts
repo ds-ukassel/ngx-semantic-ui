@@ -1,71 +1,26 @@
-import { Component, ViewChild, ViewContainerRef, ElementRef, EventEmitter, HostListener, HostBinding, ChangeDetectionStrategy } from "@angular/core";
-import { PositioningService, IDynamicClasses } from "../../../misc/util/internal";
-import { TransitionController, TransitionDirection, Transition } from "../../transition/internal";
-import { IPopup } from "../classes/popup-controller";
-import { TemplatePopupConfig } from "../classes/popup-template-controller";
-import { NgClass } from "@angular/common";
-import { SuiTransition } from "../../transition/directives/transition";
-import { SuiPopupArrow } from "./popup-arrow";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import {IDynamicClasses, PositioningService} from '../../../misc/util/internal';
+import {SuiTransition} from '../../transition/directives/transition';
+import {Transition, TransitionController, TransitionDirection} from '../../transition/internal';
+import {IPopup} from '../classes/popup-controller';
+import {TemplatePopupConfig} from '../classes/popup-template-controller';
+import {SuiPopupArrow} from './popup-arrow';
 
 @Component({
-    selector: "sui-popup",
-    template: `
-<div class="ui popup"
-  [ngClass]="dynamicClasses"
-  [suiTransition]="transitionController"
-  [attr.direction]="direction"
-  #container>
-
-  @if (!config.template && (!!config.header || !!config.text)) {
-    @if (config.header) {
-      <div class="header">{{ config.header }}</div>
-    }
-    <div class="content">{{ config.text }}</div>
-  }
-  <div #templateSibling></div>
-
-  @if (!config.isBasic) {
-    <sui-popup-arrow
-      [placement]="config.placement"
-    [inverted]="config.isInverted"></sui-popup-arrow>
-  }
-</div>
-`,
-    styles: [`
-.ui.popup {
-    /* Autofit popup to the contents. */
-    right: auto;
-    margin: 0;
-}
-
-.ui.animating.popup {
-    /* When the popup is animating, it may not initially be in the correct position.
-       This fires a mouse event, causing the anchor's mouseleave to fire - making the popup flicker.
-       Setting pointer-events to none while animating fixes this bug. */
-    pointer-events: none;
-}
-
-.ui.popup::before {
-    /* Hide the Semantic UI CSS arrow. */
-    display: none;
-}
-
-/* Offset popup by 0.75em above and below when placed 'vertically'. */
-.ui.popup[direction="top"],
-.ui.popup[direction="bottom"] {
-    margin-top: 0.75em;
-    margin-bottom: 0.75em;
-}
-
-/* Offset popup by 0.75em either side when placed 'horizontally'. */
-.ui.popup[direction="left"],
-.ui.popup[direction="right"] {
-    margin-left: 0.75em;
-    margin-right: 0.75em;
-}
-`],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [NgClass, SuiTransition, SuiPopupArrow]
+  selector: "sui-popup",
+  templateUrl: './popup.html',
+  styleUrl: './popup.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [SuiTransition, SuiPopupArrow],
 })
 export class SuiPopup implements IPopup {
     // Config settings for this popup.

@@ -1,0 +1,20 @@
+<div class="ui popup"
+  [class]="dynamicClasses"
+  [suiTransition]="transitionController"
+  [attr.direction]="direction"
+  #container>
+
+  @if (!config.template && (!!config.header || !!config.text)) {
+    @if (config.header) {
+      <div class="header">{{ config.header }}</div>
+    }
+    <div class="content">{{ config.text }}</div>
+  }
+  <div #templateSibling></div>
+
+  @if (!config.isBasic) {
+    <sui-popup-arrow
+      [placement]="config.placement"
+    [inverted]="config.isInverted"></sui-popup-arrow>
+  }
+</div>
