@@ -1,6 +1,6 @@
-import {SuiMessageModule} from '@angular-ex/semantic-ui';
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
+import {SuiMessageModule} from 'lib';
 
 import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
 import {ExampleComponent} from '../../../components/example/example.component';
@@ -18,9 +18,9 @@ import {exampleTemplateTemplate, SearchExampleTemplate} from './search-template'
     PageTitleComponent,
     PageContentComponent,
     ExampleComponent,
-    // SearchExampleStandard,
-    // SearchExampleRemote,
-    // SearchExampleTemplate,
+    SearchExampleStandard,
+    SearchExampleRemote,
+    SearchExampleTemplate,
     SuiMessageModule,
     RouterLink,
     ApiComponent,

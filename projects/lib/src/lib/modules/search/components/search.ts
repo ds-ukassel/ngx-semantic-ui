@@ -1,17 +1,25 @@
 import {
-  Component, ViewChild, HostBinding, Input, AfterViewInit, HostListener,
-  EventEmitter, Output, Directive, ElementRef, TemplateRef, Renderer2,
-  ChangeDetectionStrategy
-} from "@angular/core";
-import { Util, ITemplateRefContext, IFocusEvent } from "../../../misc/util/internal";
-import { DropdownService, SuiDropdownMenu } from "../../dropdown/internal";
-import { ISearchLocaleValues, RecursivePartial, SuiLocalizationService } from "../../../behaviors/localization/internal";
-import { SearchService } from "../services/search.service";
-import { LookupFn, FilterFn } from "../helpers/lookup-fn";
-import { FormsModule } from "@angular/forms";
-import { SuiDropdownMenu as SuiDropdownMenu_1, SuiDropdownMenuItem } from "../../dropdown/directives/dropdown-menu";
-import { SuiSearchResult } from "./search-result";
-import { SuiSearchModule } from "../search.module";
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  Renderer2,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {ISearchLocaleValues, RecursivePartial, SuiLocalizationService} from '../../../behaviors/localization/internal';
+import {IFocusEvent, ITemplateRefContext, Util} from '../../../misc/util/internal';
+import {SuiDropdownMenu as SuiDropdownMenu_1, SuiDropdownMenuItem} from '../../dropdown/directives/dropdown-menu';
+import {DropdownService, SuiDropdownMenu} from '../../dropdown/internal';
+import {FilterFn, LookupFn} from '../helpers/lookup-fn';
+import {SearchService} from '../services/search.service';
+import {SuiSearchResult} from './search-result';
 
 export interface IResultContext<T> extends ITemplateRefContext<T> {
     query:string;
@@ -63,7 +71,7 @@ export interface IResultContext<T> extends ITemplateRefContext<T> {
 }
 `],
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [FormsModule, SuiDropdownMenu_1, SuiSearchResult, SuiDropdownMenuItem, SuiSearchModule]
+    imports: [FormsModule, SuiDropdownMenu_1, SuiSearchResult, SuiDropdownMenuItem]
 })
 export class SuiSearch<T> implements AfterViewInit {
     public dropdownService:DropdownService;
