@@ -1,16 +1,15 @@
-import { Component, AfterViewInit, Input, ChangeDetectorRef, ChangeDetectionStrategy } from "@angular/core";
-import { NgClass } from "@angular/common";
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input} from '@angular/core';
 
+// TODO does not work any more
 declare const Prism: any;
 
 @Component({
     selector: "demo-codeblock",
     template: `
-<pre [ngClass]="languageClass" [innerHTML]="html"></pre>
+<pre [class]="languageClass" [innerHTML]="html"></pre>
 `,
     styleUrls: ["./codeblock.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [NgClass]
 })
 export class CodeblockComponent implements AfterViewInit {
     @Input()
