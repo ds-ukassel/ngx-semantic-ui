@@ -5,10 +5,10 @@ import { SuiRatingModule } from "../rating.module";
 @Component({
     selector: "sui-rating",
     template: `
-@for (icon of icons; track icon; let i = $index) {
+@for (icon of icons; track $index) {
   <i class="icon"
-    (mouseover)="onMouseover(i)"
-    (click)="onClick(i)"
+    (mouseover)="onMouseover($index)"
+    (click)="onClick($index)"
     [class.selected]="hoveredIndex >= i && !isReadonly"
     [class.active]="value > i">
   </i>
