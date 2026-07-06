@@ -8,6 +8,7 @@ import {
   SuiSelectModule,
   SuiTabsModule,
   TemplateModalConfig,
+  SuiModalModule,
 } from '@angular-ex/semantic-ui';
 import {ChangeDetectionStrategy, Component, forwardRef, ViewChild} from '@angular/core';
 import {FormsModule} from '@angular/forms';
@@ -245,7 +246,7 @@ this.modalService
     selector: "example-modal-template",
     template: exampleTemplateTemplate,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [FormsModule]
+    imports: [FormsModule, SuiModalModule],
 })
 export class ModalExampleTemplate {
     @ViewChild("modalTemplate")
