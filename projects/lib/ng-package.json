@@ -7,7 +7,6 @@
   "allowedNonPeerDependencies": [
     "bowser",
     "date-fns",
-    "element-closest",
     "extend",
     "is-ua-webview",
     "popper.js"

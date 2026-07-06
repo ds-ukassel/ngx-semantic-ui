@@ -9,8 +9,8 @@ import { SuiRatingModule } from "../rating.module";
   <i class="icon"
     (mouseover)="onMouseover($index)"
     (click)="onClick($index)"
-    [class.selected]="hoveredIndex >= i && !isReadonly"
-    [class.active]="value > i">
+    [class.selected]="hoveredIndex >= $index && !isReadonly"
+    [class.active]="value > $index">
   </i>
 }
 `,

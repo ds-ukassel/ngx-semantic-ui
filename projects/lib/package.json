@@ -8,7 +8,6 @@
   "dependencies": {
     "bowser": "^2.11.0",
     "date-fns": "^2.30.0",
-    "element-closest": "^3.0.2",
     "extend": "^3.0.2",
     "is-ua-webview": "^1.1.2",
     "popper.js": "^1.16.1",

@@ -32,9 +32,6 @@ importers:
       date-fns:
         specifier: ^4.4.0
         version: 4.4.0
-      element-closest:
-        specifier: ^3.0.2
-        version: 3.0.2
       extend:
         specifier: ^3.0.2
         version: 3.0.2
@@ -72,9 +69,6 @@ importers:
       '@eslint/js':
         specifier: ^9.39.4
         version: 9.39.4
-      '@types/element-closest':
-        specifier: ^3.0.2
-        version: 3.0.2
       '@types/extend':
         specifier: ^3.0.4
         version: 3.0.4
@@ -1698,9 +1692,6 @@ packages:
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
 
-  '@types/element-closest@3.0.2':
-    resolution: {integrity: sha512-ncX7/7iX6Db/uc0RVPSXOwZH3HFCKhwhzscl4AVRaP5wit27n5EXT85la/j7fANT9A+eiC8Jk8jhlBgigpH6eA==}
-
   '@types/esrecurse@4.3.1':
     resolution: {integrity: sha512-xJBAbDifo5hpffDBuHl0Y8ywswbiAp/Wi7Y/GtAgSlZyIABppyurxVueOPE8LUQOxdlgi6Zqce7uoEpqNTeiUw==}
 
@@ -2210,10 +2201,6 @@ packages:
 
   electron-to-chromium@1.5.383:
     resolution: {integrity: sha512-I2484/KkAvl8lm9VyjH2JnbOIV0d/UCqT7gbzs6l+o6Vmn9wgB66uVcKX+Vk6HrXtY6fbWTOEXuv8waDTuFNCw==}
-
-  element-closest@3.0.2:
-    resolution: {integrity: sha512-JxKQiJKX0Zr5Q2/bCaTx8P+UbfyMET1OQd61qu5xQFeWr1km3fGaxelSJtnfT27XQ5Uoztn2yIyeamAc/VX13g==}
-    engines: {node: '>=0.12.0'}
 
   emoji-regex@10.6.0:
     resolution: {integrity: sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==}
@@ -5233,8 +5220,6 @@ snapshots:
 
   '@types/deep-eql@4.0.2': {}
 
-  '@types/element-closest@3.0.2': {}
-
   '@types/esrecurse@4.3.1': {}
 
   '@types/estree@1.0.8': {}
@@ -5811,8 +5796,6 @@ snapshots:
   ee-first@1.1.1: {}
 
   electron-to-chromium@1.5.383: {}
-
-  element-closest@3.0.2: {}
 
   emoji-regex@10.6.0: {}
 
