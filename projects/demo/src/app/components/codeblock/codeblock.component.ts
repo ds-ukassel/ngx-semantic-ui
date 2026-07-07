@@ -1,7 +1,8 @@
-import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input} from '@angular/core';
-
-// TODO does not work any more
-declare const Prism: any;
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input} from '@angular/core';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-bash';
+// markup (HTML) is included in the Prism core.
 
 @Component({
     selector: "demo-codeblock",
@@ -20,15 +21,15 @@ export class CodeblockComponent implements AfterViewInit {
 
     public html!:string;
 
-    public languageClass:any = {};
+    public languageClass = "";
 
-    constructor(private _changeDetectorRef:ChangeDetectorRef) {}
+    private _changeDetectorRef = inject(ChangeDetectorRef);
 
     public ngAfterViewInit():void {
         if (this.src[0] === "\n") {
             this.src = this.src.replace("\n", "");
         }
-        this.languageClass[`language-${this.language}`] = true;
+        this.languageClass = `language-${this.language}`;
         this.html = Prism.highlight(this.src || "", Prism.languages[this.language], this.language);
         this._changeDetectorRef.detectChanges();
     }

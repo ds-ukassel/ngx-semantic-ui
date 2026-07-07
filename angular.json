@@ -67,12 +67,16 @@
               "zone.js"
             ],
             "tsConfig": "projects/demo/tsconfig.app.json",
+            "allowedCommonJsDependencies": [
+              "prismjs"
+            ],
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/demo/src/favicon.ico",
               "projects/demo/src/assets"
             ],
             "styles": [
+              "node_modules/prismjs/themes/prism.css",
               "projects/demo/src/css/styles.scss"
             ],
             "scripts": [],
