@@ -1,19 +1,16 @@
-import { HostBinding, Directive, Input } from "@angular/core";
+import { Directive, Input, signal } from "@angular/core";
 
-@Directive({ selector: "[suiTabContent]" })
+@Directive({
+    selector: "[suiTabContent]",
+    host: {
+        "class": "tab",
+        "[class.active]": "isActive()"
+    }
+})
 export class SuiTabContent {
-    @HostBinding("class.tab")
-    public readonly hasClasses:boolean;
-
     @Input("suiTabContent")
     public id!:any; // string
 
-    @HostBinding("class.active")
-    public isActive:boolean;
-
-    constructor() {
-        this.isActive = false;
-
-        this.hasClasses = true;
-    }
+    // Signal so state changes notify (zoneless) change detection.
+    public isActive = signal(false);
 }

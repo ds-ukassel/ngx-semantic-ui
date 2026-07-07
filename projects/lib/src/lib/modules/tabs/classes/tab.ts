@@ -14,7 +14,7 @@ export class Tab {
 
         // So that the header and content isActive properties are always in sync.
         this.header.isActiveChange
-            .subscribe(() => this.content.isActive = this.isActive);
+            .subscribe(() => this.content.isActive.set(this.isActive));
     }
 
     // Saves accessing .header.isActive every time.
