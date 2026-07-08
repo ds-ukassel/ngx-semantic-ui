@@ -231,7 +231,7 @@ export class PopupPage {
 `;
 
     public manualPopupCode = `
-import {IPopup} from "@angular-ex/semantic-ui";
+import {IPopup} from "@ds-ukassel/ngx-semantic-ui";
 
 @Component({})
 export class MyComponent {
@@ -246,7 +246,7 @@ export class MyComponent {
 `;
 
     public globalConfigCode = `
-import {SuiPopupConfig} from "@angular-ex/semantic-ui";
+import {SuiPopupConfig} from "@ds-ukassel/ngx-semantic-ui";
 
 @Component({})
 export class MyComponent {

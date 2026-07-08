@@ -17,14 +17,14 @@ import {PageTitleComponent} from '../../components/page-title/page-title.compone
     imports: [PageTitleComponent, PageContentComponent, CodeblockComponent, SuiDropdownModule]
 })
 export class GettingStartedPage {
-    public installCode = `$ npm install @angular-ex/semantic-ui --save`;
+    public installCode = `$ npm install @ds-ukassel/ngx-semantic-ui --save`;
 
     public includeCssCode =
 `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">`;
 
-    public importCode = `import {SuiModule} from '@angular-ex/semantic-ui';`;
+    public importCode = `import {SuiModule} from '@ds-ukassel/ngx-semantic-ui';`;
     public moduleImportCode = `
-import {SuiModule} from '@angular-ex/semantic-ui';
+import {SuiModule} from '@ds-ukassel/ngx-semantic-ui';
 
 @NgModule({
     declarations: [AppComponent, ...],
@@ -38,9 +38,9 @@ var config = {
     ...
     map: {
         ...
-        '@angular-ex/semantic-ui': 'npm:@angular-ex/semantic-ui/fesm2022/lib.mjs'
+        '@ds-ukassel/ngx-semantic-ui': 'npm:@ds-ukassel/ngx-semantic-ui/fesm2022/lib.mjs'
     }
 }
 `;
-    public individualImportCode = `import {SuiCheckboxModule, SuiRatingModule} from '@angular-ex/semantic-ui';`;
+    public individualImportCode = `import {SuiCheckboxModule, SuiRatingModule} from '@ds-ukassel/ngx-semantic-ui';`;
 }
