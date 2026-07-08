@@ -84,5 +84,4 @@ $ npm run test
 
 ## License
 
-MIT © @angular-ex
-
+MIT
