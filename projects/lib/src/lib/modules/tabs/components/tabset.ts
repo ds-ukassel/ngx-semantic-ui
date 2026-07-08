@@ -1,12 +1,11 @@
-import { Component, ContentChildren, QueryList, AfterContentInit, ChangeDetectionStrategy } from "@angular/core";
+import { Component, ContentChildren, QueryList, AfterContentInit } from "@angular/core";
 import { SuiTabHeader } from "../directives/tab-header";
 import { SuiTabContent } from "../directives/tab-content";
 import { Tab } from "../classes/tab";
 
 @Component({
     selector: "sui-tabset",
-    template: `<ng-content></ng-content>`,
-    changeDetection: ChangeDetectionStrategy.Eager
+    template: `<ng-content></ng-content>`
 })
 export class SuiTabset implements AfterContentInit {
     @ContentChildren(SuiTabHeader, { descendants: true })
@@ -28,8 +27,9 @@ export class SuiTabset implements AfterContentInit {
     // When setting a tab as the currently active tab, it automatically gains
     // `isActive` status (saves littering `isActive = true` everywhere).
     public set activeTab(tab:Tab) {
+        // Record before activating so `onTabActivated` sees it as already coordinated.
         this._activeTab = tab;
-        tab.isActive = true;
+        tab.header.isActive.set(true);
     }
 
     // Keeps track of the number of times `internalComponentsUpdated` is called.
@@ -72,13 +72,13 @@ export class SuiTabset implements AfterContentInit {
 
         this._tabHeaders
             // Filter out the loaded headers with attached tab instances.
-            .filter(tH => 
+            .filter(tH =>
                 !this.tabs.find(t => t.header === tH)
                 // Fix for ContentChildren can't see elements in ng-content like tab-header
                 && (tH.eleRef.nativeElement.parentElement === parentEleFirstTab)
             )
             .forEach(tH => {
-                const content = this._tabContents.find(tC => tC.id === tH.id);
+                const content = this._tabContents.find(tC => tC.id() === tH.id());
 
                 if (!content) {
                     // Error if an associated tab content cannot be found for the given header.
@@ -88,8 +88,9 @@ export class SuiTabset implements AfterContentInit {
                 // Create a new tab instance for this header & content combo.
                 const tab = new Tab(tH, content);
 
-                // Subscribe to any external changes in the tab header's active state. External changes are triggered by user input.
-                tab.header.isActiveExternalChange.subscribe(() => this.onHeaderActiveChanged(tab));
+                // Coordinate on the header's activation transitions (auto-cleaned on destroy).
+                tab.header.activate.subscribe(() => this.onTabActivated(tab));
+                tab.header.deactivate.subscribe(() => this.onTabDeactivated(tab));
 
                 // Add the new instance to the list of tabs.
                 this.tabs.push(tab);
@@ -123,19 +124,28 @@ export class SuiTabset implements AfterContentInit {
         }
     }
 
-    // Fires whenever a tab header's active state is externally changed.
-    private onHeaderActiveChanged(tab:Tab):void {
-        // If the tab has become activated, but was not previously the active tab:
-        if (tab.isActive && this.activeTab !== tab) {
-            // Deactivate all of the tabs.
-            this.tabs.filter(t => t !== tab).forEach(t => t.isActive = false);
+    // Fires whenever a tab header becomes active.
+    private onTabActivated(tab:Tab):void {
+        // A disabled tab can never be active (the header also enforces this).
+        if (tab.isDisabled) {
+            tab.header.isActive.set(false);
+            return;
+        }
+
+        // If this tab was not previously the active tab:
+        if (this.activeTab !== tab) {
+            // Deactivate all of the other tabs.
+            this.tabs.filter(t => t !== tab).forEach(t => t.header.isActive.set(false));
 
             // Set the currently active tab to this one.
             this.activeTab = tab;
         }
+    }
 
-        // If the tab has become deactivated, but was previously the active tab:
-        if (!tab.isActive && this.activeTab === tab) {
+    // Fires whenever a tab header becomes inactive.
+    private onTabDeactivated(tab:Tab):void {
+        // If the tab that was deactivated was the active tab:
+        if (this.activeTab === tab) {
             // Activate the closest tab to it.
             this.activateClosestTab(tab);
         }

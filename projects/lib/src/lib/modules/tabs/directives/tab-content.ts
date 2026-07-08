@@ -1,19 +1,16 @@
-import { HostBinding, Directive, Input } from "@angular/core";
+import { Directive, input, signal } from "@angular/core";
 
-@Directive({ selector: "[suiTabContent]" })
-export class SuiTabContent {
-    @HostBinding("class.tab")
-    public readonly hasClasses:boolean;
-
-    @Input("suiTabContent")
-    public id!:any; // string
-
-    @HostBinding("class.active")
-    public isActive:boolean;
-
-    constructor() {
-        this.isActive = false;
-
-        this.hasClasses = true;
+@Directive({
+    selector: "[suiTabContent]",
+    host: {
+        "class": "tab",
+        "[class.active]": "isActive()"
     }
+})
+export class SuiTabContent {
+    // Unique identifier used to link the content to its related [suiTabHeader].
+    public readonly id = input.required<string | number>({ alias: "suiTabContent" });
+
+    // Signal so state changes notify (zoneless) change detection.
+    public readonly isActive = signal(false);
 }
