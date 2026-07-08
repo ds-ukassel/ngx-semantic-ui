@@ -1,4 +1,4 @@
-import { Directive, Input, signal } from "@angular/core";
+import { Directive, input, signal } from "@angular/core";
 
 @Directive({
     selector: "[suiTabContent]",
@@ -8,9 +8,9 @@ import { Directive, Input, signal } from "@angular/core";
     }
 })
 export class SuiTabContent {
-    @Input("suiTabContent")
-    public id!:any; // string
+    // Unique identifier used to link the content to its related [suiTabHeader].
+    public readonly id = input.required<string | number>({ alias: "suiTabContent" });
 
     // Signal so state changes notify (zoneless) change detection.
-    public isActive = signal(false);
+    public readonly isActive = signal(false);
 }

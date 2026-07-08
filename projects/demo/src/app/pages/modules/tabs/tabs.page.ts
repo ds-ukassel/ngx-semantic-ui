@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {Component, forwardRef} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {SuiCheckboxModule, SuiDropdownModule, SuiModalModule, SuiModalService, SuiTabsModule} from 'lib';
 import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
@@ -93,7 +93,6 @@ const exampleStyledTemplate = `
 @Component({
     selector: "demo-page-tabs",
     templateUrl: "./tabs.page.html",
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => TabExampleStandard), forwardRef(() => TabExampleProperties), forwardRef(() => TabExampleDynamic), forwardRef(() => TabExampleStyled), ApiComponent]
 })
 export class TabsPage {
@@ -165,7 +164,6 @@ export class TabsPage {
 @Component({
     selector: "example-tab-standard",
     template: exampleStandardTemplate,
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [SuiTabsModule, SuiDropdownModule]
 })
 export class TabExampleStandard {}
@@ -173,7 +171,6 @@ export class TabExampleStandard {}
 @Component({
     selector: "example-tab-properties",
     template: examplePropertiesTemplate,
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [SuiModalModule, SuiTabsModule, SuiDropdownModule, SuiCheckboxModule, FormsModule]
 })
 export class TabExampleProperties {
@@ -195,7 +192,6 @@ export class TabExampleProperties {
 @Component({
     selector: "example-tab-dynamic",
     template: exampleDynamicTemplate,
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [SuiTabsModule, SuiDropdownModule]
 })
 export class TabExampleDynamic {
@@ -222,7 +218,6 @@ export class TabExampleDynamic {
 @Component({
     selector: "example-tab-styled",
     template: exampleStyledTemplate,
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [SuiTabsModule, SuiDropdownModule]
 })
 export class TabExampleStyled {
