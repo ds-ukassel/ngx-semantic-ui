@@ -6,9 +6,9 @@
     "types": [],
     "paths": {
       "lib": ["../../dist/lib"],
-      "@angular-ex/semantic-ui": ["../../dist/lib"],
-      "@angular-ex/semantic-ui/locales": ["../../dist/lib/locales"],
-      "@angular-ex/semantic-ui/*": ["../../dist/lib/*"]
+      "@ds-ukassel/ngx-semantic-ui": ["../../dist/lib"],
+      "@ds-ukassel/ngx-semantic-ui/locales": ["../../dist/lib/locales"],
+      "@ds-ukassel/ngx-semantic-ui/*": ["../../dist/lib/*"]
     },
   },
   "files": [

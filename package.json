@@ -1,5 +1,5 @@
 {
-  "name": "@angular-ex/semantic-ui",
+  "name": "@ds-ukassel/ngx-semantic-ui",
   "version": "16.1.1",
   "scripts": {
     "ng": "ng",

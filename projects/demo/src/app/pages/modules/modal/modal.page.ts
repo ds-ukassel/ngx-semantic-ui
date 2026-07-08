@@ -175,7 +175,7 @@ export class ModalPage {
     public templateTemplate:string = exampleTemplateModalTemplate;
 
     public templateComponent = `
-import {SuiModalService, TemplateModalConfig, ModalTemplate} from '@angular-ex/semantic-ui';
+import {SuiModalService, TemplateModalConfig, ModalTemplate} from '@ds-ukassel/ngx-semantic-ui';
 
 export interface IContext {
     data:string;
@@ -205,7 +205,7 @@ public open(dynamicContent:string = "Example") {
 `;
 
     public componentComponent = `
-import {SuiModal, ComponentModalConfig, ModalSize} from "@angular-ex/semantic-ui"
+import {SuiModal, ComponentModalConfig, ModalSize} from "@ds-ukassel/ngx-semantic-ui"
 
 interface IConfirmModalContext {
     title:string;
