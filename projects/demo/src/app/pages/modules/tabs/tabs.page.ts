@@ -1,7 +1,11 @@
-import { Component } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
-import { SuiModalService } from "@angular-ex/semantic-ui";
-import { AlertModal } from "../../../modals/alert.modal";
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {SuiCheckboxModule, SuiDropdownModule, SuiModalModule, SuiModalService, SuiTabsModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
+import {AlertModal} from '../../../modals/alert.modal';
 
 const exampleStandardTemplate = `
 <sui-tabset>
@@ -46,9 +50,13 @@ const exampleDynamicTemplate = `
 <sui-tabset>
     <div class="ui top attached tabular menu">
         <a class="item" suiTabHeader="static">Static</a>
-        <a class="item" *ngFor="let tab of tabs; let i = index" [suiTabHeader]="i" [(isActive)]="active[i]">{{ tab.header }}</a>
+        @for (tab of tabs; track $index) {
+            <a class="item" [suiTabHeader]="$index" [(isActive)]="active[$index]">{{ tab.header }}</a>
+        }
     </div>
-    <div class="ui bottom attached segment" *ngFor="let tab of tabs; let i = index" [suiTabContent]="i">{{ tab.content }}</div>
+    @for (tab of tabs; track $index) {
+        <div class="ui bottom attached segment" [suiTabContent]="$index">{{ tab.content }}</div>
+    }
     <div class="ui bottom attached segment" suiTabContent="static">
         <p>Static tabs alongside dynamic tabs are supported.</p>
         <p>Note that the order that <code>[suiTabContent]</code> elements are defined doesn't affect the headers.</p>
@@ -84,7 +92,9 @@ const exampleStyledTemplate = `
 
 @Component({
     selector: "demo-page-tabs",
-    templateUrl: "./tabs.page.html"
+    templateUrl: "./tabs.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => TabExampleStandard), forwardRef(() => TabExampleProperties), forwardRef(() => TabExampleDynamic), forwardRef(() => TabExampleStyled), ApiComponent]
 })
 export class TabsPage {
     public api:ApiDefinition = [
@@ -154,13 +164,17 @@ export class TabsPage {
 
 @Component({
     selector: "example-tab-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiTabsModule, SuiDropdownModule]
 })
 export class TabExampleStandard {}
 
 @Component({
     selector: "example-tab-properties",
-    template: examplePropertiesTemplate
+    template: examplePropertiesTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiModalModule, SuiTabsModule, SuiDropdownModule, SuiCheckboxModule, FormsModule]
 })
 export class TabExampleProperties {
     public firstActive:boolean;
@@ -180,7 +194,9 @@ export class TabExampleProperties {
 
 @Component({
     selector: "example-tab-dynamic",
-    template: exampleDynamicTemplate
+    template: exampleDynamicTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiTabsModule, SuiDropdownModule]
 })
 export class TabExampleDynamic {
     public active:boolean[] = [];
@@ -205,10 +221,12 @@ export class TabExampleDynamic {
 
 @Component({
     selector: "example-tab-styled",
-    template: exampleStyledTemplate
+    template: exampleStyledTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiTabsModule, SuiDropdownModule]
 })
 export class TabExampleStyled {
-    public pointing:boolean = true;
+    public pointing = true;
 }
 
 export const TabsPageComponents = [TabsPage, TabExampleStandard, TabExampleProperties, TabExampleDynamic, TabExampleStyled];

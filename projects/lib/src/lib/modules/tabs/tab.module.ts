@@ -6,9 +6,7 @@ import { SuiTabContent } from "./directives/tab-content";
 
 @NgModule({
     imports: [
-        CommonModule
-    ],
-    declarations: [
+        CommonModule,
         SuiTabset,
         SuiTabHeader,
         SuiTabContent

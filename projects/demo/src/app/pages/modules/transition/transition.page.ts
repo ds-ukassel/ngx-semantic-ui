@@ -1,20 +1,29 @@
-import { Component } from "@angular/core";
-import { SuiTransition, Transition, TransitionDirection, TransitionController } from "@angular-ex/semantic-ui";
-import { ApiDefinition } from "../../../components/api/api.component";
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {SuiSelectModule, SuiTransitionModule, Transition, TransitionController, TransitionDirection} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui segment">
     <img src="https://goo.gl/VUcnwx" class="ui image" [suiTransition]="transitionController">
 </div>
 <sui-select class="selection" [(ngModel)]="transitionName" [options]="transitions" [isSearchable]="true" #animSelect>
-    <sui-select-option *ngFor="let a of animSelect.availableOptions" [value]="a"></sui-select-option>
+  @for (a of animSelect.availableOptions; track a) {
+    <sui-select-option [value]="a" />
+  }
 </sui-select>
 <button class="ui button" (click)="animate(transitionName)">Animate</button>
 `;
 
 @Component({
     selector: "demo-page-transition",
-    templateUrl: "./transition.page.html"
+    templateUrl: "./transition.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, CodeblockComponent, ExampleComponent, forwardRef(() => TransitionExampleStandard), ApiComponent]
 })
 export class TransitionPage {
     public api:ApiDefinition = [
@@ -31,7 +40,7 @@ export class TransitionPage {
         }
     ];
 
-    public transitionControllerCode:string = `
+    public transitionControllerCode = `
 import {TransitionController} from "@angular-ex/semantic-ui";
 
 @Component({})
@@ -40,19 +49,19 @@ export class MyComponent {
 }
 `;
 
-    public transitionElementCode:string = `
+    public transitionElementCode = `
 <div class="ui segment">
     <img src="https://goo.gl/VUcnwx" class="ui image" [suiTransition]="transitionController">
 </div>
 `;
 
-    public transitionExampleCode:string = `
+    public transitionExampleCode = `
 import {TransitionController, Transition, TransitionDirection} from "@angular-ex/semantic-ui";
 
 @Component({})
 export class MyComponent {
     public transitionController = new TransitionController();
-    
+
     public animate(transitionName:string = "scale") {
         this.transitionController.animate(
             new Transition(transitionName, 500, TransitionDirection.In, () => console.log("Completed transition.")));
@@ -62,7 +71,7 @@ export class MyComponent {
 
     public exampleStandardTemplate:string = exampleStandardTemplate;
 
-    public transitionControllerInterface:string = `
+    public transitionControllerInterface = `
 this.ctrl = new TransitionController(isInitiallyVisible:boolean = false, display:string = "block");
 // isInitiallyVisible sets whether the element being animated starts off visible.
 // display sets the 'display' style set on the animated element when it is visible.
@@ -89,7 +98,7 @@ this.ctrl.clearQueue();
 // Continues with the current transition, but empties the queue.
 `;
 
-    public advancedExampleCode:string = `
+    public advancedExampleCode = `
 import {SuiTransition, TransitionController, Transition} from "@angular-ex/semantic-ui";
 
 @Component({})
@@ -114,7 +123,9 @@ export class MyComponent extends SuiTransition {
 
 @Component({
     selector: "example-transition-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiTransitionModule, SuiSelectModule, FormsModule]
 })
 export class TransitionExampleStandard {
     public transitionController:TransitionController = new TransitionController();
@@ -129,9 +140,9 @@ export class TransitionExampleStandard {
         "flash", "shake", "pulse", "tada", "bounce"
     ];
 
-    public transitionName:string = "scale";
+    public transitionName = "scale";
 
-    public animate(transitionName:string = "scale"):void {
+    public animate(transitionName = "scale"):void {
         this.transitionController.animate(
             new Transition(transitionName, 500, TransitionDirection.Either, () => console.log("Completed transition.")));
     }

@@ -13,9 +13,7 @@ import { SuiSearchResult } from "./components/search-result";
         FormsModule,
         SuiDropdownModule,
         SuiLocalizationModule,
-        SuiUtilityModule
-    ],
-    declarations: [
+        SuiUtilityModule,
         SuiSearch,
         SuiSearchResult
     ],

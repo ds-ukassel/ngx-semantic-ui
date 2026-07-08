@@ -176,8 +176,7 @@ export class SuiDatepickerDirective
         }
 
         // Angular expects null
-        // tslint:disable-next-line:no-null-keyword
-        return null;
+               return null;
     }
 
     public writeValue(value:Date | undefined):void {

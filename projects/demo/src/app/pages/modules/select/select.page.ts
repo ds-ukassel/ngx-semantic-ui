@@ -1,5 +1,13 @@
-import { Component } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import {JsonPipe} from '@angular/common';
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {RouterLink} from '@angular/router';
+import {SuiCheckboxModule, SuiMessageModule, SuiSelectModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui segments">
@@ -12,9 +20,9 @@ const exampleStandardTemplate = `
                     [isSearchable]="searchable"
                     [isDisabled]="disabled"
                     #select>
-            <sui-select-option *ngFor="let option of select.filteredOptions"
-                               [value]="option">
-            </sui-select-option>
+            @for (option of select.filteredOptions; track option) {
+                <sui-select-option [value]="option" />
+            }
         </sui-select>
     </div>
     <div class="ui segment">
@@ -27,9 +35,9 @@ const exampleStandardTemplate = `
                           [isDisabled]="disabled"
                           [hasLabels]="!hideLabels"
                           #multiSelect>
-            <sui-select-option *ngFor="let option of multiSelect.filteredOptions"
-                               [value]="option">
-            </sui-select-option>
+            @for (option of multiSelect.filteredOptions; track option) {
+                <sui-select-option [value]="option" />
+            }
         </sui-multi-select>
         <br><br>
         <sui-checkbox [(ngModel)]="hideLabels">Hide labels?</sui-checkbox>
@@ -38,7 +46,7 @@ const exampleStandardTemplate = `
         <sui-checkbox [(ngModel)]="searchable">Searchable?</sui-checkbox>
         <br>
         <sui-checkbox [(ngModel)]="disabled">Disabled?</sui-checkbox>
-        
+
     </div>
     <div class="ui segment">
         <p>Singly selected: {{ selectedOption | json }}</p>
@@ -85,7 +93,9 @@ const exampleVariationsTemplate = `
                 <i class="tags icon"></i>
                 Filter by tag
             </div>
-            <sui-select-option *ngFor="let o of filterSelect.filteredOptions" [value]="o"></sui-select-option>
+            @for (option of filterSelect.filteredOptions; track option) {
+                <sui-select-option [value]="option" />
+            }
         </sui-select>
     </div>
 </div>
@@ -108,7 +118,9 @@ const exampleInMenuSearchTemplate = `
         Options
     </div>
     <div class="scrolling menu">
-        <sui-select-option *ngFor="let o of select.filteredOptions" [value]="o"></sui-select-option>
+        @for (option of select.filteredOptions; track option) {
+            <sui-select-option [value]="option" />
+        }
     </div>
 </sui-multi-select>
 `;
@@ -128,7 +140,9 @@ const exampleTemplateTemplate = `
                     [optionTemplate]="optionTemplate"
                     [isSearchable]="true"
                     #templated>
-            <sui-select-option *ngFor="let o of templated.filteredOptions" [value]="o"></sui-select-option>
+            @for (option of templated.filteredOptions; track option) {
+                <sui-select-option [value]="option" />
+            }
         </sui-select>
     </div>
     <div class="ui segment">
@@ -138,7 +152,9 @@ const exampleTemplateTemplate = `
                     [options]="options"
                     [optionFormatter]="formatter"
                     #formatted>
-            <sui-select-option *ngFor="let o of formatted.filteredOptions" [value]="o"></sui-select-option>
+            @for (option of formatted.filteredOptions; track option) {
+                <sui-select-option [value]="option" />
+            }
         </sui-select>
     </div>
     <div class="ui segment">
@@ -155,7 +171,9 @@ const exampleSearchLookupTemplate = `
             valueField="id"
             [isSearchable]="true"
             #searchSelect>
-    <sui-select-option *ngFor="let o of searchSelect.filteredOptions" [value]="o"></sui-select-option>
+    @for (option of searchSelect.filteredOptions; track option) {
+        <sui-select-option [value]="option" />
+    }
 </sui-select>
 <div class="ui segment">
     <p>Currently selected: {{ selectedOption | json }}</p>
@@ -164,7 +182,9 @@ const exampleSearchLookupTemplate = `
 
 @Component({
     selector: "demo-page-select",
-    templateUrl: "./select.page.html"
+    templateUrl: "./select.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => SelectExampleStandard), SuiMessageModule, forwardRef(() => SelectExampleVariations), forwardRef(() => SelectExampleInMenuSearch), forwardRef(() => SelectExampleTemplate), CodeblockComponent, forwardRef(() => SelectExampleLookupSearch), RouterLink, ApiComponent]
 })
 export class SelectPage {
     public api:ApiDefinition = [
@@ -410,13 +430,13 @@ export class SelectPage {
     public exampleVariationsTemplate:string = exampleVariationsTemplate;
     public exampleInMenuSearchTemplate:string = exampleInMenuSearchTemplate;
     public exampleTemplateTemplate:string = exampleTemplateTemplate;
-    public formatterCode:string = `
+    public formatterCode = `
 public formatter(option:IOption, query?:string):string {
     return \`name: "\${option.name}"\`;
 }
 `;
     public exampleSearchLookupTemplate:string = exampleSearchLookupTemplate;
-    public searchLookupCode:string = `
+    public searchLookupCode = `
 type LookupFn<T, U> = (query:string, initial?:U) => Promise<T> | Promise<T[]>
 
 // Example option interface:
@@ -447,30 +467,36 @@ const idOptions:IOption[] = namedOptions.map(({ name }, id) => ({ name, id }));
 
 @Component({
     selector: "example-select-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiSelectModule, FormsModule, SuiCheckboxModule, JsonPipe]
 })
 export class SelectExampleStandard {
     public options:IOption[] = namedOptions;
     public selectedOption!:IOption;
     public selectedOptions!:IOption[];
 
-    public searchable:boolean = false;
-    public disabled:boolean = false;
-    public hideLabels:boolean = false;
+    public searchable = false;
+    public disabled = false;
+    public hideLabels = false;
 }
 
 @Component({
     selector: "example-select-variations",
-    template: exampleVariationsTemplate
+    template: exampleVariationsTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiSelectModule, FormsModule]
 })
 export class SelectExampleVariations {
-    public selectedRange:string = "today";
+    public selectedRange = "today";
     public filters:string[] = ["Important", "Announcement", "Discussion"];
 }
 
 @Component({
     selector: "example-select-in-menu-search",
-    template: exampleInMenuSearchTemplate
+    template: exampleInMenuSearchTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiSelectModule, FormsModule]
 })
 export class SelectExampleInMenuSearch {
     public options:IOption[] = namedOptions;
@@ -479,7 +505,9 @@ export class SelectExampleInMenuSearch {
 
 @Component({
     selector: "example-select-template",
-    template: exampleTemplateTemplate
+    template: exampleTemplateTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiSelectModule, FormsModule, JsonPipe]
 })
 export class SelectExampleTemplate {
     public options:IOption[] = namedOptions;
@@ -492,7 +520,9 @@ export class SelectExampleTemplate {
 
 @Component({
     selector: "example-select-search-lookup",
-    template: exampleSearchLookupTemplate
+    template: exampleSearchLookupTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiSelectModule, FormsModule, JsonPipe]
 })
 export class SelectExampleLookupSearch {
     private _options:IOption[] = idOptions;

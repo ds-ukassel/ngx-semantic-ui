@@ -1,10 +1,22 @@
-import { Component, ViewChild } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import {ChangeDetectionStrategy, Component, forwardRef, ViewChild} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {
-    SuiModalService, ModalTemplate, TemplateModalConfig, ComponentModalConfig,
-    ModalSize, SuiModal
-} from "@angular-ex/semantic-ui";
-import { AlertModal } from "../../../modals/alert.modal";
+  ComponentModalConfig,
+  ModalSize,
+  ModalTemplate,
+  SuiDropdownModule,
+  SuiModal,
+  SuiModalModule,
+  SuiModalService,
+  SuiSelectModule,
+  SuiTabsModule,
+  TemplateModalConfig,
+} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
+import {AlertModal} from '../../../modals/alert.modal';
 
 const exampleTemplateModalTemplate = `
 <ng-template let-context let-modal="modal" #modalTemplate>
@@ -20,7 +32,6 @@ const exampleTemplateModalTemplate = `
 `;
 
 // Don't use template concatenation here as the Angular compiler complains.
-// tslint:disable-next-line:prefer-template
 export const exampleTemplateTemplate = exampleTemplateModalTemplate + `
 <div class="ui fluid action input">
     <input type="text" placeholder="Modal content..." [(ngModel)]="dynamicContent">
@@ -44,7 +55,9 @@ const exampleComponentTemplate = `
 <div class="field">
     <label>Modal Size:</label>
     <sui-select class="selection" [(ngModel)]="size" [options]="availableSizes" #sizes>
-        <sui-select-option *ngFor="let s of sizes.availableOptions" [value]="s"></sui-select-option>
+        @for (s of sizes.availableOptions; track s) {
+            <sui-select-option [value]="s" />
+        }
     </sui-select>
 </div>
 <button class="ui primary button" (click)="open()">Confirm?</button>
@@ -53,7 +66,9 @@ const exampleComponentTemplate = `
 
 @Component({
     selector: "demo-page-modal",
-    templateUrl: "./modal.page.html"
+    templateUrl: "./modal.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, SuiTabsModule, SuiDropdownModule, CodeblockComponent, forwardRef(() => ModalExampleTemplate), forwardRef(() => ModalExampleComponent), ApiComponent]
 })
 export class ModalPage {
     public api:ApiDefinition = [
@@ -144,7 +159,7 @@ export class ModalPage {
     ];
     public exampleTemplateTemplate:string = exampleTemplateModalTemplate;
 
-    public autoCode:string = `
+    public autoCode = `
 <sui-modal [isClosable]="true" (dismissed)="alert($event)" #modal>
     <div class="header">Example</div>
     <div class="content">
@@ -159,7 +174,7 @@ export class ModalPage {
 
     public templateTemplate:string = exampleTemplateModalTemplate;
 
-    public templateComponent:string = `
+    public templateComponent = `
 import {SuiModalService, TemplateModalConfig, ModalTemplate} from '@angular-ex/semantic-ui';
 
 export interface IContext {
@@ -175,7 +190,7 @@ export class MyComponent {
 }
 `;
 
-    public templateOpen:string = `
+    public templateOpen = `
 public open(dynamicContent:string = "Example") {
     const config = new TemplateModalConfig<IContext, string, string>(this.modalTemplate);
 
@@ -189,7 +204,7 @@ public open(dynamicContent:string = "Example") {
 }
 `;
 
-    public componentComponent:string = `
+    public componentComponent = `
 import {SuiModal, ComponentModalConfig, ModalSize} from "@angular-ex/semantic-ui"
 
 interface IConfirmModalContext {
@@ -206,7 +221,7 @@ export class ConfirmModalComponent {
 }
 `;
 
-    public componentHelper:string = `
+    public componentHelper = `
 export class ConfirmModal extends ComponentModalConfig<IConfirmModalContext, void, void> {
     constructor(title:string, question:string, size = ModalSize.Small) {
         super(ConfirmModalComponent, { title, question });
@@ -218,7 +233,7 @@ export class ConfirmModal extends ComponentModalConfig<IConfirmModalContext, voi
 }
 `;
 
-    public componentOpen:string = `
+    public componentOpen = `
 this.modalService
     .open(new ConfirmModal("Are you sure?", "Are you sure about accepting this?", this.modalSize))
     .onApprove(() => alert("User has accepted."))
@@ -229,17 +244,19 @@ this.modalService
 
 @Component({
     selector: "example-modal-template",
-    template: exampleTemplateTemplate
+    template: exampleTemplateTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [FormsModule, SuiModalModule],
 })
 export class ModalExampleTemplate {
     @ViewChild("modalTemplate")
     public modalTemplate!:ModalTemplate<{ data:string }, string, string>;
 
-    public dynamicContent:string = "Example of dynamic content.";
+    public dynamicContent = "Example of dynamic content.";
 
     constructor(public modalService:SuiModalService) {}
 
-    public open(dynamicContent:string = "Example"):void {
+    public open(dynamicContent = "Example"):void {
         const config = new TemplateModalConfig<{ data:string }, string, string>(this.modalTemplate);
 
         config.closeResult = "dismissed";
@@ -263,7 +280,8 @@ interface IConfirmModalContext {
 
 @Component({
     selector: "example-modal-confirm",
-    template: exampleComponentModalTemplate
+    template: exampleComponentModalTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ConfirmModalComponent {
     constructor(public modal:SuiModal<IConfirmModalContext, void, void>) {}
@@ -281,7 +299,9 @@ export class ConfirmModal extends ComponentModalConfig<IConfirmModalContext, voi
 
 @Component({
     selector: "example-modal-component",
-    template: exampleComponentTemplate
+    template: exampleComponentTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiSelectModule, FormsModule]
 })
 export class ModalExampleComponent {
 

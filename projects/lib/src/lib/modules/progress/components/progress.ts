@@ -1,13 +1,15 @@
-import { Component, Input, HostBinding } from "@angular/core";
+import {ChangeDetectionStrategy, Component, HostBinding, Input} from '@angular/core';
 
 @Component({
     selector: "sui-progress",
     template: `
 <div class="bar" [style.width.%]="percentage">
-    <div class="progress" *ngIf="showProgress">{{ percentage }}%</div>
+  @if (showProgress) {
+    <div class="progress">{{ percentage }}%</div>
+  }
 </div>
 <div class="label">
-    <ng-content></ng-content>
+  <ng-content></ng-content>
 </div>
 `,
     styles: [`
@@ -15,7 +17,8 @@ import { Component, Input, HostBinding } from "@angular/core";
     transition-duration: 300ms !important;
     z-index: 1;
 }
-`]
+`],
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SuiProgress {
     @HostBinding("class.ui")

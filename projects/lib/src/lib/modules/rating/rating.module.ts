@@ -6,9 +6,7 @@ import { SuiRating, SuiRatingValueAccessor } from "./components/rating";
 @NgModule({
     imports: [
         FormsModule,
-        CommonModule
-    ],
-    declarations: [
+        CommonModule,
         SuiRating,
         SuiRatingValueAccessor
     ],

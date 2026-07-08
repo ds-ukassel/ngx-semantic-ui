@@ -1,21 +1,27 @@
 import {
-    Component, Input, HostBinding, HostListener, EventEmitter, ViewContainerRef,
-    ViewChild, Renderer2, ElementRef, Output, ChangeDetectorRef, TemplateRef
-} from "@angular/core";
-import { SuiTransition, TransitionController, Transition, TransitionDirection } from "../../transition/internal";
-import { HandledEvent, SuiComponentFactory } from "../../../misc/util/internal";
-import { IOptionContext } from "../classes/select-base";
-
-// See https://github.com/Microsoft/TypeScript/issues/13449.
-const templateRef = TemplateRef;
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  Renderer2,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import {HandledEvent, SuiComponentFactory} from '../../../misc/util/internal';
+import {SuiTransition, Transition, TransitionController, TransitionDirection} from '../../transition/internal';
+import {IOptionContext} from '../classes/select-base';
 
 @Component({
-    selector: "sui-multi-select-label",
-    template: `
-<span #templateSibling></span>
-<span *ngIf="!template" [innerHTML]="formatter(value)"></span>
-<i class="delete icon" (click)="deselectOption($event)"></i>
-`
+  selector: "sui-multi-select-label",
+  templateUrl: './multi-select-label.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [],
 })
 export class SuiMultiSelectLabel<T> extends SuiTransition {
     // Sets the Semantic UI classes on the host element.

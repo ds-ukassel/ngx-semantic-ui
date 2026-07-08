@@ -1,22 +1,33 @@
-import { Component, Directive, Input, Output, EventEmitter, HostBinding, HostListener } from "@angular/core";
-import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor } from "../../../misc/util/internal";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
+import {CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost} from '../../../misc/util/internal';
 
 @Component({
     selector: "sui-rating",
     template: `
-<i class="icon"
-   *ngFor="let icon of icons; let i = index"
-   (mouseover)="onMouseover(i)"
-   (click)="onClick(i)"
-   [class.selected]="hoveredIndex >= i && !isReadonly"
-   [class.active]="value > i">
-</i>
+@for (icon of icons; track $index) {
+  <i class="icon"
+    (mouseover)="onMouseover($index)"
+    (click)="onClick($index)"
+    [class.selected]="hoveredIndex >= $index && !isReadonly"
+    [class.active]="value > $index">
+  </i>
+}
 `,
     styles: [`
 :host.read-only .icon {
     cursor: auto
 }
-`]
+`],
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SuiRating implements ICustomValueAccessorHost<number> {
     @HostBinding("class.ui")
@@ -44,11 +55,10 @@ export class SuiRating implements ICustomValueAccessorHost<number> {
     public isReadonly:boolean;
 
     public get icons():undefined[] {
-        // tslint:disable-next-line:prefer-literal
-        return new Array(this.maximum);
+               return new Array(this.maximum);
     }
 
-    public hoveredIndex:number = -1;
+    public hoveredIndex = -1;
 
     constructor() {
         this.value = 0;

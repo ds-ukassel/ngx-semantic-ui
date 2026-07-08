@@ -1,8 +1,16 @@
 import {
-    Component, Input, Output, HostBinding, HostListener, EventEmitter, Renderer2,
-    ElementRef, ChangeDetectorRef
-} from "@angular/core";
-import { TransitionController, SuiTransition, TransitionDirection, Transition } from "../../transition/internal";
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  Renderer2,
+} from '@angular/core';
+import {SuiTransition, Transition, TransitionController, TransitionDirection} from '../../transition/internal';
 
 @Component({
     selector: "sui-dimmer",
@@ -16,7 +24,8 @@ import { TransitionController, SuiTransition, TransitionDirection, Transition } 
     transition: none;
     display: flex !important;
 }
-`]
+`],
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SuiDimmer extends SuiTransition {
     @HostBinding("class.ui")

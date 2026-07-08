@@ -1,61 +1,36 @@
-import { Component, HostBinding, ElementRef, EventEmitter, Output, Input, Directive } from "@angular/core";
-import { ICustomValueAccessorHost, KeyCode, customValueAccessorFactory, CustomValueAccessor } from "../../../misc/util/internal";
-import { SuiLocalizationService } from "../../../behaviors/localization/internal";
-import { SuiSelectBase } from "../classes/select-base";
-import { SuiSelectOption } from "./select-option";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+} from '@angular/core';
+import {SuiLocalizationService} from '../../../behaviors/localization/internal';
+import {
+  CustomValueAccessor,
+  customValueAccessorFactory,
+  ICustomValueAccessorHost,
+  KeyCode,
+} from '../../../misc/util/internal';
+import {SuiDropdownMenu} from '../../dropdown/directives/dropdown-menu';
+import {SuiSelectBase} from '../classes/select-base';
+import {SuiSelectSearch} from '../directives/select-search';
+import {SuiMultiSelectLabel} from './multi-select-label';
+import {SuiSelectOption} from './select-option';
 
 @Component({
-    selector: "sui-multi-select",
-    template: `
-<!-- Dropdown icon -->
-<i class="{{ icon }} icon" (click)="onCaretClick($event)"></i>
-
-<ng-container *ngIf="hasLabels">
-<!-- Multi-select labels -->
-    <sui-multi-select-label *ngFor="let selected of selectedOptions;"
-                            [value]="selected"
-                            [query]="query"
-                            [formatter]="configuredFormatter"
-                            [template]="optionTemplate"
-                            (deselected)="deselectOption($event)"></sui-multi-select-label>
-</ng-container>
-
-<!-- Query input -->
-<input suiSelectSearch
-       type="text"
-       [hidden]="!isSearchable || isSearchExternal">
-
-<!-- Helper text -->
-<div class="text"
-     [class.default]="hasLabels"
-     [class.filtered]="!!query && !isSearchExternal">
-    
-    <!-- Placeholder text -->
-    <ng-container *ngIf="hasLabels; else selectedBlock">{{ placeholder }}</ng-container>
-    
-    <!-- Summary shown when labels are hidden -->
-    <ng-template #selectedBlock> {{ selectedMessage }}</ng-template>
-</div>
-
-<!-- Select dropdown menu -->
-<div class="menu"
-     suiDropdownMenu
-     [menuTransition]="transition"
-     [menuTransitionDuration]="transitionDuration"
-     [menuAutoSelectFirst]="true">
-
-    <ng-content></ng-content>
-    <ng-container *ngIf="availableOptions.length == 0 ">
-        <div *ngIf="!maxSelectedReached" class="message">{{ localeValues.noResultsMessage }}</div>
-        <div *ngIf="maxSelectedReached" class="message">{{ maxSelectedMessage }}</div>
-    </ng-container>
-</div>
-`,
-    styles: [`
+  selector: "sui-multi-select",
+  templateUrl: './multi-select.html',
+  styles: [`
 :host input.search {
     width: 12em !important;
 }
-`]
+`],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [SuiMultiSelectLabel, SuiSelectSearch, SuiDropdownMenu],
 })
 export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValueAccessorHost<U[]> {
     public selectedOptions:T[];

@@ -41,7 +41,7 @@ export class DropdownService {
         this.children = [];
     }
 
-    public setOpenState(isOpen:boolean, reflectInParent:boolean = false):void {
+    public setOpenState(isOpen:boolean, reflectInParent = false):void {
         if (this.isOpen !== isOpen && !this.isDisabled) {
             // Only update the state if it has changed, and the dropdown isn't disabled.
             this.isOpen = !!isOpen;
@@ -66,7 +66,7 @@ export class DropdownService {
 
     public setDisabledState(isDisabled:boolean):void {
         if (this.isDisabled !== isDisabled) {
-            if (!!isDisabled) {
+            if (isDisabled) {
                 // Close the dropdown as it is now disabled
                 this.setOpenState(false);
             }

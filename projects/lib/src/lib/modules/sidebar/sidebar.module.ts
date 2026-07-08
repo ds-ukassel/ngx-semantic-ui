@@ -6,9 +6,7 @@ import { SuiSidebarSibling } from "./components/sidebar-sibling";
 
 @NgModule({
     imports: [
-        CommonModule
-    ],
-    declarations: [
+        CommonModule,
         SuiSidebar,
         SuiSidebarContainer,
         SuiSidebarSibling

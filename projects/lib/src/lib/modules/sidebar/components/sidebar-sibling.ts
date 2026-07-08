@@ -1,5 +1,13 @@
-import { Component, Input, HostBinding, HostListener, ElementRef, Renderer2 } from "@angular/core";
-import { SidebarService, SidebarTransition } from "../services/sidebar.service";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostBinding,
+  HostListener,
+  Input,
+  Renderer2,
+} from '@angular/core';
+import {SidebarService, SidebarTransition} from '../services/sidebar.service';
 
 @Component({
     selector: "sui-sidebar-sibling",
@@ -8,7 +16,8 @@ import { SidebarService, SidebarTransition } from "../services/sidebar.service";
 :host {
     display: block;
 }
-`]
+`],
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SuiSidebarSibling {
     private _service!:SidebarService;

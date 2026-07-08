@@ -1,4 +1,4 @@
-import { Component, OnInit, DebugElement, ViewChild } from "@angular/core";
+import { Component, OnInit, DebugElement, ViewChild, ChangeDetectionStrategy } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
 
@@ -10,13 +10,15 @@ import { SuiPaginationModule } from "../pagination.module";
  */
 @Component({
     template: `
-<sui-pagination 
-    [collectionSize]="collectionSize" 
+<sui-pagination
+    [collectionSize]="collectionSize"
     [pageSize]="pageSize"
     [maxSize]="maxSize"
     [(page)]="currentPage"
     ></sui-pagination>
-`
+`,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiPaginationModule]
 })
 export class TestHostComponent {
     public collectionSize:number;
@@ -42,8 +44,7 @@ describe("Pagination", () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [SuiPaginationModule],
-            declarations: [TestHostComponent] // declare the test component
+          imports: [SuiPaginationModule, TestHostComponent]
         });
 
         fixture = TestBed.createComponent(TestHostComponent);

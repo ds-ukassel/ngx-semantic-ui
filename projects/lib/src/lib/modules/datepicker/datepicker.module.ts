@@ -24,18 +24,14 @@ import {
         FormsModule,
         SuiPopupModule,
         SuiLocalizationModule,
-        SuiUtilityModule
-    ],
-    declarations: [
+        SuiUtilityModule,
         SuiCalendarItem,
-
         SuiCalendarViewTitle,
         SuiCalendarYearView,
         SuiCalendarMonthView,
         SuiCalendarDateView,
         SuiCalendarHourView,
         SuiCalendarMinuteView,
-
         SuiDatepicker,
         SuiDatepickerDirective,
         SuiDatepickerDirectiveValueAccessor,

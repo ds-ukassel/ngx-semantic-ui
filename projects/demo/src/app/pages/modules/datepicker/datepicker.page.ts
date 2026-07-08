@@ -1,6 +1,12 @@
-import { Component } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
-import { DatepickerMode } from "@angular-ex/semantic-ui";
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {RouterLink} from '@angular/router';
+import {DatepickerMode, SuiDatepickerModule, SuiMessageModule, SuiSelectModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui form">
@@ -18,7 +24,9 @@ const exampleStandardTemplate = `
     <div class="field">
         <label>Datepicker Mode</label>
         <sui-select class="selection" [(ngModel)]="mode" [options]="datepickerModes" #modes>
-            <sui-select-option *ngFor="let m of modes.availableOptions" [value]="m"></sui-select-option>
+          @for (m of modes.availableOptions; track m) {
+            <sui-select-option [value]="m" />
+          }
         </sui-select>
     </div>
     <div class="field">
@@ -80,7 +88,9 @@ const exampleMobileFallbackTemplate = `
 
 @Component({
     selector: "demo-page-datepicker",
-    templateUrl: "./datepicker.page.html"
+    templateUrl: "./datepicker.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, SuiMessageModule, CodeblockComponent, ExampleComponent, forwardRef(() => DatepickerExampleStandard), forwardRef(() => DatepickerExampleButton), forwardRef(() => DatepickerExampleMinMax), forwardRef(() => DatepickerExampleMobileFallback), RouterLink, ApiComponent]
 })
 export class DatepickerPage {
     public api:ApiDefinition = [
@@ -176,16 +186,18 @@ export class DatepickerPage {
     public exampleMinMaxTemplate:string = exampleMinMaxTemplate;
     public exampleMobileFallbackTemplate:string = exampleMobileFallbackTemplate;
 
-    public cssInclude:string =
+    public cssInclude =
 `<link rel="stylesheet" href="https://unpkg.com/semantic-ui-calendar/dist/calendar.min.css">`;
 }
 
 @Component({
     selector: "example-datepicker-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiDatepickerModule, FormsModule, SuiSelectModule]
 })
 export class DatepickerExampleStandard {
-    public firstDayOfWeek:number = 1;
+    public firstDayOfWeek = 1;
 
     public datepickerModes:string[] = ["datetime", "date", "time", "month", "year"];
     public mode:DatepickerMode = DatepickerMode.Datetime;
@@ -194,13 +206,17 @@ export class DatepickerExampleStandard {
 
 @Component({
     selector: "example-datepicker-button",
-    template: exampleButtonTemplate
+    template: exampleButtonTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiDatepickerModule]
 })
 export class DatepickerExampleButton {}
 
 @Component({
     selector: "example-datepicker-min-max",
-    template: exampleMinMaxTemplate
+    template: exampleMinMaxTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiDatepickerModule, FormsModule]
 })
 export class DatepickerExampleMinMax {
     public min:Date;
@@ -216,7 +232,9 @@ export class DatepickerExampleMinMax {
 
 @Component({
     selector: "example-datepicker-mobile-fallback",
-    template: exampleMobileFallbackTemplate
+    template: exampleMobileFallbackTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiDatepickerModule, FormsModule]
 })
 export class DatepickerExampleMobileFallback {
     public date?:Date = new Date();

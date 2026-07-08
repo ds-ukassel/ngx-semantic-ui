@@ -17,9 +17,7 @@ function lang(language:string):string {
     return language.toLowerCase().replace("-", "");
 }
 
-interface ILocalizationValuesContainer {
-    [name:string]:IPartialLocaleValues;
-}
+type ILocalizationValuesContainer = Record<string, IPartialLocaleValues>;
 
 @Injectable()
 export class SuiLocalizationService {

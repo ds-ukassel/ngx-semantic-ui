@@ -1,7 +1,12 @@
-import { Component, HostBinding, HostListener } from "@angular/core";
-import { CalendarService } from "./../services/calendar.service";
-import { DatetimeConfig } from "../classes/calendar-config";
-import { SuiLocalizationService } from "../../../behaviors/localization/internal";
+import {ChangeDetectionStrategy, Component, HostBinding, HostListener} from '@angular/core';
+import {SuiLocalizationService} from '../../../behaviors/localization/internal';
+import {DatetimeConfig} from '../classes/calendar-config';
+import {SuiCalendarDateView} from '../views/date-view';
+import {SuiCalendarHourView} from '../views/hour-view';
+import {SuiCalendarMinuteView} from '../views/minute-view';
+import {SuiCalendarMonthView} from '../views/month-view';
+import {SuiCalendarYearView} from '../views/year-view';
+import {CalendarService} from './../services/calendar.service';
 
 export type DatepickerMode = "year" | "month" | "date" | "datetime" | "time";
 
@@ -16,19 +21,31 @@ export const DatepickerMode = {
 @Component({
     selector: "sui-datepicker",
     template: `
-<ng-container [ngSwitch]="service.currentView">
-    <sui-calendar-year-view [service]="service" *ngSwitchCase="0"></sui-calendar-year-view>
-    <sui-calendar-month-view [service]="service" *ngSwitchCase="1"></sui-calendar-month-view>    
-    <sui-calendar-date-view [service]="service" *ngSwitchCase="2"></sui-calendar-date-view>    
-    <sui-calendar-hour-view [service]="service" *ngSwitchCase="3"></sui-calendar-hour-view>    
-    <sui-calendar-minute-view [service]="service" *ngSwitchCase="4"></sui-calendar-minute-view>    
-</ng-container>
+@switch (service.currentView) {
+  @case (0) {
+    <sui-calendar-year-view [service]="service"></sui-calendar-year-view>
+  }
+  @case (1) {
+    <sui-calendar-month-view [service]="service"></sui-calendar-month-view>
+  }
+  @case (2) {
+    <sui-calendar-date-view [service]="service"></sui-calendar-date-view>
+  }
+  @case (3) {
+    <sui-calendar-hour-view [service]="service"></sui-calendar-hour-view>
+  }
+  @case (4) {
+    <sui-calendar-minute-view [service]="service"></sui-calendar-minute-view>
+  }
+}
 `,
     styles: [`
 :host {
     user-select: none;
 }
-`]
+`],
+    changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [SuiCalendarYearView, SuiCalendarMonthView, SuiCalendarDateView, SuiCalendarHourView, SuiCalendarMinuteView],
 })
 export class SuiDatepicker {
     @HostBinding("class.ui")

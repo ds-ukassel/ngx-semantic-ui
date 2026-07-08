@@ -1,5 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import {ChangeDetectionStrategy, Component, forwardRef, OnInit} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {SuiCheckboxModule, SuiPaginationModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui segments">
@@ -15,7 +20,7 @@ const exampleStandardTemplate = `
         <p>Current page: {{ selectedPage }}</p>
         <div class="ui small form">
             <div class="field">
-                <sui-checkbox [(ngModel)]="navigation">Navigation Links?</sui-checkbox>    
+                <sui-checkbox [(ngModel)]="navigation">Navigation Links?</sui-checkbox>
             </div>
             <div class="field">
                 <sui-checkbox [(ngModel)]="boundary">Boundary Links?</sui-checkbox>
@@ -39,7 +44,7 @@ const exampleMaxSizeTemplate = `
         <p>Current page: {{ selectedPage }}</p>
         <div class="ui small form">
             <div class="field">
-                <sui-checkbox [(ngModel)]="ellipses">Ellipses?</sui-checkbox>    
+                <sui-checkbox [(ngModel)]="ellipses">Ellipses?</sui-checkbox>
             </div>
             <div class="field">
                 <label>Max Size</label>
@@ -65,7 +70,7 @@ const exampleRotationTemplate = `
         <p>Current page: {{ selectedPage }}</p>
         <div class="ui small form">
             <div class="field">
-                <sui-checkbox [(ngModel)]="ellipses">Ellipses?</sui-checkbox>    
+                <sui-checkbox [(ngModel)]="ellipses">Ellipses?</sui-checkbox>
             </div>
             <div class="field">
                 <label>Max Size</label>
@@ -78,7 +83,9 @@ const exampleRotationTemplate = `
 
 @Component({
     selector: "demo-page-pagination",
-    templateUrl: "./pagination.page.html"
+    templateUrl: "./pagination.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => PaginationExampleStandard), forwardRef(() => PaginationExampleMaxSize), forwardRef(() => PaginationExampleRotation), ApiComponent]
 })
 export class PaginationPage {
     public api:ApiDefinition = [
@@ -153,7 +160,9 @@ export class PaginationPage {
 
 @Component({
     selector: "example-pagination-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiPaginationModule, SuiCheckboxModule, FormsModule]
 })
 export class PaginationExampleStandard implements OnInit {
 
@@ -172,7 +181,9 @@ export class PaginationExampleStandard implements OnInit {
 
 @Component({
     selector: "example-pagination-maxsize",
-    template: exampleMaxSizeTemplate
+    template: exampleMaxSizeTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiPaginationModule, SuiCheckboxModule, FormsModule]
 })
 export class PaginationExampleMaxSize implements OnInit {
 
@@ -191,7 +202,9 @@ export class PaginationExampleMaxSize implements OnInit {
 
 @Component({
     selector: "example-pagination-rotation",
-    template: exampleRotationTemplate
+    template: exampleRotationTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiPaginationModule, SuiCheckboxModule, FormsModule]
 })
 export class PaginationExampleRotation implements OnInit {
 

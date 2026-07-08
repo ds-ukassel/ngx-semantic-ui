@@ -1,44 +1,29 @@
 import {
-    Component, Input, OnInit, ViewChild, ElementRef, Renderer2,
-    EventEmitter, Output, HostListener, ViewContainerRef, AfterViewInit
-} from "@angular/core";
-import { Util, IDynamicClasses, KeyCode, SuiComponentFactory } from "../../../misc/util/internal";
-import { TransitionController, Transition, TransitionDirection } from "../../transition/internal";
-import { ModalControls, ModalResult } from "../classes/modal-controls";
-import { ModalConfig, ModalSize } from "../classes/modal-config";
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import {IDynamicClasses, KeyCode, SuiComponentFactory, Util} from '../../../misc/util/internal';
+import {SuiTransition} from '../../transition/directives/transition';
+import {Transition, TransitionController, TransitionDirection} from '../../transition/internal';
+import {ModalConfig, ModalSize} from '../classes/modal-config';
+import {ModalControls, ModalResult} from '../classes/modal-controls';
+import {SuiModalDimmer} from './dimmer';
 
 @Component({
-    selector: "sui-modal",
-    template: `
-<!-- Page dimmer for modal background. -->
-<sui-modal-dimmer [ngClass]="{'top aligned': !isCentered}" 
-                  [class.inverted]="isInverted"
-                  [(isDimmed)]="dimBackground"
-                  [transitionDuration]="transitionDuration"
-                  (click)="close()">
-
-    <!-- Modal component, with transition component attached -->
-    <div class="ui modal"
-         [suiTransition]="transitionController"
-         [class.active]="transitionController?.isVisible"
-         [class.fullscreen]="isFullScreen"
-         [class.basic]="isBasic"
-         [class.scrolling]="mustScroll"
-         [class.inverted]="isInverted"
-         [ngClass]="dynamicClasses"
-         (click)="onClick($event)"
-         #modal>
-
-        <!-- Configurable close icon -->
-        <i class="close icon" *ngIf="isClosable" (click)="close()"></i>
-        <!-- <ng-content> so that <sui-modal> can be used as a normal component. -->
-        <ng-content></ng-content>
-        <!-- @ViewChild reference so we can insert elements beside this div. -->
-        <div #templateSibling></div>
-    </div>
-</sui-modal-dimmer>
-`,
-    styles: [``]
+  selector: 'sui-modal',
+  templateUrl: './modal.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [SuiModalDimmer, SuiTransition],
 })
 export class SuiModal<T, U> implements OnInit, AfterViewInit {
     @Input()

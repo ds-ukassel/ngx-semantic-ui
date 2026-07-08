@@ -1,6 +1,19 @@
-import { Component, Input } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
-import { SuiPopupConfig, PopupPlacement } from "@angular-ex/semantic-ui";
+import {ChangeDetectionStrategy, Component, forwardRef, Input} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {
+  PopupPlacement,
+  SuiPopupConfig,
+  SuiPopupModule,
+  SuiRatingModule,
+  SuiSelect,
+  SuiSelectModule,
+  SuiSelectOption,
+} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <button class="ui green icon button" suiPopup popupHeader="Example" popupText="This is an example popup">
@@ -54,11 +67,11 @@ const exampleWidthTemplate = `
 </div>
 </ng-template>
 
-<i class="circular heart icon link" suiPopup popupWidth="wide" 
-popupText="Hello. This is a wide pop-up which allows for lots of content with additional space. 
+<i class="circular heart icon link" suiPopup popupWidth="wide"
+popupText="Hello. This is a wide pop-up which allows for lots of content with additional space.
 You can fit a lot of words here and the paragraphs will be pretty wide."></i>
-<i class="circular heart icon link" suiPopup popupWidth="very wide" 
-popupText="Hello. This is a very wide pop-up which allows for lots of content with additional space. 
+<i class="circular heart icon link" suiPopup popupWidth="very wide"
+popupText="Hello. This is a very wide pop-up which allows for lots of content with additional space.
 You can fit a lot of words here and the paragraphs will be pretty wide."></i>
 <br/>
 <br/>
@@ -79,7 +92,9 @@ const exampleSizeTemplate = `
 
 @Component({
     selector: "demo-page-popup",
-    templateUrl: "./popup.page.html"
+    templateUrl: "./popup.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => PopupExampleStandard), forwardRef(() => PopupExampleTemplate), forwardRef(() => PopupExamplePlacement), SuiSelectModule, FormsModule, forwardRef(() => PopupExampleSize), forwardRef(() => PopupExampleWidth), CodeblockComponent, ApiComponent, SuiSelectOption, SuiSelect],
 })
 export class PopupPage {
     public api:ApiDefinition = [
@@ -206,7 +221,7 @@ export class PopupPage {
 
     public position:PopupPlacement = "bottom right";
 
-    public manualPopupMarkup:string = `
+    public manualPopupMarkup = `
 <div class="ui segment" suiPopup popupText="Manual" popupTrigger="manual" #popup="suiPopup">
     <button class="ui button" (click)="popup.open()">Open!</button>
     <button class="ui button" (click)="openPopup(popup)">Conditionally Open!</button>
@@ -215,7 +230,7 @@ export class PopupPage {
 </div>
 `;
 
-    public manualPopupCode:string = `
+    public manualPopupCode = `
 import {IPopup} from "@angular-ex/semantic-ui";
 
 @Component({})
@@ -230,7 +245,7 @@ export class MyComponent {
 }
 `;
 
-    public globalConfigCode:string = `
+    public globalConfigCode = `
 import {SuiPopupConfig} from "@angular-ex/semantic-ui";
 
 @Component({})
@@ -246,21 +261,27 @@ export class MyComponent {
 @Component({
     selector: "example-popup-standard",
     template: exampleStandardTemplate,
-    providers: [SuiPopupConfig]
+    providers: [SuiPopupConfig],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiPopupModule]
 })
 export class PopupExampleStandard {}
 
 @Component({
     selector: "example-popup-template",
     template: exampleTemplateTemplate,
-    providers: [SuiPopupConfig]
+    providers: [SuiPopupConfig],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiRatingModule, SuiPopupModule]
 })
 export class PopupExampleTemplate {}
 
 @Component({
     selector: "example-popup-placement",
     template: examplePlacementTemplate,
-    providers: [SuiPopupConfig]
+    providers: [SuiPopupConfig],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiPopupModule]
 })
 export class PopupExamplePlacement {
     @Input()
@@ -270,14 +291,18 @@ export class PopupExamplePlacement {
 @Component({
     selector: "example-popup-size",
     template: exampleSizeTemplate,
-    providers: [SuiPopupConfig]
+    providers: [SuiPopupConfig],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiPopupModule]
 })
 export class PopupExampleSize {}
 
 @Component({
     selector: "example-popup-width",
     template: exampleWidthTemplate,
-    providers: [SuiPopupConfig]
+    providers: [SuiPopupConfig],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiPopupModule]
 })
 export class PopupExampleWidth {}
 

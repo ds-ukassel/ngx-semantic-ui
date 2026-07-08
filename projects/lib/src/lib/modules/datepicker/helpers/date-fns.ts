@@ -2,7 +2,7 @@ import { IDatepickerLocaleValues } from "../../../behaviors/localization/interna
 import { format, parse } from "date-fns";
 import { enUS } from "date-fns/locale";
 
-interface IDateFnsLocaleValues { [name:string]:string[]; }
+type IDateFnsLocaleValues = Record<string, string[]>;
 interface IDateFnsHelperOptions { type?:string; }
 type DateFnsHelper<U, T> = (value:U, options:IDateFnsHelperOptions) => T;
 type DateFnsWeekStartsOn = 0 | 1 | 2 | 3 | 4 | 5 | 6;

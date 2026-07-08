@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import { TransitionController, Transition, TransitionDirection } from "../../../modules/transition/internal";
+import { SuiTransition } from "../../../modules/transition/directives/transition";
 
 export interface IMessage {
     dismiss():void;
@@ -8,17 +9,23 @@ export interface IMessage {
 @Component({
     selector: "sui-message",
     template: `
-<div class="ui message {{ class }}" *ngIf="!isDismissed" [suiTransition]="transitionController">
-    <i class="close icon" *ngIf="isDismissable" (click)="dismiss()"></i>
+@if (!isDismissed) {
+  <div class="ui message {{ class }}" [suiTransition]="transitionController">
+    @if (isDismissable) {
+      <i class="close icon" (click)="dismiss()"></i>
+    }
     <ng-content></ng-content>
-</div>
+  </div>
+}
 `,
     styles: [`
 /* Fix for CSS Bug */
 .ui.icon.visible.message {
     display: flex !important;
 }
-`]
+`],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiTransition]
 })
 export class SuiMessage implements IMessage {
     @Input()
@@ -37,7 +44,7 @@ export class SuiMessage implements IMessage {
     @Input()
     public transitionDuration:number;
 
-    @Input("class")
+    @Input()
     public class:string;
 
     constructor() {

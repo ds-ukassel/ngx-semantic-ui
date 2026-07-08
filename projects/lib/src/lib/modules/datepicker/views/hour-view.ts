@@ -1,9 +1,10 @@
-import { Component, Renderer2 } from "@angular/core";
+import { Component, Renderer2, ChangeDetectionStrategy } from "@angular/core";
 import { DatePrecision } from "../../../misc/util/internal";
 import { CalendarView, CalendarViewType } from "./calendar-view";
-import { CalendarItem } from "../directives/calendar-item";
+import { CalendarItem, SuiCalendarItem } from "../directives/calendar-item";
 import { CalendarRangeService } from "../services/calendar-range.service";
 import { DateParser } from "../classes/date-parser";
+import { SuiCalendarViewTitle } from "../components/calendar-view-title";
 
 export class CalendarRangeHourService extends CalendarRangeService {
     public configureItem(item:CalendarItem, baseDate:Date):void {
@@ -18,26 +19,33 @@ export class CalendarRangeHourService extends CalendarRangeService {
     selector: "sui-calendar-hour-view",
     template: `
 <table class="ui celled center aligned unstackable table four column hour">
-<thead *ngIf="service.config.mode != 1">
-    <tr>
+  @if (service.config.mode != 1) {
+    <thead>
+      <tr>
         <th colspan="4">
-            <sui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
-                {{ date }}
-            </sui-calendar-view-title>
+          <sui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
+            {{ date }}
+          </sui-calendar-view-title>
         </th>
-    </tr>
-</thead>
-<tbody>
-    <tr *ngFor="let group of ranges.current.groupedItems">
-        <td class="link"
-            *ngFor="let item of group"
+      </tr>
+    </thead>
+  }
+  <tbody>
+    @for (group of ranges.current.groupedItems; track group) {
+      <tr>
+        @for (item of group; track item) {
+          <td class="link"
             [calendarItem]="item"
             (click)="setDate(item)">{{ item.humanReadable }}
-        </td>
-    </tr>
-</tbody>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
 </table>
-`
+`,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiCalendarViewTitle, SuiCalendarItem]
 })
 export class SuiCalendarHourView extends CalendarView {
 

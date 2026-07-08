@@ -1,16 +1,24 @@
 import {
-    Component, Input, HostBinding, HostListener, EventEmitter, ViewContainerRef,
-    ViewChild, Renderer2, ElementRef, Output, ChangeDetectorRef
-} from "@angular/core";
-import { SuiDropdownMenuItem } from "../../dropdown/internal";
-import { HandledEvent } from "../../../misc/util/internal";
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  Renderer2,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import {HandledEvent} from '../../../misc/util/internal';
+import {SuiDropdownMenuItem} from '../../dropdown/internal';
 
 @Component({
-    selector: "sui-select-option",
-    template: `
-<span #templateSibling></span>
-<span [innerHTML]="renderedText"></span>
-`
+  selector: "sui-select-option",
+  templateUrl: './select-option.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SuiSelectOption<T> extends SuiDropdownMenuItem {
     // Sets the Semantic UI classes on the host element.

@@ -1,0 +1,52 @@
+<!-- Dropdown icon -->
+<i class="{{ icon }} icon" (click)="onCaretClick($event)"></i>
+
+@if (hasLabels) {
+  <!-- Multi-select labels -->
+  @for (selected of selectedOptions; track selected) {
+    <sui-multi-select-label
+      [value]="selected"
+      [query]="query"
+      [formatter]="configuredFormatter"
+      [template]="optionTemplate"
+    (deselected)="deselectOption($event)"></sui-multi-select-label>
+  }
+}
+
+<!-- Query input -->
+<input suiSelectSearch
+  type="text"
+  [hidden]="!isSearchable || isSearchExternal">
+
+<!-- Helper text -->
+<div class="text"
+  [class.default]="hasLabels"
+  [class.filtered]="!!query && !isSearchExternal">
+
+  <!-- Placeholder text -->
+  @if (hasLabels) {
+    {{ placeholder }}
+  } @else {
+    {{ selectedMessage }}
+  }
+
+  <!-- Summary shown when labels are hidden -->
+</div>
+
+<!-- Select dropdown menu -->
+<div class="menu"
+  suiDropdownMenu
+  [menuTransition]="transition"
+  [menuTransitionDuration]="transitionDuration"
+  [menuAutoSelectFirst]="true">
+
+  <ng-content></ng-content>
+  @if (availableOptions.length == 0 ) {
+    @if (!maxSelectedReached) {
+      <div class="message">{{ localeValues.noResultsMessage }}</div>
+    }
+    @if (maxSelectedReached) {
+      <div class="message">{{ maxSelectedMessage }}</div>
+    }
+  }
+</div>

@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { SuiModal, ComponentModalConfig, ModalSize } from "@angular-ex/semantic-ui";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ComponentModalConfig, ModalSize, SuiModal} from 'lib';
 
 interface IAlertModalContext {
     message:string;
@@ -9,14 +9,17 @@ interface IAlertModalContext {
 @Component({
     selector: "demo-modal-alert",
     template: `
-<div class="header" *ngIf="modal.context.title">{{ modal.context.title }}</div>
+@if (modal.context.title) {
+  <div class="header">{{ modal.context.title }}</div>
+}
 <div class="content">
-    <p>{{ modal.context.message }}</p>
+  <p>{{ modal.context.message }}</p>
 </div>
 <div class="actions">
-    <button class="ui green button" (click)="modal.approve(undefined)" autofocus>OK</button>
+  <button class="ui green button" (click)="modal.approve(undefined)">OK</button>
 </div>
-`
+`,
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class AlertModalComponent {
     constructor(public modal:SuiModal<IAlertModalContext, void, void>) {}

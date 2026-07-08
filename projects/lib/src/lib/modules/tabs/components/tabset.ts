@@ -1,11 +1,12 @@
-import { Component, ContentChildren, QueryList, AfterContentInit } from "@angular/core";
+import { Component, ContentChildren, QueryList, AfterContentInit, ChangeDetectionStrategy } from "@angular/core";
 import { SuiTabHeader } from "../directives/tab-header";
 import { SuiTabContent } from "../directives/tab-content";
 import { Tab } from "../classes/tab";
 
 @Component({
     selector: "sui-tabset",
-    template: `<ng-content></ng-content>`
+    template: `<ng-content></ng-content>`,
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class SuiTabset implements AfterContentInit {
     @ContentChildren(SuiTabHeader, { descendants: true })

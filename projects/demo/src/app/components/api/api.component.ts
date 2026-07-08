@@ -1,4 +1,5 @@
-import { Component, Input } from "@angular/core";
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {SuiPopupModule} from 'lib';
 
 export interface IApiProperty {
     name:string;
@@ -25,7 +26,9 @@ export type ApiDefinition = IApi[];
 @Component({
     selector: "demo-api",
     templateUrl: "./api.component.html",
-    styleUrls: ["./api.component.scss"]
+    styleUrls: ["./api.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [SuiPopupModule],
 })
 export class ApiComponent {
     @Input()

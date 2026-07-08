@@ -1,39 +1,26 @@
-import { Component, ViewContainerRef, ViewChild, Output, EventEmitter, ElementRef, Directive, Input } from "@angular/core";
-import { ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor } from "../../../misc/util/internal";
-import { SuiLocalizationService } from "../../../behaviors/localization/internal";
-import { SuiSelectBase } from "../classes/select-base";
-import { SuiSelectOption } from "./select-option";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import {SuiLocalizationService} from '../../../behaviors/localization/internal';
+import {CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost} from '../../../misc/util/internal';
+import {SuiDropdownMenu} from '../../dropdown/directives/dropdown-menu';
+import {SuiSelectBase} from '../classes/select-base';
+import {SuiSelectSearch} from '../directives/select-search';
+import {SuiSelectOption} from './select-option';
 
 @Component({
-    selector: "sui-select",
-    template: `
-<!-- Query input -->
-<input suiSelectSearch
-       type="text"
-       [hidden]="!isSearchable || isSearchExternal">
-
-<!-- Placeholder text -->
-<div *ngIf="selectedOption == undefined" class="default text" [class.filtered]="query">{{ placeholder }}</div>
-<!-- Selected item -->
-<div class="text" [class.filtered]="query || selectedOption == undefined">
-    <span #optionTemplateSibling></span>
-    <span *ngIf="!optionTemplate && selectedOption != undefined" [innerHTML]="configuredFormatter(selectedOption)"></span>
-</div>
-<!-- Dropdown icon -->
-<i class="{{ icon }} icon" (click)="onCaretClick($event)"></i>
-<!-- Select dropdown menu -->
-<div class="menu"
-     suiDropdownMenu
-     [menuTransition]="transition"
-     [menuTransitionDuration]="transitionDuration"
-     [menuAutoSelectFirst]="isSearchable">
-
-    <ng-content></ng-content>
-    <div *ngIf="isSearchable && availableOptions.length === 0" class="message">
-        {{ localeValues.noResultsMessage }}
-    </div>
-</div>
-`
+  selector: "sui-select",
+  templateUrl: './select.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [SuiSelectSearch, SuiDropdownMenu],
 })
 export class SuiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValueAccessorHost<U> {
     public selectedOption?:T;

@@ -1,12 +1,25 @@
 import {
-    Component, ViewChild, HostBinding, Input, AfterViewInit, HostListener,
-    EventEmitter, Output, Directive, ElementRef, TemplateRef, Renderer2
-} from "@angular/core";
-import { Util, ITemplateRefContext, IFocusEvent } from "../../../misc/util/internal";
-import { DropdownService, SuiDropdownMenu } from "../../dropdown/internal";
-import { ISearchLocaleValues, RecursivePartial, SuiLocalizationService } from "../../../behaviors/localization/internal";
-import { SearchService } from "../services/search.service";
-import { LookupFn, FilterFn } from "../helpers/lookup-fn";
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  Renderer2,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {ISearchLocaleValues, RecursivePartial, SuiLocalizationService} from '../../../behaviors/localization/internal';
+import {IFocusEvent, ITemplateRefContext, Util} from '../../../misc/util/internal';
+import {SuiDropdownMenu as SuiDropdownMenu_1, SuiDropdownMenuItem} from '../../dropdown/directives/dropdown-menu';
+import {DropdownService, SuiDropdownMenu} from '../../dropdown/internal';
+import {FilterFn, LookupFn} from '../helpers/lookup-fn';
+import {SearchService} from '../services/search.service';
+import {SuiSearchResult} from './search-result';
 
 export interface IResultContext<T> extends ITemplateRefContext<T> {
     query:string;
@@ -16,27 +29,33 @@ export interface IResultContext<T> extends ITemplateRefContext<T> {
     selector: "sui-search",
     template: `
 <div class="ui input" [class.icon]="hasIcon" (click)="onClick($event)">
-    <input class="prompt" type="text" [attr.placeholder]="placeholder" autocomplete="off" [(ngModel)]="query">
-    <i *ngIf="hasIcon" class="search icon"></i>
+  <input class="prompt" type="text" [attr.placeholder]="placeholder" autocomplete="off" [(ngModel)]="query">
+  @if (hasIcon) {
+    <i class="search icon"></i>
+  }
 </div>
 <div class="results"
-     suiDropdownMenu
-     [menuTransition]="transition"
-     [menuTransitionDuration]="transitionDuration"
-     menuSelectedItemClass="active">
+  suiDropdownMenu
+  [menuTransition]="transition"
+  [menuTransitionDuration]="transitionDuration"
+  menuSelectedItemClass="active">
 
-    <sui-search-result *ngFor="let r of results"
-                       class="item"
-                       [value]="r"
-                       [query]="query"
-                       [formatter]="resultFormatter"
-                       [template]="resultTemplate"
-                       (click)="select(r)"></sui-search-result>
+  @for (r of results; track r) {
+    <sui-search-result
+      class="item"
+      [value]="r"
+      [query]="query"
+      [formatter]="resultFormatter"
+      [template]="resultTemplate"
+    (click)="select(r)"></sui-search-result>
+  }
 
-    <div *ngIf="results.length == 0" class="message empty">
-        <div class="header">{{ localeValues.noResults.header }}</div>
-        <div class="description">{{ localeValues.noResults.message }}</div>
+  @if (results.length == 0) {
+    <div class="message empty">
+      <div class="header">{{ localeValues.noResults.header }}</div>
+      <div class="description">{{ localeValues.noResults.message }}</div>
     </div>
+  }
 </div>
 `,
     styles: [`
@@ -50,7 +69,9 @@ export interface IResultContext<T> extends ITemplateRefContext<T> {
 .results {
     margin-bottom: .5em;
 }
-`]
+`],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [FormsModule, SuiDropdownMenu_1, SuiSearchResult, SuiDropdownMenuItem]
 })
 export class SuiSearch<T> implements AfterViewInit {
     public dropdownService:DropdownService;

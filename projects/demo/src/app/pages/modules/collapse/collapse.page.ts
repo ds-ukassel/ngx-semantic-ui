@@ -1,5 +1,10 @@
-import { Component } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {SuiCollapseModule, SuiMessageModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui segments">
@@ -21,7 +26,9 @@ const exampleStandardTemplate = `
 
 @Component({
     selector: "demo-page-collapse",
-    templateUrl: "./collapse.page.html"
+    templateUrl: "./collapse.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => CollapseExampleStandard), SuiMessageModule, CodeblockComponent, ApiComponent]
 })
 export class CollapsePage {
     public api:ApiDefinition = [
@@ -45,16 +52,18 @@ export class CollapsePage {
     ];
     public exampleStandardTemplate:string = exampleStandardTemplate;
 
-    public polyfillInclude:string =
+    public polyfillInclude =
 `<script src="https://rawgit.com/web-animations/web-animations-js/master/web-animations.min.js"></script>`;
 }
 
 @Component({
     selector: "example-collapse-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiCollapseModule]
 })
 export class CollapseExampleStandard {
-    public collapse:boolean = false;
+    public collapse = false;
 }
 
 export const CollapsePageComponents = [CollapsePage, CollapseExampleStandard];

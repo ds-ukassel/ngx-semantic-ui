@@ -16,7 +16,7 @@ export class SuiTransition {
     }
 
     @HostBinding("class.transition")
-    public transitionClass:boolean = true;
+    public transitionClass = true;
 
     @HostBinding("class.visible")
     public get isVisible():boolean {

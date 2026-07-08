@@ -1,0 +1,5 @@
+@if (alignment === 'center') {
+  <div class="dynamic arrow" [attr.direction]="direction"></div>
+} @else {
+  <div class="static arrow" [attr.direction]="direction" [attr.alignment]="alignment"></div>
+}

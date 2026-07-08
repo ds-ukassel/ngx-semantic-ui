@@ -1,46 +1,30 @@
-import { Component } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
-import { SuiModalService } from "@angular-ex/semantic-ui";
-import { AlertModal } from "../../../modals/alert.modal";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {SuiMessageModule} from 'lib';
 
-const exampleStandardTemplate = `
-<sui-search placeholder="Example Search..."
-            [hasIcon]="hasIcon"
-            [allowEmptyQuery]="allowEmptyQuery"
-            [options]="options"
-            [searchDelay]="0"
-            (resultSelected)="alertSelected($event)"></sui-search>
-
-<div class="ui segment">
-    <sui-checkbox [(ngModel)]="hasIcon">Has icon?</sui-checkbox>
-    <sui-checkbox [(ngModel)]="allowEmptyQuery">Allow empty query?</sui-checkbox>
-</div>
-`;
-
-const exampleRemoteTemplate = `
-<sui-search [optionsLookup]="optionsSearch"
-            optionsField="title"
-            (resultSelected)="last = $event"></sui-search>
-
-<div class="ui segment">
-    <p>Last selected: {{ last | json }}</p>
-</div>
-`;
-
-const exampleTemplateTemplate = `
-<ng-template let-result let-query="query" #template>
-    {{ result.title }} ({{ result.index }})
-</ng-template>
-<sui-search [options]="options"
-            optionsField="title"
-            [resultTemplate]="template"
-            [retainSelectedResult]="false"
-            (resultSelected)="alert($event.title)"></sui-search>
-`;
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
+import {exampleRemoteTemplate, SearchExampleRemote} from './search-remote';
+import {exampleStandardTemplate, SearchExampleStandard} from './search-standard';
+import {exampleTemplateTemplate, SearchExampleTemplate} from './search-template';
 
 @Component({
-    selector: "demo-page-search",
-    templateUrl: "./search.page.html"
+  selector: "demo-page-search",
+  templateUrl: "./search.page.html",
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [
+    PageTitleComponent,
+    PageContentComponent,
+    ExampleComponent,
+    SearchExampleStandard,
+    SearchExampleRemote,
+    SearchExampleTemplate,
+    SuiMessageModule,
+    RouterLink,
+    ApiComponent,
+  ],
 })
 export class SearchPage {
     public api:ApiDefinition = [
@@ -158,78 +142,3 @@ export class SearchPage {
     public exampleRemoteTemplate:string = exampleRemoteTemplate;
     public exampleTemplateTemplate:string = exampleTemplateTemplate;
 }
-
-interface IOption {
-    title:string;
-    index?:number;
-}
-
-@Component({
-    selector: "example-search-standard",
-    template: exampleStandardTemplate
-})
-export class SearchExampleStandard {
-    public static standardOptions:string[] = [
-        "Apple", "Bird", "Car", "Dog",
-        "Elephant", "Finch", "Gate", "Horrify",
-        "Indigo", "Jelly", "Keep", "Lemur",
-        "Manifest", "None", "Orange", "Peel",
-        "Quest", "Resist", "Suspend", "Terrify",
-        "Underneath", "Violet", "Water", "Xylophone",
-        "Yellow", "Zebra"];
-
-    public hasIcon:boolean = true;
-    public allowEmptyQuery:boolean = true;
-
-    public get options():string[] {
-        return SearchExampleStandard.standardOptions;
-    }
-
-    constructor(public modalService:SuiModalService) {}
-
-    public alertSelected(selectedItem:string):void {
-        this.modalService.open(new AlertModal(`You chose '${selectedItem}'!`));
-    }
-}
-
-@Component({
-    selector: "example-search-remote",
-    template: exampleRemoteTemplate
-})
-export class SearchExampleRemote extends SearchExampleStandard {
-    public last!:IOption | IOption[];
-
-    public optionsSearch: any = async (query:string):Promise<IOption[]> => {
-        const options = SearchExampleStandard.standardOptions.map((o:string) => ({ title: o }));
-
-        return new Promise<IOption[]>(resolve => {
-            const results = options
-                .filter(o => o.title.slice(0, query.length).toLowerCase() === query.toLowerCase());
-            setTimeout(() => resolve(results), 300);
-        });
-    };
-}
-
-@Component({
-    selector: "example-search-template",
-    template: exampleTemplateTemplate
-})
-export class SearchExampleTemplate {
-    public options:IOption[];
-
-    constructor(public modalService:SuiModalService) {
-        this.options = SearchExampleStandard.standardOptions.map((o, i) => ({ title: o, index: i }));
-    }
-
-    public alert(selectedItem:string):void {
-        this.modalService.open(new AlertModal(`You chose '${selectedItem}'!`));
-    }
-}
-
-export const SearchPageComponents = [
-    SearchPage,
-
-    SearchExampleStandard,
-    SearchExampleRemote,
-    SearchExampleTemplate
-];

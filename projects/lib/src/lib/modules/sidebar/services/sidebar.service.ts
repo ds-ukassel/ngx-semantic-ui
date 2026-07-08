@@ -68,7 +68,7 @@ export class SidebarService {
 
     public transition:SidebarTransition;
 
-    constructor(isVisible:boolean = false) {
+    constructor(isVisible = false) {
         this.isVisible = isVisible;
         this.isAnimating = false;
         this.wasJustOpened = false;

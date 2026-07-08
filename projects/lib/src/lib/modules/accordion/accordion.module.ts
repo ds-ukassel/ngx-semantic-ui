@@ -9,9 +9,7 @@ import { SuiAccordionPanel } from "./components/accordion-panel";
     imports: [
         CommonModule,
         SuiCollapseModule,
-        SuiTransitionModule
-    ],
-    declarations: [
+        SuiTransitionModule,
         SuiAccordion,
         SuiAccordionPanel
     ],

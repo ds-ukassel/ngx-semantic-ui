@@ -1,5 +1,10 @@
-import { Component } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {SuiMessageModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <sui-message class="success">
@@ -36,7 +41,9 @@ const exampleIconTemplate = `
 
 @Component({
     selector: "demo-page-message",
-    templateUrl: "./message.page.html"
+    templateUrl: "./message.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => MessageExampleStandard), forwardRef(() => MessageExampleNoDismiss), forwardRef(() => MessageExampleIcon), CodeblockComponent, ApiComponent]
 })
 export class MessagePage {
     public api:ApiDefinition = [
@@ -75,7 +82,7 @@ export class MessagePage {
     public exampleNoDismissTemplate:string = exampleNoDismissTemplate;
     public exampleIconTemplate:string = exampleIconTemplate;
 
-    public manualDismissMarkup:string = `
+    public manualDismissMarkup = `
 <sui-message #message>
     <div class="header">
         Dismiss Manually
@@ -86,7 +93,7 @@ export class MessagePage {
 <button (click)="dismiss(message)">Dismiss (advanced)</button>
 `;
 
-    public manualDismissCode:string = `
+    public manualDismissCode = `
 import {IMessage} from "@angular-ex/semantic-ui";
 
 @Component({})
@@ -100,19 +107,25 @@ export class MyComponent {
 
 @Component({
     selector: "example-message-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiMessageModule]
 })
 export class MessageExampleStandard {}
 
 @Component({
     selector: "example-message-no-dismiss",
-    template: exampleNoDismissTemplate
+    template: exampleNoDismissTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiMessageModule]
 })
 export class MessageExampleNoDismiss {}
 
 @Component({
     selector: "example-message-icon",
-    template: exampleIconTemplate
+    template: exampleIconTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiMessageModule]
 })
 export class MessageExampleIcon {}
 

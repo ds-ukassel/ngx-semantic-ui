@@ -1,5 +1,11 @@
-import { Component } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import {JsonPipe} from '@angular/common';
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {SuiCheckboxModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui form">
@@ -38,7 +44,7 @@ const exampleRadioButtonTemplate = `
         </div>
         <div class="field">
             <sui-radio-button name="example" [value]="{ example: 'object' }" [(ngModel)]="eRadio">
-                Value: {{ '{' }} example: "object" }
+                Value: Example Object
             </sui-radio-button>
         </div>
     </div>
@@ -77,7 +83,9 @@ const exampleStyledTemplate = `
 
 @Component({
     selector: "demo-page-checkbox",
-    templateUrl: "./checkbox.page.html"
+    templateUrl: "./checkbox.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => CheckboxExampleStandard), forwardRef(() => CheckboxExampleRadioButton), forwardRef(() => CheckboxExampleStyled), ApiComponent]
 })
 export class CheckboxPage {
     public api:ApiDefinition = [
@@ -174,17 +182,21 @@ export class CheckboxPage {
 
 @Component({
     selector: "example-checkbox-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiCheckboxModule, FormsModule]
 })
 export class CheckboxExampleStandard {
-    public eCheck:boolean = true;
+    public eCheck = true;
     public eCheckReadonly!:boolean;
     public eCheckDisabled!:boolean;
 }
 
 @Component({
     selector: "example-checkbox-radio-button",
-    template: exampleRadioButtonTemplate
+    template: exampleRadioButtonTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiCheckboxModule, FormsModule, JsonPipe]
 })
 export class CheckboxExampleRadioButton {
     public eRadio:any = "world";
@@ -192,7 +204,9 @@ export class CheckboxExampleRadioButton {
 
 @Component({
     selector: "example-checkbox-styled",
-    template: exampleStyledTemplate
+    template: exampleStyledTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiCheckboxModule, FormsModule]
 })
 export class CheckboxExampleStyled {
     public eStyledRadio:any;

@@ -1,9 +1,10 @@
-import { Component, Renderer2 } from "@angular/core";
+import { Component, Renderer2, ChangeDetectionStrategy } from "@angular/core";
 import { DateUtil, DatePrecision } from "../../../misc/util/internal";
-import { CalendarItem } from "../directives/calendar-item";
+import { CalendarItem, SuiCalendarItem } from "../directives/calendar-item";
 import { CalendarView, CalendarViewType } from "./calendar-view";
 import { CalendarRangeService } from "../services/calendar-range.service";
 import { DateParser } from "../classes/date-parser";
+import { SuiCalendarViewTitle } from "../components/calendar-view-title";
 
 export class CalendarRangeDateService extends CalendarRangeService {
     public override calcStart(start:Date):Date {
@@ -23,29 +24,36 @@ export class CalendarRangeDateService extends CalendarRangeService {
     selector: "sui-calendar-date-view",
     template: `
 <table class="ui celled center aligned unstackable table seven column day">
-<thead>
+  <thead>
     <tr>
-        <th colspan="7">
-            <sui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
-                {{ date }}
-            </sui-calendar-view-title>
-        </th>
+      <th colspan="7">
+        <sui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
+          {{ date }}
+        </sui-calendar-view-title>
+      </th>
     </tr>
     <tr>
-        <th *ngFor="let day of days">{{ day }}</th>
+      @for (day of days; track $index) {
+        <th>{{ day }}</th>
+      }
     </tr>
-</thead>
-<tbody>
-    <tr *ngFor="let group of ranges.current.groupedItems">
-        <td class="link"
-            *ngFor="let item of group"
+  </thead>
+  <tbody>
+    @for (group of ranges.current.groupedItems; track group) {
+      <tr>
+        @for (item of group; track item) {
+          <td class="link"
             [calendarItem]="item"
             (click)="setDate(item)">{{ item.humanReadable }}
-        </td>
-    </tr>
-</tbody>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
 </table>
-`
+`,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiCalendarViewTitle, SuiCalendarItem]
 })
 export class SuiCalendarDateView extends CalendarView {
     public get days():string[] {

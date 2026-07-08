@@ -1,8 +1,6 @@
-import { Directive, Input, EventEmitter, Renderer2, ElementRef, HostListener, HostBinding } from "@angular/core";
+import {Directive, ElementRef, EventEmitter, HostBinding, HostListener, Renderer2} from '@angular/core';
 
-@Directive({
-    selector: "input[suiSelectSearch]"
-})
+@Directive({ selector: "input[suiSelectSearch]" })
 export class SuiSelectSearch {
     @HostBinding("class.search")
     public readonly hasClasses:boolean;
@@ -25,7 +23,11 @@ export class SuiSelectSearch {
         this.autoComplete = "off";
     }
 
-    @HostListener("input", ["$event.target.value"])
+    @HostListener("input", ["$event"])
+    protected _updateQuery($event: InputEvent) {
+      this.updateQuery($event.target && 'value' in $event.target && typeof $event.target.value === 'string' ? $event.target.value : '');
+    }
+
     public updateQuery(query:string):void {
         this.onQueryUpdated.emit(query);
     }

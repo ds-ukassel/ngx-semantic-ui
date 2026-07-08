@@ -1,7 +1,13 @@
 import {
-    Injectable, ApplicationRef, ComponentFactoryResolver, Injector, ComponentRef,
-    Provider, Type, ViewContainerRef, TemplateRef
-} from "@angular/core";
+  ApplicationRef,
+  ComponentRef, createComponent, EnvironmentInjector, inject,
+  Injectable,
+  Injector,
+  Provider,
+  TemplateRef,
+  Type,
+  ViewContainerRef,
+} from '@angular/core';
 
 export interface IImplicitContext<T> {
     $implicit?:T;
@@ -9,25 +15,23 @@ export interface IImplicitContext<T> {
 
 @Injectable()
 export class SuiComponentFactory {
-    constructor(private _applicationRef:ApplicationRef,
-                private _componentFactoryResolver:ComponentFactoryResolver,
-                private _injector:Injector) {}
+  private readonly _applicationRef = inject(ApplicationRef);
+  private _injector = inject(Injector);
+  private _envInjector = inject(EnvironmentInjector);
 
-    public createComponent<T>(type:Type<T>, providers:Provider[] = []):ComponentRef<T> {
-        // Resolve a factory for creating components of type `type`.
-        const factory = this._componentFactoryResolver.resolveComponentFactory(type as Type<T>);
+  public createComponent<T>(type: Type<T>, providers: Provider[] = []): ComponentRef<T> {
+    // Resolve and create an injector with the specified providers.
+    const injector = Injector.create({
+      providers: providers,
+      parent: this._injector,
+    });
 
-        // Resolve and create an injector with the specified providers.
-        const injector = Injector.create({
-            providers: providers,
-            parent: this._injector
-        });
-
-        // Create a component using the previously resolved factory & injector.
-        const componentRef = factory.create(injector);
-
-        return componentRef;
-    }
+    // Create a component using the previously resolved factory & injector.
+    return createComponent(type as Type<T>, {
+      environmentInjector: this._envInjector,
+      elementInjector: injector,
+    });
+  }
 
     public createView<T, U extends IImplicitContext<T>>(viewContainer:ViewContainerRef, template:TemplateRef<U>, context:U):void {
         viewContainer.createEmbeddedView<U>(template, context);

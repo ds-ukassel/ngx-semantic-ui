@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { SuiModal, ComponentModalConfig, ModalSize } from "@angular-ex/semantic-ui";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ComponentModalConfig, ModalSize, SuiModal} from 'lib';
 
 interface IConfirmModalContext {
     question:string;
@@ -9,15 +9,18 @@ interface IConfirmModalContext {
 @Component({
     selector: "demo-modal-confirm",
     template: `
-<div class="header" *ngIf="modal.context.title">{{ modal.context.title }}</div>
+@if (modal.context.title) {
+  <div class="header">{{ modal.context.title }}</div>
+}
 <div class="content">
-    <p>{{ modal.context.question }}</p>
+  <p>{{ modal.context.question }}</p>
 </div>
 <div class="actions">
-    <button class="ui red button" (click)="modal.deny(undefined)">Cancel</button>
-    <button class="ui green button" (click)="modal.approve(undefined)" autofocus>OK</button>
+  <button class="ui red button" (click)="modal.deny(undefined)">Cancel</button>
+  <button class="ui green button" (click)="modal.approve(undefined)">OK</button>
 </div>
-`
+`,
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ConfirmModalComponent {
     constructor(public modal:SuiModal<IConfirmModalContext, void, void>) {}

@@ -40,7 +40,7 @@ export class ModalConfig<T, U = undefined, V = undefined> {
     // Duration of the modal & dimmer transitions.
     public transitionDuration:number;
 
-    constructor(context:T | undefined = undefined, isClosable:boolean = true) {
+    constructor(context:T | undefined = undefined, isClosable = true) {
         // Initialise with default values.
         this.isClosable = isClosable;
         this.context = context;
@@ -62,7 +62,7 @@ export class ModalConfig<T, U = undefined, V = undefined> {
 export class TemplateModalConfig<T, U = undefined, V = undefined> extends ModalConfig<T, U, V> {
     public template:ModalTemplate<T, U, V>;
 
-    constructor(template:ModalTemplate<T, U, V>, context:T | undefined = undefined, isClosable:boolean = true) {
+    constructor(template:ModalTemplate<T, U, V>, context:T | undefined = undefined, isClosable = true) {
         super(context, isClosable);
 
         this.template = template;
@@ -73,7 +73,7 @@ export class TemplateModalConfig<T, U = undefined, V = undefined> extends ModalC
 export class ComponentModalConfig<T, U = undefined, V = undefined> extends ModalConfig<T, U, V> {
     public component:Type<any>;
 
-    constructor(component:Type<any>, context:T | undefined = undefined, isClosable:boolean = true) {
+    constructor(component:Type<any>, context:T | undefined = undefined, isClosable = true) {
         super(context, isClosable);
 
         this.component = component;

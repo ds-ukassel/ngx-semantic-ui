@@ -1,9 +1,10 @@
-import { Component, Renderer2 } from "@angular/core";
+import { Component, Renderer2, ChangeDetectionStrategy } from "@angular/core";
 import { DatePrecision } from "../../../misc/util/internal";
 import { CalendarView, CalendarViewType } from "./calendar-view";
-import { CalendarItem } from "../directives/calendar-item";
+import { CalendarItem, SuiCalendarItem } from "../directives/calendar-item";
 import { CalendarRangeService } from "../services/calendar-range.service";
 import { DateParser } from "../classes/date-parser";
+import { SuiCalendarViewTitle } from "../components/calendar-view-title";
 
 export class CalendarRangeMonthService extends CalendarRangeService {
     public configureItem(item:CalendarItem, baseDate:Date):void {
@@ -16,26 +17,31 @@ export class CalendarRangeMonthService extends CalendarRangeService {
     selector: "sui-calendar-month-view",
     template: `
 <table class="ui celled center aligned unstackable table three column month">
-<thead>
+  <thead>
     <tr>
-        <th colspan="3">
-            <sui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
-                {{ year }}
-            </sui-calendar-view-title>
-        </th>
+      <th colspan="3">
+        <sui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
+          {{ year }}
+        </sui-calendar-view-title>
+      </th>
     </tr>
-</thead>
-<tbody>
-    <tr *ngFor="let group of ranges.current.groupedItems">
-        <td class="link"
-            *ngFor="let item of group"
+  </thead>
+  <tbody>
+    @for (group of ranges.current.groupedItems; track group) {
+      <tr>
+        @for (item of group; track item) {
+          <td class="link"
             [calendarItem]="item"
             (click)="setDate(item)">{{ item.humanReadable }}
-        </td>
-    </tr>
-</tbody>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
 </table>
-`
+`,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiCalendarViewTitle, SuiCalendarItem]
 })
 export class SuiCalendarMonthView extends CalendarView {
     public get year():string {

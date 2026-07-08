@@ -1,19 +1,24 @@
 import {
-    Component, ViewChild, ViewContainerRef, Renderer2, ElementRef, HostBinding,
-    Input, TemplateRef
-} from "@angular/core";
-import { ITemplateRefContext, SuiComponentFactory } from "../../../misc/util/internal";
-import type { IResultContext } from "./search";
-
-// See https://github.com/Microsoft/TypeScript/issues/13449.
-const templateRef = TemplateRef;
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import {SuiComponentFactory} from '../../../misc/util/internal';
+import type {IResultContext} from './search';
 
 @Component({
     selector: "sui-search-result",
     template: `
 <span #templateSibling></span>
-<span *ngIf="!template" [innerHTML]="formatter(value, query)"></span>
-`
+@if (!template) {
+  <span [innerHTML]="formatter(value, query)"></span>
+}
+`,
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SuiSearchResult<T> {
     // Sets the Semantic UI classes on the host element.

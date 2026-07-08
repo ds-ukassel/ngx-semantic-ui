@@ -1,5 +1,10 @@
-import { Component } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {SuiCheckboxModule, SuiProgressModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui segment">
@@ -53,7 +58,9 @@ const exampleVariationsTemplate = `
 
 @Component({
     selector: "demo-page-progress",
-    templateUrl: "./progress.page.html"
+    templateUrl: "./progress.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => ProgressExampleStandard), forwardRef(() => ProgressExampleVariations), ApiComponent]
 })
 export class ProgressPage {
     public api:ApiDefinition = [
@@ -101,24 +108,28 @@ export class ProgressPage {
 
 @Component({
     selector: "example-progress-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiProgressModule, FormsModule, SuiCheckboxModule]
 })
 export class ProgressExampleStandard {
-    public value:number = 55;
-    public progress:boolean = true;
-    public maximum:number = 100;
-    public precision:number = 0;
+    public value = 55;
+    public progress = true;
+    public maximum = 100;
+    public precision = 0;
 }
 
 @Component({
     selector: "example-progress-variations",
-    template: exampleVariationsTemplate
+    template: exampleVariationsTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiProgressModule]
 })
 export class ProgressExampleVariations {
-    public value:number = 55;
+    public value = 55;
 
-    public changingValue:number = -20;
-    public randomValue:number = 0;
+    public changingValue = -20;
+    public randomValue = 0;
 
     constructor() {
         this.updateChangingValue();

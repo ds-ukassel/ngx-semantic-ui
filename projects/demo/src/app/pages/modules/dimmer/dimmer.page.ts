@@ -1,5 +1,10 @@
-import { Component } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {SuiCheckboxModule, SuiDimmerModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <div class="ui segment">
@@ -33,7 +38,9 @@ const exampleVariationsTemplate = `
 
 @Component({
     selector: "demo-page-dimmer",
-    templateUrl: "./dimmer.page.html"
+    templateUrl: "./dimmer.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => DimmerExampleStandard), forwardRef(() => DimmerExampleVariations), ApiComponent]
 })
 export class DimmerPage {
     public api:ApiDefinition = [
@@ -81,19 +88,23 @@ export class DimmerPage {
 
 @Component({
     selector: "example-dimmer-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiDimmerModule, SuiCheckboxModule, FormsModule]
 })
 export class DimmerExampleStandard {
-    public isClickable:boolean = true;
+    public isClickable = true;
     public isDimmed!:boolean;
 }
 
 @Component({
     selector: "example-dimmer-variations",
-    template: exampleVariationsTemplate
+    template: exampleVariationsTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiDimmerModule]
 })
 export class DimmerExampleVariations {
-    public isClickable:boolean = true;
+    public isClickable = true;
     public pageDimmed!:boolean;
     public segmentDimmed!:boolean;
 }

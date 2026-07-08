@@ -2,13 +2,11 @@ import {
     Directive, Input, HostBinding, EventEmitter, Output, AfterContentInit, ContentChild,
     ElementRef, HostListener, QueryList, ContentChildren
 } from "@angular/core";
-import { HandledEvent, KeyCode, IFocusEvent } from "../../../misc/util/internal";
+import {HandledEvent, KeyCode, IFocusEvent, HandledKeyboardEvent} from '../../../misc/util/internal';
 import { DropdownService, DropdownAutoCloseType } from "../services/dropdown.service";
 import { SuiDropdownMenu } from "./dropdown-menu";
 
-@Directive({
-    selector: "[suiDropdown]"
-})
+@Directive({ selector: "[suiDropdown]" })
 export class SuiDropdown implements AfterContentInit {
     public service:DropdownService;
 
@@ -125,7 +123,7 @@ export class SuiDropdown implements AfterContentInit {
     }
 
     @HostListener("keypress", ["$event"])
-    public onKeypress(e:HandledEvent & KeyboardEvent):void {
+    public onKeypress(e: HandledKeyboardEvent):void {
         // Block the keyboard event from being fired on parent dropdowns.
         if (!e.eventHandled) {
 

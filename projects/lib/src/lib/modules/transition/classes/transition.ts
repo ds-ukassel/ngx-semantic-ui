@@ -29,7 +29,7 @@ export class Transition {
     public onComplete:() => void;
 
     constructor(name:string,
-                duration:number = 250,
+                duration = 250,
                 direction:TransitionDirection = TransitionDirection.Either,
                 onComplete:(() => void) = () => {}) {
 

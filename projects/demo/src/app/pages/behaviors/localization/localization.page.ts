@@ -1,6 +1,11 @@
-import { Component, OnDestroy } from "@angular/core";
-import { SuiLocalizationService } from "@angular-ex/semantic-ui";
-import locales from "@angular-ex/semantic-ui/locales";
+import locales from '@angular-ex/semantic-ui/locales';
+import {ChangeDetectionStrategy, Component, forwardRef, OnDestroy} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {SuiDatepickerModule, SuiDropdownModule, SuiLocalizationService, SuiSelectModule} from 'lib';
+import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleTemplate = `
 <div class="ui segments">
@@ -13,9 +18,9 @@ const exampleTemplate = `
                     valueField="code"
                     [isSearchable]="true"
                     #lang>
-
-            <sui-select-option *ngFor="let l of lang.availableOptions"
-                               [value]="l"></sui-select-option>
+            @for (l of lang.availableOptions; track l) {
+                <sui-select-option [value]="l" />
+            }
         </sui-select>
     </div>
     <div class="ui segment">
@@ -100,10 +105,12 @@ const supportedLanguages:ISupportedLanguage[] = [
 
 @Component({
     selector: "demo-page-localization",
-    templateUrl: "./localization.page.html"
+    templateUrl: "./localization.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, CodeblockComponent, ExampleComponent, forwardRef(() => LocalizationExample), SuiDropdownModule]
 })
 export class LocalizationPage {
-    public localizationCode:string = `
+    public localizationCode = `
 import {SuiLocalizationService} from "@angular-ex/semantic-ui";
 // We'll use Spanish for this example.
 import es from "@angular-ex/semantic-ui/locales/es";
@@ -122,7 +129,7 @@ export class AppComponent {
 }
 `;
 
-    public customizationCode:string = `
+    public customizationCode = `
 import {SuiLocalizationService} from "@angular-ex/semantic-ui";
 // This example uses French.
 import fr from "@angular-ex/semantic-ui/locales/fr";
@@ -150,7 +157,7 @@ export class AppComponent {
 }
 `;
 
-    public valuesInterface:string = `
+    public valuesInterface = `
 interface ILocaleValues {
     datepicker: {
         months:string[], // Full month names
@@ -196,7 +203,9 @@ interface ILocaleValues {
 
 @Component({
     selector: "example-localization",
-    template: exampleTemplate
+    template: exampleTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiSelectModule, FormsModule, SuiDatepickerModule]
 })
 export class LocalizationExample implements OnDestroy {
     public languages:ISupportedLanguage[];

@@ -15,9 +15,7 @@ export class CalendarItem {
     }
 }
 
-@Directive({
-    selector: "[calendarItem]"
-})
+@Directive({ selector: "[calendarItem]" })
 export class SuiCalendarItem {
     @Input("calendarItem")
     public item!:CalendarItem;

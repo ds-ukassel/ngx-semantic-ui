@@ -41,15 +41,17 @@ See the [Documentation](https://angular-ex.github.io/ngx-semantic-ui) for more i
 
 ## Dependencies
 
-* [Angular](https://angular.io) (^16.0.0)
-* [Semantic UI CSS](http://semantic-ui.com/) (^2.3.1) (jQuery is **not** required)
+* [Angular](https://angular.io) (^22.0.0)
+* [Semantic UI CSS](http://semantic-ui.com/) (^2.4.0) (jQuery is **not** required)
+
+For older version support see https://github.com/angular-ex/ngx-semantic-ui.
 
 ## Component Support
 
-|           Icon          |                                      Description                                    |
+| Icon                    | Description                                                                         |
 |-------------------------|-------------------------------------------------------------------------------------|
-| :white_check_mark:      | Component supported by @angular-ex/semantic-ui.                                             |
-| :rocket:                | Semantic UI plugin supported by @angular-ex/semantic-ui (not in Semantic UI Core).          |
+| :white_check_mark:      | Component supported by @angular-ex/semantic-ui.                                     |
+| :rocket:                | Semantic UI plugin supported by @angular-ex/semantic-ui (not in Semantic UI Core).  |
 | :ballot_box_with_check: | Component supported natively by [Semantic UI](https://semantic-ui.com/) (CSS only). |
 | :x:                     | Component currently unavailable.                                                    |
 | :no_entry_sign:         | Component not applicable to Angular.                                                |

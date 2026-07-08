@@ -1,8 +1,9 @@
-import { Component, Renderer2 } from "@angular/core";
+import { Component, Renderer2, ChangeDetectionStrategy } from "@angular/core";
 import { Util, DateUtil, DatePrecision } from "../../../misc/util/internal";
 import { CalendarView, CalendarViewType } from "./calendar-view";
-import { CalendarItem } from "../directives/calendar-item";
+import { CalendarItem, SuiCalendarItem } from "../directives/calendar-item";
 import { CalendarRangeService } from "../services/calendar-range.service";
+import { SuiCalendarViewTitle } from "../components/calendar-view-title";
 
 export class CalendarRangeYearService extends CalendarRangeService {
     public configureItem(item:CalendarItem, baseDate:Date):void {
@@ -15,26 +16,31 @@ export class CalendarRangeYearService extends CalendarRangeService {
     selector: "sui-calendar-year-view",
     template: `
 <table class="ui celled center aligned unstackable table three column year">
-<thead>
+  <thead>
     <tr>
-        <th colspan="3">
-            <sui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
-                {{ pad(decadeStart) }} - {{ pad(decadeStart + 10) }}
-            </sui-calendar-view-title>
-        </th>
+      <th colspan="3">
+        <sui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
+          {{ pad(decadeStart) }} - {{ pad(decadeStart + 10) }}
+        </sui-calendar-view-title>
+      </th>
     </tr>
-</thead>
-<tbody>
-    <tr *ngFor="let group of ranges.current.groupedItems">
-        <td class="link"
-            *ngFor="let item of group"
+  </thead>
+  <tbody>
+    @for (group of ranges.current.groupedItems; track group) {
+      <tr>
+        @for (item of group; track item) {
+          <td class="link"
             [calendarItem]="item"
             (click)="setDate(item)">{{ item.humanReadable }}
-        </td>
-    </tr>
-</tbody>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
 </table>
-`
+`,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiCalendarViewTitle, SuiCalendarItem]
 })
 export class SuiCalendarYearView extends CalendarView {
     public get decadeStart():number {

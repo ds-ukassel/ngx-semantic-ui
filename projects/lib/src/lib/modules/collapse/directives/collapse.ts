@@ -1,8 +1,6 @@
 import { Directive, ElementRef, Input, HostBinding, Renderer2 } from "@angular/core";
 
-@Directive({
-    selector: "[suiCollapse]"
-})
+@Directive({ selector: "[suiCollapse]" })
 export class SuiCollapse {
     // Set when the collapse is open, and not animating.
     @HostBinding("class.expanded")
@@ -86,7 +84,7 @@ export class SuiCollapse {
         });
     }
 
-    private animate(startHeight:number, endHeight:number, removeOnComplete:boolean = false, callback:() => void = () => {}):void {
+    private animate(startHeight:number, endHeight:number, removeOnComplete = false, callback:() => void = () => {}):void {
         const heightFrames = [
             {
                 offset: 0,

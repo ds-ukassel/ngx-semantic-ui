@@ -24,13 +24,15 @@ export class HandledEvent extends MouseEvent {
     public eventHandled?:boolean;
 }
 
-export interface IDynamicClasses {
-    [name:string]:true;
+export class HandledKeyboardEvent extends KeyboardEvent {
+    public eventHandled?:boolean;
 }
+
+export type IDynamicClasses = Record<string, true>;
 
 export const Util = {
     Array: {
-        range(n:number, offset:number = 0):number[] {
+        range(n:number, offset = 0):number[] {
             return Array(n).fill(0).map((z, i) => i + offset);
         },
         group<T>(items:T[], groupLength:number):T[][] {
@@ -42,8 +44,8 @@ export const Util = {
             }
             return groups;
         },
-        groupBy<T>(items:T[], field:keyof T):{ [name:string]:T[] } {
-            return items.reduce<{ [name:string]:T[] }>(
+        groupBy<T>(items:T[], field:keyof T):Record<string, T[]> {
+            return items.reduce<Record<string, T[]>>(
                 (groups, i: T) => {
                     const fieldValue = (i as any)[field].toString();
                     groups[fieldValue] = groups[fieldValue] || [];

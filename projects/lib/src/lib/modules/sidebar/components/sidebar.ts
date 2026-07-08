@@ -1,9 +1,19 @@
-import { Component, HostBinding, Input, Output, Renderer2, ElementRef, EventEmitter } from "@angular/core";
-import { SidebarService, SidebarTransition, SidebarDirection } from "../services/sidebar.service";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+  Renderer2,
+} from '@angular/core';
+import {SidebarDirection, SidebarService, SidebarTransition} from '../services/sidebar.service';
 
 @Component({
     selector: "sui-sidebar",
-    template: `<ng-content></ng-content>`
+    template: `<ng-content></ng-content>`,
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SuiSidebar {
     public service:SidebarService;
@@ -76,7 +86,7 @@ export class SuiSidebar {
         this.service.height = this._element.nativeElement.offsetHeight;
     }
 
-    private setClass(className:string, isAdd:boolean = true):void {
+    private setClass(className:string, isAdd = true):void {
         if (isAdd) {
             this._renderer.addClass(this._element.nativeElement, className);
         } else {

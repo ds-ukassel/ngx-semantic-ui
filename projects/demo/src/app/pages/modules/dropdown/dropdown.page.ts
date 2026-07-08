@@ -1,5 +1,11 @@
-import { Component } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {RouterLink} from '@angular/router';
+import {SuiCheckboxModule, SuiDropdownModule, SuiMessageModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleFileMenuTemplate = `
 <div class="ui dropdown" suiDropdown>
@@ -65,7 +71,7 @@ const exampleStandardTemplate = `
     </div>
 </div>
 <button class="ui secondary button" (click)="isOpen = !isOpen">Toggle Dropdown</button>
-<sui-checkbox [(ngModel)]="isDisabled != isDisabled">Disabled?</sui-checkbox>
+<sui-checkbox [(ngModel)]="isDisabled">Disabled?</sui-checkbox>
 `;
 
 const exampleStyledTemplate = `
@@ -138,7 +144,9 @@ const exampleMenuTemplate = `
 
 @Component({
     selector: "demo-page-dropdown",
-    templateUrl: "./dropdown.page.html"
+    templateUrl: "./dropdown.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, ExampleComponent, forwardRef(() => DropdownExampleFileMenu), forwardRef(() => DropdownExampleStandard), forwardRef(() => DropdownExampleStyled), forwardRef(() => DropdownExampleMenu), SuiMessageModule, RouterLink, ApiComponent]
 })
 export class DropdownPage {
     public api:ApiDefinition = [
@@ -206,13 +214,17 @@ export class DropdownPage {
 
 @Component({
     selector: "example-dropdown-file-menu",
-    template: exampleFileMenuTemplate
+    template: exampleFileMenuTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiDropdownModule]
 })
 export class DropdownExampleFileMenu {}
 
 @Component({
     selector: "example-dropdown-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiDropdownModule, SuiCheckboxModule, FormsModule]
 })
 export class DropdownExampleStandard {
     public isOpen!:boolean;
@@ -221,13 +233,17 @@ export class DropdownExampleStandard {
 
 @Component({
     selector: "example-dropdown-styled",
-    template: exampleStyledTemplate
+    template: exampleStyledTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiDropdownModule]
 })
 export class DropdownExampleStyled {}
 
 @Component({
     selector: "example-dropdown-menu",
-    template: exampleMenuTemplate
+    template: exampleMenuTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiDropdownModule]
 })
 export class DropdownExampleMenu {}
 

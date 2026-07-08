@@ -6,9 +6,7 @@ import { SuiDimmer } from "./components/dimmer";
 @NgModule({
     imports: [
         CommonModule,
-        SuiTransitionModule
-    ],
-    declarations: [
+        SuiTransitionModule,
         SuiDimmer
     ],
     exports: [

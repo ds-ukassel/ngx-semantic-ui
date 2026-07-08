@@ -1,5 +1,10 @@
-import { Component } from "@angular/core";
-import { ApiDefinition } from "../../../components/api/api.component";
+import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {SuiAccordionModule, SuiMessage, SuiMessageModule} from 'lib';
+import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
+import {ExampleComponent} from '../../../components/example/example.component';
+import {PageContentComponent} from '../../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../../components/page-title/page-title.component';
 
 const exampleStandardTemplate = `
 <sui-accordion [closeOthers]="false">
@@ -75,7 +80,9 @@ const exampleManualTemplate = `
 
 @Component({
     selector: "demo-page-accordion",
-    templateUrl: "./accordion.page.html"
+    templateUrl: "./accordion.page.html",
+    changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [PageTitleComponent, PageContentComponent, SuiMessageModule, RouterLink, ExampleComponent, forwardRef(() => AccordionExampleStandard), forwardRef(() => AccordionExampleStyled), forwardRef(() => AccordionExampleManual), ApiComponent, SuiMessage],
 })
 export class AccordionPage {
     public api:ApiDefinition = [
@@ -134,22 +141,28 @@ export class AccordionPage {
 
 @Component({
     selector: "example-accordion-standard",
-    template: exampleStandardTemplate
+    template: exampleStandardTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiAccordionModule]
 })
 export class AccordionExampleStandard {}
 
 @Component({
     selector: "example-accordion-styled",
-    template: exampleStyledTemplate
+    template: exampleStyledTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiAccordionModule]
 })
 export class AccordionExampleStyled {}
 
 @Component({
     selector: "example-accordion-manual",
-    template: exampleManualTemplate
+    template: exampleManualTemplate,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [SuiAccordionModule]
 })
 export class AccordionExampleManual {
-    public panelOpen:boolean = false;
+    public panelOpen = false;
 }
 
 export const AccordionPageComponents = [AccordionPage, AccordionExampleStandard, AccordionExampleStyled, AccordionExampleManual];

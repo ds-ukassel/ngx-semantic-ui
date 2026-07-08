@@ -1,4 +1,8 @@
-import { Component } from "@angular/core";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {SuiDropdownModule} from 'lib';
+import {CodeblockComponent} from '../../components/codeblock/codeblock.component';
+import {PageContentComponent} from '../../components/page-content/page-content.component';
+import {PageTitleComponent} from '../../components/page-title/page-title.component';
 
 @Component({
     selector: "demo-page-getting-started",
@@ -8,26 +12,28 @@ import { Component } from "@angular/core";
     margin-top: 1em;
     margin-bottom: 0.5em;
 }
-`]
+`],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [PageTitleComponent, PageContentComponent, CodeblockComponent, SuiDropdownModule]
 })
 export class GettingStartedPage {
-    public installCode:string = `$ npm install @angular-ex/semantic-ui --save`;
+    public installCode = `$ npm install @angular-ex/semantic-ui --save`;
 
-    public includeCssCode:string =
+    public includeCssCode =
 `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">`;
 
-    public importCode:string = `import {SuiModule} from '@angular-ex/semantic-ui';`;
-    public moduleImportCode:string = `
+    public importCode = `import {SuiModule} from '@angular-ex/semantic-ui';`;
+    public moduleImportCode = `
 import {SuiModule} from '@angular-ex/semantic-ui';
 
 @NgModule({
     declarations: [AppComponent, ...],
-    imports: [SuiModule, ...],  
+    imports: [SuiModule, ...],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
 `;
-    public systemJSCode:string = `
+    public systemJSCode = `
 var config = {
     ...
     map: {
@@ -36,5 +42,5 @@ var config = {
     }
 }
 `;
-    public individualImportCode:string = `import {SuiCheckboxModule, SuiRatingModule} from '@angular-ex/semantic-ui';`;
+    public individualImportCode = `import {SuiCheckboxModule, SuiRatingModule} from '@angular-ex/semantic-ui';`;
 }

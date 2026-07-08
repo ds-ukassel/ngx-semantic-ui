@@ -1,19 +1,16 @@
+import {Directive, ElementRef, Host, HostBinding, HostListener, Input, Renderer2} from '@angular/core';
+import bowser from 'bowser';
+import * as isUAWebView from 'is-ua-webview';
 
-import { Directive, Host, Input, ElementRef, HostBinding, HostListener, Renderer2 } from "@angular/core";
-import { DateUtil, DatePrecision } from "../../../misc/util/internal";
-import { SuiLocalizationService } from "../../../behaviors/localization/internal";
-import { PopupTrigger } from "../../popup/internal";
-import { SuiDatepickerDirective, SuiDatepickerDirectiveValueAccessor } from "./datepicker.directive";
-import { InternalDateParser, DateParser } from "../classes/date-parser";
-import * as bowser from "bowser";
+import {SuiLocalizationService} from '../../../behaviors/localization/internal';
+import {DateUtil} from '../../../misc/util/internal';
+import {PopupTrigger} from '../../popup/internal';
+import {DateParser, InternalDateParser} from '../classes/date-parser';
+import {SuiDatepickerDirective, SuiDatepickerDirectiveValueAccessor} from './datepicker.directive';
 
-import "../helpers/is-webview";
-import * as isUAWebView from "is-ua-webview";
 const isWebView = isUAWebView["default"] || isUAWebView;
 
-@Directive({
-    selector: "input[suiDatepicker]"
-})
+@Directive({ selector: "input[suiDatepicker]" })
 export class SuiDatepickerInputDirective {
     private _useNativeOnMobile!:boolean;
 
@@ -121,7 +118,11 @@ export class SuiDatepickerInputDirective {
         this._lastUpdateTyped = false;
     }
 
-    @HostListener("input", ["$event.target.value"])
+    @HostListener("input", ["$event"])
+    protected _typeValue($event: InputEvent) {
+      this.typeValue($event.target && 'value' in $event.target && typeof $event.target.value === 'string' ? $event.target.value : undefined);
+    }
+
     public typeValue(value:string | undefined):void {
         this._lastUpdateTyped = true;
         this._currentInputValue = value;
