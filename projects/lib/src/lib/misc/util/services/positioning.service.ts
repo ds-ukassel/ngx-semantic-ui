@@ -1,16 +1,15 @@
 import { ElementRef } from "@angular/core";
-import Popper, { Modifiers, PopperOptions, Placement, Data } from "popper.js";
-
-type PopperModifiers = Modifiers & {
-    computeStyle?:{
-        gpuAcceleration:boolean;
-    };
-};
-type PopperInstance = Popper & {
-    options:PopperOptions & {
-        modifiers:PopperModifiers;
-    };
-};
+import {
+    arrow,
+    autoPlacement,
+    autoUpdate,
+    computePosition,
+    flip,
+    limitShift,
+    offset,
+    Placement,
+    shift
+} from "@floating-ui/dom";
 
 export type PositioningPlacement = "auto" |
                                    "top left" | "top" | "top right" |
@@ -43,9 +42,10 @@ export interface IPositionBoundingBox {
     right:number;
 }
 
-function placementToPopper(placement:PositioningPlacement):Placement {
+// Returns `undefined` for `auto`, expressed by `autoPlacement`.
+function placementToFloating(placement:PositioningPlacement):Placement | undefined {
     if (!placement || placement === PositioningPlacement.Auto) {
-        return "auto";
+        return undefined;
     }
 
     // All placements of the format: `direction alignment`, e.g. `top left`.
@@ -66,16 +66,16 @@ function placementToPopper(placement:PositioningPlacement):Placement {
             break;
     }
 
-    // Join with hyphen to create Popper compatible placement.
+    // Join with hyphen to create Floating UI compatible placement.
     return chosenPlacement.join("-") as Placement;
 }
 
-function popperToPlacement(popper:string):PositioningPlacement {
-    if (!popper || popper === "auto") {
+function floatingToPlacement(floating:string):PositioningPlacement {
+    if (!floating) {
         return "auto";
     }
 
-    const [direction, alignment] = popper.split("-");
+    const [direction, alignment] = floating.split("-");
 
     const chosenPlacement = [direction];
 
@@ -111,11 +111,12 @@ export class PositioningService {
     public readonly anchor:ElementRef;
     public readonly subject:ElementRef;
 
-    private _popper!:PopperInstance;
-    private _popperState!:Data;
     private _placement:PositioningPlacement;
-    private _hasArrow!:boolean;
+    private _actualPlacement:PositioningPlacement;
+    private _hasArrow:boolean;
     private _arrowSelector:string | undefined;
+    // Stops the scroll / resize listeners set up by `autoUpdate`.
+    private _stopAutoUpdate?:() => void;
 
     public get placement():PositioningPlacement {
         return this._placement;
@@ -123,110 +124,111 @@ export class PositioningService {
 
     public set placement(placement:PositioningPlacement) {
         this._placement = placement;
-        if (this._popper) {
-            this._popper.options.placement = placementToPopper(placement);
-        }
+        this.update();
     }
 
     public set hasArrow(hasArrow:boolean) {
         this._hasArrow = hasArrow;
+        this.update();
     }
 
     public get actualPlacement():PositioningPlacement {
-        if (!this._popperState) {
-            return PositioningPlacement.Auto;
-        }
-
-        return popperToPlacement(this._popperState.placement);
+        return this._actualPlacement;
     }
 
-    public get state():Data {
-        return this._popperState;
-    }
-
-    constructor(anchor:ElementRef, subject:ElementRef, placement:PositioningPlacement, arrowSelector?:string) {
-        this.anchor = anchor;
+    constructor(anchor:ElementRef, subject:ElementRef, placement:PositioningPlacement, arrowSelector?:string) {this.anchor = anchor;
         this.subject = subject;
         this._placement = placement;
+        this._actualPlacement = PositioningPlacement.Auto;
+        this._hasArrow = false;
         this._arrowSelector = arrowSelector;
         this.init();
     }
 
     public init():void {
-        const modifiers:PopperModifiers = {
-            computeStyle: {
-                gpuAcceleration: false
-            },
-            preventOverflow: {
-                escapeWithReference: true,
-                boundariesElement: document.body
-            },
-            arrow: {
-                element: this._arrowSelector
-            },
-            offset: {
-                fn: (data:Popper.Data) => {
-                    if (this._hasArrow) {
-                        const offsets = this.calculateOffsets();
-                        data.offsets.popper.left += offsets.left;
-                        data.offsets.popper.top += offsets.top;
-                    }
-                    return data;
-                }
-            }
-        };
-
-        if (!this._arrowSelector) {
-            delete modifiers.arrow;
-        }
-
-        this._popper = new Popper(
-            this.anchor.nativeElement,
-            this.subject.nativeElement,
-            {
-                placement: placementToPopper(this._placement),
-                modifiers,
-                onCreate: (initial: any) => this._popperState = initial,
-                onUpdate: (update: any) => this._popperState = update
-            }) as PopperInstance;
+        // Unlike Popper (old framework), Floating UI computes a position once per call,
+        // so it has to be recomputed whenever the anchor moves or resizes.
+        this._stopAutoUpdate = autoUpdate(
+          this.anchor.nativeElement,
+          this.subject.nativeElement,
+          () => this.update()
+        );
     }
 
     public update():void {
-        this._popper.update();
+        if (!this._stopAutoUpdate) {
+            return;
+        }
+
+        const subject = this.subject.nativeElement as HTMLElement;
+        const arrowElement = this._arrowSelector
+            ? subject.querySelector<HTMLElement>(this._arrowSelector)
+            : undefined;
+        const placement = placementToFloating(this._placement);
+
+        const middleware = [
+            // Evaluated on every update, so that a later `hasArrow` still takes effect.
+            offset(() => ({ crossAxis: this._hasArrow ? this.calculateOffset() : 0 })),
+            placement ? flip({ boundary: document.body }) : autoPlacement({ boundary: document.body }),
+            // `limitShift` keeps the subject attached to its anchor, (replaces Popper's `escapeWithReference`).
+            shift({ boundary: document.body, limiter: limitShift() })
+        ];
+
+        if (arrowElement) {
+            middleware.push(arrow({ element: arrowElement }));
+        }
+
+        computePosition(this.anchor.nativeElement, subject, {
+            placement,
+            strategy: "absolute",
+            middleware
+        }).then(({ x, y, placement: actual, middlewareData }) => {
+            // Floating UI computed DOM values
+            Object.assign(subject.style, {
+                position: "absolute",
+                left: `${x}px`,
+                top: `${y}px`
+            });
+
+            this._actualPlacement = floatingToPlacement(actual);
+
+            if (arrowElement && middlewareData.arrow) {
+                const { x: arrowX, y: arrowY } = middlewareData.arrow;
+                // Set alignment axis, stylesheet sets the other
+                arrowElement.style.left = arrowX != null ? `${arrowX}px` : "";
+                arrowElement.style.top = arrowY != null ? `${arrowY}px` : "";
+            }
+        });
     }
 
     public destroy():void {
-        this._popper.destroy();
+        this._stopAutoUpdate?.();
+        this._stopAutoUpdate = undefined;
     }
 
-    private calculateOffsets():Popper.Offset {
-        let left = 0; let top = 0;
-
+    // Shifts the subject along its alignment axis when the anchor is too small to reach the arrow.
+    private calculateOffset():number {
         // To support correct positioning for all popup sizes we should calculate offset using em
         const fontSize = parseFloat(window.getComputedStyle(this.subject.nativeElement).getPropertyValue("font-size"));
         // The Semantic UI popup arrow width and height are 0.71428571em and the margin from the popup edge is 1em
         const arrowCenter = (0.71428571 / 2 + 1) * fontSize;
+        const anchor = this.anchor.nativeElement as HTMLElement;
 
-        if (this.anchor.nativeElement.offsetWidth <= arrowCenter * 2) {
-            const anchorCenterWidth = this.anchor.nativeElement.offsetWidth / 2;
-            if (this._placement === PositioningPlacement.TopLeft || this._placement === PositioningPlacement.BottomLeft) {
-                left = anchorCenterWidth - arrowCenter;
-            }
-            if (this._placement === PositioningPlacement.TopRight || this._placement === PositioningPlacement.BottomRight) {
-                left = arrowCenter - anchorCenterWidth;
-            }
+        switch (this._placement) {
+            case PositioningPlacement.TopLeft:
+            case PositioningPlacement.BottomLeft:
+                return anchor.offsetWidth <= arrowCenter * 2 ? anchor.offsetWidth / 2 - arrowCenter : 0;
+            case PositioningPlacement.TopRight:
+            case PositioningPlacement.BottomRight:
+                return anchor.offsetWidth <= arrowCenter * 2 ? arrowCenter - anchor.offsetWidth / 2 : 0;
+            case PositioningPlacement.LeftTop:
+            case PositioningPlacement.RightTop:
+                return anchor.offsetHeight <= arrowCenter * 2 ? anchor.offsetHeight / 2 - arrowCenter : 0;
+            case PositioningPlacement.LeftBottom:
+            case PositioningPlacement.RightBottom:
+                return anchor.offsetHeight <= arrowCenter * 2 ? arrowCenter - anchor.offsetHeight / 2 : 0;
+            default:
+                return 0;
         }
-
-        if (this.anchor.nativeElement.offsetHeight <= arrowCenter * 2) {
-            const anchorCenterHeight = this.anchor.nativeElement.offsetHeight / 2;
-            if (this._placement === PositioningPlacement.LeftTop || this._placement === PositioningPlacement.RightTop) {
-                top = anchorCenterHeight - arrowCenter;
-            }
-            if (this._placement === PositioningPlacement.LeftBottom || this._placement === PositioningPlacement.RightBottom) {
-                top = arrowCenter - anchorCenterHeight;
-            }
-        }
-        return { top, left, width: 0, height: 0 };
     }
-
 }

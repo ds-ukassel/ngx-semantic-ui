@@ -5,10 +5,10 @@
     "entryFile": "src/public-api.ts"
   },
   "allowedNonPeerDependencies": [
+    "@floating-ui/dom",
     "bowser",
     "date-fns",
     "extend",
-    "is-ua-webview",
-    "popper.js"
+    "is-ua-webview"
   ]
 }
