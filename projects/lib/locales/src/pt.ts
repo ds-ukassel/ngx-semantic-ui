@@ -1,11 +1,11 @@
-import { IPartialLocaleValues } from "./interfaces/values";
+import { IPartialLocaleValues } from "@ds-ukassel/ngx-semantic-ui";
 
 /**
  * locale : Portuguese (pt)
  * author : Fernando Niwes : https://github.com/fniwes
  */
 
-const pt:IPartialLocaleValues = {
+export const pt:IPartialLocaleValues = {
     datepicker: {
         months: [
             "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
@@ -50,5 +50,3 @@ const pt:IPartialLocaleValues = {
         }
     }
 };
-
-export default pt;

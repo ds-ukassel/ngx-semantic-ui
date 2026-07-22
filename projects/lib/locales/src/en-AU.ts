@@ -1,14 +1,12 @@
-import { IPartialLocaleValues } from "./interfaces/values";
+import { IPartialLocaleValues } from "@ds-ukassel/ngx-semantic-ui";
 
 /**
  * locale : Australian (en-AU)
  * author : Trevor Daniels : https://github.com/trevordaniels
  */
 
-const enAU:IPartialLocaleValues = {
+export const enAU:IPartialLocaleValues = {
     datepicker: {
         firstDayOfWeek: 0
     }
 };
-
-export default enAU;

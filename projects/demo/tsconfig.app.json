@@ -7,7 +7,6 @@
     "paths": {
       "lib": ["../../dist/lib"],
       "@ds-ukassel/ngx-semantic-ui": ["../../dist/lib"],
-      "@ds-ukassel/ngx-semantic-ui/locales": ["../../dist/lib/locales"],
       "@ds-ukassel/ngx-semantic-ui/*": ["../../dist/lib/*"]
     },
   },
