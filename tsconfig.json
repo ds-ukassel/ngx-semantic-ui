@@ -11,12 +11,6 @@
     "paths": {
       "lib": [
         "./dist/lib"
-      ],
-      "@ds-ukassel/ngx-semantic-ui": [
-        "./projects/lib/src/public-api.ts"
-      ],
-      "@ds-ukassel/ngx-semantic-ui/locales": [
-        "./projects/lib/locales/src/public_api.ts"
       ]
     },
     "noImplicitReturns": true,
