@@ -168,7 +168,15 @@ export class PositioningService {
 
         const middleware = [
             // Evaluated on every update, so that a later `hasArrow` still takes effect.
-            offset(() => ({ crossAxis: this._hasArrow ? this.calculateOffset() : 0 })),
+            offset(() => {
+                const fontSize = parseFloat(window.getComputedStyle(this.subject.nativeElement).getPropertyValue("font-size"));
+                return {
+                    // Gap between anchor and popup. Popper used the popup's CSS margin
+                    // Floating UI ignores element margins, reproduce the 0.75em gap
+                    mainAxis: 0.75 * fontSize,
+                    crossAxis: this._hasArrow ? this.calculateOffset(fontSize) : 0
+                };
+            }),
             placement ? flip({ boundary: document.body }) : autoPlacement({ boundary: document.body }),
             // `limitShift` keeps the subject attached to its anchor, (replaces Popper's `escapeWithReference`).
             shift({ boundary: document.body, limiter: limitShift() })
@@ -207,9 +215,8 @@ export class PositioningService {
     }
 
     // Shifts the subject along its alignment axis when the anchor is too small to reach the arrow.
-    private calculateOffset():number {
-        // To support correct positioning for all popup sizes we should calculate offset using em
-        const fontSize = parseFloat(window.getComputedStyle(this.subject.nativeElement).getPropertyValue("font-size"));
+    // `fontSize` (in px) passed in, only read once per positioning update.
+    private calculateOffset(fontSize:number):number {
         // The Semantic UI popup arrow width and height are 0.71428571em and the margin from the popup edge is 1em
         const arrowCenter = (0.71428571 / 2 + 1) * fontSize;
         const anchor = this.anchor.nativeElement as HTMLElement;
