@@ -41,12 +41,11 @@
   [menuAutoSelectFirst]="true">
 
   <ng-content></ng-content>
-  @if (availableOptions.length == 0 ) {
-    @if (!maxSelectedReached) {
-      <div class="message">{{ localeValues.noResultsMessage }}</div>
-    }
+  @if (!availableOptions.length) {
     @if (maxSelectedReached) {
       <div class="message">{{ maxSelectedMessage }}</div>
+    } @else {
+      <div class="message">{{ localeValues.noResultsMessage }}</div>
     }
   }
 </div>
