@@ -1,6 +1,6 @@
 import {Directive, ElementRef, HostBinding, HostListener, inject, Input, Renderer2} from '@angular/core';
-import bowser from 'bowser';
-import * as isUAWebView from 'is-ua-webview';
+import bowser, {ClientHints} from 'bowser';
+import isUAWebView from 'is-ua-webview';
 
 import {SuiLocalizationService} from '../../../behaviors/localization/internal';
 import {DateUtil} from '../../../misc/util/internal';
@@ -8,7 +8,13 @@ import {PopupTrigger} from '../../popup/internal';
 import {DateParser, InternalDateParser} from '../classes/date-parser';
 import {SuiDatepickerDirective, SuiDatepickerDirectiveValueAccessor} from './datepicker.directive';
 
-const isWebView = isUAWebView["default"] || isUAWebView;
+function isMobile() {
+  if (isUAWebView(navigator.userAgent)) {
+    return true;
+  }
+  const result = bowser.parse(navigator.userAgent, 'userAgentData' in navigator && typeof navigator.userAgentData === 'object' ? navigator.userAgentData as ClientHints : undefined);
+  return result.platform.type === 'mobile';
+}
 
 @Directive({ selector: "input[suiDatepicker]" })
 export class SuiDatepickerInputDirective {
@@ -26,8 +32,7 @@ export class SuiDatepickerInputDirective {
 
     public set useNativeOnMobile(fallback:boolean) {
         this._useNativeOnMobile = fallback;
-        const isOnMobile = (bowser as any).mobile || (bowser as any).tablet || isWebView(navigator.userAgent);
-        this.fallbackActive = this.useNativeOnMobile && isOnMobile;
+        this.fallbackActive = this.useNativeOnMobile && isMobile();
     }
 
     private _fallbackActive!:boolean;
