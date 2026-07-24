@@ -14,7 +14,7 @@
       ]
     },
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": false, // covered by eslint
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,

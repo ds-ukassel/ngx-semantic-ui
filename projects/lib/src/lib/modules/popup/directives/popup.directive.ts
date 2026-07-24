@@ -14,8 +14,6 @@ import {
 } from '../classes/popup-template-controller';
 import {SuiPopupConfig} from '../services/popup.service';
 
-const templateRef = TemplateRef;
-
 @Directive({
     selector: "[suiPopup]",
     exportAs: "suiPopup"
