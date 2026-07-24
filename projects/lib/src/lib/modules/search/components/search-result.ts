@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostBinding,
+  inject,
   Input,
   TemplateRef,
   ViewChild,
@@ -21,6 +22,8 @@ import type {IResultContext} from './search';
     changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SuiSearchResult<T> {
+    componentFactory = inject(SuiComponentFactory);
+
     // Sets the Semantic UI classes on the host element.
     @HostBinding("class.result")
     public readonly hasClasses:boolean;
@@ -56,7 +59,7 @@ export class SuiSearchResult<T> {
     @ViewChild("templateSibling", { read: ViewContainerRef, static: true })
     public templateSibling!:ViewContainerRef;
 
-    constructor(public componentFactory:SuiComponentFactory) {
+    constructor() {
         this.hasClasses = true;
 
         // By default we make this function return an empty string, for the brief moment when it isn't displaying the correct label.

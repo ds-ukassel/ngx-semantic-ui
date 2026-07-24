@@ -4,6 +4,7 @@ import {
   ElementRef,
   HostBinding,
   HostListener,
+  inject,
   Input,
   Renderer2,
 } from '@angular/core';
@@ -20,6 +21,9 @@ import {SidebarService, SidebarTransition} from '../services/sidebar.service';
     changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SuiSidebarSibling {
+    private _renderer = inject(Renderer2);
+    private _element = inject(ElementRef);
+
     private _service!:SidebarService;
 
     public get service():SidebarService {
@@ -55,7 +59,7 @@ export class SuiSidebarSibling {
     @HostBinding("class.pusher")
     public readonly hasClasses:boolean;
 
-    constructor(private _renderer:Renderer2, private _element:ElementRef) {
+    constructor() {
         this.isDimmedWhenVisible = false;
 
         this.hasClasses = true;

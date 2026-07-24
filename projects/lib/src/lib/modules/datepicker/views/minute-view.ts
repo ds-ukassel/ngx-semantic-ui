@@ -1,11 +1,11 @@
-import { Component, Renderer2, ChangeDetectionStrategy } from "@angular/core";
-import { Util, DateUtil, DatePrecision } from "../../../misc/util/internal";
-import { CalendarView, CalendarViewType } from "./calendar-view";
-import { CalendarItem, SuiCalendarItem } from "../directives/calendar-item";
-import { CalendarMode } from "../services/calendar.service";
-import { CalendarRangeService } from "../services/calendar-range.service";
-import { DateParser } from "../classes/date-parser";
-import { SuiCalendarViewTitle } from "../components/calendar-view-title";
+import {ChangeDetectionStrategy, Component, inject, Renderer2} from '@angular/core';
+import {DatePrecision, DateUtil, Util} from '../../../misc/util/internal';
+import {DateParser} from '../classes/date-parser';
+import {SuiCalendarViewTitle} from '../components/calendar-view-title';
+import {CalendarItem, SuiCalendarItem} from '../directives/calendar-item';
+import {CalendarRangeService} from '../services/calendar-range.service';
+import {CalendarMode} from '../services/calendar.service';
+import {CalendarView, CalendarViewType} from './calendar-view';
 
 export class CalendarRangeMinuteService extends CalendarRangeService {
     public override calcStart(start:Date):Date {
@@ -67,7 +67,9 @@ export class SuiCalendarMinuteView extends CalendarView {
         }
     }
 
-    constructor(renderer:Renderer2) {
+    constructor() {
+        const renderer = inject(Renderer2);
+
         super(renderer, CalendarViewType.Minute, new CalendarRangeMinuteService(DatePrecision.Hour, 4, 3));
     }
 }

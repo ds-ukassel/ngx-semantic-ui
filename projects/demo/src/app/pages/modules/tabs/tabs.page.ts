@@ -1,4 +1,4 @@
-import {Component, forwardRef} from '@angular/core';
+import {Component, forwardRef, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {SuiCheckboxModule, SuiDropdownModule, SuiModalModule, SuiModalService, SuiTabsModule} from 'lib';
 import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
@@ -174,13 +174,15 @@ export class TabExampleStandard {}
     imports: [SuiModalModule, SuiTabsModule, SuiDropdownModule, SuiCheckboxModule, FormsModule]
 })
 export class TabExampleProperties {
+    modalService = inject(SuiModalService);
+
     public firstActive:boolean;
     public secondActive!:boolean;
     public thirdActive!:boolean;
 
     public thirdDisabled!:boolean;
 
-    constructor(public modalService:SuiModalService) {
+    constructor() {
         this.firstActive = true;
     }
 

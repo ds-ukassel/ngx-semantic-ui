@@ -6,6 +6,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  inject,
   Input,
   Output,
   ViewChild,
@@ -126,7 +127,9 @@ export class SuiRadio<T> implements ICustomValueAccessorHost<T> {
     providers: [customValueAccessorFactory(SuiRadioValueAccessor)]
 })
 export class SuiRadioValueAccessor<T> extends CustomValueAccessor<T, SuiRadio<T>> {
-    constructor(host:SuiRadio<T>) {
+    constructor() {
+        const host = inject<SuiRadio<T>>(SuiRadio);
+
         super(host);
     }
 }

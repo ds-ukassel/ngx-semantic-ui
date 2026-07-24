@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, forwardRef, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, forwardRef, inject, ViewChild} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {
   ComponentModalConfig,
@@ -249,12 +249,12 @@ this.modalService
     imports: [FormsModule, SuiModalModule],
 })
 export class ModalExampleTemplate {
+    modalService = inject(SuiModalService);
+
     @ViewChild("modalTemplate")
     public modalTemplate!:ModalTemplate<{ data:string }, string, string>;
 
     public dynamicContent = "Example of dynamic content.";
-
-    constructor(public modalService:SuiModalService) {}
 
     public open(dynamicContent = "Example"):void {
         const config = new TemplateModalConfig<{ data:string }, string, string>(this.modalTemplate);
@@ -284,7 +284,7 @@ interface IConfirmModalContext {
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ConfirmModalComponent {
-    constructor(public modal:SuiModal<IConfirmModalContext, void, void>) {}
+    modal = inject<SuiModal<IConfirmModalContext, void, void>>(SuiModal);
 }
 
 export class ConfirmModal extends ComponentModalConfig<IConfirmModalContext, void, void> {
@@ -304,11 +304,11 @@ export class ConfirmModal extends ComponentModalConfig<IConfirmModalContext, voi
     imports: [SuiSelectModule, FormsModule]
 })
 export class ModalExampleComponent {
+    modalService = inject(SuiModalService);
+
 
     public availableSizes:string[] = ["mini", "tiny", "small", "normal", "large"];
     public size:ModalSize = ModalSize.Small;
-
-    constructor(public modalService:SuiModalService) {}
 
     public open():void {
         this.modalService

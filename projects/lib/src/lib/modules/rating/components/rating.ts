@@ -5,6 +5,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  inject,
   Input,
   Output,
 } from '@angular/core';
@@ -97,7 +98,9 @@ export class SuiRating implements ICustomValueAccessorHost<number> {
     providers: [customValueAccessorFactory(SuiRatingValueAccessor)]
 })
 export class SuiRatingValueAccessor extends CustomValueAccessor<number, SuiRating> {
-    constructor(host:SuiRating) {
+    constructor() {
+        const host = inject(SuiRating);
+
         super(host);
     }
 }

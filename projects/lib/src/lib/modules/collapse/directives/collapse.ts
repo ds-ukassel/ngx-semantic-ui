@@ -1,7 +1,10 @@
-import { Directive, ElementRef, Input, HostBinding, Renderer2 } from "@angular/core";
+import {Directive, ElementRef, HostBinding, inject, Input, Renderer2} from '@angular/core';
 
 @Directive({ selector: "[suiCollapse]" })
 export class SuiCollapse {
+    private _element = inject(ElementRef);
+    private _renderer = inject(Renderer2);
+
     // Set when the collapse is open, and not animating.
     @HostBinding("class.expanded")
     public get isExpanded():boolean {
@@ -48,7 +51,7 @@ export class SuiCollapse {
         return this._pristine ? 0 : this.collapseDuration;
     }
 
-    public constructor(private _element:ElementRef, private _renderer:Renderer2) {
+    public constructor() {
         this._pristine = true;
 
         // Collapse animation duration is 350ms by default.

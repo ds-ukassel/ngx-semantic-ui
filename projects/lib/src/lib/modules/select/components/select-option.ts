@@ -6,6 +6,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  inject,
   Input,
   Output,
   Renderer2,
@@ -21,6 +22,8 @@ import {SuiDropdownMenuItem} from '../../dropdown/internal';
   changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SuiSelectOption<T> extends SuiDropdownMenuItem {
+    changeDetector = inject(ChangeDetectorRef);
+
     // Sets the Semantic UI classes on the host element.
     @HostBinding("class.item")
     public readonly hasClasses:boolean;
@@ -51,7 +54,10 @@ export class SuiSelectOption<T> extends SuiDropdownMenuItem {
     @ViewChild("templateSibling", { read: ViewContainerRef, static: true })
     public templateSibling!:ViewContainerRef;
 
-    constructor(renderer:Renderer2, element:ElementRef, public changeDetector:ChangeDetectorRef) {
+    constructor() {
+        const renderer = inject(Renderer2);
+        const element = inject(ElementRef);
+
         // We inherit SuiDropdownMenuItem to automatically gain all keyboard navigation functionality.
         // This is not done via adding the .item class because it isn't supported by Angular.
         super(renderer, element);

@@ -1,8 +1,16 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy } from "@angular/core";
-import { SuiAccordionService } from "../services/accordion.service";
-import { TransitionController, Transition } from "../../transition/internal";
-import { SuiCollapse } from "../../collapse/directives/collapse";
-import { SuiTransition } from "../../transition/directives/transition";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+} from '@angular/core';
+import {SuiCollapse} from '../../collapse/directives/collapse';
+import {SuiTransition} from '../../transition/directives/transition';
+import {Transition, TransitionController} from '../../transition/internal';
+import {SuiAccordionService} from '../services/accordion.service';
 
 @Component({
     selector: "sui-accordion-panel",
@@ -34,6 +42,8 @@ import { SuiTransition } from "../../transition/directives/transition";
     imports: [SuiCollapse, SuiTransition]
 })
 export class SuiAccordionPanel {
+    private _changeDetector = inject(ChangeDetectorRef);
+
     private _service!:SuiAccordionService;
 
     public transitionController:TransitionController;
@@ -93,7 +103,7 @@ export class SuiAccordionPanel {
     @Output()
     public isOpenChange:EventEmitter<boolean>;
 
-    constructor(private _changeDetector:ChangeDetectorRef) {
+    constructor() {
         this.transitionController = new TransitionController(false);
 
         this._isOpen = false;

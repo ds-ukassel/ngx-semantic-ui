@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, HostBinding, HostListener} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostBinding, HostListener, inject} from '@angular/core';
 import {SuiLocalizationService} from '../../../behaviors/localization/internal';
 import {DatetimeConfig} from '../classes/calendar-config';
 import {SuiCalendarDateView} from '../views/date-view';
@@ -55,7 +55,9 @@ export class SuiDatepicker {
 
     public service:CalendarService;
 
-    constructor(localizationService:SuiLocalizationService) {
+    constructor() {
+        const localizationService = inject(SuiLocalizationService);
+
         this.service = new CalendarService(new DatetimeConfig(), localizationService.get().datepicker);
 
         this.hasClasses = true;

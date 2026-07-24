@@ -1,13 +1,25 @@
 import {
-    Directive, Input, HostBinding, EventEmitter, Output, AfterContentInit, ContentChild,
-    ElementRef, HostListener, QueryList, ContentChildren
-} from "@angular/core";
-import {HandledEvent, KeyCode, IFocusEvent, HandledKeyboardEvent} from '../../../misc/util/internal';
-import { DropdownService, DropdownAutoCloseType } from "../services/dropdown.service";
-import { SuiDropdownMenu } from "./dropdown-menu";
+  AfterContentInit,
+  ContentChild,
+  ContentChildren,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  inject,
+  Input,
+  Output,
+  QueryList,
+} from '@angular/core';
+import {HandledEvent, HandledKeyboardEvent, IFocusEvent, KeyCode} from '../../../misc/util/internal';
+import {DropdownAutoCloseType, DropdownService} from '../services/dropdown.service';
+import {SuiDropdownMenu} from './dropdown-menu';
 
 @Directive({ selector: "[suiDropdown]" })
 export class SuiDropdown implements AfterContentInit {
+    private _element = inject(ElementRef);
+
     public service:DropdownService;
 
     @ContentChild(SuiDropdownMenu)
@@ -78,7 +90,7 @@ export class SuiDropdown implements AfterContentInit {
         this.service.autoCloseMode = value;
     }
 
-    constructor(private _element:ElementRef) {
+    constructor() {
         this.service = new DropdownService();
         this.service.isOpenChange.subscribe(() => {
             if (this.service.isOpen) {

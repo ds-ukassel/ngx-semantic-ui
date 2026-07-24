@@ -1,10 +1,10 @@
-import { Component, Renderer2, ChangeDetectionStrategy } from "@angular/core";
-import { DateUtil, DatePrecision } from "../../../misc/util/internal";
-import { CalendarItem, SuiCalendarItem } from "../directives/calendar-item";
-import { CalendarView, CalendarViewType } from "./calendar-view";
-import { CalendarRangeService } from "../services/calendar-range.service";
-import { DateParser } from "../classes/date-parser";
-import { SuiCalendarViewTitle } from "../components/calendar-view-title";
+import {ChangeDetectionStrategy, Component, inject, Renderer2} from '@angular/core';
+import {DatePrecision, DateUtil} from '../../../misc/util/internal';
+import {DateParser} from '../classes/date-parser';
+import {SuiCalendarViewTitle} from '../components/calendar-view-title';
+import {CalendarItem, SuiCalendarItem} from '../directives/calendar-item';
+import {CalendarRangeService} from '../services/calendar-range.service';
+import {CalendarView, CalendarViewType} from './calendar-view';
 
 export class CalendarRangeDateService extends CalendarRangeService {
     public override calcStart(start:Date):Date {
@@ -65,7 +65,9 @@ export class SuiCalendarDateView extends CalendarView {
         return new DateParser(this.service.localeValues.formats.month, this.service.localeValues).format(this.currentDate);
     }
 
-    constructor(renderer:Renderer2) {
+    constructor() {
+        const renderer = inject(Renderer2);
+
         super(renderer, CalendarViewType.Date, new CalendarRangeDateService(DatePrecision.Month, 6, 7));
     }
 }
