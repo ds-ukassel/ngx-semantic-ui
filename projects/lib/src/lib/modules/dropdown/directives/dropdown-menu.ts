@@ -202,10 +202,10 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
                     this._service.setOpenState(false);
                     break;
                 }
-                // Down : select the next item below the current one, or the 1st if none selected.
                 case KeyCode.Down:
-                // Up : select the next item above the current one, or the 1st if none selected.
                 case KeyCode.Up: {
+                    // Down : select the next item below the current one, or the 1st if none selected.
+                    // Up : select the next item above the current one, or the 1st if none selected.
                     this.selectedItems.pop();
                     this.selectedItems.push(selectedContainer.updateSelection(selected, e.keyCode));
                     // Prevent default regardless of whether we are in an input, to stop jumping to the start or end of the query string.
@@ -213,7 +213,6 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
                     break;
                 }
                 // Enter : if the item doesn't contain a nested dropdown, 'click' it. Otherwise, fall through to 'Right' action.
-                // @ts-ignore
                 case KeyCode.Enter: {
                     if (selected && !selected.hasChildDropdown) {
                         selected.performClick();
@@ -221,8 +220,8 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
                     }
                 }
                     // falls through
-                // Right : if the selected item contains a nested dropdown, open the dropdown & select the 1st item.
                 case KeyCode.Right: {
+                    // Right : if the selected item contains a nested dropdown, open the dropdown & select the 1st item.
                     if (selected && selected.hasChildDropdown) {
                         selected.childDropdownMenu.service.setOpenState(true);
 
