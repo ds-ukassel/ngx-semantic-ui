@@ -50,7 +50,7 @@ export interface IResultContext<T> extends ITemplateRefContext<T> {
     (click)="select(r)"></sui-search-result>
   }
 
-  @if (results.length == 0) {
+  @if (!results.length) {
     <div class="message empty">
       <div class="header">{{ localeValues.noResults.header }}</div>
       <div class="description">{{ localeValues.noResults.message }}</div>

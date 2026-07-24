@@ -17,11 +17,13 @@ module.exports = tseslint.config(
     ],
     processor: angular.processInlineTemplates,
     rules: {
+      // TODO: Migrate all components to OnPush change detection
+      '@angular-eslint/prefer-on-push-component-change-detection': 'warn',
       '@angular-eslint/directive-selector': [
         'error',
         {
           type: 'attribute',
-          prefix: 'app',
+          prefix: 'sui',
           style: 'camelCase',
         },
       ],
@@ -29,7 +31,7 @@ module.exports = tseslint.config(
         'error',
         {
           type: 'element',
-          prefix: 'app',
+          prefix: 'sui',
           style: 'kebab-case',
         },
       ],
