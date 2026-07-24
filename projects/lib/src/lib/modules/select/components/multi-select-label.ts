@@ -1,15 +1,12 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  ElementRef,
   EventEmitter,
   HostBinding,
   HostListener,
   inject,
   Input,
   Output,
-  Renderer2,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
@@ -69,12 +66,7 @@ export class SuiMultiSelectLabel<T> extends SuiTransition {
     public templateSibling!:ViewContainerRef;
 
     constructor() {
-        const renderer = inject(Renderer2);
-        const element = inject(ElementRef);
-        const changeDetector = inject(ChangeDetectorRef);
-
-
-        super(renderer, element, changeDetector);
+        super();
 
         // Initialise transition functionality.
         this._transitionController = new TransitionController(false, "inline-block");

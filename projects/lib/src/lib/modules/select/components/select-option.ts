@@ -2,14 +2,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
   EventEmitter,
   HostBinding,
   HostListener,
   inject,
   Input,
   Output,
-  Renderer2,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
@@ -55,12 +53,9 @@ export class SuiSelectOption<T> extends SuiDropdownMenuItem {
     public templateSibling!:ViewContainerRef;
 
     constructor() {
-        const renderer = inject(Renderer2);
-        const element = inject(ElementRef);
-
         // We inherit SuiDropdownMenuItem to automatically gain all keyboard navigation functionality.
         // This is not done via adding the .item class because it isn't supported by Angular.
-        super(renderer, element);
+        super();
 
         this.hasClasses = true;
         this.isActive = false;

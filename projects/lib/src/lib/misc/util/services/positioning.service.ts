@@ -186,8 +186,8 @@ export class PositioningService {
             {
                 placement: placementToPopper(this._placement),
                 modifiers,
-                onCreate: (initial: any) => this._popperState = initial,
-                onUpdate: (update: any) => this._popperState = update
+                onCreate: (initial: Data) => this._popperState = initial,
+                onUpdate: (update: Data) => this._popperState = update
             }) as PopperInstance;
     }
 
