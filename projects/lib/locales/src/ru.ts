@@ -1,11 +1,11 @@
-import { IPartialLocaleValues } from "./interfaces/values";
+import { IPartialLocaleValues } from "@ds-ukassel/ngx-semantic-ui";
 
 /**
  * locale : Russian (ru)
  * author : Maksim Moiseikin : https://github.com/maksim-m
  */
 
-const ru:IPartialLocaleValues = {
+export const ru:IPartialLocaleValues = {
     datepicker: {
         months: [
             "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
@@ -50,5 +50,3 @@ const ru:IPartialLocaleValues = {
         }
     }
 };
-
-export default ru;

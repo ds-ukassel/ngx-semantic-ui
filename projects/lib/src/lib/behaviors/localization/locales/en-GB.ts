@@ -1,6 +1,6 @@
 import { ILocaleValues } from "./interfaces/values";
 
-const enGB:ILocaleValues = {
+export const enGB:ILocaleValues = {
     datepicker: {
         months: [
             "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
@@ -54,5 +54,3 @@ const enGB:ILocaleValues = {
         }
     }
 };
-
-export default enGB;
