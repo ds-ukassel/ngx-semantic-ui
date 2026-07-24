@@ -6,6 +6,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  inject,
   Input,
   Output,
   Renderer2,
@@ -78,7 +79,11 @@ export class SuiDimmer extends SuiTransition {
     @Input()
     public wrapContent:boolean;
 
-    constructor(renderer:Renderer2, element:ElementRef, changeDetector:ChangeDetectorRef) {
+    constructor() {
+        const renderer = inject(Renderer2);
+        const element = inject(ElementRef);
+        const changeDetector = inject(ChangeDetectorRef);
+
         super(renderer, element, changeDetector);
 
         this._isDimmed = false;

@@ -1,11 +1,15 @@
-import { Renderer2, ElementRef, Directive, Input, HostBinding, ChangeDetectorRef } from "@angular/core";
-import { TransitionController } from "../classes/transition-controller";
+import {ChangeDetectorRef, Directive, ElementRef, HostBinding, inject, Input, Renderer2} from '@angular/core';
+import {TransitionController} from '../classes/transition-controller';
 
 @Directive({
     selector: "[suiTransition]",
     exportAs: "transition"
 })
 export class SuiTransition {
+    protected _renderer = inject(Renderer2);
+    protected _element = inject(ElementRef);
+    private _changeDetector = inject(ChangeDetectorRef);
+
     // Each transition must have a controller associated that dispatches the transitions.
     private _controller!:TransitionController;
 
@@ -33,8 +37,6 @@ export class SuiTransition {
         }
         return false;
     }
-
-    constructor(protected _renderer:Renderer2, protected _element:ElementRef, private _changeDetector:ChangeDetectorRef) {}
 
     // Initialises the controller with the injected renderer and elementRef.
     public setTransitionController(transitionController:TransitionController):void {

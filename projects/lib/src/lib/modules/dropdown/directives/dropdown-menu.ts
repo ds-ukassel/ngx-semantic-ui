@@ -7,6 +7,7 @@ import {
   ElementRef,
   forwardRef,
   HostListener,
+  inject,
   Input,
   OnDestroy,
   QueryList,
@@ -20,6 +21,9 @@ import {DropdownAutoCloseType, DropdownService} from '../services/dropdown.servi
     // We must attach to every '.item' as Angular doesn't support > selectors.
     selector: ".item" })
 export class SuiDropdownMenuItem {
+    private _renderer = inject(Renderer2);
+    element = inject(ElementRef);
+
     public get isDisabled():boolean {
         // We must use nativeElement as Angular doesn't have a way of reading class information.
         const element = this.element.nativeElement as Element;
@@ -51,7 +55,7 @@ export class SuiDropdownMenuItem {
         return !!this.childDropdownMenu;
     }
 
-    constructor(private _renderer:Renderer2, public element:ElementRef) {
+    constructor() {
         this.isSelected = false;
 
         this.selectedClass = "selected";
@@ -142,7 +146,11 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
 
     private _parentKeyDownListener:() => void;
 
-    constructor(renderer:Renderer2, element:ElementRef, changeDetector:ChangeDetectorRef) {
+    constructor() {
+        const renderer = inject(Renderer2);
+        const element = inject(ElementRef);
+        const changeDetector = inject(ChangeDetectorRef);
+
         super(renderer, element, changeDetector);
 
         // Initialise transition functionality.

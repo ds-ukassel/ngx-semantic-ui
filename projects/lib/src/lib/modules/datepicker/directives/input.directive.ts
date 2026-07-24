@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Host, HostBinding, HostListener, Input, Renderer2} from '@angular/core';
+import {Directive, ElementRef, HostBinding, HostListener, inject, Input, Renderer2} from '@angular/core';
 import bowser from 'bowser';
 import * as isUAWebView from 'is-ua-webview';
 
@@ -12,6 +12,11 @@ const isWebView = isUAWebView["default"] || isUAWebView;
 
 @Directive({ selector: "input[suiDatepicker]" })
 export class SuiDatepickerInputDirective {
+    datepicker = inject(SuiDatepickerDirective, { host: true });
+    valueAccessor = inject(SuiDatepickerDirectiveValueAccessor, { host: true });
+    private _renderer = inject(Renderer2);
+    private _element = inject(ElementRef);
+
     private _useNativeOnMobile!:boolean;
 
     @Input("pickerUseNativeOnMobile")
@@ -91,11 +96,9 @@ export class SuiDatepickerInputDirective {
         return undefined;
     }
 
-    constructor(@Host() public datepicker:SuiDatepickerDirective,
-                @Host() public valueAccessor:SuiDatepickerDirectiveValueAccessor,
-                private _renderer:Renderer2,
-                private _element:ElementRef,
-                localizationService:SuiLocalizationService) {
+    constructor() {
+        const localizationService = inject(SuiLocalizationService);
+
 
         this.useNativeOnMobile = true;
         this.fallbackActive = false;

@@ -6,6 +6,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  inject,
   Input,
   Output,
   Renderer2,
@@ -24,6 +25,8 @@ import {IOptionContext} from '../classes/select-base';
   imports: [],
 })
 export class SuiMultiSelectLabel<T> extends SuiTransition {
+    componentFactory = inject(SuiComponentFactory);
+
     // Sets the Semantic UI classes on the host element.
     // Doing it on the host enables use in menus etc.
     @HostBinding("class.ui")
@@ -65,10 +68,11 @@ export class SuiMultiSelectLabel<T> extends SuiTransition {
     @ViewChild("templateSibling", { read: ViewContainerRef, static: true })
     public templateSibling!:ViewContainerRef;
 
-    constructor(renderer:Renderer2,
-                element:ElementRef,
-                changeDetector:ChangeDetectorRef,
-                public componentFactory:SuiComponentFactory) {
+    constructor() {
+        const renderer = inject(Renderer2);
+        const element = inject(ElementRef);
+        const changeDetector = inject(ChangeDetectorRef);
+
 
         super(renderer, element, changeDetector);
 

@@ -5,6 +5,7 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
+  inject,
   Input,
   OnInit,
   Output,
@@ -26,6 +27,10 @@ import {SuiModalDimmer} from './dimmer';
   imports: [SuiModalDimmer, SuiTransition],
 })
 export class SuiModal<T, U> implements OnInit, AfterViewInit {
+    private _renderer = inject(Renderer2);
+    private _element = inject(ElementRef);
+    private _componentFactory = inject(SuiComponentFactory);
+
     @Input()
     // Determines whether the modal can be closed with a close button, clicking outside, or the escape key.
     public isClosable!:boolean;
@@ -143,7 +148,7 @@ export class SuiModal<T, U> implements OnInit, AfterViewInit {
         return classes;
     }
 
-    constructor(private _renderer:Renderer2, private _element:ElementRef, private _componentFactory:SuiComponentFactory) {
+    constructor() {
         // Initialise with default configuration from `ModalConfig` (to avoid writing defaults twice).
         const config = new ModalConfig<undefined, T, U>();
         this.loadConfig(config);

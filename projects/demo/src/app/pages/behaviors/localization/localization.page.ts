@@ -1,6 +1,6 @@
-import * as locales from '@ds-ukassel/ngx-semantic-ui/locales';
-import {ChangeDetectionStrategy, Component, forwardRef, OnDestroy} from '@angular/core';
+import {ChangeDetectionStrategy, Component, forwardRef, inject, OnDestroy} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import * as locales from '@ds-ukassel/ngx-semantic-ui/locales';
 import {SuiDatepickerModule, SuiDropdownModule, SuiLocalizationService, SuiSelectModule} from 'lib';
 import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
 import {ExampleComponent} from '../../../components/example/example.component';
@@ -208,6 +208,8 @@ interface ILocaleValues {
     imports: [SuiSelectModule, FormsModule, SuiDatepickerModule]
 })
 export class LocalizationExample implements OnDestroy {
+    localizationService = inject(SuiLocalizationService);
+
     public languages:ISupportedLanguage[];
 
     public get language():string {
@@ -218,7 +220,7 @@ export class LocalizationExample implements OnDestroy {
         this.localizationService.setLanguage(language);
     }
 
-    constructor(public localizationService:SuiLocalizationService) {
+    constructor() {
         this.languages = [];
 
         supportedLanguages.forEach(l => {

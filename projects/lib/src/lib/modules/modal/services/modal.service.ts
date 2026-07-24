@@ -1,13 +1,14 @@
-import { Injectable } from "@angular/core";
-import { SuiComponentFactory } from "../../../misc/util/internal";
-import { ModalConfig, TemplateModalConfig, ComponentModalConfig } from "../classes/modal-config";
-import { SuiModal } from "../components/modal";
-import { Modal } from "../classes/modal-controls";
-import { ActiveModal } from "../classes/active-modal";
+import {inject, Injectable} from '@angular/core';
+import {SuiComponentFactory} from '../../../misc/util/internal';
+import {ActiveModal} from '../classes/active-modal';
+import {ComponentModalConfig, ModalConfig, TemplateModalConfig} from '../classes/modal-config';
+import {Modal} from '../classes/modal-controls';
+import {SuiModal} from '../components/modal';
 
 @Injectable()
 export class SuiModalService {
-    constructor(private _componentFactory:SuiComponentFactory) {}
+    private _componentFactory = inject(SuiComponentFactory);
+
 
     public open<T, U, V>(modal:ModalConfig<T, U, V>):ActiveModal<T, U, V> {
         // Generate the modal component to be shown.

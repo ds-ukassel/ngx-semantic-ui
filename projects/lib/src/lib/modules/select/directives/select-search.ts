@@ -1,7 +1,10 @@
-import {Directive, ElementRef, EventEmitter, HostBinding, HostListener, Renderer2} from '@angular/core';
+import {Directive, ElementRef, EventEmitter, HostBinding, HostListener, inject, Renderer2} from '@angular/core';
 
 @Directive({ selector: "input[suiSelectSearch]" })
 export class SuiSelectSearch {
+    private _renderer = inject(Renderer2);
+    private _element = inject(ElementRef);
+
     @HostBinding("class.search")
     public readonly hasClasses:boolean;
 
@@ -15,7 +18,7 @@ export class SuiSelectSearch {
     public onQueryUpdated:EventEmitter<string>;
     public onQueryKeyDown:EventEmitter<KeyboardEvent>;
 
-    constructor(private _renderer:Renderer2, private _element:ElementRef) {
+    constructor() {
         this.onQueryUpdated = new EventEmitter<string>();
         this.onQueryKeyDown = new EventEmitter<KeyboardEvent>();
 

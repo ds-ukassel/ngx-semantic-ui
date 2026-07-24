@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Renderer2} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  inject,
+  Renderer2,
+} from '@angular/core';
 import {SuiDimmer} from '../../dimmer/internal';
 
 @Component({
@@ -19,7 +27,11 @@ export class SuiModalDimmer extends SuiDimmer {
     @HostBinding("class.modals")
     public override readonly hasClasses:boolean;
 
-    constructor(renderer:Renderer2, element:ElementRef, changeDetector:ChangeDetectorRef) {
+    constructor() {
+        const renderer = inject(Renderer2);
+        const element = inject(ElementRef);
+        const changeDetector = inject(ChangeDetectorRef);
+
         super(renderer, element, changeDetector);
         this.hasClasses = true;
         this.isClickable = false;

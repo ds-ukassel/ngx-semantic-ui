@@ -4,6 +4,7 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
+  inject,
   Input,
   Output,
   ViewChild,
@@ -44,7 +45,10 @@ export class SuiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValue
         this._placeholder = placeholder;
     }
 
-    constructor(element:ElementRef, localizationService:SuiLocalizationService) {
+    constructor() {
+        const element = inject(ElementRef);
+        const localizationService = inject(SuiLocalizationService);
+
         super(element, localizationService);
 
         this.selectedOptionChange = new EventEmitter<U>();
@@ -143,7 +147,9 @@ export class SuiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValue
     providers: [customValueAccessorFactory(SuiSelectValueAccessor)]
 })
 export class SuiSelectValueAccessor<T, U> extends CustomValueAccessor<U, SuiSelect<T, U>> {
-    constructor(host:SuiSelect<T, U>) {
+    constructor() {
+        const host = inject<SuiSelect<T, U>>(SuiSelect);
+
         super(host);
     }
 }

@@ -1,5 +1,4 @@
-
-import { Directive, HostBinding, HostListener, Input, EventEmitter, ChangeDetectorRef } from "@angular/core";
+import {ChangeDetectorRef, Directive, EventEmitter, HostBinding, HostListener, inject, Input} from '@angular/core';
 
 export class CalendarItem {
     public date:Date;
@@ -17,6 +16,8 @@ export class CalendarItem {
 
 @Directive({ selector: "[calendarItem]" })
 export class SuiCalendarItem {
+    changeDetector = inject(ChangeDetectorRef);
+
     @Input("calendarItem")
     public item!:CalendarItem;
 
@@ -40,7 +41,7 @@ export class SuiCalendarItem {
 
     public onFocussed:EventEmitter<boolean>;
 
-    constructor(public changeDetector:ChangeDetectorRef) {
+    constructor() {
         this.hasFocus = false;
 
         this.onFocussed = new EventEmitter<boolean>();
