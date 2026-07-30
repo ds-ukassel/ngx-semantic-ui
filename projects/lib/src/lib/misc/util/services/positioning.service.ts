@@ -42,7 +42,7 @@ export interface IPositionBoundingBox {
     right:number;
 }
 
-// Returns `undefined` for `auto`, expressed by `autoPlacement`.
+// Returns `undefined` instead of old `auto`
 function placementToFloating(placement:PositioningPlacement):Placement | undefined {
     if (!placement || placement === PositioningPlacement.Auto) {
         return undefined;
@@ -136,7 +136,8 @@ export class PositioningService {
         return this._actualPlacement;
     }
 
-    constructor(anchor:ElementRef, subject:ElementRef, placement:PositioningPlacement, arrowSelector?:string) {this.anchor = anchor;
+    constructor(anchor:ElementRef, subject:ElementRef, placement:PositioningPlacement, arrowSelector?:string) {
+        this.anchor = anchor;
         this.subject = subject;
         this._placement = placement;
         this._actualPlacement = PositioningPlacement.Auto;
