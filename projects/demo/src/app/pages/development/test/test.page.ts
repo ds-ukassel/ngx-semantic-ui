@@ -8,6 +8,4 @@ import { PageContentComponent } from "../../../components/page-content/page-cont
     changeDetection: ChangeDetectionStrategy.Eager,
     imports: [PageTitleComponent, PageContentComponent]
 })
-export class TestPage {
-    constructor() {}
-}
+export class TestPage {}

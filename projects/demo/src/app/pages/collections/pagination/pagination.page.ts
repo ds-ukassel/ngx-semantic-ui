@@ -170,8 +170,6 @@ export class PaginationExampleStandard implements OnInit {
     public navigation!:boolean;
     public boundary!:boolean;
 
-    constructor() { }
-
     public ngOnInit():void {
         this.selectedPage = 1;
         this.navigation = true;
@@ -191,8 +189,6 @@ export class PaginationExampleMaxSize implements OnInit {
     public ellipses!:boolean;
     public maxSize!:number;
 
-    constructor() { }
-
     public ngOnInit():void {
         this.selectedPage = 1;
         this.ellipses = true;
@@ -211,8 +207,6 @@ export class PaginationExampleRotation implements OnInit {
     public selectedPage!:number;
     public ellipses!:boolean;
     public maxSize!:number;
-
-    constructor() { }
 
     public ngOnInit():void {
         this.selectedPage = 1;
