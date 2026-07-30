@@ -191,7 +191,7 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
             const [selected] = this.selectedItems.slice(-1);
             // Keeping track of the menu containing the currently selected element allows us to easily determine its siblings.
             const selectedContainer:SuiDropdownMenu = this.selectedItems.length >= 2
-                ? this.selectedItems.slice(-2)[0].childDropdownMenu
+                ? this.selectedItems.at(-2)!.childDropdownMenu
                 : this;
 
             switch (e.keyCode) {

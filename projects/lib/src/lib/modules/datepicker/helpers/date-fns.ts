@@ -101,11 +101,11 @@ export class DateFnsParser {
     };
   }
 
-  public format(d: Date, f: string): string {
-    return format(d, f, this._config);
+  public format(date: Date, formatString: string): string {
+    return format(date, formatString, this._config);
   }
 
-  public parse(dS: string, f: string, bD: Date): Date {
-    return parse(dS, f, bD, this._config);
+  public parse(dateString: string, formatString: string, baseDate: Date): Date {
+    return parse(dateString, formatString, baseDate, this._config);
   }
 }
