@@ -1,4 +1,4 @@
-import { ComponentRef, Directive, ElementRef, HostListener, OnDestroy, Renderer2 } from "@angular/core";
+import { ComponentRef, Directive, ElementRef, HostListener, inject, OnDestroy, Renderer2 } from "@angular/core";
 import { SuiComponentFactory } from "../../../misc/util/internal";
 import { PopupConfig, PopupTrigger, IPopupConfig } from "./popup-config";
 import { SuiPopup } from "../components/popup";
@@ -12,6 +12,10 @@ export interface IPopup {
 
 @Directive()
 export abstract class SuiPopupController implements IPopup, OnDestroy {
+    protected _renderer = inject(Renderer2);
+    protected _element = inject(ElementRef);
+    protected _componentFactory = inject(SuiComponentFactory);
+
     // Stores reference to generated popup component.
     private _componentRef:ComponentRef<SuiPopup>;
 
@@ -27,11 +31,10 @@ export abstract class SuiPopupController implements IPopup, OnDestroy {
     // Function to remove the document click handler.
     private _documentListener:(() => void) | undefined;
 
-    constructor(protected _renderer:Renderer2,
-                protected _element:ElementRef,
-                protected _componentFactory:SuiComponentFactory,
-                config:PopupConfig) {
-
+    // Not a dependency: the popup is built from this while constructing, so it cannot be an
+    // abstract member either, as those are only initialised once the subclass runs.
+    // eslint-disable-next-line @angular-eslint/prefer-inject
+    constructor(config:PopupConfig) {
         // Generate a new SuiPopup component and attach it to the application view.
         this._componentRef = this._componentFactory.createComponent(SuiPopup);
 

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, Renderer2} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {DatePrecision, DateUtil, Util} from '../../../misc/util/internal';
 import {DateParser} from '../classes/date-parser';
 import {SuiCalendarViewTitle} from '../components/calendar-view-title';
@@ -18,7 +18,7 @@ export class CalendarRangeMinuteService extends CalendarRangeService {
             .map(i => DateUtil.add(DatePrecision.Minute, DateUtil.clone(start), i * 5));
     }
 
-    public configureItem(item:CalendarItem, baseDate:Date):void {
+    public configureItem(item:CalendarItem, _baseDate:Date):void {
         item.humanReadable = new DateParser(this.service.localeValues.formats.time, this.service.localeValues).format(item.date);
         item.isOutsideRange = false;
     }
@@ -42,7 +42,7 @@ export class CalendarRangeMinuteService extends CalendarRangeService {
       <tr>
         @for (item of group; track item) {
           <td class="link"
-            [calendarItem]="item"
+            [suiCalendarItem]="item"
             (click)="setDate(item)">{{ item.humanReadable }}
           </td>
         }
@@ -55,6 +55,9 @@ export class CalendarRangeMinuteService extends CalendarRangeService {
     imports: [SuiCalendarViewTitle, SuiCalendarItem]
 })
 export class SuiCalendarMinuteView extends CalendarView {
+    public readonly ranges = new CalendarRangeMinuteService(DatePrecision.Hour, 4, 3);
+    protected readonly _type = CalendarViewType.Minute;
+
     public get date():string {
         if (this.service.config.mode !== CalendarMode.TimeOnly) {
             // Set minutes and seconds to 0
@@ -65,11 +68,5 @@ export class SuiCalendarMinuteView extends CalendarView {
             const timeFormat:string = this.service.localeValues.formats.time.replace(/[ms]/g, "0");
             return new DateParser(timeFormat, this.service.localeValues).format(this.currentDate);
         }
-    }
-
-    constructor() {
-        const renderer = inject(Renderer2);
-
-        super(renderer, CalendarViewType.Minute, new CalendarRangeMinuteService(DatePrecision.Hour, 4, 3));
     }
 }

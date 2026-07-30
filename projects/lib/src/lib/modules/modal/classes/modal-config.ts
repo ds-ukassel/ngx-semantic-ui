@@ -12,6 +12,8 @@ export const ModalSize = {
 };
 
 // Stores a basic set of configuration options for a modal.
+// `U` is unused here, but the subclasses need it, so we can't drop it.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export class ModalConfig<T, U = undefined, V = undefined> {
     // Determines whether the modal can be closed with a close button, clicking outside, or the escape key.
     public isClosable:boolean;
@@ -71,9 +73,9 @@ export class TemplateModalConfig<T, U = undefined, V = undefined> extends ModalC
 
 // Used when creating a modal from an existing component.
 export class ComponentModalConfig<T, U = undefined, V = undefined> extends ModalConfig<T, U, V> {
-    public component:Type<any>;
+    public component:Type<unknown>;
 
-    constructor(component:Type<any>, context:T | undefined = undefined, isClosable = true) {
+    constructor(component:Type<unknown>, context:T | undefined = undefined, isClosable = true) {
         super(context, isClosable);
 
         this.component = component;

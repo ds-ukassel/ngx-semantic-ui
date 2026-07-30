@@ -1,5 +1,4 @@
-import {ComponentRef, ElementRef, Renderer2, Type} from '@angular/core';
-import {SuiComponentFactory} from '../../../misc/util/internal';
+import {ComponentRef, Type} from '@angular/core';
 import {PopupConfig} from './popup-config';
 import {SuiPopupController} from './popup-controller';
 
@@ -15,13 +14,8 @@ export class SuiPopupComponentController<T> extends SuiPopupController {
         return undefined;
     }
 
-    constructor(renderer:Renderer2,
-                element:ElementRef,
-                componentFactory:SuiComponentFactory,
-                private _component:Type<T>,
-                config:PopupConfig) {
-
-        super(renderer, element, componentFactory, config);
+    constructor(private _component:Type<T>, config:PopupConfig) {
+        super(config);
     }
 
     public override open():void {

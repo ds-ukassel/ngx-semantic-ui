@@ -1,9 +1,8 @@
-import {Directive, ElementRef, inject, Input, Renderer2, TemplateRef} from '@angular/core';
+import {Directive, inject, Input, TemplateRef} from '@angular/core';
 import {
   BooleanInput,
   coerceBooleanProperty,
   PositioningPlacement,
-  SuiComponentFactory,
   Util,
 } from '../../../misc/util/internal';
 import {PopupConfig, PopupSize, PopupTrigger, PopupWidth} from '../classes/popup-config';
@@ -104,12 +103,6 @@ export class SuiPopupDirective<T> extends SuiPopupTemplateController<T> {
     }
 
     constructor() {
-        const renderer = inject(Renderer2);
-        const element = inject(ElementRef);
-        const componentFactory = inject(SuiComponentFactory);
-        const popupDefaults = inject(SuiPopupConfig);
-
-
-        super(renderer, element, componentFactory, new PopupConfig(popupDefaults));
+        super(new PopupConfig(inject(SuiPopupConfig)));
     }
 }

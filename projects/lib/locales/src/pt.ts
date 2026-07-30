@@ -24,9 +24,9 @@ export const pt:IPartialLocaleValues = {
         ],
         formats: {
             time: "HH:mm",
-            datetime: "d MMMM [de] yyyy HH:mm",
-            date: "d [de] MMMM [de] yyyy",
-            month: "MMMM [de] yyyy",
+            datetime: "d MMMM 'de' yyyy HH:mm",
+            date: "d 'de' MMMM 'de' yyyy",
+            month: "MMMM 'de' yyyy",
             year: "yyyy"
         },
         firstDayOfWeek: 1

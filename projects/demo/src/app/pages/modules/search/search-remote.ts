@@ -1,6 +1,6 @@
 import {JsonPipe} from '@angular/common';
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {SuiSearchModule} from 'lib';
+import {LookupFn, SuiSearchModule} from 'lib';
 import {SearchExampleStandard} from './search-standard';
 import {IOption, standardOptions} from './search.common';
 
@@ -23,7 +23,7 @@ export const exampleRemoteTemplate = `
 export class SearchExampleRemote extends SearchExampleStandard {
   public last!: IOption | IOption[];
 
-  public optionsSearch: any = async (query: string): Promise<IOption[]> => {
+  public optionsSearch:LookupFn<IOption> = async (query = ''): Promise<IOption[]> => {
     const options = standardOptions.map((o: string) => ({title: o}));
 
     return new Promise<IOption[]>(resolve => {

@@ -13,8 +13,7 @@ export const DateUtil = {
     startOf(precision:DatePrecision, date:Date, resetAll = false):Date {
         switch (precision) {
             case DatePrecision.Decade:
-                const start = Math.floor(date.getFullYear() / 10) * 10 + 1;
-                date.setFullYear(start);
+                date.setFullYear(Math.floor(date.getFullYear() / 10) * 10 + 1);
                 if (!resetAll) {
                     break;
                 }

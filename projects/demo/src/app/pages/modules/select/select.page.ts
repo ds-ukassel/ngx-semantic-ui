@@ -2,7 +2,7 @@ import {JsonPipe} from '@angular/common';
 import {ChangeDetectionStrategy, Component, forwardRef} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
-import {SuiCheckboxModule, SuiMessageModule, SuiSelectModule} from 'lib';
+import {LookupFn, SuiCheckboxModule, SuiMessageModule, SuiSelectModule} from 'lib';
 import {ApiComponent, ApiDefinition} from '../../../components/api/api.component';
 import {CodeblockComponent} from '../../../components/codeblock/codeblock.component';
 import {ExampleComponent} from '../../../components/example/example.component';
@@ -513,7 +513,7 @@ export class SelectExampleTemplate {
     public options:IOption[] = namedOptions;
     public selectedOption:IOption = this.options[5];
 
-    public formatter(option:IOption, query?:string):string {
+    public formatter(option:IOption, _query?:string):string {
         return `name: '${option.name}'`;
     }
 }
@@ -528,16 +528,17 @@ export class SelectExampleLookupSearch {
     private _options:IOption[] = idOptions;
     public selectedOption:number = this._options[3]["id"] || 1;
 
-    public optionsLookup: any = async (query:string|undefined, initial:number) => {
+    // Not `async`: that would return `Promise<T | T[]>`, but `LookupFn` wants either one.
+    public optionsLookup:LookupFn<IOption, number> = (query, initial) => {
         if (initial != undefined) {
-            return new Promise<IOption | undefined>(resolve =>
-                setTimeout(() => resolve(this._options.find(item => item.id === initial)), 500));
+            return new Promise<IOption>(resolve =>
+                setTimeout(() => resolve(this._options.find(item => item.id === initial)!), 500));
         }
 
         let regex:RegExp | string;
         try {
             regex = new RegExp(query || '', "i");
-        } catch (e) {
+        } catch {
             regex = query || '';
         }
         return new Promise<IOption[]>(resolve =>

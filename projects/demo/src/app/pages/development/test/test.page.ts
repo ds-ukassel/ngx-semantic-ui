@@ -1,5 +1,4 @@
-import { Component, AfterViewInit, ViewChild, TemplateRef, ChangeDetectionStrategy } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { PageTitleComponent } from "../../../components/page-title/page-title.component";
 import { PageContentComponent } from "../../../components/page-content/page-content.component";
 
@@ -9,6 +8,4 @@ import { PageContentComponent } from "../../../components/page-content/page-cont
     changeDetection: ChangeDetectionStrategy.Eager,
     imports: [PageTitleComponent, PageContentComponent]
 })
-export class TestPage {
-    constructor() {}
-}
+export class TestPage {}

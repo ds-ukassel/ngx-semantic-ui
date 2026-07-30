@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, Renderer2} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {DatePrecision} from '../../../misc/util/internal';
 import {DateParser} from '../classes/date-parser';
 import {SuiCalendarViewTitle} from '../components/calendar-view-title';
@@ -7,7 +7,7 @@ import {CalendarRangeService} from '../services/calendar-range.service';
 import {CalendarView, CalendarViewType} from './calendar-view';
 
 export class CalendarRangeHourService extends CalendarRangeService {
-    public configureItem(item:CalendarItem, baseDate:Date):void {
+    public configureItem(item:CalendarItem, _baseDate:Date):void {
         // Set minutes and seconds to 0
         const customFormat:string = this.service.localeValues.formats.time.replace(/[ms]/g, "0");
         item.humanReadable = new DateParser(customFormat, this.service.localeValues).format(item.date);
@@ -19,7 +19,7 @@ export class CalendarRangeHourService extends CalendarRangeService {
     selector: "sui-calendar-hour-view",
     template: `
 <table class="ui celled center aligned unstackable table four column hour">
-  @if (service.config.mode != 1) {
+  @if (service.config.mode !== 1) {
     <thead>
       <tr>
         <th colspan="4">
@@ -35,7 +35,7 @@ export class CalendarRangeHourService extends CalendarRangeService {
       <tr>
         @for (item of group; track item) {
           <td class="link"
-            [calendarItem]="item"
+            [suiCalendarItem]="item"
             (click)="setDate(item)">{{ item.humanReadable }}
           </td>
         }
@@ -48,14 +48,10 @@ export class CalendarRangeHourService extends CalendarRangeService {
     imports: [SuiCalendarViewTitle, SuiCalendarItem]
 })
 export class SuiCalendarHourView extends CalendarView {
+    public readonly ranges = new CalendarRangeHourService(DatePrecision.Date, 6, 4);
+    protected readonly _type = CalendarViewType.Hour;
 
     public get date():string {
         return new DateParser(this.service.localeValues.formats.date, this.service.localeValues).format(this.currentDate);
-    }
-
-    constructor() {
-        const renderer = inject(Renderer2);
-
-        super(renderer, CalendarViewType.Hour, new CalendarRangeHourService(DatePrecision.Date, 6, 4));
     }
 }

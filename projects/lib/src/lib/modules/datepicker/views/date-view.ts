@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, Renderer2} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {DatePrecision, DateUtil} from '../../../misc/util/internal';
 import {DateParser} from '../classes/date-parser';
 import {SuiCalendarViewTitle} from '../components/calendar-view-title';
@@ -43,7 +43,7 @@ export class CalendarRangeDateService extends CalendarRangeService {
       <tr>
         @for (item of group; track item) {
           <td class="link"
-            [calendarItem]="item"
+            [suiCalendarItem]="item"
             (click)="setDate(item)">{{ item.humanReadable }}
           </td>
         }
@@ -56,6 +56,9 @@ export class CalendarRangeDateService extends CalendarRangeService {
     imports: [SuiCalendarViewTitle, SuiCalendarItem]
 })
 export class SuiCalendarDateView extends CalendarView {
+    public readonly ranges = new CalendarRangeDateService(DatePrecision.Month, 6, 7);
+    protected readonly _type = CalendarViewType.Date;
+
     public get days():string[] {
         const days = this.service.localeValues.weekdaysNarrow;
         return days.map((d, i) => days[(i + this.service.firstDayOfWeek) % days.length]);
@@ -63,11 +66,5 @@ export class SuiCalendarDateView extends CalendarView {
 
     public get date():string {
         return new DateParser(this.service.localeValues.formats.month, this.service.localeValues).format(this.currentDate);
-    }
-
-    constructor() {
-        const renderer = inject(Renderer2);
-
-        super(renderer, CalendarViewType.Date, new CalendarRangeDateService(DatePrecision.Month, 6, 7));
     }
 }

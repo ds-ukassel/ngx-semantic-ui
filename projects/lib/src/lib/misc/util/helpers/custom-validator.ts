@@ -1,5 +1,5 @@
 import { NG_VALIDATORS, AbstractControl, ValidationErrors, Validator } from "@angular/forms";
-import { forwardRef, InjectionToken, Type } from "@angular/core";
+import { forwardRef, Type } from "@angular/core";
 
 export interface ICustomValidatorHost {
     validate(c:AbstractControl):ValidationErrors | null;
@@ -20,12 +20,12 @@ export class CustomValidator<T extends ICustomValidatorHost> implements Validato
 }
 
 export interface IValidationProvider {
-    provide:InjectionToken<(Function | Validator)[]>;
-    useExisting:Type<any>;
+    provide:typeof NG_VALIDATORS;
+    useExisting:Type<Validator>;
     multi:boolean;
 }
 
-export function customValidatorFactory(type:Function):IValidationProvider {
+export function customValidatorFactory(type:Type<Validator>):IValidationProvider {
     return {
         provide: NG_VALIDATORS,
         useExisting: forwardRef(() => type),

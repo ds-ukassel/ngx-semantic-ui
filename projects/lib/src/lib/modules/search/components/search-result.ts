@@ -63,6 +63,6 @@ export class SuiSearchResult<T> {
         this.hasClasses = true;
 
         // By default we make this function return an empty string, for the brief moment when it isn't displaying the correct label.
-        this.formatter = value => "";
+        this.formatter = () => "";
     }
 }

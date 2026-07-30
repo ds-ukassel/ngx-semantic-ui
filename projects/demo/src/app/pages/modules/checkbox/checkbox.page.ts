@@ -199,7 +199,7 @@ export class CheckboxExampleStandard {
     imports: [SuiCheckboxModule, FormsModule, JsonPipe]
 })
 export class CheckboxExampleRadioButton {
-    public eRadio:any = "world";
+    public eRadio:string | { example:string } = "world";
 }
 
 @Component({
@@ -209,7 +209,7 @@ export class CheckboxExampleRadioButton {
     imports: [SuiCheckboxModule, FormsModule]
 })
 export class CheckboxExampleStyled {
-    public eStyledRadio:any;
+    public eStyledRadio?:string;
 }
 
 export const CheckboxPageComponents = [CheckboxPage, CheckboxExampleStandard, CheckboxExampleRadioButton, CheckboxExampleStyled];

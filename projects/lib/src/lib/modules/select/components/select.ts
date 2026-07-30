@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   Directive,
-  ElementRef,
   EventEmitter,
   inject,
   Input,
@@ -10,7 +9,6 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import {SuiLocalizationService} from '../../../behaviors/localization/internal';
 import {CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost} from '../../../misc/util/internal';
 import {SuiDropdownMenu} from '../../dropdown/directives/dropdown-menu';
 import {SuiSelectBase} from '../classes/select-base';
@@ -46,10 +44,7 @@ export class SuiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValue
     }
 
     constructor() {
-        const element = inject(ElementRef);
-        const localizationService = inject(SuiLocalizationService);
-
-        super(element, localizationService);
+        super();
 
         this.selectedOptionChange = new EventEmitter<U>();
     }
@@ -141,7 +136,7 @@ export class SuiSelect<T, U> extends SuiSelectBase<T, U> implements ICustomValue
 @Directive({
     selector: "sui-select",
     host: {
-        "(selectedOptionChange)": "onChange($event)",
+        "(selectedOptionChange)": "onChange($any($event))",
         "(touched)": "onTouched()"
     },
     providers: [customValueAccessorFactory(SuiSelectValueAccessor)]

@@ -3,6 +3,8 @@ import {Subscription} from 'rxjs';
 import {Util} from '../../../misc/util/internal';
 import {SuiRadio} from '../components/radio';
 
+// We attach to the surrounding form, so this can't have the `sui` prefix.
+// eslint-disable-next-line @angular-eslint/directive-selector
 @Directive({ selector: "form:not([ngForm]):not([[ngForm]]),ngForm,[ngForm]" })
 export class SuiRadioManager<T> implements AfterContentInit {
     element = inject(ElementRef);

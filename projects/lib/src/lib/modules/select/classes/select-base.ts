@@ -7,6 +7,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  inject,
   Input,
   OnDestroy,
   Output,
@@ -31,6 +32,9 @@ export interface IOptionContext<T> extends ITemplateRefContext<T> {
 // and U to specify the type of the property of the option used as the value.
 @Directive()
 export abstract class SuiSelectBase<T, U> implements AfterViewInit, OnDestroy {
+    private _element = inject(ElementRef);
+    protected _localizationService = inject(SuiLocalizationService);
+
     public dropdownService:DropdownService;
     public searchService:SearchService<T, U>;
 
@@ -242,7 +246,7 @@ export abstract class SuiSelectBase<T, U> implements AfterViewInit, OnDestroy {
     @Output("touched")
     public onTouched:EventEmitter<void>;
 
-    constructor(private _element:ElementRef, protected _localizationService:SuiLocalizationService) {
+    constructor() {
         this.dropdownService = new DropdownService();
         // We do want an empty query to return all results.
         this.searchService = new SearchService<T, U>(true);
@@ -413,7 +417,7 @@ export abstract class SuiSelectBase<T, U> implements AfterViewInit, OnDestroy {
         }
     }
 
-    public onQueryInputKeydown(event:KeyboardEvent):void {}
+    public onQueryInputKeydown(_event:KeyboardEvent):void {}
 
     protected focus():void {
         if (this.isSearchable && this.searchInput) {

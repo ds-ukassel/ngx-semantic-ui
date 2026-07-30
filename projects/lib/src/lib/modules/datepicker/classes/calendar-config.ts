@@ -19,7 +19,7 @@ export abstract class CalendarConfig {
         this.fallback = fallback;
     }
 
-    public updateBounds(providedDate:Date):void {
+    public updateBounds(_providedDate:Date):void {
         this.dateMinBound = DateUtil.startOf(DatePrecision.Year, new Date(), true);
         this.dateMinBound.setFullYear(0);
     }

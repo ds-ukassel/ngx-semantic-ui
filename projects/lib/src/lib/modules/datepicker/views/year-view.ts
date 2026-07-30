@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, Renderer2} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {DatePrecision, DateUtil, Util} from '../../../misc/util/internal';
 import {SuiCalendarViewTitle} from '../components/calendar-view-title';
 import {CalendarItem, SuiCalendarItem} from '../directives/calendar-item';
@@ -30,7 +30,7 @@ export class CalendarRangeYearService extends CalendarRangeService {
       <tr>
         @for (item of group; track item) {
           <td class="link"
-            [calendarItem]="item"
+            [suiCalendarItem]="item"
             (click)="setDate(item)">{{ item.humanReadable }}
           </td>
         }
@@ -43,16 +43,13 @@ export class CalendarRangeYearService extends CalendarRangeService {
     imports: [SuiCalendarViewTitle, SuiCalendarItem]
 })
 export class SuiCalendarYearView extends CalendarView {
+    public readonly ranges = new CalendarRangeYearService(DatePrecision.Decade, 4, 3);
+    protected readonly _type = CalendarViewType.Year;
+
     public get decadeStart():number {
         return DateUtil
             .startOf(DatePrecision.Decade, DateUtil.clone(this.service.currentDate))
             .getFullYear();
-    }
-
-    constructor() {
-        const renderer = inject(Renderer2);
-
-        super(renderer, CalendarViewType.Year, new CalendarRangeYearService(DatePrecision.Decade, 4, 3));
     }
 
     public pad(year:number):string {
