@@ -57,7 +57,7 @@ export class SuiPopup implements IPopup {
 
     // Returns the direction (`top`, `left`, `right`, `bottom`) of the current placement.
     public get direction():string | undefined {
-        // We need to set direction attribute before popper init to allow correct positioning
+        // We need to set direction attribute before positioning to allow correct positioning
         return this.config.placement.split(" ").shift();
     }
 
