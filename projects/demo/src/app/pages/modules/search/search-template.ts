@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {SuiModalModule, SuiModalService, SuiSearchModule} from 'lib';
 import {AlertModal} from '../../../modals/alert.modal';
 import {IOption, standardOptions} from './search.common';
@@ -21,9 +21,11 @@ export const exampleTemplateTemplate = `
   imports: [SuiSearchModule, SuiModalModule],
 })
 export class SearchExampleTemplate {
+  modalService = inject(SuiModalService);
+
   public options: IOption[];
 
-  constructor(public modalService: SuiModalService) {
+  constructor() {
     this.options = standardOptions.map((o, i) => ({title: o, index: i}));
   }
 

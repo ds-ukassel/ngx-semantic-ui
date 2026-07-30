@@ -1,10 +1,12 @@
-import { Directive, AfterContentInit, ContentChildren, QueryList, ElementRef } from "@angular/core";
-import { SuiRadio } from "../components/radio";
-import { Subscription } from "rxjs";
-import { Util } from "../../../misc/util/internal";
+import {AfterContentInit, ContentChildren, Directive, ElementRef, inject, QueryList} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {Util} from '../../../misc/util/internal';
+import {SuiRadio} from '../components/radio';
 
 @Directive({ selector: "form:not([ngForm]):not([[ngForm]]),ngForm,[ngForm]" })
 export class SuiRadioManager<T> implements AfterContentInit {
+    element = inject(ElementRef);
+
 
     public isNested:boolean;
 
@@ -16,7 +18,7 @@ export class SuiRadioManager<T> implements AfterContentInit {
 
     private _radioSubs:Subscription[];
 
-    constructor(public element:ElementRef) {
+    constructor() {
         this.isNested = false;
         this._radioSubs = [];
     }

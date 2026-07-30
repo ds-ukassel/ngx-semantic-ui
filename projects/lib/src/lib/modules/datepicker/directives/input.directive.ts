@@ -1,6 +1,6 @@
-import {Directive, ElementRef, Host, HostBinding, HostListener, Input, Renderer2} from '@angular/core';
-import bowser from 'bowser';
-import * as isUAWebView from 'is-ua-webview';
+import {Directive, ElementRef, HostBinding, HostListener, inject, Input, Renderer2} from '@angular/core';
+import bowser, {ClientHints} from 'bowser';
+import isUAWebView from 'is-ua-webview';
 
 import {SuiLocalizationService} from '../../../behaviors/localization/internal';
 import {DateUtil} from '../../../misc/util/internal';
@@ -8,10 +8,21 @@ import {PopupTrigger} from '../../popup/internal';
 import {DateParser, InternalDateParser} from '../classes/date-parser';
 import {SuiDatepickerDirective, SuiDatepickerDirectiveValueAccessor} from './datepicker.directive';
 
-const isWebView = isUAWebView["default"] || isUAWebView;
+function isMobile() {
+  if (isUAWebView(navigator.userAgent)) {
+    return true;
+  }
+  const result = bowser.parse(navigator.userAgent, 'userAgentData' in navigator && typeof navigator.userAgentData === 'object' ? navigator.userAgentData as ClientHints : undefined);
+  return result.platform.type === 'mobile';
+}
 
 @Directive({ selector: "input[suiDatepicker]" })
 export class SuiDatepickerInputDirective {
+    datepicker = inject(SuiDatepickerDirective, { host: true });
+    valueAccessor = inject(SuiDatepickerDirectiveValueAccessor, { host: true });
+    private _renderer = inject(Renderer2);
+    private _element = inject(ElementRef);
+
     private _useNativeOnMobile!:boolean;
 
     @Input("pickerUseNativeOnMobile")
@@ -21,8 +32,7 @@ export class SuiDatepickerInputDirective {
 
     public set useNativeOnMobile(fallback:boolean) {
         this._useNativeOnMobile = fallback;
-        const isOnMobile = (bowser as any).mobile || (bowser as any).tablet || isWebView(navigator.userAgent);
-        this.fallbackActive = this.useNativeOnMobile && isOnMobile;
+        this.fallbackActive = this.useNativeOnMobile && isMobile();
     }
 
     private _fallbackActive!:boolean;
@@ -91,11 +101,9 @@ export class SuiDatepickerInputDirective {
         return undefined;
     }
 
-    constructor(@Host() public datepicker:SuiDatepickerDirective,
-                @Host() public valueAccessor:SuiDatepickerDirectiveValueAccessor,
-                private _renderer:Renderer2,
-                private _element:ElementRef,
-                localizationService:SuiLocalizationService) {
+    constructor() {
+        const localizationService = inject(SuiLocalizationService);
+
 
         this.useNativeOnMobile = true;
         this.fallbackActive = false;

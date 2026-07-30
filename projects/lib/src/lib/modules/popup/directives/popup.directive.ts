@@ -1,12 +1,18 @@
-import { Directive, Input, ElementRef, TemplateRef, Renderer2 } from "@angular/core";
-import { ITemplateRefContext, Util, PositioningPlacement, SuiComponentFactory, BooleanInput, coerceBooleanProperty } from "../../../misc/util/internal";
-import { SuiPopup } from "../components/popup";
-import { PopupConfig, PopupTrigger, PopupSize, PopupWidth } from "../classes/popup-config";
-import { SuiPopupConfig } from "../services/popup.service";
-import { SuiPopupController } from "../classes/popup-controller";
-import { SuiPopupTemplateController, ITemplatePopupContext, ITemplatePopupConfig } from "../classes/popup-template-controller";
-
-const templateRef = TemplateRef;
+import {Directive, ElementRef, inject, Input, Renderer2, TemplateRef} from '@angular/core';
+import {
+  BooleanInput,
+  coerceBooleanProperty,
+  PositioningPlacement,
+  SuiComponentFactory,
+  Util,
+} from '../../../misc/util/internal';
+import {PopupConfig, PopupSize, PopupTrigger, PopupWidth} from '../classes/popup-config';
+import {
+  ITemplatePopupConfig,
+  ITemplatePopupContext,
+  SuiPopupTemplateController,
+} from '../classes/popup-template-controller';
+import {SuiPopupConfig} from '../services/popup.service';
 
 @Directive({
     selector: "[suiPopup]",
@@ -97,10 +103,12 @@ export class SuiPopupDirective<T> extends SuiPopupTemplateController<T> {
         this.configure(config);
     }
 
-    constructor(renderer:Renderer2,
-                element:ElementRef,
-                componentFactory:SuiComponentFactory,
-                popupDefaults:SuiPopupConfig) {
+    constructor() {
+        const renderer = inject(Renderer2);
+        const element = inject(ElementRef);
+        const componentFactory = inject(SuiComponentFactory);
+        const popupDefaults = inject(SuiPopupConfig);
+
 
         super(renderer, element, componentFactory, new PopupConfig(popupDefaults));
     }

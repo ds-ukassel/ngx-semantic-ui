@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {ComponentModalConfig, ModalSize, SuiModal} from 'lib';
 
 interface IAlertModalContext {
@@ -22,7 +22,7 @@ interface IAlertModalContext {
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class AlertModalComponent {
-    constructor(public modal:SuiModal<IAlertModalContext, void, void>) {}
+    modal = inject<SuiModal<IAlertModalContext, void, void>>(SuiModal);
 }
 
 export class AlertModal extends ComponentModalConfig<IAlertModalContext, void, void> {

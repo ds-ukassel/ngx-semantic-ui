@@ -6,9 +6,9 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  inject,
   Input,
   Output,
-  Renderer2,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -50,7 +50,7 @@ export interface IResultContext<T> extends ITemplateRefContext<T> {
     (click)="select(r)"></sui-search-result>
   }
 
-  @if (results.length == 0) {
+  @if (!results.length) {
     <div class="message empty">
       <div class="header">{{ localeValues.noResults.header }}</div>
       <div class="description">{{ localeValues.noResults.message }}</div>
@@ -74,6 +74,9 @@ export interface IResultContext<T> extends ITemplateRefContext<T> {
     imports: [FormsModule, SuiDropdownMenu_1, SuiSearchResult, SuiDropdownMenuItem]
 })
 export class SuiSearch<T> implements AfterViewInit {
+    private _element = inject(ElementRef);
+    private _localizationService = inject(SuiLocalizationService);
+
     public dropdownService:DropdownService;
     public searchService:SearchService<T, T>;
 
@@ -224,7 +227,7 @@ export class SuiSearch<T> implements AfterViewInit {
     @Input()
     public transitionDuration:number;
 
-    constructor(private _element:ElementRef, renderer:Renderer2, private _localizationService:SuiLocalizationService) {
+    constructor() {
         this.dropdownService = new DropdownService();
         this.searchService = new SearchService<T, T>();
 

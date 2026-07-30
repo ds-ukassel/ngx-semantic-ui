@@ -68,55 +68,57 @@ export class DateFnsParser {
     }
 
     constructor(locale:IDatepickerLocaleValues) {
-        this._weekStartsOn = locale.firstDayOfWeek as DateFnsWeekStartsOn;
+      this._weekStartsOn = locale.firstDayOfWeek as DateFnsWeekStartsOn;
 
-        const weekdayValues = {
-            long: locale.weekdays,
-            short: locale.weekdaysShort,
-            narrow: locale.weekdaysNarrow
-        };
+      const weekdayValues = {
+        long: locale.weekdays,
+        short: locale.weekdaysShort,
+        narrow: locale.weekdaysNarrow
+      };
 
-        const monthValues = {
-            long: locale.months,
-            short: locale.monthsShort
-        };
+      const monthValues = {
+        long: locale.months,
+        short: locale.monthsShort
+      };
 
-        const timeOfDayValues = {
-            long: locale.timesOfDay,
-            uppercase: locale.timesOfDayUppercase,
-            lowercase: locale.timesOfDayLowercase
-        };
+      const timeOfDayValues = {
+        long: locale.timesOfDay,
+        uppercase: locale.timesOfDayUppercase,
+        lowercase: locale.timesOfDayLowercase
+      };
 
-        const timeOfDayMatchValues = {
-            long: locale.timesOfDay,
-            short: locale.timesOfDayUppercase.concat(locale.timesOfDayLowercase)
-        };
+      const timeOfDayMatchValues = {
+        long: locale.timesOfDay,
+        short: locale.timesOfDayUppercase.concat(locale.timesOfDayLowercase)
+      };
 
-        this._locale = enUS as any;
-        this._locale.localize = {
-            ...this._locale.localize,
-            ...{
-                weekday: buildLocalizeFn(weekdayValues, "long"),
-                weekdays: buildLocalizeArrayFn(weekdayValues, "long"),
-                month: buildLocalizeFn(monthValues, "long"),
-                months: buildLocalizeArrayFn(monthValues, "long"),
-                timeOfDay: buildLocalizeFn(timeOfDayValues, "long", (hours:number) => {
-                    return hours / 12 >= 1 ? 1 : 0;
-                }),
-                timesOfDay: buildLocalizeArrayFn(timeOfDayValues, "long")
-            }
-        };
-        this._locale.match = {
-            ...this._locale.match,
-            ...{
-                weekdays: buildMatchFn(weekdayValues, "long"),
-                weekday: buildParseFn(weekdayValues, "long"),
-                months: buildMatchFn(monthValues, "long"),
-                month: buildParseFn(monthValues, "long"),
-                timesOfDay:buildMatchFn(timeOfDayMatchValues, "long"),
-                timeOfDay:buildParseFn(timeOfDayMatchValues, "long")
-            }
-        };
+      this._locale = {
+        ...enUS,
+        localize: {
+          ...enUS.localize,
+          ...{
+            weekday: buildLocalizeFn(weekdayValues, 'long'),
+            weekdays: buildLocalizeArrayFn(weekdayValues, 'long'),
+            month: buildLocalizeFn(monthValues, 'long'),
+            months: buildLocalizeArrayFn(monthValues, 'long'),
+            timeOfDay: buildLocalizeFn(timeOfDayValues, 'long', (hours: number) => {
+              return hours / 12 >= 1 ? 1 : 0;
+            }),
+            timesOfDay: buildLocalizeArrayFn(timeOfDayValues, 'long'),
+          },
+        },
+        match: {
+          ...enUS.match,
+          ...{
+            weekdays: buildMatchFn(weekdayValues, 'long'),
+            weekday: buildParseFn(weekdayValues, 'long'),
+            months: buildMatchFn(monthValues, 'long'),
+            month: buildParseFn(monthValues, 'long'),
+            timesOfDay: buildMatchFn(timeOfDayMatchValues, 'long'),
+            timeOfDay: buildParseFn(timeOfDayMatchValues, 'long'),
+          },
+        },
+      };
     }
 
     public format(d:Date, f:string):string {

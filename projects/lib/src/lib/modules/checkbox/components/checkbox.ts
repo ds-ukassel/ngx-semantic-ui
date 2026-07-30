@@ -6,6 +6,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  inject,
   Input,
   Output,
   ViewChild,
@@ -118,7 +119,9 @@ export class SuiCheckbox implements ICustomValueAccessorHost<boolean> {
     providers: [customValueAccessorFactory(SuiCheckboxValueAccessor)]
 })
 export class SuiCheckboxValueAccessor extends CustomValueAccessor<boolean, SuiCheckbox> {
-    constructor(host:SuiCheckbox) {
+    constructor() {
+        const host = inject(SuiCheckbox);
+
         super(host);
     }
 }

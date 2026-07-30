@@ -1,16 +1,42 @@
 import {
-    Directive, ElementRef, Renderer2, EventEmitter, Output, Input,
-    HostListener, OnChanges, SimpleChanges
-} from "@angular/core";
-import { AbstractControl, ValidationErrors } from "@angular/forms";
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  inject,
+  Input,
+  OnChanges,
+  Output,
+  Renderer2,
+  SimpleChanges,
+} from '@angular/core';
+import {AbstractControl, ValidationErrors} from '@angular/forms';
 import {
-    ICustomValueAccessorHost, customValueAccessorFactory, CustomValueAccessor,
-    ICustomValidatorHost, customValidatorFactory, CustomValidator, PositioningPlacement, SuiComponentFactory, KeyCode
-} from "../../../misc/util/internal";
-import { IDatepickerLocaleValues, RecursivePartial, SuiLocalizationService } from "../../../behaviors/localization/internal";
-import { SuiPopupComponentController, PopupAfterOpen, PopupConfig, PopupTrigger } from "../../popup/internal";
-import { SuiDatepicker, DatepickerMode } from "../components/datepicker";
-import { CalendarConfig, YearConfig, MonthConfig, DatetimeConfig, TimeConfig, DateConfig } from "../classes/calendar-config";
+  IDatepickerLocaleValues,
+  RecursivePartial,
+  SuiLocalizationService,
+} from '../../../behaviors/localization/internal';
+import {
+  CustomValidator,
+  customValidatorFactory,
+  CustomValueAccessor,
+  customValueAccessorFactory,
+  ICustomValidatorHost,
+  ICustomValueAccessorHost,
+  KeyCode,
+  PositioningPlacement,
+  SuiComponentFactory,
+} from '../../../misc/util/internal';
+import {PopupAfterOpen, PopupConfig, PopupTrigger, SuiPopupComponentController} from '../../popup/internal';
+import {
+  CalendarConfig,
+  DateConfig,
+  DatetimeConfig,
+  MonthConfig,
+  TimeConfig,
+  YearConfig,
+} from '../classes/calendar-config';
+import {DatepickerMode, SuiDatepicker} from '../components/datepicker';
 
 @Directive({
     selector: "[suiDatepicker]",
@@ -19,6 +45,8 @@ import { CalendarConfig, YearConfig, MonthConfig, DatetimeConfig, TimeConfig, Da
 export class SuiDatepickerDirective
        extends SuiPopupComponentController<SuiDatepicker>
        implements ICustomValueAccessorHost<Date>, ICustomValidatorHost, OnChanges, PopupAfterOpen {
+    localizationService = inject(SuiLocalizationService);
+
 
     private _selectedDate?:Date;
 
@@ -104,10 +132,11 @@ export class SuiDatepickerDirective
     @Output("pickerValidatorChange")
     public onValidatorChange:EventEmitter<void>;
 
-    constructor(renderer:Renderer2,
-                element:ElementRef,
-                componentFactory:SuiComponentFactory,
-                public localizationService:SuiLocalizationService) {
+    constructor() {
+        const renderer = inject(Renderer2);
+        const element = inject(ElementRef);
+        const componentFactory = inject(SuiComponentFactory);
+
 
         super(renderer, element, componentFactory, SuiDatepicker, new PopupConfig({
             trigger: PopupTrigger.Focus,
@@ -201,7 +230,13 @@ export class SuiDatepickerDirective
     providers: [customValueAccessorFactory(SuiDatepickerDirectiveValueAccessor)]
 })
 export class SuiDatepickerDirectiveValueAccessor extends CustomValueAccessor<Date, SuiDatepickerDirective> {
-    constructor(public host:SuiDatepickerDirective) { super(host); }
+    host: SuiDatepickerDirective;
+
+    constructor() {
+ const host = inject(SuiDatepickerDirective);
+ super(host);
+ this.host = host;
+    }
 }
 
 @Directive({
@@ -210,5 +245,11 @@ export class SuiDatepickerDirectiveValueAccessor extends CustomValueAccessor<Dat
     providers: [customValidatorFactory(SuiDatepickerDirectiveValidator)]
 })
 export class SuiDatepickerDirectiveValidator extends CustomValidator<SuiDatepickerDirective> {
-    constructor(public host:SuiDatepickerDirective) { super(host); }
+    host: SuiDatepickerDirective;
+
+    constructor() {
+ const host = inject(SuiDatepickerDirective);
+ super(host);
+ this.host = host;
+    }
 }

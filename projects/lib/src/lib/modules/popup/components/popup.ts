@@ -5,6 +5,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  inject,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
@@ -23,6 +24,8 @@ import {SuiPopupArrow} from './popup-arrow';
   imports: [SuiTransition, SuiPopupArrow],
 })
 export class SuiPopup implements IPopup {
+    elementRef = inject(ElementRef);
+
     // Config settings for this popup.
     public config!:TemplatePopupConfig<any>;
 
@@ -96,7 +99,7 @@ export class SuiPopup implements IPopup {
     @HostBinding("attr.tabindex")
     public readonly tabindex:number;
 
-    constructor(public elementRef:ElementRef) {
+    constructor() {
         this.transitionController = new TransitionController(false);
 
         this._isOpen = false;

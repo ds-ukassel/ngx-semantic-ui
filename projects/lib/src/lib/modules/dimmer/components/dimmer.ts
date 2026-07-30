@@ -1,14 +1,11 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  ElementRef,
   EventEmitter,
   HostBinding,
   HostListener,
   Input,
   Output,
-  Renderer2,
 } from '@angular/core';
 import {SuiTransition, Transition, TransitionController, TransitionDirection} from '../../transition/internal';
 
@@ -78,8 +75,8 @@ export class SuiDimmer extends SuiTransition {
     @Input()
     public wrapContent:boolean;
 
-    constructor(renderer:Renderer2, element:ElementRef, changeDetector:ChangeDetectorRef) {
-        super(renderer, element, changeDetector);
+    constructor() {
+        super();
 
         this._isDimmed = false;
         this.isDimmedChange = new EventEmitter<boolean>();

@@ -1,12 +1,12 @@
 import {
   AfterContentInit,
-  ChangeDetectorRef,
   ContentChild,
   ContentChildren,
   Directive,
   ElementRef,
   forwardRef,
   HostListener,
+  inject,
   Input,
   OnDestroy,
   QueryList,
@@ -20,6 +20,9 @@ import {DropdownAutoCloseType, DropdownService} from '../services/dropdown.servi
     // We must attach to every '.item' as Angular doesn't support > selectors.
     selector: ".item" })
 export class SuiDropdownMenuItem {
+    private _renderer = inject(Renderer2);
+    element = inject(ElementRef);
+
     public get isDisabled():boolean {
         // We must use nativeElement as Angular doesn't have a way of reading class information.
         const element = this.element.nativeElement as Element;
@@ -51,7 +54,7 @@ export class SuiDropdownMenuItem {
         return !!this.childDropdownMenu;
     }
 
-    constructor(private _renderer:Renderer2, public element:ElementRef) {
+    constructor() {
         this.isSelected = false;
 
         this.selectedClass = "selected";
@@ -142,8 +145,8 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
 
     private _parentKeyDownListener:() => void;
 
-    constructor(renderer:Renderer2, element:ElementRef, changeDetector:ChangeDetectorRef) {
-        super(renderer, element, changeDetector);
+    constructor() {
+        super();
 
         // Initialise transition functionality.
         this._transitionController = new TransitionController(false);
@@ -199,10 +202,10 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
                     this._service.setOpenState(false);
                     break;
                 }
-                // Down : select the next item below the current one, or the 1st if none selected.
                 case KeyCode.Down:
-                // Up : select the next item above the current one, or the 1st if none selected.
                 case KeyCode.Up: {
+                    // Down : select the next item below the current one, or the 1st if none selected.
+                    // Up : select the next item above the current one, or the 1st if none selected.
                     this.selectedItems.pop();
                     this.selectedItems.push(selectedContainer.updateSelection(selected, e.keyCode));
                     // Prevent default regardless of whether we are in an input, to stop jumping to the start or end of the query string.
@@ -210,7 +213,6 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
                     break;
                 }
                 // Enter : if the item doesn't contain a nested dropdown, 'click' it. Otherwise, fall through to 'Right' action.
-                // @ts-ignore
                 case KeyCode.Enter: {
                     if (selected && !selected.hasChildDropdown) {
                         selected.performClick();
@@ -218,8 +220,8 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
                     }
                 }
                     // falls through
-                // Right : if the selected item contains a nested dropdown, open the dropdown & select the 1st item.
                 case KeyCode.Right: {
+                    // Right : if the selected item contains a nested dropdown, open the dropdown & select the 1st item.
                     if (selected && selected.hasChildDropdown) {
                         selected.childDropdownMenu.service.setOpenState(true);
 

@@ -1,14 +1,12 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  ElementRef,
   EventEmitter,
   HostBinding,
   HostListener,
+  inject,
   Input,
   Output,
-  Renderer2,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
@@ -24,6 +22,8 @@ import {IOptionContext} from '../classes/select-base';
   imports: [],
 })
 export class SuiMultiSelectLabel<T> extends SuiTransition {
+    componentFactory = inject(SuiComponentFactory);
+
     // Sets the Semantic UI classes on the host element.
     // Doing it on the host enables use in menus etc.
     @HostBinding("class.ui")
@@ -65,12 +65,8 @@ export class SuiMultiSelectLabel<T> extends SuiTransition {
     @ViewChild("templateSibling", { read: ViewContainerRef, static: true })
     public templateSibling!:ViewContainerRef;
 
-    constructor(renderer:Renderer2,
-                element:ElementRef,
-                changeDetector:ChangeDetectorRef,
-                public componentFactory:SuiComponentFactory) {
-
-        super(renderer, element, changeDetector);
+    constructor() {
+        super();
 
         // Initialise transition functionality.
         this._transitionController = new TransitionController(false, "inline-block");

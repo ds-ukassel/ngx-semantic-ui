@@ -47,7 +47,7 @@ export const Util = {
         groupBy<T>(items:T[], field:keyof T):Record<string, T[]> {
             return items.reduce<Record<string, T[]>>(
                 (groups, i: T) => {
-                    const fieldValue = (i as any)[field].toString();
+                    const fieldValue = String(i[field]);
                     groups[fieldValue] = groups[fieldValue] || [];
                     groups[fieldValue].push(i);
                     return groups;
@@ -83,16 +83,16 @@ export const Util = {
     Object: {
         readValue<T, U>(object:T, path?:string):U {
             if (!path) {
-                return object as any as U;
+                return object as unknown as U;
             }
 
-            let recursed = object as any as IRecursiveObject;
+            let recursed = object as unknown as IRecursiveObject;
 
             for (let i = 0, p = path.split("."), len = p.length; i < len; i++) {
-                recursed = (recursed as any as IRecursiveObject)[p[i]];
+                recursed = (recursed as unknown as IRecursiveObject)[p[i]];
             }
 
-            return recursed as any as U;
+            return recursed as unknown as U;
         }
     },
 

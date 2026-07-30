@@ -4,6 +4,7 @@ import {
   ElementRef,
   EventEmitter,
   HostBinding,
+  inject,
   Input,
   Output,
   Renderer2,
@@ -16,6 +17,9 @@ import {SidebarDirection, SidebarService, SidebarTransition} from '../services/s
     changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SuiSidebar {
+    private _renderer = inject(Renderer2);
+    private _element = inject(ElementRef);
+
     public service:SidebarService;
 
     @HostBinding("class.ui")
@@ -69,7 +73,7 @@ export class SuiSidebar {
         return this.service.isAnimating;
     }
 
-    constructor(private _renderer:Renderer2, private _element:ElementRef) {
+    constructor() {
         this.service = new SidebarService();
         // We set the default here as well to force the classes to update.
         this.transition = SidebarTransition.Uncover;

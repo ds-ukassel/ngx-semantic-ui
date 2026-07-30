@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {SuiCheckboxModule, SuiModalModule, SuiModalService, SuiSearchModule} from 'lib';
 import {AlertModal} from '../../../modals/alert.modal';
@@ -25,14 +25,14 @@ export const exampleStandardTemplate = `
   imports: [SuiSearchModule, SuiCheckboxModule, FormsModule, SuiModalModule],
 })
 export class SearchExampleStandard {
+  modalService = inject(SuiModalService);
+
   public hasIcon = true;
   public allowEmptyQuery = true;
 
   public get options():string[] {
     return standardOptions;
   }
-
-  constructor(public modalService:SuiModalService) {}
 
   public alertSelected(selectedItem:string):void {
     this.modalService.open(new AlertModal(`You chose '${selectedItem}'!`));

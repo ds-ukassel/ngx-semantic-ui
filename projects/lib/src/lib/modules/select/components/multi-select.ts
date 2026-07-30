@@ -5,6 +5,7 @@ import {
   ElementRef,
   EventEmitter,
   HostBinding,
+  inject,
   Input,
   Output,
 } from '@angular/core';
@@ -109,7 +110,10 @@ export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustom
     @HostBinding("class.multiple")
     public override readonly hasClasses:boolean;
 
-    constructor(element:ElementRef, localizationService:SuiLocalizationService) {
+    constructor() {
+        const element = inject(ElementRef);
+        const localizationService = inject(SuiLocalizationService);
+
         super(element, localizationService);
 
         this.selectedOptions = [];
@@ -222,7 +226,9 @@ export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustom
     providers: [customValueAccessorFactory(SuiMultiSelectValueAccessor)]
 })
 export class SuiMultiSelectValueAccessor<T, U> extends CustomValueAccessor<U[], SuiMultiSelect<T, U>> {
-    constructor(host:SuiMultiSelect<T, U>) {
+    constructor() {
+        const host = inject<SuiMultiSelect<T, U>>(SuiMultiSelect);
+
         super(host);
     }
 }
