@@ -2,14 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   Directive,
-  ElementRef,
   EventEmitter,
   HostBinding,
   inject,
   Input,
   Output,
 } from '@angular/core';
-import {SuiLocalizationService} from '../../../behaviors/localization/internal';
 import {
   CustomValueAccessor,
   customValueAccessorFactory,
@@ -111,10 +109,7 @@ export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustom
     public override readonly hasClasses:boolean;
 
     constructor() {
-        const element = inject(ElementRef);
-        const localizationService = inject(SuiLocalizationService);
-
-        super(element, localizationService);
+        super();
 
         this.selectedOptions = [];
         this.selectedOptionsChange = new EventEmitter<U[]>();
@@ -220,7 +215,7 @@ export class SuiMultiSelect<T, U> extends SuiSelectBase<T, U> implements ICustom
 @Directive({
     selector: "sui-multi-select",
     host: {
-        "(selectedOptionsChange)": "onChange($event)",
+        "(selectedOptionsChange)": "onChange($any($event))",
         "(touched)": "onTouched()"
     },
     providers: [customValueAccessorFactory(SuiMultiSelectValueAccessor)]

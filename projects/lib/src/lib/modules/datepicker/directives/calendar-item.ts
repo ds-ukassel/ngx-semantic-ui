@@ -14,11 +14,11 @@ export class CalendarItem {
     }
 }
 
-@Directive({ selector: "[calendarItem]" })
+@Directive({ selector: "[suiCalendarItem]" })
 export class SuiCalendarItem {
     changeDetector = inject(ChangeDetectorRef);
 
-    @Input("calendarItem")
+    @Input("suiCalendarItem")
     public item!:CalendarItem;
 
     @HostBinding("class.disabled")

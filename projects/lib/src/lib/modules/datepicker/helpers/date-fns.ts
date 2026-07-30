@@ -60,6 +60,8 @@ export class DateFnsParser {
     private _weekStartsOn:DateFnsWeekStartsOn;
     private _locale:IDateFnsCustomLocale;
 
+    // TODO: This is the date-fns v1 locale API. On v4, `MMM` formats wrong and `parse` throws.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private get _config():any {
         return {
             weekStartsOn: this._weekStartsOn,

@@ -190,11 +190,9 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
             // Gets the top selected item from the stack.
             const [selected] = this.selectedItems.slice(-1);
             // Keeping track of the menu containing the currently selected element allows us to easily determine its siblings.
-            let selectedContainer:SuiDropdownMenu = this;
-            if (this.selectedItems.length >= 2) {
-                const [selectedParent] = this.selectedItems.slice(-2);
-                selectedContainer = selectedParent.childDropdownMenu;
-            }
+            const selectedContainer:SuiDropdownMenu = this.selectedItems.length >= 2
+                ? this.selectedItems.slice(-2)[0].childDropdownMenu
+                : this;
 
             switch (e.keyCode) {
                 // Escape : close the entire dropdown.
@@ -269,8 +267,6 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
         let selectedIndex = this._items
             .findIndex(i => i === selectedItem);
 
-        let newSelection:SuiDropdownMenuItem;
-
         switch (keyCode) {
             case KeyCode.Enter:
             case KeyCode.Right:
@@ -289,7 +285,7 @@ export class SuiDropdownMenu extends SuiTransition implements AfterContentInit, 
         }
 
         // Select the item at the updated index. The || is to stop us selecting past the start or end of the item list.
-        newSelection = this._items[selectedIndex] || selectedItem;
+        const newSelection:SuiDropdownMenuItem = this._items[selectedIndex] || selectedItem;
 
         if (newSelection) {
             // Set the selected status on the newly selected item.

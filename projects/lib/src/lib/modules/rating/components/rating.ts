@@ -94,7 +94,7 @@ export class SuiRating implements ICustomValueAccessorHost<number> {
 
 @Directive({
     selector: "sui-rating",
-    host: { "(valueChange)": "onChange($event)" },
+    host: { "(valueChange)": "onChange($any($event))" },
     providers: [customValueAccessorFactory(SuiRatingValueAccessor)]
 })
 export class SuiRatingValueAccessor extends CustomValueAccessor<number, SuiRating> {

@@ -27,7 +27,7 @@ export class SuiPopup implements IPopup {
     elementRef = inject(ElementRef);
 
     // Config settings for this popup.
-    public config!:TemplatePopupConfig<any>;
+    public config!:TemplatePopupConfig<unknown>;
 
     public transitionController:TransitionController;
     public positioningService!:PositioningService;

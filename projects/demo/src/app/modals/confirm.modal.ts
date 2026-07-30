@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {ComponentModalConfig, ModalSize, SuiModal} from 'lib';
 
 interface IConfirmModalContext {
@@ -23,7 +23,7 @@ interface IConfirmModalContext {
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ConfirmModalComponent {
-    constructor(public modal:SuiModal<IConfirmModalContext, void, void>) {}
+    public modal = inject<SuiModal<IConfirmModalContext, void, void>>(SuiModal);
 }
 
 export class ConfirmModal extends ComponentModalConfig<IConfirmModalContext, void, void> {

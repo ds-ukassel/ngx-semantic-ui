@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, Input, OnDestroy, QueryList, Renderer2, ViewChildren} from '@angular/core';
+import {AfterViewInit, Directive, inject, Input, OnDestroy, QueryList, Renderer2, ViewChildren} from '@angular/core';
 import {KeyCode} from '../../../misc/util/internal';
 import {CalendarItem, SuiCalendarItem} from '../directives/calendar-item';
 import {CalendarRangeService} from '../services/calendar-range.service';
@@ -15,7 +15,9 @@ export type CalendarViewResult = [Date, CalendarViewType];
 
 @Directive()
 export abstract class CalendarView implements AfterViewInit, OnDestroy {
-    private _type:CalendarViewType;
+    public abstract readonly ranges:CalendarRangeService;
+    protected abstract readonly _type:CalendarViewType;
+
     private _service!:CalendarService;
 
     @ViewChildren(SuiCalendarItem)
@@ -39,8 +41,6 @@ export abstract class CalendarView implements AfterViewInit, OnDestroy {
         return this._service;
     }
 
-    public ranges:CalendarRangeService;
-
     public get currentDate():Date {
         return this.service.currentDate;
     }
@@ -49,14 +49,8 @@ export abstract class CalendarView implements AfterViewInit, OnDestroy {
         return this.service.selectedDate;
     }
 
-    private _documentKeyDownListener:() => void;
-
-    constructor(renderer:Renderer2, viewType:CalendarViewType, ranges:CalendarRangeService) {
-        this._type = viewType;
-        this.ranges = ranges;
-
-        this._documentKeyDownListener = renderer.listen("document", "keydown", (e:KeyboardEvent) => this.onDocumentKeyDown(e));
-    }
+    private _documentKeyDownListener = inject(Renderer2)
+        .listen("document", "keydown", (e:KeyboardEvent) => this.onDocumentKeyDown(e));
 
     // Template Methods
 

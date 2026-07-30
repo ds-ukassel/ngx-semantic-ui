@@ -264,8 +264,8 @@ export class ModalExampleTemplate {
 
         this.modalService
             .open(config)
-            .onApprove((r: any) => this.alert(`Accepted with result: '${r}'.`))
-            .onDeny((r: any) => this.alert(`Denied with result: '${r}'.`));
+            .onApprove(r => this.alert(`Accepted with result: '${r}'.`))
+            .onDeny(r => this.alert(`Denied with result: '${r}'.`));
     }
 
     public alert(message:string):void {

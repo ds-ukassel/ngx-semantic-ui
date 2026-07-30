@@ -1,13 +1,11 @@
 import {
   Directive,
-  ElementRef,
   EventEmitter,
   HostListener,
   inject,
   Input,
   OnChanges,
   Output,
-  Renderer2,
   SimpleChanges,
 } from '@angular/core';
 import {AbstractControl, ValidationErrors} from '@angular/forms';
@@ -25,7 +23,6 @@ import {
   ICustomValueAccessorHost,
   KeyCode,
   PositioningPlacement,
-  SuiComponentFactory,
 } from '../../../misc/util/internal';
 import {PopupAfterOpen, PopupConfig, PopupTrigger, SuiPopupComponentController} from '../../popup/internal';
 import {
@@ -133,12 +130,7 @@ export class SuiDatepickerDirective
     public onValidatorChange:EventEmitter<void>;
 
     constructor() {
-        const renderer = inject(Renderer2);
-        const element = inject(ElementRef);
-        const componentFactory = inject(SuiComponentFactory);
-
-
-        super(renderer, element, componentFactory, SuiDatepicker, new PopupConfig({
+        super(SuiDatepicker, new PopupConfig({
             trigger: PopupTrigger.Focus,
             placement: PositioningPlacement.BottomLeft,
             transition: "scale",
@@ -205,7 +197,7 @@ export class SuiDatepickerDirective
         }
 
         // Angular expects null
-               return null;
+        return null;
     }
 
     public writeValue(value:Date | undefined):void {
@@ -226,16 +218,16 @@ export class SuiDatepickerDirective
 
 @Directive({
     selector: "[suiDatepicker]",
-    host: { "(pickerSelectedDateChange)": "onChange($event)" },
+    host: { "(pickerSelectedDateChange)": "onChange($any($event))" },
     providers: [customValueAccessorFactory(SuiDatepickerDirectiveValueAccessor)]
 })
 export class SuiDatepickerDirectiveValueAccessor extends CustomValueAccessor<Date, SuiDatepickerDirective> {
     host: SuiDatepickerDirective;
 
     constructor() {
- const host = inject(SuiDatepickerDirective);
- super(host);
- this.host = host;
+        const host = inject(SuiDatepickerDirective);
+        super(host);
+        this.host = host;
     }
 }
 
@@ -248,8 +240,8 @@ export class SuiDatepickerDirectiveValidator extends CustomValidator<SuiDatepick
     host: SuiDatepickerDirective;
 
     constructor() {
- const host = inject(SuiDatepickerDirective);
- super(host);
- this.host = host;
+        const host = inject(SuiDatepickerDirective);
+        super(host);
+        this.host = host;
     }
 }

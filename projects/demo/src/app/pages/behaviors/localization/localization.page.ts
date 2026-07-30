@@ -238,7 +238,7 @@ export class LocalizationExample implements OnDestroy {
 
         this.localizationService.setLanguage("en-GB");
 
-        Object.keys(locales).forEach((k: string) => this.localizationService.load(k, (locales as any)[k]));
+        Object.entries(locales).forEach(([k, values]) => this.localizationService.load(k, values));
     }
 
     public ngOnDestroy():void {

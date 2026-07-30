@@ -130,7 +130,7 @@ export class SearchService<T, U> {
             return callback();
         }
 
-        if (this._resultsCache.hasOwnProperty(this._query)) {
+        if (Object.prototype.hasOwnProperty.call(this._resultsCache, this._query)) {
             // If the query is already cached, make use of it.
             this._results = this._resultsCache[this._query];
 
@@ -185,7 +185,7 @@ export class SearchService<T, U> {
     private toRegex(query:string):RegExp | string {
         try {
             return new RegExp(query, "i");
-        } catch (e) {
+        } catch {
             return query;
         }
     }

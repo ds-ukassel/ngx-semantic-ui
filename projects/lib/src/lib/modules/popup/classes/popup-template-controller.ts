@@ -1,5 +1,5 @@
-import {ElementRef, Renderer2, TemplateRef} from '@angular/core';
-import {IImplicitContext, SuiComponentFactory} from '../../../misc/util/internal';
+import {TemplateRef} from '@angular/core';
+import {IImplicitContext} from '../../../misc/util/internal';
 import {IPopupConfig, PopupConfig} from './popup-config';
 import {IPopup, SuiPopupController} from './popup-controller';
 
@@ -20,14 +20,6 @@ export class TemplatePopupConfig<T> extends PopupConfig {
 export class SuiPopupTemplateController<T> extends SuiPopupController {
     public template?:TemplateRef<ITemplatePopupContext<T>>;
     public context?:T;
-
-    constructor(renderer:Renderer2,
-                element:ElementRef,
-                componentFactory:SuiComponentFactory,
-                config:PopupConfig) {
-
-        super(renderer, element, componentFactory, config);
-    }
 
     public override configure(config?:ITemplatePopupConfig<T>):void {
         super.configure(config);
