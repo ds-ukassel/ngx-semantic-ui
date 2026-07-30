@@ -1,11 +1,11 @@
-import { IPartialLocaleValues } from "./interfaces/values";
+import { IPartialLocaleValues } from "@ds-ukassel/ngx-semantic-ui";
 
 /**
  * locale : French (fr)
  * author : Ciara Ward : https://github.com/ciaraward
  */
 
-const fr:IPartialLocaleValues = {
+export const fr:IPartialLocaleValues = {
     datepicker: {
         months: [
             "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
@@ -50,5 +50,3 @@ const fr:IPartialLocaleValues = {
         }
     }
 };
-
-export default fr;

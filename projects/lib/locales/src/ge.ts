@@ -1,11 +1,11 @@
-import { IPartialLocaleValues } from "./interfaces/values";
+import { IPartialLocaleValues } from "@ds-ukassel/ngx-semantic-ui";
 
 /**
  * locale : Georgian (ge)
  * author : Vaso Gazdeliani : https://github.com/vaso991
  */
 
-const ge:IPartialLocaleValues = {
+export const ge:IPartialLocaleValues = {
     datepicker: {
         months: [
             "იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი",
@@ -51,5 +51,3 @@ const ge:IPartialLocaleValues = {
         }
     }
 };
-
-export default ge;

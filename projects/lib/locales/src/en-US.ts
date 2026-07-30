@@ -1,6 +1,6 @@
-import { IPartialLocaleValues } from "./interfaces/values";
+import { IPartialLocaleValues } from "@ds-ukassel/ngx-semantic-ui";
 
-const enUS:IPartialLocaleValues = {
+export const enUS:IPartialLocaleValues = {
     datepicker: {
         firstDayOfWeek: 0,
         formats: {
@@ -12,5 +12,3 @@ const enUS:IPartialLocaleValues = {
         }
     }
 };
-
-export default enUS;

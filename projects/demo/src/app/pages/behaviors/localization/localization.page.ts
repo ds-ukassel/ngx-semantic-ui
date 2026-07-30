@@ -1,4 +1,4 @@
-import locales from '@ds-ukassel/ngx-semantic-ui/locales';
+import * as locales from '@ds-ukassel/ngx-semantic-ui/locales';
 import {ChangeDetectionStrategy, Component, forwardRef, OnDestroy} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {SuiDatepickerModule, SuiDropdownModule, SuiLocalizationService, SuiSelectModule} from 'lib';
@@ -113,7 +113,7 @@ export class LocalizationPage {
     public localizationCode = `
 import {SuiLocalizationService} from "@ds-ukassel/ngx-semantic-ui";
 // We'll use Spanish for this example.
-import es from "@ds-ukassel/ngx-semantic-ui/locales/es";
+import { es } from "@ds-ukassel/ngx-semantic-ui/locales";
 
 @Component({
     selector: "app-root",
@@ -132,7 +132,7 @@ export class AppComponent {
     public customizationCode = `
 import {SuiLocalizationService} from "@ds-ukassel/ngx-semantic-ui";
 // This example uses French.
-import fr from "@ds-ukassel/ngx-semantic-ui/locales/fr";
+import { fr } from "@ds-ukassel/ngx-semantic-ui/locales";
 
 @Component({
     selector: "app-root",
