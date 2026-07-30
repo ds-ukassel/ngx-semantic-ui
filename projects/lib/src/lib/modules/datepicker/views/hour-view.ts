@@ -7,7 +7,7 @@ import {CalendarRangeService} from '../services/calendar-range.service';
 import {CalendarView, CalendarViewType} from './calendar-view';
 
 export class CalendarRangeHourService extends CalendarRangeService {
-    public configureItem(item:CalendarItem, baseDate:Date):void {
+    public configureItem(item:CalendarItem, _baseDate:Date):void {
         // Set minutes and seconds to 0
         const customFormat:string = this.service.localeValues.formats.time.replace(/[ms]/g, "0");
         item.humanReadable = new DateParser(customFormat, this.service.localeValues).format(item.date);

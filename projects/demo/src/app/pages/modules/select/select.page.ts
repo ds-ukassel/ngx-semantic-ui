@@ -513,7 +513,7 @@ export class SelectExampleTemplate {
     public options:IOption[] = namedOptions;
     public selectedOption:IOption = this.options[5];
 
-    public formatter(option:IOption, query?:string):string {
+    public formatter(option:IOption, _query?:string):string {
         return `name: '${option.name}'`;
     }
 }

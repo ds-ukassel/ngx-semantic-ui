@@ -18,7 +18,7 @@ export class CalendarRangeMinuteService extends CalendarRangeService {
             .map(i => DateUtil.add(DatePrecision.Minute, DateUtil.clone(start), i * 5));
     }
 
-    public configureItem(item:CalendarItem, baseDate:Date):void {
+    public configureItem(item:CalendarItem, _baseDate:Date):void {
         item.humanReadable = new DateParser(this.service.localeValues.formats.time, this.service.localeValues).format(item.date);
         item.isOutsideRange = false;
     }

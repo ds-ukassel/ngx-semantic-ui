@@ -18,8 +18,7 @@ module.exports = tseslint.config(
     processor: angular.processInlineTemplates,
     rules: {
       '@typescript-eslint/no-empty-function': ['error', { allow: ['arrowFunctions', 'methods'] }],
-      // Params often only exist to satisfy an interface or base class.
-      '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       '@angular-eslint/prefer-on-push-component-change-detection': 'warn',
       '@angular-eslint/no-input-rename': 'warn',
       '@angular-eslint/no-output-rename': 'warn',

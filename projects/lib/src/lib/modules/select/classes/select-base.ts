@@ -417,7 +417,7 @@ export abstract class SuiSelectBase<T, U> implements AfterViewInit, OnDestroy {
         }
     }
 
-    public onQueryInputKeydown(event:KeyboardEvent):void {}
+    public onQueryInputKeydown(_event:KeyboardEvent):void {}
 
     protected focus():void {
         if (this.isSearchable && this.searchInput) {

@@ -270,7 +270,7 @@ export class SuiSearch<T> implements AfterViewInit {
         }
     }
 
-    public onClick(e:MouseEvent):void {
+    public onClick(_e:MouseEvent):void {
         this.open();
     }
 

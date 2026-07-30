@@ -7,7 +7,7 @@ import {CalendarRangeService} from '../services/calendar-range.service';
 import {CalendarView, CalendarViewType} from './calendar-view';
 
 export class CalendarRangeMonthService extends CalendarRangeService {
-    public configureItem(item:CalendarItem, baseDate:Date):void {
+    public configureItem(item:CalendarItem, _baseDate:Date):void {
         item.humanReadable = this.service.localeValues.monthsShort[item.date.getMonth()];
         item.isOutsideRange = false;
     }
