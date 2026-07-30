@@ -1,7 +1,7 @@
 <!-- Logo -->
 <p align="center">
   <a href="https://ds-ukassel.github.io/ngx-semantic-ui /">
-    <img height="128" width="238" src="https://raw.githubusercontent.com/ds-ukassel/ngx-semantic-ui/main/projects/demo/src/assets/logo.png">
+    <img height="128" width="238" src="https://raw.githubusercontent.com/ds-ukassel/ngx-semantic-ui/main/projects/demo/src/assets/logo.png" alt="ngx-semantic-ui logo">
   </a>
 </p>
 
@@ -14,7 +14,7 @@ Semantic UI Angular Integrations, written in pure Angular - **no JQuery required
 
 ## Introduction
 
-Angular and jQuery don't go together - this is the fundamental principal of this library. It provides Angular component versions of the Semantic UI modules, so that you don't need to add jQuery to your app.
+Angular and jQuery don't go together - this is the fundamental principle of this library. It provides Angular component versions of the Semantic UI modules, so that you don't need to add jQuery to your app.
 
 Note that only Semantic UI elements that use jQuery are recreated here - those written purely in CSS aren't included as they can be used in Angular apps already.
 
@@ -24,18 +24,20 @@ See the [Documentation](https://ds-ukassel.github.io/ngx-semantic-ui ) for insta
 
 ## Dependencies
 
-* [Angular](https://angular.io) (^16.0.0)
-* [Semantic UI CSS](http://semantic-ui.com/) (^2.3.1) (jQuery is **not** required)
+* [Angular](https://angular.io) (^22.0.0)
+* [Semantic UI CSS](http://semantic-ui.com/) (^2.4.0) (jQuery is **not** required)
+
+For older version support see https://github.com/angular-ex/ngx-semantic-ui.
 
 ## Component Support
 
-| Icon                    | Description                                                                         |
-|-------------------------|-------------------------------------------------------------------------------------|
-| :white_check_mark:      | Component supported by @ds-ukassel/ngx-semantic-ui.                                     |
-| :rocket:                | Semantic UI plugin supported by @ds-ukassel/ngx-semantic-ui (not in Semantic UI Core).  |
-| :ballot_box_with_check: | Component supported natively by [Semantic UI](https://semantic-ui.com/) (CSS only). |
-| :x:                     | Component currently unavailable.                                                    |
-| :no_entry_sign:         | Component not applicable to Angular.                                                |
+| Icon                    | Description                                                                            |
+|-------------------------|----------------------------------------------------------------------------------------|
+| :white_check_mark:      | Component supported by @ds-ukassel/ngx-semantic-ui.                                    |
+| :rocket:                | Semantic UI plugin supported by @ds-ukassel/ngx-semantic-ui (not in Semantic UI Core). |
+| :ballot_box_with_check: | Component supported natively by [Semantic UI](https://semantic-ui.com/) (CSS only).    |
+| :x:                     | Component currently unavailable.                                                       |
+| :no_entry_sign:         | Component not applicable to Angular.                                                   |
 
 |              Elements              |            Collections             |                   Views                  |              Modules              |              Behaviors              |
 |------------------------------------|------------------------------------|------------------------------------------|-----------------------------------|-------------------------------------|
@@ -60,27 +62,6 @@ See the [Documentation](https://ds-ukassel.github.io/ngx-semantic-ui ) for insta
 ## Want to help?
 
 Want to file a bug, contribute some code, or improve documentation? Great! Please read the [contributing guidelines](https://github.com/ds-ukassel/ngx-semantic-ui/blob/main/CONTRIBUTING.md) to get going.
-
-## Development
-
-To generate all library files:
-
-```bash
-$ npm run lib:build
-# use lib:build:w to watch for changes
-```
-
-To run the demo app:
-```bash
-$ npm run demo:serve
-```
-
-## Testing
-
-To run the unit tests suite:
-```bash
-$ npm run test
-```
 
 ## License
 
