@@ -28,30 +28,6 @@ module.exports = tseslint.config(
   {
     files: ['projects/lib/**/*.ts'],
     rules: {
-      '@angular-eslint/directive-selector': [
-        'error',
-        [
-          {
-            type: 'attribute',
-            prefix: 'sui',
-            style: 'camelCase',
-          },
-          // Some directives share a selector with their component, e.g. <sui-checkbox>.
-          {
-            type: 'element',
-            prefix: 'sui',
-            style: 'kebab-case',
-          },
-        ],
-      ],
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'sui',
-          style: 'kebab-case',
-        },
-      ],
     },
   },
   {
