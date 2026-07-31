@@ -26,24 +26,6 @@ module.exports = tseslint.config(
     },
   },
   {
-    files: ['projects/lib/**/*.ts'],
-    rules: {
-    },
-  },
-  {
-    files: ['projects/demo/**/*.ts'],
-    rules: {
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: ['app', 'demo', 'example'],
-          style: 'kebab-case',
-        },
-      ],
-    },
-  },
-  {
     files: ['**/*.html'],
     extends: [
       ...angular.configs.templateRecommended,
