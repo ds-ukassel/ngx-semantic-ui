@@ -55,7 +55,7 @@
     "concurrently": "^10.0.4",
     "eslint": "^10.8.0",
     "istanbul-lib-instrument": "^6.0.3",
-    "jasmine-core": "~6.3.0",
+    "jasmine-core": "~7.0.2",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
@@ -65,7 +65,7 @@
     "prismjs": "^1.30.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.65.0",
-    "vitest": "^4.1.10"
+    "vitest": "^5.0.2"
   },
   "packageManager": "pnpm@11.17.0+sha512.cca3cea332ad254bb84145f966d19f4879615210346fc92c79a047f23a0d7b3cca3c3792f0076ba1f1831d277efbcf0a9119b31a9a60eca7fb3d6231f331ef72"
 }
