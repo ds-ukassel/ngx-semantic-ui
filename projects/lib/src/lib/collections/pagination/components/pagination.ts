@@ -13,7 +13,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, On
     <span><i class="angle left icon"></i></span>
   </a>
 }
-@if (hasEllipses) {
+@if (hasEllipses && collectionSize != undefined) {
   @if (pages[0] !== 1) {
     <a class="item" (click)="setPage(1)">
       <span>1</span>
@@ -28,7 +28,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, On
     {{ p }}
   </a>
 }
-@if (hasEllipses) {
+@if (hasEllipses && collectionSize != undefined) {
   @if (pages[pages.length - 1] < pageCount - 1) {
     <a class="disabled item">...</a>
   }
@@ -39,12 +39,12 @@ import {ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, On
   }
 }
 @if (hasNavigationLinks) {
-  <a class="item" (click)="setPage(page+1)" [class.disabled]="!hasNext()">
+  <a class="item" (click)="hasNext() && setPage(page+1)" [class.disabled]="!hasNext()">
     <span><i class="angle right icon"></i></span>
   </a>
 }
 @if (hasBoundaryLinks) {
-  <a class="item"  (click)="setPage(pageCount)" [class.disabled]="page===pageCount">
+  <a class="item"  (click)="hasNext() && setPage(pageCount)" [class.disabled]="!hasNext()">
     <span><i class="angle double right icon"></i></span>
   </a>
 }
@@ -71,7 +71,7 @@ export class SuiPagination implements OnChanges {
 
     // Private members
     private _maxSize?:number;
-    private _collectionSize!:number;
+    private _collectionSize?:number;
     private _page:number;
     private _pages:number[];
     private _hasNavigationLinks!:boolean;
@@ -89,13 +89,15 @@ export class SuiPagination implements OnChanges {
     public pageSize:number;
 
     @Input()
-    public get collectionSize():number {
+    public get collectionSize():number|undefined {
         return this._collectionSize;
     }
 
-    public set collectionSize(value:number) {
-        this._collectionSize = Math.max(value, 0);
-        this.pageCount = Math.max(1, Math.ceil(this._collectionSize / this.pageSize));
+    public set collectionSize(value:number|undefined) {
+        this._collectionSize = (value != undefined) ? Math.max(value, 0) : undefined;
+        this.pageCount = (this._collectionSize != undefined)
+            ? Math.max(1, Math.ceil(this._collectionSize / this.pageSize))
+            : 1;
     }
 
     @Input()
@@ -123,7 +125,13 @@ export class SuiPagination implements OnChanges {
     }
 
     public set page(value:number) {
-        this.setPage(value);
+        const page:number = this.normalizePage(value);
+        if (page !== value) {
+            this._page = page;
+            this.emitPageChangeAfterCurrentCheck(page);
+        } else {
+            this.setPage(value);
+        }
     }
 
     public get pages():number[] {
@@ -150,11 +158,11 @@ export class SuiPagination implements OnChanges {
     }
 
     public hasNext():boolean {
-        return this.page < this.pageCount;
+        return this._collectionSize != undefined && this.page < this.pageCount;
     }
 
     public setPage(newPage:number):void {
-        const value:number = (Number.isInteger(newPage)) ? Math.min(Math.max(newPage, 1), this.pageCount) : 1;
+        const value:number = this.normalizePage(newPage);
         if (value !== this._page) {
             this._page = value;
             this.pageChange.emit(this._page);
@@ -168,13 +176,37 @@ export class SuiPagination implements OnChanges {
 
     // Private methods
     private updatePages():void {
+        if (this._collectionSize == undefined) {
+            this.pageCount = 1;
+            this._pages = [this._page];
+            return;
+        }
+
         this.pageCount = Math.max(1, Math.ceil(this._collectionSize / this.pageSize));
+        const page:number = this.normalizePage(this._page);
+        if (page !== this._page) {
+            this._page = page;
+            this.emitPageChangeAfterCurrentCheck(page);
+        }
 
         const [start, end] = this.applyPagination();
 
         this._pages = Array<number>(end - start)
             .fill(start + 1)
             .map((s, i) => s + i);
+    }
+
+    private normalizePage(newPage:number):number {
+        const page:number = Number.isInteger(newPage) ? Math.max(newPage, 1) : 1;
+        return (this._collectionSize != undefined) ? Math.min(page, this.pageCount) : page;
+    }
+
+    private emitPageChangeAfterCurrentCheck(page:number):void {
+        queueMicrotask(() => {
+            if (this._page === page) {
+                this.pageChange.emit(page);
+            }
+        });
     }
 
     private applyPagination():[number, number] {
