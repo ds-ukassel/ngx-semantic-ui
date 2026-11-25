@@ -208,7 +208,7 @@ describe("Pagination", () => {
         expect(pagination.page).toBe(5);
     });
 
-    it("should preserve the selected page until the collection size is known", () => {
+    it("should preserve the selected page until the collection size is known", async () => {
         comp.collectionSize = undefined;
         comp.currentPage = 3;
 
@@ -230,6 +230,7 @@ describe("Pagination", () => {
 
         comp.collectionSize = 20;
         fixture.detectChanges();
+        await fixture.whenStable();
         expect(comp.currentPage).toBe(2);
         expect(pagination.page).toBe(2);
     });

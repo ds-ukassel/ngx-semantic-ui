@@ -125,7 +125,13 @@ export class SuiPagination implements OnChanges {
     }
 
     public set page(value:number) {
-        this.setPage(value);
+        const page:number = this.normalizePage(value);
+        if (page !== value) {
+            this._page = page;
+            this.emitPageChangeAfterCurrentCheck(page);
+        } else {
+            this.setPage(value);
+        }
     }
 
     public get pages():number[] {
@@ -156,8 +162,7 @@ export class SuiPagination implements OnChanges {
     }
 
     public setPage(newPage:number):void {
-        const page:number = Number.isInteger(newPage) ? Math.max(newPage, 1) : 1;
-        const value:number = (this._collectionSize != undefined) ? Math.min(page, this.pageCount) : page;
+        const value:number = this.normalizePage(newPage);
         if (value !== this._page) {
             this._page = value;
             this.pageChange.emit(this._page);
@@ -178,13 +183,30 @@ export class SuiPagination implements OnChanges {
         }
 
         this.pageCount = Math.max(1, Math.ceil(this._collectionSize / this.pageSize));
-        this.setPage(this._page);
+        const page:number = this.normalizePage(this._page);
+        if (page !== this._page) {
+            this._page = page;
+            this.emitPageChangeAfterCurrentCheck(page);
+        }
 
         const [start, end] = this.applyPagination();
 
         this._pages = Array<number>(end - start)
             .fill(start + 1)
             .map((s, i) => s + i);
+    }
+
+    private normalizePage(newPage:number):number {
+        const page:number = Number.isInteger(newPage) ? Math.max(newPage, 1) : 1;
+        return (this._collectionSize != undefined) ? Math.min(page, this.pageCount) : page;
+    }
+
+    private emitPageChangeAfterCurrentCheck(page:number):void {
+        queueMicrotask(() => {
+            if (this._page === page) {
+                this.pageChange.emit(page);
+            }
+        });
     }
 
     private applyPagination():[number, number] {
