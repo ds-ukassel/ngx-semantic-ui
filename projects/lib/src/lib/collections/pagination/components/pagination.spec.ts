@@ -21,7 +21,7 @@ import {SuiPagination} from './pagination';
     imports: [SuiPaginationModule]
 })
 export class TestHostComponent {
-    public collectionSize:number;
+    public collectionSize:number|undefined;
     public pageSize:number;
     public maxSize?:number;
     public currentPage:number;
@@ -206,5 +206,31 @@ describe("Pagination", () => {
         fixture.detectChanges();
         expect(comp.currentPage).toBe(5);
         expect(pagination.page).toBe(5);
+    });
+
+    it("should preserve the selected page until the collection size is known", () => {
+        comp.collectionSize = undefined;
+        comp.currentPage = 3;
+
+        fixture.detectChanges();
+        expect(pagination.page).toBe(3);
+        expect(pagination.pages).toEqual([3]);
+        expect(paginationElement.nativeElement.querySelector(".item.active").textContent.trim()).toBe("3");
+        expect(paginationElement.nativeElement.textContent).not.toContain("1");
+        expect(pagination.hasNext()).toBe(false);
+
+        paginationElement.nativeElement.querySelector(".angle.right.icon").closest("a").click();
+        fixture.detectChanges();
+        expect(pagination.page).toBe(3);
+
+        comp.collectionSize = 50;
+        fixture.detectChanges();
+        expect(pagination.page).toBe(3);
+        expect(pagination.pageCount).toBe(5);
+
+        comp.collectionSize = 20;
+        fixture.detectChanges();
+        expect(comp.currentPage).toBe(2);
+        expect(pagination.page).toBe(2);
     });
 });
